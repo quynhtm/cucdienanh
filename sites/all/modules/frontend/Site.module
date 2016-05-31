@@ -1,0 +1,333 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+//news
+function Site_menu() {
+    
+	$items['trang-chu.html'] = array(
+        'title' => t('Trang chủ'),
+        'page callback' => 'page_default',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    $items["danh-muc/%/%"] = array(
+		"title" => t('Danh mục sản phẩm'),
+		"description" => "Danh mục sản phẩm",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getListProductInCategory'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["san-pham-moi.html"] = array(
+		"title" => t('Sản phẩm mới'),
+		"description" => "Sản phẩm mới",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getListProductNew'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["tim-kiem.html"] = array(
+		"title" => t('Sản phẩm mới'),
+		"description" => "Sản phẩm mới",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getSearchProduct'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	//news link
+	$arrCategoryNew = CGlobal::$aryCatergoryNews;
+	foreach($arrCategoryNew as $key => $val){
+		//category
+		$key_cat = $key.'.html';
+		$items[$key_cat] = array(
+			"title" => $val,
+			"description" => $val,
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getSearchNews'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
+		//detail
+		$key_detail = $key;
+		$items[$key_detail] = array(
+			"title" => $val,
+			"description" => $val,
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getSearchNews'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
+	}
+	$items['tim-kiem-tin-tuc.html'] = array(
+		"title" => 'Tìm kiếm tin tức',
+		"description" => 'Tìm kiếm tin tức',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/searchNews'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	//end news link
+	$items['video.html'] = array(
+		"title" => 'Video',
+		"description" => 'Video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getVideo'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items['video/%/%'] = array(
+		"title" => 'Chi tiết video',
+		"description" => 'Chi tiết video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/videoDetail'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items['tim-kiem-video.html'] = array(
+		"title" => 'Tìm kiếm video',
+		"description" => 'Tìm kiếm video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/searchVideo'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+  return $items;
+}
+
+function Site_block_info() {
+	$blocks['block-header'] = array(
+		'info' => t('Block header'),
+		'status'	=> TRUE,
+		'region'	=> 'header',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-slide'] = array(
+		'info' => t('Block slide'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-content'] = array(
+		'info' => t('Block content'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-footer'] = array(
+		'info' => t('Block footer'),
+		'status'	=> TRUE,
+		'region'	=> 'footer',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+
+	$blocks['block-item-404'] = array(
+		'info' => t('Block item 404'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+
+   return $blocks;
+}
+function Site_theme() {
+	return array(
+	    'block-header' => array(
+	      'template' => 'View/tpl/block-header'
+	    ),
+	    'block-slide' => array(
+	      'template' => 'View/tpl/block-slide'
+	    ),
+	    'block-content' => array(
+	      'template' => 'View/tpl/block-content'
+	    ),
+		'block-footer' => array(
+	      'template' => 'View/tpl/block-footer'
+	    ),
+	    'block-item-404' => array(
+	      'template' => 'View/tpl/block-item-404'
+	    ),
+	    'pageCategoryProduct' => array(
+	      'template' => 'View/tpl/pageCategoryProduct'
+	    ),
+	    'pageProductNew' => array(
+	      'template' => 'View/tpl/pageProductNew'
+	    ),
+	    'ajaxPageProductNew' => array(
+	      'template' => 'View/tpl/ajaxPageProductNew'
+	    ),
+	    'pageProductSearch' => array(
+	      'template' => 'View/tpl/pageProductSearch'
+	    ), 
+
+	    'pageNews' => array(
+	      'template' => 'View/tpl/pageNews'
+	    ), 
+	    'pageNewsDetail' => array(
+	      'template' => 'View/tpl/pageNewsDetail'
+	    ), 
+	    'pageNewsSearch' => array(
+	      'template' => 'View/tpl/pageNewsSearch'
+	    ),
+
+	    'pageVideo' => array(
+	      'template' => 'View/tpl/pageVideo'
+	    ),
+	    'pageVideoDetail' => array(
+	      'template' => 'View/tpl/pageVideoDetail'
+	    ),
+	    'pageVideoSearch' => array(
+	      'template' => 'View/tpl/pageVideoSearch'
+	    ),
+	    
+	);
+}
+function Site_block_view($delta='') {
+	$block = array();
+	switch ($delta) {
+		case 'block-header':
+		  $block['subject'] = t('Block header');
+		  $block['content'] = block_header();
+		  break;
+		 case 'block-slide':
+		  $block['subject'] = t('Block slide');
+		  $block['content'] = block_slide();
+		  break;
+		case 'block-content':
+		  $block['subject'] = t('Block content');
+		  $block['content'] = block_content_home();
+		  break;
+		case 'block-footer':
+		  $block['subject'] = t('Block footer');
+		  $block['content'] = block_footer();
+		  break;
+		case 'block-item-404':
+		  $block['subject'] = t('Block item 404');
+		  $block['content'] = block_item_404();
+		  break;
+	}
+	return $block;
+}
+function Site_init() {
+	$uri = request_uri();
+	if(preg_match("/(\/admin)/", $uri)==0){
+		$files = array(
+			'Model/Site.php',
+			'Controller/SiteController.php',
+
+			'View/js/site.js',
+			'View/css/site.css',
+			'View/css/fancySelect.css',
+		);
+		Loader::load('Site', $files);
+
+		$files = array(
+			'View/js/fancySelect.js',
+		);
+		Loader::loadJSExt('Site', $files);
+	}
+}
+
+function page_default(){
+	global $base_url;
+    drupal_set_title('Trang chủ');
+    $meta_seo = Utility::keyword_seo($keyword='SITE_SEO_HOME');
+
+    if(count($meta_seo)>0){
+        foreach($meta_seo as $v){
+            $meta_title = $v->meta_title;
+            $meta_keywords  = $v->meta_keywords;
+            $meta_description = $v->meta_description;
+            if($v->img != ''){
+                $img = $base_url.'/uploads/images/info/'.$v->img;
+            }else{
+                 $img = '';
+            }
+        }
+    }else{
+            $meta_title = 'Home';
+            $meta_keywords = 'Home';
+            $meta_description = 'Home';
+            $img = '';
+    }
+    SeoMeta::SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
+
+	return '';
+}
+
+function block_header(){
+	$arrCategory = array();
+	if(!drupal_is_front_page()){
+		$arrCategory = DataCommon::buildCacheTreeCategory();
+	}
+	$provices_id 	= FunctionLib::getIntParam('provices_id', 0);
+	$listProvices 	= DataCommon::getAllProvices();
+	$optionProvices = FunctionLib::getOption($listProvices, $provices_id);
+	
+	$category_id 	= FunctionLib::getIntParam('category_id', 0);
+	$listCategory = DataCommon::getListCategoryParent();
+
+	$numCart = SiteController::countCartItem();
+	
+	return theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart, 
+				'optionProvices'=>$optionProvices, 'listCategory'=>$listCategory, 'category_id'=>$category_id));
+}
+function block_slide(){
+	$arrCategory = DataCommon::buildCacheTreeCategory();
+	$bannerLager = SiteController::getListBannerLagerSite();
+	$bannerSmall = SiteController::getListBannerSmallSite();
+
+	return theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
+}
+
+/**
+ * @return string
+ * @throws Exception
+ * Hiển thị sản phẩm trang chủ theo danh muc cha
+ */
+function block_content_home(){
+	$arrCateParentShowHome = DataCommon::getCategoryParentShowProductHome();
+	$dataShow = array();
+	if(!empty($arrCateParentShowHome)){
+		foreach($arrCateParentShowHome as $cate_parent_id => $name_cate_parent){
+			$dataShow[$cate_parent_id]['category_name'] = $name_cate_parent;
+			$dataShow[$cate_parent_id]['arrProducts'] = DataCommon::getProductsHomeWithCateParentId($cate_parent_id);
+			//FunctionLib::Debug($dataShow);
+		}
+	}
+	//không có danh muc hien thi o Home, thi lay san pham moi nhat ra show
+	else{
+		$dataShow[0]['category_name'] = 'Sản phẩm mới';
+		$dataShow[0]['arrProducts'] = SiteController::getListProductContent(40, false);
+	}
+
+	return theme('block-content', array('dataShow'=>$dataShow));
+}
+function block_content(){
+	$result = SiteController::getListProductContent(40, false);
+	return theme('block-content', array('result'=>$result));
+}
+function block_footer(){
+	$news_intro = DataCommon::getNewsInCategory(NEW_CATEGORY_GIOI_THIEU);
+	$news_shop = DataCommon::getNewsInCategory(NEW_CATEGORY_SHOP);
+	$news_customer = DataCommon::getNewsInCategory(NEW_CATEGORY_CUSTOMER);
+
+	return theme('block-footer', array('news_intro'=>$news_intro, 'news_shop'=>$news_shop,'news_customer'=>$news_customer));;
+}
+function block_item_404(){
+	$result = SiteController::getListProductContent(20, true);
+	return theme('block-item-404', array('result'=>$result));
+}

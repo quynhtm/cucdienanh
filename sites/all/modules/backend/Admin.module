@@ -1,0 +1,345 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+
+function Admin_menu() {
+	
+	$items["admin/admincp"] = array(
+        "title" => t("CMS"),
+        "description" => t("Administration"),
+        'page callback' => 'admin_redirect',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+	$items["admincp"] = array(
+        "title" => t("CMS"),
+        "description" => t("Administration"),
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+	$items["admincp/province"] = array(
+		"title" => t('province'),
+		"description" => "province",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["admincp/supportonline"] = array(
+		"title" => t('Support online'),
+		"description" => "Support online",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["admincp/configinfo"] = array(
+		"title" => t('Config info'),
+		"description" => "Config info",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["admincp/usershop"] = array(
+		"title" => t('User Shop'),
+		"description" => "User Shop",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+    $items["admincp/supplier"] = array(
+		"title" => t('NCC'),
+		"description" => "NCC",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/category"] = array(
+		"title" => t('Category'),
+		"description" => "Category",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/news"] = array(
+		"title" => t('News'),
+		"description" => "News",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/product"] = array(
+		"title" => t('Quan ly San pham'),
+		"description" => "product",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/contact"] = array(
+		"title" => t('Quan ly lien he'),
+		"description" => "contact",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/order"] = array(
+		"title" => t('Quan ly don hang shop'),
+		"description" => "orders",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/buildsql"] = array(
+		"title" => t('Quan ly thuc thi SQL'),
+		"description" => "build_sql",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+    $items["admincp/comments"] = array(
+        "title" => t('Quan ly Binh luan'),
+        "description" => "comments",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    $items["admincp/banner"] = array(
+        "title" => t('Banner Quang cao'),
+        "description" => "banner",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items["admincp/video"] = array(
+        "title" => t('Video giai tri'),
+        "description" => "banner",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    //login to shop by admin
+    $items["admincp/techloginas"] = array(
+        "title" => t('Tech login as'),
+        "description" => "Tech login as",
+        'page callback' => 'menuLoad',
+        'page arguments' => array('TechLoginAsController/techLoginAs'),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+  return $items;
+}
+
+function Admin_block_info() {
+
+    $blocks['admin-header'] = array(
+        'info' => t('Block admin header'),
+        'status'	=> TRUE,
+        'region'	=> 'header',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    $blocks['admin-left'] = array(
+        'info' => t('Block admin left'),
+        'status'	=> TRUE,
+        'region'	=> 'left',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+	 $blocks['admin-content'] = array(
+        'info' => t('Block admin content'),
+        'status'	=> TRUE,
+        'region'	=> 'content',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    $blocks['admin-footer'] = array(
+        'info' => t('Block admin footer'),
+        'status'	=> TRUE,
+        'region'	=> 'footer',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    return $blocks;
+}
+
+function Admin_block_view($delta='') {
+    $block = array();
+    switch ($delta) {
+        case 'admin-header':
+            $block['subject'] = t('Block admin header');
+            $block['content'] = blockAdminHeader();
+            break;
+
+		case 'admin-left':
+            $block['subject'] = t('Block admin left');
+            $block['content'] = blockAdminLeft();
+            break;
+
+        case 'admin-content':
+            $block['subject'] = t('Block admin content');
+            $block['content'] = blockAdminContent();
+            break;
+
+        case 'admin-footer':
+            $block['subject'] = t('Block admin footer');
+            $block['content'] = blockAdminFooter();
+            break;
+    }
+
+    return $block;
+}
+
+function Admin_theme() {
+    return array(
+        //block
+        'admin-header' 	=> array('template' 	=> 'View/tpl/block/admin-header'),
+        'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
+      	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
+        'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
+        //nick support online
+        'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
+        'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+        //cau hinh
+        'indexConfigInfo' 		=> array('template' => 'View/tpl/configInfo/indexConfigInfo'),
+        'addConfigInfo' 		=> array('template' => 'View/tpl/configInfo/addConfigInfo'),
+        //user shop
+		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
+        'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
+        //ncc
+        'indexSupplier' 		=> array('template' => 'View/tpl/supplier/indexSupplier'),
+        'addSupplier' 		    => array('template' => 'View/tpl/supplier/addSupplier'),
+        //tinh thanh
+        'indexProvince' 		=> array('template' => 'View/tpl/province/indexProvince'),
+        'addProvince' 			=> array('template' => 'View/tpl/province/addProvince'),
+        //danh muc
+        'indexCategory' 		=> array('template' => 'View/tpl/category/indexCategory'),
+        'addCategory' 			=> array('template' => 'View/tpl/category/addCategory'),
+        //tin tuc
+        'indexNews' 		=> array('template' => 'View/tpl/news/indexNews'),
+        'addNews' 			=> array('template' => 'View/tpl/news/addNews'),
+        //S?n ph?m
+        'indexProduct' 		=> array('template' => 'View/tpl/product/indexProduct'),
+        'addProduct' 			=> array('template' => 'View/tpl/product/addProduct'),
+        //lien he
+        'indexContact' 		=> array('template' => 'View/tpl/contact/indexContact'),
+        'addContact' 		=> array('template' => 'View/tpl/contact/addContact'),
+
+        //??n hàng
+        'indexOrder' 		=> array('template' => 'View/tpl/order/indexOrder'),
+
+        //lien he
+        'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
+        'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
+
+        //lien he
+        'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
+        'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
+
+        //video
+        'indexVideo' 		=> array('template' => 'View/tpl/video/indexVideo'),
+        'addVideo' 		=> array('template' => 'View/tpl/video/addVideo'),
+
+        //build SQL
+        'indexBuildSql' 		=> array('template' => 'View/tpl/buildSql/indexBuildSql'),
+        'addBuildSql' 		=> array('template' => 'View/tpl/buildSql/addBuildSql'),
+ 		//here
+    );
+}
+
+function Admin_permission() {
+  return array(
+    'access protected Admin' => array(
+      'title' => t('access protected Admin'),
+    ),
+  );
+}
+
+function Admin_init(){
+	
+	$files = array(
+		
+		'Controller/BlockController.php',
+		
+		'Model/SupportOnline.php',
+		'Controller/SupportOnlineController.php',
+
+		'Model/ConfigInfo.php',
+		'Controller/ConfigInfoController.php',
+
+		'Model/UserShop.php',
+		'Controller/UserShopController.php',
+
+        'Model/Supplier.php',
+		'Controller/SupplierController.php',
+
+		'Model/Province.php',
+		'Controller/ProvinceController.php',
+
+        'Model/Category.php',
+		'Controller/CategoryController.php',
+
+        'Model/News.php',
+		'Controller/NewsController.php',
+
+        'Model/Product.php',
+		'Controller/ProductController.php',
+
+        'Model/Contact.php',
+		'Controller/ContactController.php',
+
+        'Model/Order.php',
+		'Controller/OrderController.php',
+
+        'Model/Comments.php',
+		'Controller/CommentsController.php',
+
+        'Model/Banner.php',
+		'Controller/BannerController.php',
+
+        'Model/Video.php',
+		'Controller/VideoController.php',
+
+        'Model/BuildSql.php',
+		'Controller/BuildSqlController.php',
+        
+        'Model/TechLoginAs.php',
+        'Controller/TechLoginAsController.php',
+	);
+	Loader::load('Admin', $files);
+}
+
+
+function Admin_mail($key, &$message, $params) {
+    global $user;
+
+    $options = array(
+    'langcode' => $message['language']->language,
+    );
+    if($key != null){
+        $message['subject'] = $params;
+        $message['body'][] = '<div style=" border: 1px solid #166ead;margin: 0 auto;
+                                min-height: 100%;width: 100%; 
+                                display:inline-block; background:#166ead">';
+        $message['body'][] = _emailHeader();
+        $message['body'][] = '<div style="background: #fff;margin: 0 auto;min-height: 200px;padding: 30px;width: 88%;">'.$key.'</div>';
+       $message['body'][] = _emailFooter();
+        $message['body'][] = '</div>';
+    $message['headers']['Content-Type'] = "text/html; charset=utf-8";
+    $message['headers']['Mime-Version'] = "1.0";
+    }
+}
