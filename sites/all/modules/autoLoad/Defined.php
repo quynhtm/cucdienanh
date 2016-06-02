@@ -40,18 +40,11 @@ define('SESSION_SHOP_TIME_OUT', 3600);
  */
 define('TABLE_SUPPORT_ONLINE', 'web_support_online');
 define('TABLE_CONFIG_INFO',    'web_config_info');
-define('TABLE_PRODUCT',        'web_product');
 define('TABLE_USER_SHOP',      'web_user_shop');
-define('TABLE_SUPPLIER',       'web_supplier');
-define('TABLE_PROVINCE',       'web_province');
 define('TABLE_CATEGORY',       'web_category');
 define('TABLE_NEWS',           'web_news');
 define('TABLE_CONTACT',        'web_contact');
-define('TABLE_BUILD_SQL',      'web_build_sql');
-define('TABLE_COMMENT',        'web_comment');
-define('TABLE_ORDER',          'web_order');
 define('TABLE_BANNER',         'web_banner');
-define('TABLE_ADVERTISE_CLICK','web_advertise_click');
 define('TABLE_VIDEO','web_video');
 
 //dinh nghia thu muc chua anh
@@ -67,9 +60,6 @@ define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
 define('STASTUS_BLOCK', -1);//khóa
 
-define('COMMENT_OK_REPLY', 0);//comment_is_reply
-define('COMMENT_NOT_REPLY', 1);
-
 define('CONTACT_NEW', 1);
 define('CONTACT_OK', 2);
 define('CONTACT_SUCCESS', 3);
@@ -83,12 +73,6 @@ define('BLOCK_TRUE', 1);
 
 define('TYPE_PRICE_NUMBER', 1);
 define('TYPE_PRICE_CONTACT', 2);
-
-define('PRODUCT_NOMAL', 1);
-define('PRODUCT_HOT', 2);
-define('PRODUCT_SELLOFF', 3);
-define('PRODUCT_BLOCK', 0);
-define('PRODUCT_NOT_BLOCK', 1);
 
 define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
@@ -119,14 +103,6 @@ define('NEW_TYPE_DAC_BIET', 1);// di voi danh muc: 1,2,3
 define('NEW_TYPE_NOI_BAT', 2);// di voi danh muc: 4,5,6,7
 define('NEW_TYPE_TIN_TUC', 3);// di voi danh muc: 4,5,6,7
 define('NEW_TYPE_QUANG_CAO', 4);// di voi danh muc: 8
-
-//Trang thái Don hang
-//0:đơn hàng bị xóa1: đơn hàng mới, 2: đơn hàng đã xác nhận, 3:đơn hàng hoàn thành,4: đơn hàng bị hủy
-define('ORDER_STATUS_DELETE', 0);
-define('ORDER_STATUS_NEW', 1);
-define('ORDER_STATUS_CHECKED', 2);
-define('ORDER_STATUS_SUCCESS', 3);
-define('ORDER_STATUS_CANCEL', 4);
 
 //loai shop
 define('SHOP_FREE', 1);

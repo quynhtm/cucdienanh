@@ -49,9 +49,6 @@ class AjaxUpload{
             case 1://img news
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
                 break;
-            case 2 ://img product
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
-                break;
             case 3 ://img banner quang cao
                 $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image', self::$primary_key_banner);
                 break;
@@ -75,10 +72,6 @@ class AjaxUpload{
                 if($field_img_other == 'news_image_other'){
                     $new_row['news_create'] = time();
                     $new_row['news_status'] = IMAGE_ERROR;
-                }
-                elseif($field_img_other == 'product_image_other'){
-                    $new_row['time_created'] = time();
-                    $new_row['product_status'] = IMAGE_ERROR;
                 }
                 elseif($field_img_other == 'banner_image_temp'){
                     $new_row['banner_create_time'] = time();
@@ -199,16 +192,7 @@ class AjaxUpload{
                     }
                 }
                 break;
-            case 2://anh san pham
-                $folder_image = 'uploads/'.FOLDER_PRODUCT;
-                $table_action = TABLE_PRODUCT;
-                if($id > 0 && $nameImage != '' && $folder_image != ''){
-                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_product, $id, 'product_image_other', $nameImage, $folder_image);
-                    if($delete_action == 1){
-                        $aryData['intIsOK'] = 1;
-                    }
-                }
-                break;
+
             default:
                 $folder_image = '';
                 break;
@@ -285,9 +269,7 @@ class AjaxUpload{
                 case 1://img news
                     $aryData = $this->getImgContent($id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
                     break;
-                case 2 ://img product
-                    $aryData = $this->getImgContent($id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
-                    break;
+
                 default:
                     break;
             }

@@ -22,16 +22,16 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Cấu hình chung" href="<?php echo $base_url ?>/admincp/configinfo">
+				<a class="a_control" title="Danh sách Shop" href="<?php echo $base_url ?>/admincp/usershop">
 					<div class="boder_admin padding10">
-					<i class="icon-cogs icon-4x"></i> <br/>Cấu hình chung
+						<i class="icon-group icon-4x"></i> <br/>Users Shop
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý tỉnh thành" href="<?php echo $base_url ?>/admincp/province">
+				<a class="a_control" title="Cấu hình chung" href="<?php echo $base_url ?>/admincp/configinfo">
 					<div class="boder_admin padding10">
-					<i class="icon-truck icon-4x"></i> <br/>Quản lý tỉnh thành
+					<i class="icon-cogs icon-4x"></i> <br/>Cấu hình chung
 					</div>
 				</a>
 			</div>
@@ -42,37 +42,14 @@ global $base_url;
 					</div>
 				</a>
 			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý NCC" href="<?php echo $base_url ?>/admincp/supplier">
-					<div class="boder_admin padding10">
-					<i class="icon-user icon-4x"></i> <br/>Quản lý NCC
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý liên hệ" href="<?php echo $base_url ?>/admincp/contact">
-					<div class="boder_admin padding10">
-					<i class="icon-envelope icon-4x"></i> <br/>Quản lý liên hệ
-					</div>
-				</a>
-			</div>
-
-
 
 
 			<!--Dòng 2--->
 			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Danh sách Shop" href="<?php echo $base_url ?>/admincp/usershop">
-					<div class="boder_admin padding10">
-						<i class="icon-group icon-4x"></i> <br/>Users Shop
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Danh mục Sản phẩm" href="<?php echo $base_url ?>/admincp/category">
 					<div class="boder_admin padding10">
-					<i class="icon-sitemap icon-4x"></i> <br/>Danh mục Sản phẩm
+					<i class="icon-sitemap icon-4x"></i> <br/>Danh mục tin tức
 					</div>
 				</a>
 			</div>
@@ -98,30 +75,6 @@ global $base_url;
 				</a>
 			</div>
 
-
-			<!--Dòng 3--->
-			<div class="clear paddingTop30"></div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý Sản phẩm" href="<?php echo $base_url ?>/admincp/product">
-					<div class="boder_admin padding10">
-						<i class="icon-gift icon-4x"></i> <br/>Quản lý Sản phẩm
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Bình luận Sản phẩm" href="<?php echo $base_url ?>/admincp/comments">
-					<div class="boder_admin padding10">
-						<i class="icon-comments icon-4x"></i> <br/>Bình luận Sản phẩm
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý Đơn hàng" href="<?php echo $base_url ?>/admincp/order">
-					<div class="boder_admin padding10">
-					<i class="icon-shopping-cart icon-4x"></i> <br/>Quản lý Đơn hàng
-					</div>
-				</a>
-			</div>
 		</div>
 	</div>
 </div>
