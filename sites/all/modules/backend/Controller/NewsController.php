@@ -32,6 +32,8 @@ class NewsController{
 	        	'View/css/admin.css',
 	            'View/js/admin.js',
 	        );
+	        Loader::load('Admin', $files);
+	        
 		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + CGlobal::$aryCatergoryNews;
 	}
 

@@ -13,34 +13,6 @@ class DataCommon{
 	public static $table_video = TABLE_VIDEO;
 	public static $primary_key_province = 'province_id';
 
-	/**
-	 * D�ng ?? kh�a, m?, ?n to�n b? s?n ph?m c?a shop
-	 * @param int $shop_id
-	 * @param int $is_block
-	 */
-	public static function updateInforProductByShopId($shop_id = 0, $is_block = PRODUCT_NOT_BLOCK){
-		if($shop_id > 0){
-			$query = db_select(self::$table_product, 'p')
-				->condition('p.user_shop_id', $shop_id, '=')
-				->fields('p', array('product_id'));
-			$data = $query->execute();
-			$inforShop = self::getShopById($shop_id);
-			if (!empty($data)) {
-				$cache = new Cache();
-				foreach ($data as $k => $pro) {
-					$dataUpdate['is_block']['value'] = $is_block;
-					if(!empty($inforShop)){
-						$dataUpdate['user_shop_name']['value'] = $inforShop->shop_name;
-						$dataUpdate['is_shop']['value'] = $inforShop->is_shop;
-						$dataUpdate['shop_province']['value'] = $inforShop->shop_province;
-					}
-					Product::save($dataUpdate, $pro->product_id);
-					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$pro->product_id;
-					$cache->do_remove($key_cache);
-				}
-			}
-		}
-	}
 	public static function getListCategoryParent(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT;
 		$categoryParent = array();
@@ -297,35 +269,6 @@ class DataCommon{
 		}
 		return $user_shop;
 	}
-
-	/**
-	 * @param int $product_id
-	 * @return array
-	 */
-	public static function getProductById($product_id = 0){
-		$product = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$product_id;
-		if($product_id <= 0) return $product;
-		if(Cache::CACHE_ON) {
-			$cache = new Cache();
-			$product = $cache->do_get($key_cache);
-		}
-		if( $product == null || empty($product)){
-			$query = db_select(self::$table_product, 'p')
-				->condition('p.product_id', $product_id, '=')
-				->fields('p');
-			$data = $query->execute();
-			if(!empty($data)){
-				foreach($data as $k=> $pro){
-					$product = $pro;
-				}
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $product, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $product;
-	}
 	/**
 	 * @param int $news_id
 	 * @return array
@@ -546,51 +489,6 @@ class DataCommon{
 	}
 
 	/**
-	 * Lay SP theo danh muc cha o trang HOME
-	 * @param int $category_parent_id
-	 * @return array
-	 */
-	public static function getProductsHomeWithCateParentId($category_parent_id = 0){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID.$category_parent_id;
-		$product = array();
-		if($category_parent_id > 0){
-			if(Cache::CACHE_ON){
-				$cache = new Cache();
-				$product = $cache->do_get($key_cache);
-			}
-			if($product == null || empty($product)) {
-				//lay danh sach id danh muc con
-				$arrParentShowProduct = array(97,43);//cho danh muc nay hien thi 20 san pham home
-				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
-				$arrCateId = array();
-				if(!empty($arrCategoryChildren)){
-					$arrCateId = array_keys($arrCategoryChildren);
-					$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image',
-						'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
-					$query = db_select(self::$table_product, 'p')
-						->condition('p.product_status', STASTUS_SHOW, '=')
-						->condition('p.is_block', PRODUCT_NOT_BLOCK, '=')
-						->condition('p.category_id', $arrCateId, 'IN')
-						->orderBy('p.time_update', 'DESC')
-						->range(0,in_array($category_parent_id,$arrParentShowProduct)? 20: NUMBER_PRODUCT_HOME)
-						->fields('p', $arrFields);
-					$data = $query->execute();
-					if (!empty($data)) {
-						foreach ($data as $k => $pro) {
-							$product[] = $pro;
-						}
-						if (Cache::CACHE_ON) {
-							$cache->do_put($key_cache, $product, Cache::CACHE_TIME_TO_LIVE_15);
-						}
-					}
-					return $product;
-				}
-			}
-		}
-		return $product;
-	}
-
-	/**
 	 * c?p nh?t l??t click banner, tin t?c qu?ng c�o
 	 * @param int $id_object
 	 * @param string $ip_client
@@ -665,40 +563,6 @@ class DataCommon{
 				}
 			}
 		}
-	}
-
-	public static function getProductDetailHot($category_id = 0){
-		$product = array();
-		if($category_id > 0){
-			//lấy danh muc cha
-			$infor_category = DataCommon::getCategoryById($category_id);
-			if(!empty($infor_category)){
-				$category_parent_id = isset($infor_category->category_parent_id)?$infor_category->category_parent_id: 0;
-				//lay danh sach id danh muc con
-				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
-				if(!empty($arrCategoryChildren)){
-					$i = rand(1,300);
-					$arrCateId = array_keys($arrCategoryChildren);
-					$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image',
-						'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
-					$query = db_select(self::$table_product, 'p')
-						->condition('p.product_status', STASTUS_SHOW, '=')
-						->condition('p.is_block', PRODUCT_NOT_BLOCK, '=')
-						->condition('p.category_id', $arrCateId, 'NOT IN')
-						->orderBy('p.time_update', 'DESC')
-						->range($i,8)
-						->fields('p', $arrFields);
-					$data = $query->execute();
-					if (!empty($data)) {
-						foreach ($data as $k => $pro) {
-							$product[] = $pro;
-						}
-					}
-					return $product;
-				}
-			}
-		}
-		return $product;
 	}
 
 	public static function getVideoById($video_id = 0){
