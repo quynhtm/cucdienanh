@@ -7,13 +7,10 @@
 */
 class DataCommon{
 	public static $table_category = TABLE_CATEGORY;
-	public static $table_province = TABLE_PROVINCE;
 	public static $table_user_shop = TABLE_USER_SHOP;
-	public static $table_product = TABLE_PRODUCT;
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
-	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
 	public static $primary_key_province = 'province_id';
 
 	/**
@@ -416,7 +413,7 @@ class DataCommon{
 	public static function getAllProvices(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
 		$province = array();
-		if(Cache::CACHE_ON){
+/*		if(Cache::CACHE_ON){
 			$cache = new Cache();
 			$province = $cache->do_get($key_cache);
 		}
@@ -434,7 +431,7 @@ class DataCommon{
 					$cache->do_put($key_cache, $province, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
-		}
+		}*/
 		return $province;
 	}
 

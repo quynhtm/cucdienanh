@@ -68,6 +68,12 @@
             <!--ket thuc hien thi anh-->
 
             <div class="control-group">
+                <label class="control-label">Mô tả ngắn</label>
+                <div class="controls">
+                    <textarea name="news_desc_sort"><?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?></textarea>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label">Nội dung</label>
                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
                 <div class="controls">
@@ -83,6 +89,24 @@
                     </select>
                 </div>
             </div>
+             <div class="control-group">
+                 <label class="control-label">Title Seo</label>
+                 <div class="controls">
+                     <input type="text" class="form-control input-sm" name="new_meta_title" value="<?php if(isset($arrItem->new_meta_title)){ echo $arrItem->new_meta_title; } ?>">
+                 </div>
+             </div>
+             <div class="control-group">
+                 <label class="control-label">Keywork Seo</label>
+                 <div class="controls">
+                     <input type="text" class="form-control input-sm" name="new_meta_keyword" value="<?php if(isset($arrItem->new_meta_keyword)){ echo $arrItem->new_meta_keyword; } ?>">
+                 </div>
+             </div>
+             <div class="control-group">
+                 <label class="control-label">Mô tả Seo</label>
+                 <div class="controls">
+                     <input type="text" class="form-control input-sm" name="new_meta_description" value="<?php if(isset($arrItem->new_meta_description)){ echo $arrItem->new_meta_description; } ?>">
+                 </div>
+             </div>
             <div class="form-actions">
                 <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>"/>
                 <input type="hidden" value="txt-form-post" name="txt-form-post">

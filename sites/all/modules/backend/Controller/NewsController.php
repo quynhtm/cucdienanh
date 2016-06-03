@@ -106,6 +106,9 @@ class NewsController{
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
 				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
+				'new_meta_title'=>array('value'=>FunctionLib::getParam('new_meta_title','')),
+				'new_meta_keyword'=>array('value'=>FunctionLib::getParam('new_meta_keyword','')),
+				'new_meta_description'=>array('value'=>FunctionLib::getParam('new_meta_description','')),
 				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
 				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
 				'news_create'=>array('value'=>time()),
@@ -151,13 +154,11 @@ class NewsController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_SHOW);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: NEW_CATEGORY_TIN_TUC_CHUNG);
-		$optionType = FunctionLib::getOption($this->arrTypeNew, isset($arrItem->news_type) ? $arrItem->news_type: NEW_TYPE_TIN_TUC);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
 				'optionCategory'=>$optionCategory,
-				'optionType'=>$optionType,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}

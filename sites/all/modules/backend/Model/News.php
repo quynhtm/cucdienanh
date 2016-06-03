@@ -24,10 +24,6 @@ class News{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'news_type' && $value != -1){
-						$sql->condition('i.'.$field, $value, '=');
-						array_push($arrCond, $field.' = '.$value);
-					}
 					if($field === 'news_category' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
