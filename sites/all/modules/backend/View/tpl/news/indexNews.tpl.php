@@ -12,10 +12,6 @@
 				<div><select class="form-control input-sm" name="news_category"><?php echo $optionCategory;?></select></div>
 			</div>
 			<div class="col-lg-3">
-				<label class="control-label">Loại tin</label>
-				<div><select class="form-control input-sm" name="news_type"><?php echo $optionType;?></select></div>
-			</div>
-			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="news_status"><?php echo $optionStatus;?></select></div>
 			</div>
@@ -57,7 +53,6 @@
 						<th width="5%" class="td_list">Ảnh</th>
 						<th width="60%" class="td_list">Tên bài viết</th>
 						<th width="10%" class="td_list">Thuộc danh mục</th>
-						<th width="10%" class="td_list">Loại tin</th>
 						<th width="5%" class="td_list">Status</th>
 						<th width="5%" class="td_list">Action</th>
 					</tr>
@@ -86,7 +81,7 @@
 								<a target="_blank" href="<?php echo FunctionLib::buildLinkNewsDetail($item->news_category_alias, $item->news_id, $item->news_title) ?>"><?php echo $item->news_title ?></a>
 							</td>
 							<td><?php echo isset($arrCategoryNew[$item->news_category])?$arrCategoryNew[$item->news_category]:'Chưa rõ'; ?></td>
-							<td><?php echo isset($arrTypeNew[$item->news_type])?$arrTypeNew[$item->news_type]:'Chưa rõ';?></td>
+
 							<td>
 								<?php echo ($item->news_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>

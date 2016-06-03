@@ -4,23 +4,7 @@
 */
 class NewsController{
 	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
-	private $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
-		NEW_CATEGORY_TIN_TUC_CHUNG => 'Tin tức chung',
-		NEW_CATEGORY_GOC_GIA_DINH => 'Góc gia đinh',
-		NEW_CATEGORY_THI_TRUONG => 'Thị trường',
-		NEW_CATEGORY_GIAI_TRI => 'Giải trí',
-		NEW_CATEGORY_GIOI_THIEU => 'Tin giới thiệu',
-		NEW_CATEGORY_SHOP => 'Tin của Shop',
-		NEW_CATEGORY_CUSTOMER => 'Tin của khách',
-		NEW_CATEGORY_QUANG_CAO => 'Tin quảng cáo',
-	);
-
-	private $arrTypeNew = array(-1 => '--- Chọn kiểu tin ---',
-		NEW_TYPE_TIN_TUC => 'Tin tức chung',
-		NEW_TYPE_NOI_BAT => 'Tin nổi bật',
-		NEW_TYPE_DAC_BIET => 'Tin đặc biệt',
-		NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
-	);
+	private $arrCategoryNew = array();
 
 	public function __construct(){
 		
@@ -48,7 +32,7 @@ class NewsController{
 	        	'View/css/admin.css',
 	            'View/js/admin.js',
 	        );
-	        Loader::load('Admin', $files);
+		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + CGlobal::$aryCatergoryNews;
 	}
 
 	function indexNews(){
@@ -58,7 +42,6 @@ class NewsController{
 		$dataSearch['news_title'] = FunctionLib::getParam('news_title','');
 		$dataSearch['news_status'] = FunctionLib::getParam('news_status', -1);
 		$dataSearch['news_category'] = FunctionLib::getParam('news_category', -1);
-		$dataSearch['news_type'] = FunctionLib::getParam('news_type', -1);
 
 		$result = News::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -67,28 +50,9 @@ class NewsController{
 					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
 					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
 				}
-				$value->news_category_alias = '';
+				$value->news_category_alias = 'tin-tuc';
 				if($value->news_category > 0){
-					switch($value->news_category){
-					    case NEW_CATEGORY_TIN_TUC_CHUNG:
-					        $value->news_category_alias = 'tin-tuc-chung';break;
-					    case NEW_CATEGORY_GOC_GIA_DINH:
-					        $value->news_category_alias = 'goc-gia-dinh';break;
-					    case NEW_CATEGORY_THI_TRUONG:
-					        $value->news_category_alias = 'thi-truong';break;
-					    case NEW_CATEGORY_GIAI_TRI:
-					        $value->news_category_alias = 'giai-tri';break;
-					    case NEW_CATEGORY_GIOI_THIEU:
-					        $value->news_category_alias = 'gioi-thieu';break;
-					    case NEW_CATEGORY_SHOP:
-					        $value->news_category_alias = 'tin-cua-shop';break;
-					    case NEW_CATEGORY_CUSTOMER:
-					        $value->news_category_alias = 'tin-cua-khach';break;
-					    case NEW_CATEGORY_QUANG_CAO:
-					        $value->news_category_alias = 'tin-quang-cao';break;
-					    default:
-			       			$value->news_category_alias = 'tin-tuc-chung';break;
-					}
+					$value->news_category_alias = isset(CGlobal::$aryNameAliasNews[$value->news_category]) ? CGlobal::$aryNameAliasNews[$value->news_category]: $value->news_category_alias;
 				}
 			}
 		}
@@ -97,16 +61,13 @@ class NewsController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['news_category']);
-		$optionType = FunctionLib::getOption($this->arrTypeNew, $dataSearch['news_type']);
 		return $view = theme('indexNews',array(
 									'title'=>'Tin tức',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
-									'optionType' => $optionType,
 									'optionCategory' => $optionCategory,
 									'arrCategoryNew' => $this->arrCategoryNew,
-									'arrTypeNew' => $this->arrTypeNew,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));

@@ -22,14 +22,6 @@
                      </select>
                  </div>
              </div>
-             <div class="control-group">
-                 <label class="control-label">Loại tin</label>
-                 <div class="controls">
-                     <select class="form-control input-sm" name="news_type">
-                         <?php echo $optionType;?>
-                     </select>
-                 </div>
-             </div>
 
              <div class="control-group">
                  <label for="textName" class="control-label marginTop_15">Ảnh đại diện</label>
@@ -75,12 +67,6 @@
              <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
             <!--ket thuc hien thi anh-->
 
-            <div class="control-group">
-                <label class="control-label">Mô tả ngắn</label>
-                <div class="controls">
-                    <textarea name="news_desc_sort"><?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?></textarea>
-                </div>
-            </div>
             <div class="control-group">
                 <label class="control-label">Nội dung</label>
                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
