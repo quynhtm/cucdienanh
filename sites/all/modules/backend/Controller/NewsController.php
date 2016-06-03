@@ -154,13 +154,11 @@ class NewsController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_SHOW);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: NEW_CATEGORY_TIN_TUC_CHUNG);
-		$optionType = FunctionLib::getOption($this->arrTypeNew, isset($arrItem->news_type) ? $arrItem->news_type: NEW_TYPE_TIN_TUC);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
 				'optionCategory'=>$optionCategory,
-				'optionType'=>$optionType,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}
