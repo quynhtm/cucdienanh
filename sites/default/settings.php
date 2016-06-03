@@ -5,7 +5,7 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'cucdienanh',
+      'database' => 'cucdienanhvn',
       'username' => 'root',
       'password' => '',
       'host' => 'localhost',
