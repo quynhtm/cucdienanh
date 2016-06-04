@@ -2,7 +2,7 @@
 /*
 * @Created by: HSS
 * @Author	 : nguyenduypt86@gmail.com
-* @Date 	 : 06/2014
+* @Date 	 : 06/2016
 * @Version	 : 1.0
 */
 
@@ -22,6 +22,25 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/type"] = array(
+        "title" => t('Type'),
+        "description" => "Type",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items["admincp/category"] = array(
+        "title" => t('Category'),
+        "description" => "Category",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+
+
+
+
 
 	$items["admincp/supportonline"] = array(
 		"title" => t('Support online'),
@@ -47,13 +66,6 @@ function Admin_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
-    $items["admincp/category"] = array(
-		"title" => t('Category'),
-		"description" => "Category",
-		'page callback' => 'router_page',
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
     $items["admincp/news"] = array(
 		"title" => t('News'),
 		"description" => "News",
@@ -155,11 +167,27 @@ function Admin_block_view($delta='') {
 
 function Admin_theme() {
     return array(
-        //block
+        //Block
         'admin-header' 	=> array('template' 	=> 'View/tpl/block/admin-header'),
         'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
       	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
         'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
+        
+        //Type
+        'indexType'         => array('template' => 'View/tpl/type/indexType'),
+        'addType'           => array('template' => 'View/tpl/type/addType'),
+        //Category
+        'indexCategory'         => array('template' => 'View/tpl/category/indexCategory'),
+        'addCategory'           => array('template' => 'View/tpl/category/addCategory'),
+
+
+
+
+
+
+
+
+
         //nick support online
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
@@ -169,18 +197,12 @@ function Admin_theme() {
         //user shop
 		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
         'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
-
-        //danh muc
-        'indexCategory' 		=> array('template' => 'View/tpl/category/indexCategory'),
-        'addCategory' 			=> array('template' => 'View/tpl/category/addCategory'),
         //tin tuc
         'indexNews' 		=> array('template' => 'View/tpl/news/indexNews'),
         'addNews' 			=> array('template' => 'View/tpl/news/addNews'),
-
         //lien he
         'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
         'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
-
         //video
         'indexVideo' 		=> array('template' => 'View/tpl/video/indexVideo'),
         'addVideo' 		=> array('template' => 'View/tpl/video/addVideo'),
@@ -198,8 +220,17 @@ function Admin_permission() {
 function Admin_init(){
 	
 	$files = array(
-		
+        //Block
 		'Controller/BlockController.php',
+        //Type
+        'Model/Type.php',
+        'Controller/TypeController.php',
+        //Category
+        'Model/Category.php',
+        'Controller/CategoryController.php',
+
+
+
 		
 		'Model/SupportOnline.php',
 		'Controller/SupportOnlineController.php',
@@ -209,9 +240,6 @@ function Admin_init(){
 
 		'Model/UserShop.php',
 		'Controller/UserShopController.php',
-
-        'Model/Category.php',
-		'Controller/CategoryController.php',
 
         'Model/News.php',
 		'Controller/NewsController.php',
@@ -228,21 +256,3 @@ function Admin_init(){
 	Loader::load('Admin', $files);
 }
 
-function Admin_mail($key, &$message, $params) {
-    global $user;
-    $options = array(
-    'langcode' => $message['language']->language,
-    );
-    if($key != null){
-        $message['subject'] = $params;
-        $message['body'][] = '<div style=" border: 1px solid #166ead;margin: 0 auto;
-                                min-height: 100%;width: 100%; 
-                                display:inline-block; background:#166ead">';
-        $message['body'][] = _emailHeader();
-        $message['body'][] = '<div style="background: #fff;margin: 0 auto;min-height: 200px;padding: 30px;width: 88%;">'.$key.'</div>';
-       $message['body'][] = _emailFooter();
-        $message['body'][] = '</div>';
-    $message['headers']['Content-Type'] = "text/html; charset=utf-8";
-    $message['headers']['Mime-Version'] = "1.0";
-    }
-}

@@ -2,77 +2,60 @@
 /*
 * @Created by: HSS
 * @Author	 : nguyenduypt86@gmail.com
-* @Date 	 : 06/2014
+* @Date 	 : 06/2016
 * @Version	 : 1.0
 */
+
 global $base_url, $language;
-/*redirect link*/
+
+//Redirect link
 $q = $_GET['q'];
 if($q == 'user/login' || $q =='user/register' || $q =='search' || $q =='comment' || $q =='comment/reply' || $q =='admin' || $q =='filter/tips'){
 	drupal_goto($base_url);
 	exit();
 }
 
-/*define*/
-define('SITE_VERSION',   '1.0');
-define("SITE_RECORD_PER_PAGE", '32');
-define('SITE_SCROLL_PAGE', '3');
-define('SITE_SAME_RECORD', '5');
-define("SITE_RECORD_PER_PAGE_SHOP_NORMAL", '12');
-define("SITE_RECORD_PER_PAGE_SHOP_VIP", '32');
-define("NUMBER_PRODUCT_HOME", 15);
-define("NUMBER_PRODUCT_NEW", 7);
+//Num record
+define("SITE_RECORD_PER_PAGE", 	30);
+define('SITE_SCROLL_PAGE', 		3);
+define('SITE_SAME_RECORD', 		5);
 
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
-define('AJAX_DOMAIN', '/shopcuatui.com.vn/');//check preg_match ajax
-define('WEB_SITE', 'Shopcuatui.com.vn');//suffix link and alt
+define('AJAX_DOMAIN', '/cucdienanh.vn/');//check preg_match ajax
+define('WEB_SITE', 'Cucdienanh.vn');//suffix link and alt
 
 define('IS_DEV', 1);// 0:local, 1:web
-define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
-define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
-define('NOT_PRODUCT_CART', 'Chưa có sản phẩm nào trong giỏ hàng...');
+define('NOT_POST', 'Chưa có bài viết nào...');
 define('SESSION_SHOP_TIME_OUT', 3600);
-/**
- * QuynhTM add
- * Dinh nghia cac Table cho website
- */
-define('TABLE_SUPPORT_ONLINE', 'web_support_online');
-define('TABLE_CONFIG_INFO',    'web_config_info');
-define('TABLE_USER_SHOP',      'web_user_shop');
-define('TABLE_CATEGORY',       'web_category');
-define('TABLE_NEWS',           'web_news');
-define('TABLE_CONTACT',        'web_contact');
-define('TABLE_BANNER',         'web_banner');
-define('TABLE_VIDEO','web_video');
 
-//dinh nghia thu muc chua anh
+
+//Tables for website
+define('TABLE_TYPE', 			'web_type');
+define('TABLE_CATEGORY',       	'web_category');
+define('TABLE_NEWS',           	'web_news');
+
+define('TABLE_CONFIG_INFO',    	'web_config_info');
+define('TABLE_SUPPORT_ONLINE', 	'web_support_online');
+
+define('TABLE_CONTACT',        	'web_contact');
+define('TABLE_BANNER',         	'web_banner');
+define('TABLE_VIDEO',			'web_video');
+
+//Folder images
 define('FOLDER_DEFAULT', 'img_other');
-define('FOLDER_PRODUCT', 'product');
 define('FOLDER_BANNER', 'banner');
 define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
-define('FOLDER_CATEGORY', 'category');
 
-//common
+//Common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
-define('STASTUS_BLOCK', -1);//khóa
 
 define('CONTACT_NEW', 1);
 define('CONTACT_OK', 2);
-define('CONTACT_SUCCESS', 3);
-define('CONTACT_REASON_CUSTOMER', 1);
-define('CONTACT_REASON_SHOP', 2);
-define('CONTACT_TYPE_SEND', 1);//ki?u g?i
-define('CONTACT_TYPE_RECEIVE', 2);//receive ki?u nh?n
 
-define('BLOCK_FALSE', 0);
-define('BLOCK_TRUE', 1);
-
-define('TYPE_PRICE_NUMBER', 1);
-define('TYPE_PRICE_CONTACT', 2);
 
 define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
@@ -104,23 +87,11 @@ define('NEW_TYPE_NOI_BAT', 2);// di voi danh muc: 4,5,6,7
 define('NEW_TYPE_TIN_TUC', 3);// di voi danh muc: 4,5,6,7
 define('NEW_TYPE_QUANG_CAO', 4);// di voi danh muc: 8
 
-//loai shop
-define('SHOP_FREE', 1);
-define('SHOP_NOMAL', 2);
-define('SHOP_VIP', 3);
-define('SHOP_ONLINE', 1);
-define('SHOP_OFFLINE', 0);
-define('SHOP_number_limit_product', 3);
-define('SHOP_NUMBER_PRODUCT_FREE', 20);//so luong san pham shop dc dang
-define('SHOP_NUMBER_PRODUCT_NOMAL', 100);
-define('SHOP_NUMBER_PRODUCT_VIP',1000);
 
-/*link nofolow*/
+//Link nofolow
 define('LINK_NOFOLLOW', 0);
 define('LINK_FOLLOW',1);
 
-/*img*/
+//Image
 define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
-define('IMAGE_DEFAULT_VIDEO', $base_url.'/sites/all/modules/autoLoad/img/default-video.png');
-define('IMAGE_DEFAULT_SHOP', $base_url.'/sites/all/modules/autoLoad/img/default-shop.png');

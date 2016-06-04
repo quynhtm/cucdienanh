@@ -5,10 +5,9 @@
 class Category{
 	static $table_action = TABLE_CATEGORY;
 	static $primary_key = 'category_id';
-	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_image_background', 'category_content_front', 'category_content_front_order');
+	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_content_front', 'category_content_front_order');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
-		//n?u get field rong thi lay all
 		if(empty($arrFields))
 			$arrFields = self::$arrFields;
 
@@ -80,14 +79,14 @@ class Category{
 		//update
 		if($id > 0){
 			self::updateId($data_post, $id);
-			drupal_set_message('Upadate success.');
+			drupal_set_message('Cập nhật thành công.');
 			return true;
 		}
 		//insert
 		else{
 			$query = self::insert($data_post);
 			if($query){
-				drupal_set_message('Insert success.');
+				drupal_set_message('Thêm mới thành công.');
 				return true;
 			}
 		}

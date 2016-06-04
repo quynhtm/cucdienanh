@@ -29,7 +29,7 @@ class CategoryController{
 		global $base_url;
 		$limit = 1000;
 		$treeCategroy = array();
-		//search
+		//Search
 		$dataSearch['category_name'] = FunctionLib::getParam('category_name','');
 		$dataSearch['category_status'] = FunctionLib::getParam('category_status', -1);
 		$dataSearch['category_parent_id'] = FunctionLib::getParam('category_parent_id', -1);
@@ -40,11 +40,11 @@ class CategoryController{
 		if(!empty($dataCate)){
 			$treeCategroy = self::getTreeCategory($dataCate);
 		}
-		//FunctionLib::Debug($treeCategroy);
-
-		//build option
+	
+		//Build option
+		$this->arrCategoryParent[-1] = 'Chọn danh mục cha';
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
-		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha')+$this->arrCategoryParent, $dataSearch['category_parent_id']);
+		$optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, $dataSearch['category_parent_id']);
 		$optionShowContent = FunctionLib::getOption($this->arrShowContent, $dataSearch['category_content_front']);
 
 		return $view = theme('indexCategory',array(
@@ -134,6 +134,8 @@ class CategoryController{
 				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
+				'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
+				'category_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 			);
 
 			$errors = ValidForm::validInputData($dataInput);
@@ -159,8 +161,9 @@ class CategoryController{
 				drupal_goto($base_url.'/admincp/category');
 			}
 		}
+		$this->arrCategoryParent[0] = 'Chọn danh mục cha';
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: -1);
-		$optionCategoryParent = FunctionLib::getOption(array(0=>'Chọn danh mục cha')+$this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: -1);
+		$optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: -1);
 		$optionShowContent = FunctionLib::getOption($this->arrShowContent, isset($arrItem->category_content_front) ? $arrItem->category_content_front: 0);
 		
 		return $view = theme('addCategory',
@@ -176,7 +179,7 @@ class CategoryController{
 	function deleteCategoryAction(){
 		global $base_url;
 		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
-			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
+			$listId = FunctionLib::getParam('checkItem',array());
 			if(!empty($listId)){
 				foreach($listId as $item_id){
 					$cache = new Cache();

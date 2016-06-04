@@ -13,7 +13,7 @@ global $base_url;
 	</div>
 	<div class="content-global">
 		<div class="wrapp-content-global">
-			<!--Dòng 1--->
+			<!--Dòng 1-->
 			<div class="col-lg-2 align_center">
 				<a class="a_control" target="_blank" title="Home Site" href="<?php echo $base_url ?>">
 					<div class="boder_admin padding10">
@@ -44,12 +44,19 @@ global $base_url;
 			</div>
 
 
-			<!--Dòng 2--->
+			<!--Dòng 2-->
 			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Danh mục Sản phẩm" href="<?php echo $base_url ?>/admincp/category">
+				<a class="a_control" title="Kiểu dữ liệu" href="<?php echo $base_url ?>/admincp/type">
 					<div class="boder_admin padding10">
-					<i class="icon-sitemap icon-4x"></i> <br/>Danh mục tin tức
+					<i class="icon-reorder icon-4x"></i> <br/>Kiểu dữ liệu
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Danh mục tin" href="<?php echo $base_url ?>/admincp/category">
+					<div class="boder_admin padding10">
+					<i class="icon-sitemap icon-4x"></i> <br/>Chuyên mục
 					</div>
 				</a>
 			</div>
@@ -63,14 +70,14 @@ global $base_url;
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Quản lý Tin tức" href="<?php echo $base_url ?>/admincp/news">
 					<div class="boder_admin padding10">
-						<i class="icon-book icon-4x"></i> <br/>Quản lý Tin tức
+						<i class="icon-book icon-4x"></i> <br/>Quản lý bài viết
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Quản lý Video" href="<?php echo $base_url ?>/admincp/video">
 					<div class="boder_admin padding10">
-						<i class="icon-facetime-video icon-4x"></i> <br/>Quản lý Video
+						<i class="icon-facetime-video icon-4x"></i> <br/>Quản lý video
 					</div>
 				</a>
 			</div>

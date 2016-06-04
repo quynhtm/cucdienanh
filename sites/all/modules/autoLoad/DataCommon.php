@@ -7,11 +7,9 @@
 */
 class DataCommon{
 	public static $table_category = TABLE_CATEGORY;
-	public static $table_user_shop = TABLE_USER_SHOP;
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
-	public static $primary_key_province = 'province_id';
 
 	public static function getListCategoryParent(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT;
@@ -39,7 +37,7 @@ class DataCommon{
 	}
 
 	/**
-	 * Danh m?c cha c� hi?n th?
+	 * Danh muc cha hien thi
 	 * ngo�i trang ch? list s?n ph?m
 	 * @return array
 	 */
