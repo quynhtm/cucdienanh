@@ -4,13 +4,14 @@
 */
 class CategoryController{
 
-	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrCategoryParent = array();
 	private $arrShowContent = array(STASTUS_HIDE => 'Ẩn', STASTUS_SHOW => 'Hiển thị');
 
 	public function __construct(){
+		$this->arrCategoryParent[-1] = 'Chọn danh mục cha';
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
-		
+
         $files = array(
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
@@ -27,6 +28,7 @@ class CategoryController{
 	}
 	function indexCategory(){
 		global $base_url;
+
 		$limit = 1000;
 		$treeCategroy = array();
 		//Search
@@ -37,18 +39,18 @@ class CategoryController{
 
 		$result = Category::getSearchListItems(array(),$limit,array());
 		$dataCate = $result['data'];
+
 		if(!empty($dataCate)){
 			$treeCategroy = self::getTreeCategory($dataCate);
 		}
-	
+
 		//Build option
-		$this->arrCategoryParent[-1] = 'Chọn danh mục cha';
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
 		$optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, $dataSearch['category_parent_id']);
 		$optionShowContent = FunctionLib::getOption($this->arrShowContent, $dataSearch['category_content_front']);
 
 		return $view = theme('indexCategory',array(
-									'title'=>'Danh mục sản phẩm',
+									'title'=>'Chuyên mục tin',
 									'result' => $treeCategroy,
 									'dataSearch' => $dataSearch,
 									'arrShowContent' => $this->arrShowContent,
@@ -83,7 +85,7 @@ class CategoryController{
 			}
 		}
 
-		if($max > 0){
+		if($max >= 0){
 			$aryCategoryProduct = self::showCategory($max, $arrCategory);
 		}
 		return $aryCategoryProduct;
@@ -116,7 +118,7 @@ class CategoryController{
 	}
 
 	function formCategoryAction(){
-		global $base_url;
+		global $base_url,$user;
 		$param = arg();
 		$arrItem = array();
 		$item_id = 0;
@@ -127,15 +129,26 @@ class CategoryController{
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$category_name = FunctionLib::getParam('category_name','');
 			$dataInput = array(
-				'category_name'=>array('value'=>FunctionLib::getParam('category_name',''), 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
+				'category_name'=>array('value'=>$category_name, 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
+				'category_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($category_name)),'require'=>0),
+
 				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
-				'category_content_front'=>array('value'=>FunctionLib::getIntParam('category_content_front',0)),
 				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
-				'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
-				'category_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+
+				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'category_meta_title'=>array('value'=>FunctionLib::getParam('category_meta_title',''),'require'=>0),
+				'category_meta_keywords'=>array('value'=>FunctionLib::getParam('category_meta_keywords',''),'require'=>0),
+				'category_meta_description'=>array('value'=>FunctionLib::getParam('category_meta_description',''),'require'=>0),
+
+				'category_horizontal'=>array('value'=>FunctionLib::getParam('category_horizontal',STASTUS_HIDE),'require'=>0),
+				'category_vertical'=>array('value'=>FunctionLib::getParam('category_vertical',STASTUS_HIDE),'require'=>0),
+
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+				'category_created'=>array('value'=>time(), 'require'=>0),
 			);
 
 			$errors = ValidForm::validInputData($dataInput);
@@ -147,33 +160,26 @@ class CategoryController{
 					drupal_goto($base_url.'/admincp/category/add');
 				}
 			}else{
-				Category::save($dataInput, $item_id);
+				Category::save($dataInput,$item_id);
 				if(Cache::CACHE_ON){
-					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
-					$cache = new Cache();
-					$cache->do_remove($key_cache);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT_SHOW_HOME);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_OPTION_TREE_CATEGORY);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$dataInput['category_parent_id']['value']);
+					$this->removeCache($item_id);
 				}
 				drupal_goto($base_url.'/admincp/category');
 			}
 		}
-		$this->arrCategoryParent[0] = 'Chọn danh mục cha';
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: -1);
-		$optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: -1);
-		$optionShowContent = FunctionLib::getOption($this->arrShowContent, isset($arrItem->category_content_front) ? $arrItem->category_content_front: 0);
-		
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: STASTUS_SHOW);
+		$optionCategoryHorizontal = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_horizontal) ? $arrItem->category_horizontal: STASTUS_HIDE);
+		$optionCategoryVertical = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_vertical) ? $arrItem->category_vertical: STASTUS_HIDE);
+		$optionCategoryParent = FunctionLib::getOption(array(0 =>'--Chọn danh mục cha--')+$this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: 0);
+
 		return $view = theme('addCategory',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
-				'title'=>'danh mục sản phẩm',
+				'title'=>'Thêm sửa xóa chuyên mục',
 				'optionCategoryParent'=>$optionCategoryParent,
 				'optionStatus'=>$optionStatus,
-				'optionShowContent'=>$optionShowContent,
-				));
+				'optionCategoryHorizontal'=>$optionCategoryHorizontal,
+				'optionCategoryVertical'=>$optionCategoryVertical));
 	}
 
 	function deleteCategoryAction(){
@@ -182,15 +188,10 @@ class CategoryController{
 			$listId = FunctionLib::getParam('checkItem',array());
 			if(!empty($listId)){
 				foreach($listId as $item_id){
-					$cache = new Cache();
 					if($item_id > 0){
 						Category::deleteId($item_id);
 						if(Cache::CACHE_ON){
-							$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
-							$cache->do_remove($key_cache);
-							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
-							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER);
-							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$item_id);
+							$this->removeCache($item_id);
 						}
 					}
 				}
@@ -198,5 +199,13 @@ class CategoryController{
 			}
 		}
 		drupal_goto($base_url.'/admincp/category');
+	}
+	function removeCache($item_id){
+		if($item_id > 0){
+			$cache = new Cache();
+			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
+			$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
+			$cache->do_remove($key_cache);
+		}
 	}
 }

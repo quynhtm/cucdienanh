@@ -36,6 +36,35 @@ class DataCommon{
 		return $categoryParent;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * Danh muc cha hien thi
 	 * ngo�i trang ch? list s?n ph?m
@@ -128,7 +157,6 @@ class DataCommon{
 				}
 				//build tree cat with parent_id
 				$treeCategory = self::getTreeCategory($dataCate);
-
 				if(Cache::CACHE_ON) {
 					$cache->do_put($key_cache, $treeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}

@@ -5,7 +5,12 @@
 class Category{
 	static $table_action = TABLE_CATEGORY;
 	static $primary_key = 'category_id';
-	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_content_front', 'category_content_front_order');
+
+	static $arrFields = array('category_id', 'category_name', 'category_name_alias', 'category_parent_id', 'category_status',
+		'category_order', 'category_content_front', 'category_content_front_order',
+		'type_id','uid','category_horizontal','category_vertical','category_created','language',
+		'category_meta_title','category_meta_keywords','category_meta_description',
+	);
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		if(empty($arrFields))
@@ -16,7 +21,6 @@ class Category{
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
-
             /*Begin search*/
             $cond = '';
             $arrCond = array();
@@ -27,10 +31,6 @@ class Category{
 						array_push($arrCond, $field.' = '.$value);
 					}
 					if($field === 'category_status' && $value != -1){
-						$sql->condition('i.'.$field, $value, '=');
-						array_push($arrCond, $field.' = '.$value);
-					}
-					if($field === 'category_content_front' && $value != 0){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
@@ -78,6 +78,12 @@ class Category{
 		}
 		//update
 		if($id > 0){
+			if(isset($data_post['uid'])){
+				unset($data_post['uid']);
+			}
+			if(isset($data_post['category_created'])){
+				unset($data_post['category_created']);
+			}
 			self::updateId($data_post, $id);
 			drupal_set_message('Cập nhật thành công.');
 			return true;

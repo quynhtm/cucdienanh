@@ -23,7 +23,7 @@
                  </div>
              </div>
              <div class="control-group">
-                 <label class="control-label">Vị trí danh mục</label>
+                 <label class="control-label">Thứ tự hiển thị</label>
                  <div class="controls">
                      <input type="text"class="form-control input-sm" name="category_order" value="<?php if(isset($arrItem->category_order)){ echo $arrItem->category_order; } ?>">
                  </div>
@@ -40,17 +40,37 @@
              </div>
 
              <div class="control-group">
-                 <label class="control-label">Hiện ở trang chủ</label>
+                 <label class="control-label">Menu danh mục - Header</label>
                  <div class="controls">
-                     <select class="form-control input-sm" name="category_content_front">
-                         <?php echo $optionShowContent;?>
+                     <select class="form-control input-sm" name="category_horizontal">
+                         <?php echo $optionCategoryHorizontal;?>
+                     </select>
+                 </div>
+            </div>
+             <div class="control-group">
+                 <label class="control-label">Menu danh mục - Trái phải</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="category_vertical">
+                         <?php echo $optionCategoryVertical;?>
                      </select>
                  </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Vị trí trang chủ</label>
+                <label class="control-label">Meta title</label>
                 <div class="controls">
-                    <input type="text"class="form-control input-sm" name="category_content_front_order" value="<?php if(isset($arrItem->category_content_front_order)){ echo $arrItem->category_content_front_order; } ?>">
+                    <input type="text"class="form-control input-sm" name="category_meta_title" value="<?php if(isset($arrItem->category_meta_title)){ echo $arrItem->category_meta_title; } ?>">
+                </div>
+            </div>
+             <div class="control-group">
+                <label class="control-label">Meta keyword</label>
+                <div class="controls">
+                    <input type="text"class="form-control input-sm" name="category_meta_keywords" value="<?php if(isset($arrItem->category_meta_keywords)){ echo $arrItem->category_meta_keywords; } ?>">
+                </div>
+            </div>
+             <div class="control-group">
+                <label class="control-label">Meta miêu tả</label>
+                <div class="controls">
+                    <input type="text"class="form-control input-sm" name="category_meta_description" value="<?php if(isset($arrItem->category_meta_description)){ echo $arrItem->category_meta_description; } ?>">
                 </div>
             </div>
 
