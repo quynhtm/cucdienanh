@@ -46,6 +46,7 @@
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
 						<th width="30%" class="td_list">Tên kiểu dũ liệu</th>
+						<th width="8%" class="td_list">Từ khóa</th>
 						<th width="8%" class="td_list">Thứ tự</th>
 						<th width="8%" class="td_list">Ngày tạo</th>
 						<th width="5%" class="td_list">Trạng thái</th>
@@ -58,6 +59,7 @@
 						<td><?php echo $key+1 ?></td>
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->type_id ?>" /></td>
 						<td><?php echo $item->type_name ?></td>
+						<td><?php echo $item->type_keyword ?></td>
 						<td><?php echo $item->type_order ?></td>
 						<td><?php echo date('d-m-Y h:i:s',$item->type_created) ?></td>
 						<td><?php echo isset($arrStatus[$item->type_status]) ? $arrStatus[$item->type_status] : ''; ?> </td>
