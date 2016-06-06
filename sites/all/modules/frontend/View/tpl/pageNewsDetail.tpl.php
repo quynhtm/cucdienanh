@@ -1,113 +1,101 @@
-<?php 
-	global $base_url;
-
-	$news_id = $result->news_id;
-	$news_title = $result->news_title;
-	$news_desc_sort = $result->news_desc_sort;
-	$news_content = Utility::setNofollow($result->news_content);
-	
-	$news_image = $result->news_image;
-	if($result->news_image != ''){
-		$news_image = FunctionLib::getThumbImage($result->news_image, $news_id, FOLDER_NEWS,400,500);
-	}
-
-	SeoMeta::SEO($news_title.' - '.WEB_SITE, $news_image, $news_title.' - '.WEB_SITE, $news_title.' - '.WEB_SITE, $news_desc_sort.' - '.WEB_SITE);
-
-?>
-<div class="container">
-	<div class="link-breadcrumb">
-		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
-		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo $base_url.'/'.$catNameAlias ?>.html" title="<?php echo $catName ?>"><?php echo $catName ?></a>
-		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo FunctionLib::buildLinkNewsDetail($news_id, $news_title) ?>" title="<?php echo $news_title ?>"><?php echo $news_title ?></a>
-	</div>
-	<div class="main-view-post">
-		<div class="left-news-view">
-			<div class="wrapp-content-news">
-				<h1 class="title-news"><?php echo $news_title ?></h1>
-				<div class="intro-news"><?php echo $news_desc_sort ?></div>
-				<div class="content-news special"><?php echo $news_content ?></div>
-			</div>
-			<?php if(!empty($arrSameNews)){?>
-			<div class="same-content-news">
-				<div class="same-title">Bài viết khác:</div>
-				<ul>
-					<?php foreach($arrSameNews as $v){?>
-					<li><i class="icon-double-angle-right"></i> <a href="<?php echo FunctionLib::buildLinkNewsDetail($catNameAlias, $v->news_id, $v->news_title) ?>" title="<?php echo $v->news_title ?>"><?php echo $v->news_title ?></a></li>
-					<?php } ?>
-				</ul>
-			</div>
-			<?php } ?>
-		</div>
-		<div class="right-news-view">
-			<div class="content-right-product search">
-				<form action="<?php echo $base_url.'/tim-kiem-tin-tuc.html' ?>" method="GET">
-					<input type="text" name="keyword" class="keyword-news" />
-					<input type="hidden" name="catalias" value="<?php echo $catNameAlias ?>" />
-					<button value="s" name="submit" class="btn btn-primary">Tìm kiếm</button>
-				</form>
-			</div>
-			<div class="content-right-product">
-				<div id="fb-root"></div>
-					<script>(function(d, s, id) {
-					  var js, fjs = d.getElementsByTagName(s)[0];
-					  if (d.getElementById(id)) return;
-					  js = d.createElement(s); js.id = id;
-					  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
-					  fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));</script>
-				<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkNewsDetail($catNameAlias, $news_id, $news_title) ?>" 
-					data-layout="button_count" data-action="like" 
-					data-show-faces="false" data-share="true">
+<?php global $base_url;?>
+<div class="wrapp">
+	<div class="bg-content-detail">
+		<div class="box-left">
+			<div class="item-box">
+				<div class="title-box">Thông tin điện ảnh</div>
+				<div class="content-box">
+					<ul>
+						<li><a href="">Thông tin hoạt động ngành</a></li>
+						<li><a href="">Phát hành - phổ biến phim</a></li>
+						<li><a href="">Hợp tác quốc tế</a></li>
+						<li><a href="">Tổ chức</a></li>
+						<li><a href="">Lịch xử phát triển ngành</a></li>
+					</ul>
 				</div>
 			</div>
-			<div class="right-bottom-content-view">
-				<div class="title-hot"><span>Sản phẩm nổi bật</span></div>
-				<div class="content-right-bottom-content-view">
+			<div class="item-box ext">
+				<div class="title-box">Chính sách - Văn bản</div>
+				<div class="content-box">
 					<ul>
-						<?php 
-							foreach($productNew as $k=>$h){
-						?>
-						<li class="item">
-							<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
-								<?php if($h->product_image != ''){?>
-								<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
-								data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
-								<?php }else{ ?>
-								<img src="<?php echo IMAGE_DEFAULT ?>"/>
-								<?php } ?>
-							</a>
-							
-							<a class="item-name" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
-							<div class="item-price">
-								<?php if($h->product_type_price == 2){?>
-									<p class="price-sale">Liên hệ</p>
-								<?php }else{ ?>
-									<p class="price-sale">
-										<?php if($h->product_price_sell > 0){?>
-											
-											<?php echo number_format($h->product_price_sell)?><span>đ</span>
-											<?php if($h->product_price_market > 0){?>
-											<i>(<?php echo number_format($h->product_price_market)?>)</i>
-											<?php } ?>
-
-										<?php }else{ ?>
-											Liên hệ
-										<?php } ?>
-									</p>
-								<?php } ?>
-							</div>
-							<div class="mgt5 amount-call">
-			                	<a title="<?php echo $h->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($h->user_shop_id, $h->user_shop_name, 0, '') ?>">
-			                		<?php echo $h->user_shop_name ?>
-			                	</a>
-			            	</div>
-						</li>
-						<?php } ?>
+						<li><a href="">Luật điện ảnh</a></li>
+						<li><a href="">Nghị định</a></li>
+						<li><a href="">Chiến lược phát triển điện ảnh</a></li>
+						<li><a href="">quy hoạch</a></li>
+						<li><a href="">Thông tư</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="item-box">
+				<div class="title-box">Thư viện ảnh</div>
+				<div class="item-ads">
+					<a href="">
+						<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/lib.jpg" alt="">
+					</a>
+				</div>
+			</div>
+			<div class="item-box">
+				<div class="video">
+					<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/video.jpg" alt="">
+				</div>
+			</div>
+			<div class="item-box">
+				<div class="box-link"><a href="">Dịch vụ công</a></div>
+			</div>
+			<div class="item-box">
+				<div class="item-ads">
+					<a href="">
+						<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/ads1.png" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="box-center-right">
+			<div class="link-breadcrumb">
+				<a title="Trang chủ" href="">Trang chủ</a> > 
+				<a title="Điện ảnh Việt Nam" href="">Điện ảnh Việt Nam</a>
+			</div>
+			<div class="box-content-view">
+				<div class="title"><a href="">Những ngọn nến trong đêm phần 2 – Hé lộ hậu trường showbiz</a> <span></span></div>
+				<div class="line-save">
+					<div class="bookmark">Bookmark</div>
+					<div class="print">In bài viết</div>
+					<div class="date-created">3/02/2016 01:53:00</div>
+				</div>
+				<div class="line-content-view">
+					Sau thành công của phần 1 cách đây đã 14 năm, bộ phim Những ngọn nến trong đêm phần 2 sắp tái ngộ khán giả màn ảnh nhỏ với dàn 
+					diễn viên “quen mà lạ”. Những gương mặt thân quen của phần 1 là “cô Trúc” Mai Thu Huyền và Văn – Bá Anh nhưng 
+					dàn diễn viên mới của phần 2 cũng hứa hẹn nhiều thú vị khi họ đều là những tên tuổi đắt show như Bình Minh, Chi Bảo, Kỳ Hân, 
+					NSƯT Mỹ Uyên, Đan Lê, NSND Lan Hương… Tuy nhiên, điểm mấu chốt mang lại sức hấp dẫn cho Những ngọn nến trong đêm phần 2 không 
+					phải hiệu ứng từ phần 1, cũng không phải dàn diễn viên hạng sao hùng hậu mà chính nội dung câu chuyện và các tình huống phim được 
+					xử lý thông minh, hiện đại và độ chín của trải nghiệm. Câu chuyện của phụ nữ
+				</div>
+				<div class="line-save ext">
+					<div class="bookmark">Bookmark</div>
+					<div class="print">In bài viết</div>
+					<div class="view">Xem phản hồi</div>
+					<div class="commment">Gửi phản hồi</div>
+					<div class="back">Trở về</div>
+				</div>
+				<div class="title-same">Tin khác<span></span></div>
+				<div class="content-same-post">
+					<ul>
+						<li><a href="">Hồ Quang 8: “Không quá đao to búa lớn”</a></li>
+						<li><a href="">Ariana Grande: Thành công bắt đầu từ đâu</a></li>
+						<li><a href="">Danh ca Khánh Ly tâm sự cuộc đời trong lỗi</a></li>
+						<li><a href="">Triệu Trang chào năm mới bằng sêri album</a></li>
+						<li><a href="">Quảng bá sâu rộng cho nét tinh tế từ áo dài</a></li>
+					</ul>
+					<ul>
+						<li><a href="">Hồ Quang 8: “Không quá đao to búa lớn”</a></li>
+						<li><a href="">Ariana Grande: Thành công bắt đầu từ đâu</a></li>
+						<li><a href="">Danh ca Khánh Ly tâm sự cuộc đời trong lỗi</a></li>
+						<li><a href="">Triệu Trang chào năm mới bằng sêri album</a></li>
+						<li><a href="">Quảng bá sâu rộng cho nét tinh tế từ áo dài</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+

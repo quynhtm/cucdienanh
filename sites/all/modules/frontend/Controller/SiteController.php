@@ -7,5 +7,8 @@
 */
 
 class SiteController{
+	public static function searchNews(){
 
+		return theme('pageNewsSearch');
+	}
 }
