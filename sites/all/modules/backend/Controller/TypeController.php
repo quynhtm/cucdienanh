@@ -86,6 +86,9 @@ class TypeController{
 				}
 			}else{
 				Type::save($data, $id);
+				if(Cache::CACHE_ON){
+					$this->removeCache($id);
+				}
 				drupal_goto($base_url.'/admincp/type');
 			}
 		}
@@ -105,5 +108,10 @@ class TypeController{
 			drupal_set_message('Xóa bài viết thành công.');
 		}
 		drupal_goto($base_url.'/admincp/type');
+	}
+
+	function removeCache($item_id){
+		$cache = new Cache();
+		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_TYPE_CATEGORY);
 	}
 }

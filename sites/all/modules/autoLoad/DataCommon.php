@@ -7,6 +7,7 @@
 */
 class DataCommon{
 	public static $table_category = TABLE_CATEGORY;
+	public static $table_type = TABLE_TYPE;
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
@@ -34,6 +35,33 @@ class DataCommon{
 			}
 		}
 		return $categoryParent;
+	}
+
+	/*
+	 * Kieu chuyen muc
+	 * */
+	public static function getListTypeCategory(){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_TYPE_CATEGORY;
+		$typeCategory = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$typeCategory = $cache->do_get($key_cache);
+		}
+		if($typeCategory == null || empty($typeCategory)) {
+			$query = db_select(self::$table_type, 't')
+				->condition('t.type_status', STASTUS_SHOW, '=')
+				->fields('t', array('type_id', 'type_name'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $cate) {
+					$typeCategory[$cate->type_id] = $cate->type_name;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $typeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $typeCategory;
 	}
 
 

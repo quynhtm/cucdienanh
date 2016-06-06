@@ -23,6 +23,14 @@
                  </div>
              </div>
              <div class="control-group">
+                 <label class="control-label">Kiểu chuyên mục<span>*</span></label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="type_id">
+                         <?php echo $optionTypeCategory;?>
+                     </select>
+                 </div>
+             </div>
+             <div class="control-group">
                  <label class="control-label">Thứ tự hiển thị</label>
                  <div class="controls">
                      <input type="text"class="form-control input-sm" name="category_order" value="<?php if(isset($arrItem->category_order)){ echo $arrItem->category_order; } ?>">
@@ -64,13 +72,13 @@
              <div class="control-group">
                 <label class="control-label">Meta keyword</label>
                 <div class="controls">
-                    <input type="text"class="form-control input-sm" name="category_meta_keywords" value="<?php if(isset($arrItem->category_meta_keywords)){ echo $arrItem->category_meta_keywords; } ?>">
+                    <textarea name="category_meta_keywords" class="form-control input-sm"><?php if(isset($arrItem->category_meta_keywords)){ echo $arrItem->category_meta_keywords; } ?></textarea>
                 </div>
             </div>
              <div class="control-group">
                 <label class="control-label">Meta miêu tả</label>
                 <div class="controls">
-                    <input type="text"class="form-control input-sm" name="category_meta_description" value="<?php if(isset($arrItem->category_meta_description)){ echo $arrItem->category_meta_description; } ?>">
+                    <textarea name="category_meta_description" class="form-control input-sm"><?php if(isset($arrItem->category_meta_description)){ echo $arrItem->category_meta_description; } ?></textarea>
                 </div>
             </div>
 

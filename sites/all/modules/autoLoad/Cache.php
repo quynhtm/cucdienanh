@@ -19,6 +19,9 @@ class Cache {
     const CACHE_CATEGORY_ID = 'cache_category_id_';
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
 
+    //cache type chuyen m?c
+    const CACHE_LIST_TYPE_CATEGORY = 'cache_list_type_category';
+
     public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
         $cache = phpFastCache();

@@ -6,11 +6,11 @@ class CategoryController{
 
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrCategoryParent = array();
-	private $arrShowContent = array(STASTUS_HIDE => 'Ẩn', STASTUS_SHOW => 'Hiển thị');
+	private $arrTypeCategory = array();
 
 	public function __construct(){
-		$this->arrCategoryParent[-1] = 'Chọn danh mục cha';
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
+		$this->arrTypeCategory = DataCommon::getListTypeCategory();//kieu chuyen muc
 
         $files = array(
             'bootstrap/css/bootstrap.css',
@@ -34,29 +34,53 @@ class CategoryController{
 		//Search
 		$dataSearch['category_name'] = FunctionLib::getParam('category_name','');
 		$dataSearch['category_status'] = FunctionLib::getParam('category_status', -1);
+		$dataSearch['category_horizontal'] = FunctionLib::getParam('category_horizontal', -1);
+		$dataSearch['category_vertical'] = FunctionLib::getParam('category_vertical', -1);
+		$dataSearch['type_id'] = FunctionLib::getParam('type_id', -1);
 		$dataSearch['category_parent_id'] = FunctionLib::getParam('category_parent_id', -1);
-		$dataSearch['category_content_front'] = FunctionLib::getParam('category_content_front', 0);
 
-		$result = Category::getSearchListItems(array(),$limit,array());
+		$result = Category::getSearchListItems($dataSearch,$limit,array());
 		$dataCate = $result['data'];
+		$check_search = $result['check_search'];
 
+		//FunctionLib::Debug($dataCate);
 		if(!empty($dataCate)){
-			$treeCategroy = self::getTreeCategory($dataCate);
+			if($check_search == 0){
+				$treeCategroy = self::getTreeCategory($dataCate);
+			}else{
+				foreach($dataCate as $k=>$value){
+					$treeCategroy[] = array('category_id'=>$value->category_id,
+						'category_parent_id'=>$value->category_parent_id,
+						'category_horizontal'=>$value->category_horizontal,
+						'category_vertical'=>$value->category_vertical,
+						'type_id'=>$value->type_id,
+						'category_order'=>$value->category_order,
+						'category_status'=>$value->category_status,
+						'category_name'=>$value->category_name,
+						'padding_left'=>'',
+						'category_parent_name'=>$this->arrCategoryParent[$value->category_parent_id]);
+				}
+			}
 		}
-
+		//FunctionLib::Debug($treeCategroy);
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
-		$optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, $dataSearch['category_parent_id']);
-		$optionShowContent = FunctionLib::getOption($this->arrShowContent, $dataSearch['category_content_front']);
+		$optionCategoryHorizontal = FunctionLib::getOption($this->arrStatus, $dataSearch['category_horizontal']);
+		$optionCategoryVertical = FunctionLib::getOption($this->arrStatus, $dataSearch['category_vertical']);
+		$optionCategoryParent = FunctionLib::getOption(array(-1 =>'--Chọn danh mục cha--')+$this->arrCategoryParent, $dataSearch['category_parent_id']);
+		$optionTypeCategory = FunctionLib::getOption(array(-1 =>'--Chọn kiểu chuyên mục--')+$this->arrTypeCategory, $dataSearch['type_id']);
 
 		return $view = theme('indexCategory',array(
 									'title'=>'Chuyên mục tin',
 									'result' => $treeCategroy,
 									'dataSearch' => $dataSearch,
-									'arrShowContent' => $this->arrShowContent,
+									'arrTypeCategory' => $this->arrTypeCategory,
 									'optionStatus' => $optionStatus,
+									'optionTypeCategory' => $optionTypeCategory,
+									'optionCategoryHorizontal' => $optionCategoryHorizontal,
+									'optionCategoryVertical' => $optionCategoryVertical,
+									'optionTypeCategory' => $optionTypeCategory,
 									'optionCategoryParent' => $optionCategoryParent,
-									'optionShowContent' => $optionShowContent,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -77,8 +101,9 @@ class CategoryController{
 				$arrCategory[$value->category_id] = array(
 					'category_id'=>$value->category_id,
 					'category_parent_id'=>$value->category_parent_id,
-					'category_content_front'=>$value->category_content_front,
-					'category_content_front_order'=>$value->category_content_front_order,
+					'category_horizontal'=>$value->category_horizontal,
+					'category_vertical'=>$value->category_vertical,
+					'type_id'=>$value->type_id,
 					'category_order'=>$value->category_order,
 					'category_status'=>$value->category_status,
 					'category_name'=>$value->category_name);
@@ -135,6 +160,7 @@ class CategoryController{
 				'category_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($category_name)),'require'=>0),
 
 				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
+				'type_id'=>array('value'=>FunctionLib::getParam('type_id',''), 'require'=>1, 'messages'=>'Chưa chọn kiểu chuyên mục!'),
 				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
@@ -171,6 +197,7 @@ class CategoryController{
 		$optionCategoryHorizontal = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_horizontal) ? $arrItem->category_horizontal: STASTUS_HIDE);
 		$optionCategoryVertical = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_vertical) ? $arrItem->category_vertical: STASTUS_HIDE);
 		$optionCategoryParent = FunctionLib::getOption(array(0 =>'--Chọn danh mục cha--')+$this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: 0);
+		$optionTypeCategory = FunctionLib::getOption(array(0 =>'--Chọn kiểu chuyên mục--')+$this->arrTypeCategory, isset($arrItem->type_id) ? $arrItem->type_id: 0);
 
 		return $view = theme('addCategory',
 			array('arrItem'=>$arrItem,
@@ -178,6 +205,7 @@ class CategoryController{
 				'title'=>'Thêm sửa xóa chuyên mục',
 				'optionCategoryParent'=>$optionCategoryParent,
 				'optionStatus'=>$optionStatus,
+				'optionTypeCategory'=>$optionTypeCategory,
 				'optionCategoryHorizontal'=>$optionCategoryHorizontal,
 				'optionCategoryVertical'=>$optionCategoryVertical));
 	}
@@ -201,11 +229,9 @@ class CategoryController{
 		drupal_goto($base_url.'/admincp/category');
 	}
 	function removeCache($item_id){
-		if($item_id > 0){
-			$cache = new Cache();
-			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
-			$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
-			$cache->do_remove($key_cache);
-		}
+		$cache = new Cache();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
+		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
+		$cache->do_remove($key_cache);
 	}
 }

@@ -1,4 +1,4 @@
-<div class="search-box" style="display: none">
+<div class="search-box">
 	<div class="wrapp-search-box">
 		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
@@ -13,8 +13,17 @@
 			</div>
 
 			<div class="col-lg-3">
-				<label class="control-label">Hiện ở trang chủ</label>
-				<div><select class="form-control input-sm" name="category_content_front"><?php echo $optionShowContent;?></select></div>
+				<label class="control-label">Hiện ở Header</label>
+				<div><select class="form-control input-sm" name="category_horizontal"><?php echo $optionCategoryHorizontal;?></select></div>
+			</div>
+
+			<div class="col-lg-3">
+				<label class="control-label">Hiện ở Menu trái-phải</label>
+				<div><select class="form-control input-sm" name="category_vertical"><?php echo $optionCategoryVertical;?></select></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">Kiểu chuyên mục</label>
+				<div><select class="form-control input-sm" name="type_id"><?php echo $optionTypeCategory;?></select></div>
 			</div>
 
 			<div class="col-lg-3">
@@ -56,11 +65,13 @@
 					<tr>
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
-						<th width="30%" class="td_list">Tên danh mục</th>
+						<th width="20%" class="td_list">Tên danh mục</th>
 						<th width="20%" class="td_list">Danh mục cha</th>
-						<th width="10%" class="td_list">Show SP home (vịtri)</th>
-						<th width="8%" class="td_list">Vị trí</th>
-						<th width="5%" class="td_list">Status</th>
+						<th width="10%" class="td_list align_center">Kiểu chuyên mục</th>
+						<th width="10%" class="td_list align_center">Show Header</th>
+						<th width="10%" class="td_list align_center">Show trái-phải</th>
+						<th width="5%" class="td_list align_center">Vị trí</th>
+						<th width="5%" class="td_list align_center" >Status</th>
 						<th width="5%" class="td_list">Action</th>
 					</tr>
 					</thead>
@@ -70,18 +81,33 @@
 						<td><?php echo $key+1 ?></td>
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item['category_id'] ?>" /></td>
 						<td><?php echo $item['padding_left'].$item['category_name']; ?></td>
-						<td><?php echo '['.$item['category_parent_id'].'] '.$item['category_parent_name']; ?></td>
 						<td>
 							<?php
-							if($item['category_parent_id'] == 0){
-								echo $arrShowContent[$item['category_content_front']].' ('.$item['category_content_front_order'].')';
+							if($item['category_parent_id'] > 0){
+								echo '['.$item['category_parent_id'].'] '.$item['category_parent_name'];
 							}else{
-								echo '-----';
+								echo 'Chuyên mục gốc';
+							}
+							?>
+
+						</td>
+						<td>
+							<?php
+							if($item['type_id'] > 0){
+								echo isset($arrTypeCategory[$item['type_id']])?$arrTypeCategory[$item['type_id']]:'Chưa xác định';
+							}else{
+								echo 'Chưa chọn kiểu';
 							}
 							?>
 						</td>
-						<td><?php echo $item['category_order']; ?></td>
-						<td>
+						<td class="align_center">
+							<?php echo ($item['category_horizontal']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+						</td>
+						<td class="align_center">
+							<?php echo ($item['category_vertical']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+						</td>
+						<td class="align_center"><?php echo $item['category_order']; ?></td>
+						<td class="align_center">
 							<?php echo ($item['category_status']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td>

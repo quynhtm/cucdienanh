@@ -23,22 +23,41 @@ class Category{
             }
             /*Begin search*/
             $cond = '';
+			$check_search = 0;
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
 					if($field === 'category_parent_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
 					}
 					if($field === 'category_status' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
+					}
+					if($field === 'type_id' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
+					}
+					if($field === 'category_horizontal' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
+					}
+					if($field === 'category_vertical' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
 					}
 					if($field === 'category_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);
 						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+						$check_search = 1;
 					}
 				}
 				if(!empty($arrCond)){
@@ -55,9 +74,10 @@ class Category{
             $data['data'] = $arrItem;
             $data['pager'] = $pager;
             $data['total'] = $totalItem;
+            $data['check_search'] = $check_search;
 			return $data;
         }
-        return array('data' => array(),'total' => 0,'pager' => array(),);
+        return array('data' => array(),'total' => 0,'check_search' => 0,'pager' => array(),);
     }
 
 	public static function getItemById($arrFields = array(), $id = 0){
