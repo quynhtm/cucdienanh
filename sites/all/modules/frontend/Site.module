@@ -15,33 +15,6 @@ function Site_menu() {
         'type' => MENU_CALLBACK,
     );
 
-    $items["danh-muc/%/%"] = array(
-		"title" => t('Danh mục sản phẩm'),
-		"description" => "Danh mục sản phẩm",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('SiteController/getListProductInCategory'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
-	$items["san-pham-moi.html"] = array(
-		"title" => t('Sản phẩm mới'),
-		"description" => "Sản phẩm mới",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('SiteController/getListProductNew'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
-	$items["tim-kiem.html"] = array(
-		"title" => t('Sản phẩm mới'),
-		"description" => "Sản phẩm mới",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('SiteController/getSearchProduct'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
 	//news link
 	$arrCategoryNew = CGlobal::$aryCatergoryNews;
 	foreach($arrCategoryNew as $key => $val){
@@ -133,14 +106,6 @@ function Site_block_info() {
 		'visibility' => 1,
 	);
 
-	$blocks['block-item-404'] = array(
-		'info' => t('Block item 404'),
-		'status'	=> TRUE,
-		'region'	=> 'content',
-		'weight'	=> 0,
-		'visibility' => 1,
-	);
-
    return $blocks;
 }
 function Site_theme() {
@@ -157,22 +122,7 @@ function Site_theme() {
 		'block-footer' => array(
 	      'template' => 'View/tpl/block-footer'
 	    ),
-	    'block-item-404' => array(
-	      'template' => 'View/tpl/block-item-404'
-	    ),
-	    'pageCategoryProduct' => array(
-	      'template' => 'View/tpl/pageCategoryProduct'
-	    ),
-	    'pageProductNew' => array(
-	      'template' => 'View/tpl/pageProductNew'
-	    ),
-	    'ajaxPageProductNew' => array(
-	      'template' => 'View/tpl/ajaxPageProductNew'
-	    ),
-	    'pageProductSearch' => array(
-	      'template' => 'View/tpl/pageProductSearch'
-	    ), 
-
+	    
 	    'pageNews' => array(
 	      'template' => 'View/tpl/pageNews'
 	    ), 
@@ -208,15 +158,11 @@ function Site_block_view($delta='') {
 		  break;
 		case 'block-content':
 		  $block['subject'] = t('Block content');
-		  $block['content'] = block_content_home();
+		  $block['content'] = block_content();
 		  break;
 		case 'block-footer':
 		  $block['subject'] = t('Block footer');
 		  $block['content'] = block_footer();
-		  break;
-		case 'block-item-404':
-		  $block['subject'] = t('Block item 404');
-		  $block['content'] = block_item_404();
 		  break;
 	}
 	return $block;
@@ -230,7 +176,6 @@ function Site_init() {
 
 			'View/js/site.js',
 			'View/css/site.css',
-			'View/css/fancySelect.css',
 		);
 		Loader::load('Site', $files);
 
