@@ -38,6 +38,81 @@ class DataCommon{
 	}
 
 	/*
+	 * Build tree chuyen muc
+	 * */
+	public static function getListCategoryNews(){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS;
+		$optionCategory = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$optionCategory = $cache->do_get($key_cache);
+		}
+		if($optionCategory == null || empty($optionCategory)) {
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->orderBy('category_order', 'ASC')
+				->fields('c', array('category_id', 'category_name', 'category_parent_id'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				$treeCategory = self::getTreeCategory($data);
+				if(!empty($treeCategory)){
+					foreach($treeCategory as $k=>$va){
+						$optionCategory[$va['category_id']] = $va['padding_left'].$va['category_name'];
+					}
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $optionCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $optionCategory;
+	}
+	public static function getTreeCategory($data){
+		$max = 0;
+		$aryCategoryNews = $arrCategory = array();
+		if(!empty($data)){
+			foreach ($data as $k=>$value){
+				$max = ($max < $value->category_parent_id)? $value->category_parent_id : $max;
+				$arrCategory[$value->category_id] = array(
+					'category_id'=>$value->category_id,
+					'category_parent_id'=>$value->category_parent_id,
+					'category_name'=>$value->category_name);
+			}
+		}
+
+		if($max >= 0){
+			$aryCategoryNews = self::showCategory($max, $arrCategory);
+		}
+		return $aryCategoryNews;
+	}
+	public static function showCategory($max, $aryDataInput) {
+		$aryData = array();
+		if(is_array($aryDataInput) && count($aryDataInput) > 0) {
+			foreach ($aryDataInput as $k => $val) {
+				if((int)$val['category_parent_id'] == 0) {
+					$val['padding_left'] = '';
+					$val['category_parent_name'] = '';
+					$aryData[] = $val;
+					self::showSubCategory($val['category_id'],$val['category_name'], $max, $aryDataInput, $aryData);
+				}
+			}
+		}
+		return $aryData;
+	}
+	public static function showSubCategory($cat_id,$cat_name, $max, $aryDataInput, &$aryData) {
+		if($cat_id <= $max) {
+			foreach ($aryDataInput as $chk => $chval) {
+				if($chval['category_parent_id'] == $cat_id) {
+					$chval['padding_left'] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					$chval['category_parent_name'] = $cat_name;
+					$aryData[] = $chval;
+					self::showSubCategory($chval['category_id'],$chval['category_name'], $max, $aryDataInput, $aryData);
+				}
+			}
+		}
+	}
+
+	/*
 	 * Kieu chuyen muc
 	 * */
 	public static function getListTypeCategory(){
@@ -64,295 +139,6 @@ class DataCommon{
 		return $typeCategory;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * Danh muc cha hien thi
-	 * ngo�i trang ch? list s?n ph?m
-	 * @return array
-	 */
-	public static function getCategoryParentShowProductHome(){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT_SHOW_HOME;
-		$categoryParent = array();
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$categoryParent = $cache->do_get($key_cache);
-		}
-		if($categoryParent == null || empty($categoryParent)) {
-			$query = db_select(self::$table_category, 'c')
-				->condition('c.category_parent_id', 0, '=')
-				->condition('c.category_status', STASTUS_SHOW, '=')
-				->condition('c.category_content_front', STASTUS_SHOW, '=')
-				->orderBy('c. category_content_front_order', 'ASC')
-				->fields('c', array('category_id', 'category_name'));
-			$data = $query->execute();
-			if (!empty($data)) {
-				foreach ($data as $k => $cate) {
-					$categoryParent[$cate->category_id] = $cate->category_name;
-				}
-				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $categoryParent;
-	}
-
-	public static function getListCategoryChildren($category_parent_id = 0){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id;
-		$categoryChildren = array();
-		if($category_parent_id > 0){
-			if(Cache::CACHE_ON){
-				$cache = new Cache();
-				$categoryChildren = $cache->do_get($key_cache);
-			}
-			if($categoryChildren == null || empty($categoryChildren)) {
-				$query = db_select(self::$table_category, 'c')
-					->condition('c.category_parent_id', $category_parent_id, '=')
-					->condition('c.category_status', STASTUS_SHOW, '=')
-					->fields('c', array('category_id', 'category_name'));
-				$data = $query->execute();
-				if (!empty($data)) {
-					foreach ($data as $k => $cate) {
-						$categoryChildren[$cate->category_id] = $cate->category_name;
-					}
-					if (Cache::CACHE_ON) {
-						$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-					}
-				}
-				return $categoryChildren;
-			}
-		}
-		return $categoryChildren;
-	}
-
-	public static function buildCacheTreeCategoryWithShop($shop_id = 0){
-		if($shop_id == 0) return array();
-		$user_shop = self::getShopById($shop_id);
-		$arrParenId = array();
-		if(!empty($user_shop)){
-			$arrParenId = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
-		}
-		if(empty($arrParenId)) return array();
-		$treeCategory = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_USER_SHOP_ID.$shop_id;
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$treeCategory = $cache->do_get($key_cache);
-		}
-		if($treeCategory == null || empty($treeCategory)){
-			$query = db_select(self::$table_category, 'c')
-				->condition('c.category_status', STASTUS_SHOW, '=')
-				->orderBy('c. category_order', 'ASC');
-			$db_or = db_or();
-			$db_or->condition('c.category_id', $arrParenId,'IN');
-			$db_or->condition('c.category_parent_id', $arrParenId,'IN');
-			$query->condition($db_or);
-			$query->fields('c');
-
-			$data = $query->execute();
-			if(!empty($data)){
-				$dataCate = array();
-				foreach($data as $k=> $cate){
-					$dataCate[] = $cate;
-				}
-				//build tree cat with parent_id
-				$treeCategory = self::getTreeCategory($dataCate);
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $treeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $treeCategory;
-	}
-
-	/**
-	 * Build Tree categroy menu danh m?c
-	 * @return array
-	 */
-	public static function buildCacheTreeCategory(){
-		$treeCategory = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER;
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$treeCategory = $cache->do_get($key_cache);
-		}
-		if($treeCategory == null || empty($treeCategory)){
-			$query = db_select(self::$table_category, 'c')
-				->condition('c.category_status', STASTUS_SHOW, '=')
-				->orderBy('c. category_order', 'ASC')
-				->fields('c');
-			$data = $query->execute();
-			if(!empty($data)){
-				$dataCate = array();
-				foreach($data as $k=> $cate){
-					$dataCate[] = $cate;
-				}
-				//build tree cat with parent_id
-				$treeCategory = self::getTreeCategory($dataCate);
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $treeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_YEAR);
-				}
-			}
-		}
-		return $treeCategory;
-	}
-	public static function getTreeCategory($data){
-		$arrCategory = array();
-		if(!empty($data)){
-			foreach ($data as $k=>$value){
-				if($value->category_parent_id > 0){
-					$arrCategory[$value->category_parent_id]['arrSubCategory'][] = array(
-						'category_id'=>$value->category_id,
-						'category_order'=>$value->category_order,//hien th? th? t? s?p x?p
-						'category_name'=>$value->category_name);
-				}else{
-					//thong tin parent
-					$arrCategory[$value->category_id]['category_parent_name'] = $value->category_name;
-					$arrCategory[$value->category_id]['category_id'] = $value->category_id;
-					$arrCategory[$value->category_id]['category_status'] = $value->category_status;
-					$arrCategory[$value->category_id]['category_image_background'] = $value->category_image_background;
-					$arrCategory[$value->category_id]['category_order'] = $value->category_order;//hien th? th? t? s?p x?p
-				}
-			}
-			if(!empty($arrCategory)){
-				foreach($arrCategory as $key => $val){
-					if(!isset($val['category_id'])){
-						unset($arrCategory[$key]);
-					}
-				}
-			}
-			self::sortArrayASC($arrCategory,"category_order");
-		}
-		return $arrCategory;
-	}
-	public static function sortArrayASC (&$array, $key) {
-		$sorter=array();
-		$ret=array();
-		reset($array);
-		foreach ($array as $ii => $va) {
-			$sorter[$ii]=$va[$key];
-		}
-		asort($sorter);
-		foreach ($sorter as $ii => $va) {
-			$ret[$ii]=$array[$ii];
-		}
-		$array=$ret;
-	}
-
-	/**
-	 * @param int $id_shop
-	 * @return array
-	 */
-	public static function getShopById($id_shop = 0){
-		$user_shop = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID;
-		if($id_shop <= 0) return $user_shop;
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$user_shop = $cache->do_get($key_cache.$id_shop);
-		}
-		if($user_shop == null || empty($user_shop)){
-			$query = db_select(self::$table_user_shop, 's')
-				->condition('s.shop_id', $id_shop, '=')
-				->fields('s');
-			$data = $query->execute();
-			if(!empty($data)){
-				foreach($data as $k=> $shop){
-					$user_shop = $shop;
-				}
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache. $id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
-				}
-			}
-		}
-		return $user_shop;
-	}
-
-	/**
-	 * get danh sach shop dang ho?t ??ng
-	 * @return array
-	 */
-	public static function getListUserShop(){
-		$user_shop = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP;
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$user_shop = $cache->do_get($key_cache);
-		}
-		if($user_shop == null || empty($user_shop)){
-			$query = db_select(self::$table_user_shop, 's')
-				->condition('s.shop_status', STASTUS_SHOW, '=')
-				->fields('s', array('shop_id', 'shop_name'));
-			$data = $query->execute();
-			if (!empty($data)) {
-				foreach ($data as $k => $shop) {
-					$user_shop[$shop->shop_id] = $shop->shop_name;
-				}
-				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $user_shop;
-	}
-	/**
-	 * @param int $news_id
-	 * @return array
-	 */
-	
-	public static function getNewsInCategory($news_category = 0){
-		$news = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_CATEGORY.$news_category;
-		if($news_category <= 0) return $news;
-		if(Cache::CACHE_ON) {
-			$cache = new Cache();
-			$news = $cache->do_get($key_cache);
-		}
-		if( $news == null || empty($news)){
-			$query = db_select(self::$table_news, 'n')
-				->condition('n.news_category', $news_category, '=')
-				->fields('n');
-			$data = $query->execute();
-			if(!empty($data)){
-				foreach($data as $k=> $new){
-					$news[$new->news_id] = $new;
-				}
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $news, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $news;
-	}
-
 	public static function getNewsById($news_id = 0){
 		$news = array();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$news_id;
@@ -377,11 +163,6 @@ class DataCommon{
 		}
 		return $news;
 	}
-
-	/**
-	 * @param int $category_id
-	 * @return array
-	 */
 	public static function getCategoryById($category_id = 0){
 		$category = array();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID;
@@ -406,30 +187,29 @@ class DataCommon{
 		}
 		return $category;
 	}
-
-	public static function getAllProvices(){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
-		$province = array();
-/*		if(Cache::CACHE_ON){
+	public static function getVideoById($video_id = 0){
+		$video = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_VIDEO_ID.$video_id;
+		if($video_id <= 0) return $video;
+		if(Cache::CACHE_ON) {
 			$cache = new Cache();
-			$province = $cache->do_get($key_cache);
+			$video = $cache->do_get($key_cache);
 		}
-		if($province == null || empty($province)) {
-			$query = db_select(self::$table_province, 'p')
-				->condition('p.province_status', STASTUS_SHOW, '=')
-				->orderBy('p.province_position', 'ASC')
-				->fields('p', array('province_id', 'province_name'));
+		if( $video == null || empty($video)){
+			$query = db_select(self::$table_video, 'n')
+				->condition('n.video_id', $video_id, '=')
+				->fields('n');
 			$data = $query->execute();
-			if (!empty($data)) {
-				foreach ($data as $k => $provi) {
-					$province[$provi->province_id] = $provi->province_name;
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$video = $new;
 				}
-				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $province, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $video, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
-		}*/
-		return $province;
+		}
+		return $video;
 	}
 
 	/**
@@ -469,178 +249,4 @@ class DataCommon{
 		return $bannerAdvanced;
 	}
 
-	/**
-	 * build c�y danh m?c
-	 * Tao Option chon danh m?c hien th? theo cay
-	 * @param $data
-	 * @return array
-	 */
-	public static function getOptionTreeCategory(){
-		$optionTreeCategory = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_OPTION_TREE_CATEGORY;
-		if(Cache::CACHE_ON){
-			$cache = new Cache();
-			$optionTreeCategory = $cache->do_get($key_cache);
-		}
-		if($optionTreeCategory == null || empty($optionTreeCategory)) {
-			$query = db_select(self::$table_category, 'c')
-				->condition('c.category_status', STASTUS_SHOW, '=')
-				->orderBy('c. category_order', 'ASC')
-				->fields('c');
-			$data = $query->execute();
-			$dataCate = array();
-			if (!empty($data)) {
-				foreach ($data as $k => $banner) {
-					$dataCate[] = $banner;
-				}
-			}
-
-			$max = 0;
-			$arrCategory = array();
-			if (!empty($dataCate)) {
-				foreach ($dataCate as $k => $value) {
-					$max = ($max < $value->category_parent_id) ? $value->category_parent_id : $max;
-					$arrCategory[$value->category_id] = array(
-						'category_id' => $value->category_id,
-						'category_parent_id' => $value->category_parent_id,
-						'category_name' => $value->category_name);
-				}
-			}
-			if ($max > 0) {
-				$optionTreeCategory = self::showCategory($max, $arrCategory);
-			}
-
-			if (Cache::CACHE_ON) {
-				$cache->do_put($key_cache, $optionTreeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-			}
-		}
-		return $optionTreeCategory;
-	}
-	public static function showCategory($max, $aryDataInput) {
-		$aryData = array();
-		if(is_array($aryDataInput) && count($aryDataInput) > 0) {
-			foreach ($aryDataInput as $k => $val) {
-				if((int)$val['category_parent_id'] == 0) {
-					$val['padding_left'] = '';
-					$val['category_parent_name'] = '';
-					$aryData[] = $val;
-					self::showSubCategory($val['category_id'],$max, $aryDataInput, $aryData);
-				}
-			}
-		}
-		return $aryData;
-	}
-	public static function showSubCategory($cat_id, $max, $aryDataInput, &$aryData) {
-		if($cat_id <= $max) {
-			foreach ($aryDataInput as $chk => $chval) {
-				if($chval['category_parent_id'] == $cat_id) {
-					$chval['padding_left'] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-					$aryData[] = $chval;
-					self::showSubCategory($chval['category_id'], $max, $aryDataInput, $aryData);
-				}
-			}
-		}
-	}
-
-	/**
-	 * c?p nh?t l??t click banner, tin t?c qu?ng c�o
-	 * @param int $id_object
-	 * @param string $ip_client
-	 * @param int $type_adver: 1: banner, 2: tin tuc quang cao,3 video giai tri
-	 * @throws Exception
-	 */
-	public static function updateNumberClickAdvertise($id_object = 0, $ip_client = '',$type_adver = 1){
-		if($id_object > 0 && trim($ip_client) != ''){
-			//check xem co ton tai ip cua quang cao nay ko
-			$string_object = 'click_banner_id';
-			switch($type_adver){
-				case 1: $string_object = 'click_banner_id';
-					break;
-				case 2: $string_object = 'click_new_id';
-					break;
-				case 3: $string_object = 'click_video_id';
-					break;
-			}
-			$query = db_select(self::$table_advertise_click, 'c')
-				->condition('c.'.$string_object, $id_object, '=')
-				->condition('c.click_type_object', $type_adver, '=')
-				->condition('c.click_host_ip', trim($ip_client), '=')
-				->orderBy('c.click_time', 'DESC')
-				->fields('c', array('click_id'));
-			$data = $query->execute();
-			if (!empty($data)) {
-				$advertise_click = array();
-				foreach ($data as $k => $pro) {
-					$advertise_click[] = $pro;
-				}
-				if(empty($advertise_click)){
-					//them vao bang click
-					$arrClick = array(
-						$string_object => $id_object,
-						'click_type_object' => $type_adver,
-						'click_host_ip' => $ip_client,
-						'click_total' => 1,
-						'click_time' => time());
-					$id_click = db_insert(self::$table_advertise_click)->fields($arrClick)->execute();
-					if($id_click > 0){
-						// lay tong luot click
-						$query = db_select(self::$table_advertise_click, 'c')
-							->condition('c.'.$string_object, $id_object, '=')
-							->condition('c.click_type_object', $type_adver, '=')
-							->orderBy('c.click_time', 'DESC')
-							->fields('c', array('click_id','click_time'));
-						$query->addExpression('COUNT(c.click_id)', 'total_click');
-						$totak_click = $query->execute();
-
-						$result_click = array();
-						foreach ($totak_click as $k => $pro) {
-							$result_click[] = $pro;
-						}
-						//update so luong vao bang doi tuong
-						if(!empty($result_click)){
-							if($type_adver == 1) {
-								$num_updated = db_update(self::$table_banner)
-									->fields(array('banner_total_click' => $result_click[0]->total_click,
-													'banner_time_click' => $result_click[0]->click_time,))
-									->condition(self::$table_banner . '.banner_id', $id_object, '=')
-									->execute();
-							}
-							if($type_adver == 3) {
-								$num_updated = db_update(self::$table_video)
-									->fields(array('video_view' => $result_click[0]->total_click,
-										'video_time_update' => $result_click[0]->click_time))
-									->condition(self::$table_video . '.video_id', $id_object, '=')
-									->execute();
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public static function getVideoById($video_id = 0){
-		$video = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_VIDEO_ID.$video_id;
-		if($video_id <= 0) return $video;
-		if(Cache::CACHE_ON) {
-			$cache = new Cache();
-			$video = $cache->do_get($key_cache);
-		}
-		if( $video == null || empty($video)){
-			$query = db_select(self::$table_video, 'n')
-				->condition('n.video_id', $video_id, '=')
-				->fields('n');
-			$data = $query->execute();
-			if(!empty($data)){
-				foreach($data as $k=> $new){
-					$video = $new;
-				}
-				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $video, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-				}
-			}
-		}
-		return $video;
-	}
 }

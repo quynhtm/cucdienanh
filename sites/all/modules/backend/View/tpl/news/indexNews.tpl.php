@@ -50,11 +50,11 @@
 					<tr>
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
-						<th width="5%" class="td_list">Ảnh</th>
-						<th width="60%" class="td_list">Tên bài viết</th>
-						<th width="10%" class="td_list">Thuộc danh mục</th>
-						<th width="5%" class="td_list">Status</th>
-						<th width="5%" class="td_list">Action</th>
+						<th width="5%" class="td_list align_center">Ảnh</th>
+						<th width="40%" class="td_list">Tên bài viết</th>
+						<th width="20%" class="td_list">Thuộc danh mục</th>
+						<th width="5%" class="td_list align_center">Status</th>
+						<th width="5%" class="td_list align_center">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -82,10 +82,10 @@
 							</td>
 							<td><?php echo isset($arrCategoryNew[$item->news_category])?$arrCategoryNew[$item->news_category]:'Chưa rõ'; ?></td>
 
-							<td>
+							<td class="align_center">
 								<?php echo ($item->news_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>
-							<td>
+							<td class="align_center">
 								<?php $linkEdit = $base_url.'/admincp/news/edit/'.$item->news_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
 							</td>

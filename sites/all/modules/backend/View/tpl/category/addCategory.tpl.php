@@ -15,7 +15,7 @@
             </div>
 
             <div class="control-group">
-                 <label class="control-label">Danh mục cha<span>*</span></label>
+                 <label class="control-label">Danh mục cha</label>
                  <div class="controls">
                      <select class="form-control input-sm" name="category_parent_id">
                          <?php echo $optionCategoryParent;?>

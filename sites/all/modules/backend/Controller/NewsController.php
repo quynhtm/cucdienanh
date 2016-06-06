@@ -33,8 +33,8 @@ class NewsController{
 	            'View/js/admin.js',
 	        );
 	        Loader::load('Admin', $files);
-	        
-		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + CGlobal::$aryCatergoryNews;
+		$aryCatergoryNews = DataCommon::getListCategoryNews();
+		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + $aryCatergoryNews;
 	}
 
 	function indexNews(){
@@ -82,6 +82,7 @@ class NewsController{
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
+		$errors = '';
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = News::getItemById(array(), $item_id);
@@ -103,18 +104,24 @@ class NewsController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
+			$news_category = FunctionLib::getIntParam('news_category',0);
+			$news_type = 0;
+			if($news_category > 0){
+				$inforCategory = DataCommon::getCategoryById($news_category);
+				$news_type = isset($inforCategory->type_id)? $inforCategory->type_id : $news_type;
+			}
 			$dataInput = array(
 				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
 				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
-				'new_meta_title'=>array('value'=>FunctionLib::getParam('new_meta_title','')),
-				'new_meta_keyword'=>array('value'=>FunctionLib::getParam('new_meta_keyword','')),
-				'new_meta_description'=>array('value'=>FunctionLib::getParam('new_meta_description','')),
-				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
-				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
+				'news_meta_title'=>array('value'=>FunctionLib::getParam('news_meta_title','')),
+				'news_meta_keyword'=>array('value'=>FunctionLib::getParam('news_meta_keyword','')),
+				'news_meta_description'=>array('value'=>FunctionLib::getParam('news_meta_description','')),
+				'news_status'=>array('value'=>FunctionLib::getIntParam('news_status',0)),
+				'news_category'=>array('value'=> $news_category, 'require'=>1, 'messages'=>'Danh mục tin tức không được bỏ trống!'),
 				'news_create'=>array('value'=>time()),
-				'news_type'=>array('value'=>FunctionLib::getParam('news_type',0)),
+				'news_type'=>array('value'=>$news_type),
 			);
 
 			//lấy lại vị trí sắp xếp của ảnh khác
@@ -161,6 +168,7 @@ class NewsController{
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
 				'optionCategory'=>$optionCategory,
+				'errors'=>$errors,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}

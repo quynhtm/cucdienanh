@@ -147,6 +147,7 @@ class CategoryController{
 		$param = arg();
 		$arrItem = array();
 		$item_id = 0;
+		$errors = '';
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = Category::getItemById(array(), $item_id);
@@ -163,7 +164,7 @@ class CategoryController{
 				'type_id'=>array('value'=>FunctionLib::getParam('type_id',''), 'require'=>1, 'messages'=>'Chưa chọn kiểu chuyên mục!'),
 				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
-				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
+				'category_order'=>array('value'=>FunctionLib::getIntParam('category_order',0)),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'category_meta_title'=>array('value'=>FunctionLib::getParam('category_meta_title',''),'require'=>0),
@@ -201,6 +202,7 @@ class CategoryController{
 
 		return $view = theme('addCategory',
 			array('arrItem'=>$arrItem,
+				'errors'=>$errors,
 				'item_id'=>$item_id,
 				'title'=>'Thêm sửa xóa chuyên mục',
 				'optionCategoryParent'=>$optionCategoryParent,
@@ -232,6 +234,7 @@ class CategoryController{
 		$cache = new Cache();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
 		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
+		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS);
 		$cache->do_remove($key_cache);
 	}
 }
