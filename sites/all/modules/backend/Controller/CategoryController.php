@@ -186,6 +186,14 @@ class CategoryController{
 					drupal_goto($base_url.'/admincp/category/add');
 				}
 			}else{
+				if(isset($dataInput['type_id']['value']) && $dataInput['type_id']['value'] > 0){
+					$arrType = DataCommon::getTypeById($dataInput['type_id']['value']);
+					if(!empty($arrType)){
+						$dataInput['type_keyword']['value'] = $arrType->type_keyword;
+					}else{
+						$dataInput['type_keyword']['value'] = '';
+					}
+				}
 				Category::save($dataInput,$item_id);
 				if(Cache::CACHE_ON){
 					$this->removeCache($item_id);

@@ -33,7 +33,7 @@ class NewsController{
 	            'View/js/admin.js',
 	        );
 	        Loader::load('Admin', $files);
-		$aryCatergoryNews = DataCommon::getListCategoryNews();
+		$aryCatergoryNews = DataCommon::getListCategoryNews('group_news');
 		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + $aryCatergoryNews;
 	}
 

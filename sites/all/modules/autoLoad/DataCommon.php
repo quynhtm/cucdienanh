@@ -40,8 +40,12 @@ class DataCommon{
 	/*
 	 * Build tree chuyen muc
 	 * */
-	public static function getListCategoryNews(){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS;
+	public static function getListCategoryNews($type_keyword=''){
+		if($type_keyword != ''){
+			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS.$type_keyword;
+		}else{
+			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS;
+		}
 		$optionCategory = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
@@ -52,6 +56,9 @@ class DataCommon{
 				->condition('c.category_status', STASTUS_SHOW, '=')
 				->orderBy('category_order', 'ASC')
 				->fields('c', array('category_id', 'category_name', 'category_parent_id'));
+				if($type_keyword != ''){
+					$query->condition('c.type_keyword', $type_keyword, '=');
+				}
 			$data = $query->execute();
 			if (!empty($data)) {
 				$treeCategory = self::getTreeCategory($data);
@@ -211,7 +218,30 @@ class DataCommon{
 		}
 		return $video;
 	}
-
+	public static function getTypeById($type_id = 0){
+		$type = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_TYPE_ID;
+		if($type_id <= 0) return $type;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$type = $cache->do_get($key_cache. $type_id);
+		}
+		if( $type == null || empty($type)){
+			$query = db_select(self::$table_type, 'c')
+				->condition('c.type_id', $type_id, '=')
+				->fields('c');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $type){
+					$type = $type;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache.$type_id, $type, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $type;
+	}
 	/**
 	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner tr�i, 4 banner ph?i,5: banner trong list s?n ph?m
 	 * @param int $banner_page: 1: trang ch?, 2: trang list,3: trang detail, 4: trang list danh m?c
