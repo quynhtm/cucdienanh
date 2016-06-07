@@ -13,16 +13,16 @@
 			</div>
 
 			<div class="col-lg-3">
-				<label class="control-label">Hiện ở Header</label>
+				<label class="control-label">Hiện ở Menu ngang</label>
 				<div><select class="form-control input-sm" name="category_horizontal"><?php echo $optionCategoryHorizontal;?></select></div>
 			</div>
 
 			<div class="col-lg-3">
-				<label class="control-label">Hiện ở Menu trái-phải</label>
+				<label class="control-label">Hiện ở Menu dọc</label>
 				<div><select class="form-control input-sm" name="category_vertical"><?php echo $optionCategoryVertical;?></select></div>
 			</div>
 			<div class="col-lg-3">
-				<label class="control-label">Kiểu chuyên mục</label>
+				<label class="control-label">Kiểu dữ liệu</label>
 				<div><select class="form-control input-sm" name="type_id"><?php echo $optionTypeCategory;?></select></div>
 			</div>
 
@@ -67,11 +67,11 @@
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%" class="td_list">Tên danh mục</th>
 						<th width="20%" class="td_list">Danh mục cha</th>
-						<th width="10%" class="td_list align_center">Kiểu chuyên mục</th>
-						<th width="10%" class="td_list align_center">Show Header</th>
-						<th width="10%" class="td_list align_center">Show trái-phải</th>
-						<th width="5%" class="td_list align_center">Vị trí</th>
-						<th width="5%" class="td_list align_center" >Status</th>
+						<th width="10%" class="td_list align_center">Kiểu dữ liệu</th>
+						<th width="10%" class="td_list align_center">Menu ngang</th>
+						<th width="10%" class="td_list align_center">Menu dọc</th>
+						<th width="5%" class="td_list align_center">Thứ tự</th>
+						<th width="7%" class="td_list align_center">Trạng thái</th>
 						<th width="5%" class="td_list">Action</th>
 					</tr>
 					</thead>
@@ -86,10 +86,9 @@
 							if($item['category_parent_id'] > 0){
 								echo '['.$item['category_parent_id'].'] '.$item['category_parent_name'];
 							}else{
-								echo 'Chuyên mục gốc';
+								echo 'Danh mục gốc';
 							}
 							?>
-
 						</td>
 						<td>
 							<?php

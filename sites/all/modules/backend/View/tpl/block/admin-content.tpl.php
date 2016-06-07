@@ -13,39 +13,14 @@ global $base_url;
 	</div>
 	<div class="content-global">
 		<div class="wrapp-content-global">
-			<!--Dòng 1-->
+			<!--Row 1-->
 			<div class="col-lg-2 align_center">
 				<a class="a_control" target="_blank" title="Home Site" href="<?php echo $base_url ?>">
 					<div class="boder_admin padding10">
-						<i class="icon-home icon-4x"></i> <br/>Home Site
+						<i class="icon-home icon-4x"></i> <br/>Trang chủ quản trị
 					</div>
 				</a>
 			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Danh sách Shop" href="<?php echo $base_url ?>/admincp/usershop">
-					<div class="boder_admin padding10">
-						<i class="icon-group icon-4x"></i> <br/>Users Shop
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Cấu hình chung" href="<?php echo $base_url ?>/admincp/configinfo">
-					<div class="boder_admin padding10">
-					<i class="icon-cogs icon-4x"></i> <br/>Cấu hình chung
-					</div>
-				</a>
-			</div>
-			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Nick hỗ trợ" href="<?php echo $base_url ?>/admincp/supportonline">
-					<div class="boder_admin padding10">
-					<i class="icon-skype icon-4x"></i> <br/>Nick hỗ trợ
-					</div>
-				</a>
-			</div>
-
-
-			<!--Dòng 2-->
-			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Kiểu dữ liệu" href="<?php echo $base_url ?>/admincp/type">
 					<div class="boder_admin padding10">
@@ -61,16 +36,32 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Banner Quảng cáo" href="<?php echo $base_url ?>/admincp/banner">
+				<a class="a_control" title="Quản lý Tin tức" href="<?php echo $base_url ?>/admincp/news">
 					<div class="boder_admin padding10">
-					<i class="icon-globe icon-4x"></i> <br/>Banner Quảng cáo
+						<i class="icon-book icon-4x"></i> <br/>Quản lý bài viết
+					</div>
+				</a>
+			</div>
+			<!--Row 2-->
+			<div class="clear paddingTop30"></div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Cấu hình chung" href="<?php echo $base_url ?>/admincp/configinfo">
+					<div class="boder_admin padding10">
+					<i class="icon-cogs icon-4x"></i> <br/>Cấu hình chung
 					</div>
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý Tin tức" href="<?php echo $base_url ?>/admincp/news">
+				<a class="a_control" title="Nick hỗ trợ" href="<?php echo $base_url ?>/admincp/supportonline">
 					<div class="boder_admin padding10">
-						<i class="icon-book icon-4x"></i> <br/>Quản lý bài viết
+					<i class="icon-skype icon-4x"></i> <br/>Nick hỗ trợ
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Banner Quảng cáo" href="<?php echo $base_url ?>/admincp/banner">
+					<div class="boder_admin padding10">
+					<i class="icon-globe icon-4x"></i> <br/>Banner quảng cáo
 					</div>
 				</a>
 			</div>
@@ -81,7 +72,6 @@ global $base_url;
 					</div>
 				</a>
 			</div>
-
 		</div>
 	</div>
 </div>

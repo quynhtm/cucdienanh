@@ -67,7 +67,7 @@ class Category{
             /*End search*/
 
             $totalItem = DB::countItem(self::$table_action, self::$primary_key , $cond, '', self::$primary_key.' ASC');
-            $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+            $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'ASC')->execute();
             $arrItem = (array)$result->fetchAll();
 
             $pager = array('#theme' => 'pager','#quantity' => 3);

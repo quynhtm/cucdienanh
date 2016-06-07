@@ -6,14 +6,14 @@
     </div>
     <div class="page-content-box paddingTop30">
          <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
-            
             <div class="control-group">
-                <label class="control-label">Tên danh mục<span>*</span></label>
-                <div class="controls">
-                    <input type="text" class="form-control input-sm" name="category_name" value="<?php if(isset($arrItem->category_name)){ echo $arrItem->category_name; } ?>">
-                </div>
+                 <label class="control-label">Kiểu dữ liệu<span>*</span></label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="type_id">
+                         <?php echo $optionTypeCategory;?>
+                     </select>
+                 </div>
             </div>
-
             <div class="control-group">
                  <label class="control-label">Danh mục cha</label>
                  <div class="controls">
@@ -21,23 +21,35 @@
                          <?php echo $optionCategoryParent;?>
                      </select>
                  </div>
-             </div>
-             <div class="control-group">
-                 <label class="control-label">Kiểu chuyên mục<span>*</span></label>
-                 <div class="controls">
-                     <select class="form-control input-sm" name="type_id">
-                         <?php echo $optionTypeCategory;?>
-                     </select>
-                 </div>
-             </div>
-             <div class="control-group">
-                 <label class="control-label">Thứ tự hiển thị</label>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Tên danh mục<span>*</span></label>
+                <div class="controls">
+                    <input type="text" class="form-control input-sm" name="category_name" value="<?php if(isset($arrItem->category_name)){ echo $arrItem->category_name; } ?>">
+                </div>
+            </div>
+            <div class="control-group">
+                 <label class="control-label">Thứ tự</label>
                  <div class="controls">
                      <input type="text"class="form-control input-sm" name="category_order" value="<?php if(isset($arrItem->category_order)){ echo $arrItem->category_order; } ?>">
                  </div>
-             </div>
-
-
+            </div>
+            <div class="control-group">
+                 <label class="control-label">Menu ngang</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="category_horizontal">
+                         <?php echo $optionCategoryHorizontal;?>
+                     </select>
+                 </div>
+            </div>
+            <div class="control-group">
+                 <label class="control-label">Menu dọc</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="category_vertical">
+                         <?php echo $optionCategoryVertical;?>
+                     </select>
+                 </div>
+            </div>
              <div class="control-group">
                  <label class="control-label">Trạng thái</label>
                  <div class="controls">
@@ -46,23 +58,6 @@
                      </select>
                  </div>
              </div>
-
-             <div class="control-group">
-                 <label class="control-label">Menu danh mục - Header</label>
-                 <div class="controls">
-                     <select class="form-control input-sm" name="category_horizontal">
-                         <?php echo $optionCategoryHorizontal;?>
-                     </select>
-                 </div>
-            </div>
-             <div class="control-group">
-                 <label class="control-label">Menu danh mục - Trái phải</label>
-                 <div class="controls">
-                     <select class="form-control input-sm" name="category_vertical">
-                         <?php echo $optionCategoryVertical;?>
-                     </select>
-                 </div>
-            </div>
             <div class="control-group">
                 <label class="control-label">Meta title</label>
                 <div class="controls">
@@ -76,7 +71,7 @@
                 </div>
             </div>
              <div class="control-group">
-                <label class="control-label">Meta miêu tả</label>
+                <label class="control-label">Meta description</label>
                 <div class="controls">
                     <textarea name="category_meta_description" class="form-control input-sm"><?php if(isset($arrItem->category_meta_description)){ echo $arrItem->category_meta_description; } ?></textarea>
                 </div>

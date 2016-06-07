@@ -71,7 +71,7 @@ class CategoryController{
 		$optionTypeCategory = FunctionLib::getOption(array(-1 =>'--Chọn kiểu chuyên mục--')+$this->arrTypeCategory, $dataSearch['type_id']);
 
 		return $view = theme('indexCategory',array(
-									'title'=>'Chuyên mục tin',
+									'title'=>'Quản lý chuyên mục',
 									'result' => $treeCategroy,
 									'dataSearch' => $dataSearch,
 									'arrTypeCategory' => $this->arrTypeCategory,

@@ -37,10 +37,28 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
 
+    $items["admincp/news"] = array(
+        "title" => t('News'),
+        "description" => "News",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+     $items["admincp/video"] = array(
+        "title" => t('Video giai tri'),
+        "description" => "banner",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
-
-
-
+    $items["admincp/configinfo"] = array(
+        "title" => t('Config info'),
+        "description" => "Config info",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
 	$items["admincp/supportonline"] = array(
 		"title" => t('Support online'),
@@ -49,51 +67,10 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-
-	$items["admincp/configinfo"] = array(
-		"title" => t('Config info'),
-		"description" => "Config info",
-		'page callback' => 'router_page',
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
-	$items["admincp/usershop"] = array(
-		"title" => t('User Shop'),
-		"description" => "User Shop",
-		'page callback' => 'router_page',
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
-    $items["admincp/news"] = array(
-		"title" => t('News'),
-		"description" => "News",
-		'page callback' => 'router_page',
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-
     $items["admincp/banner"] = array(
         "title" => t('Banner Quang cao'),
         "description" => "banner",
         'page callback' => 'router_page',
-        'access callback' => TRUE,
-        'type' => MENU_CALLBACK,
-    );
-    $items["admincp/video"] = array(
-        "title" => t('Video giai tri'),
-        "description" => "banner",
-        'page callback' => 'router_page',
-        'access callback' => TRUE,
-        'type' => MENU_CALLBACK,
-    );
-    //login to shop by admin
-    $items["admincp/techloginas"] = array(
-        "title" => t('Tech login as'),
-        "description" => "Tech login as",
-        'page callback' => 'menuLoad',
-        'page arguments' => array('TechLoginAsController/techLoginAs'),
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
@@ -172,40 +149,27 @@ function Admin_theme() {
         'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
       	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
         'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
-        
         //Type
         'indexType'         => array('template' => 'View/tpl/type/indexType'),
         'addType'           => array('template' => 'View/tpl/type/addType'),
         //Category
         'indexCategory'         => array('template' => 'View/tpl/category/indexCategory'),
         'addCategory'           => array('template' => 'View/tpl/category/addCategory'),
-
-
-
-
-
-
-
-
-
-        //nick support online
-        'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
-        'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
-        //cau hinh
-        'indexConfigInfo' 		=> array('template' => 'View/tpl/configInfo/indexConfigInfo'),
-        'addConfigInfo' 		=> array('template' => 'View/tpl/configInfo/addConfigInfo'),
-        //user shop
-		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
-        'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
-        //tin tuc
-        'indexNews' 		=> array('template' => 'View/tpl/news/indexNews'),
-        'addNews' 			=> array('template' => 'View/tpl/news/addNews'),
-        //lien he
-        'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
-        'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
-        //video
-        'indexVideo' 		=> array('template' => 'View/tpl/video/indexVideo'),
-        'addVideo' 		=> array('template' => 'View/tpl/video/addVideo'),
+        //News
+        'indexNews'         => array('template' => 'View/tpl/news/indexNews'),
+        'addNews'           => array('template' => 'View/tpl/news/addNews'),
+        //ConfigInfo
+        'indexConfigInfo'       => array('template' => 'View/tpl/configInfo/indexConfigInfo'),
+        'addConfigInfo'         => array('template' => 'View/tpl/configInfo/addConfigInfo'),
+        //SupportOnline
+        'indexSupportOnline'    => array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
+        'addSupportOnline'      => array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+        //Banner
+        'indexBanner'       => array('template' => 'View/tpl/banner/indexBanner'),
+        'addBanner'         => array('template' => 'View/tpl/banner/addBanner'),
+        //Video
+        'indexVideo'        => array('template' => 'View/tpl/video/indexVideo'),
+        'addVideo'      => array('template' => 'View/tpl/video/addVideo'), 
     );
 }
 
@@ -228,31 +192,21 @@ function Admin_init(){
         //Category
         'Model/Category.php',
         'Controller/CategoryController.php',
-
-
-
-		
+        //News
+        'Model/News.php',
+        'Controller/NewsController.php',
+        //ConfigInfo
+        'Model/ConfigInfo.php',
+        'Controller/ConfigInfoController.php',
+		//SupportOnline
 		'Model/SupportOnline.php',
 		'Controller/SupportOnlineController.php',
-
-		'Model/ConfigInfo.php',
-		'Controller/ConfigInfoController.php',
-
-		'Model/UserShop.php',
-		'Controller/UserShopController.php',
-
-        'Model/News.php',
-		'Controller/NewsController.php',
-
+        //Banner
         'Model/Banner.php',
-		'Controller/BannerController.php',
-
+        'Controller/BannerController.php',
+		//Video
         'Model/Video.php',
-		'Controller/VideoController.php',
-
-        'Model/TechLoginAs.php',
-        'Controller/TechLoginAsController.php',
+        'Controller/VideoController.php',  
 	);
 	Loader::load('Admin', $files);
 }
-
