@@ -49,6 +49,7 @@ class DocumentController{
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionCategory' => $optionCategory,
+									'aryCatergoryDocument' => $this->aryCatergoryDocument,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -63,7 +64,7 @@ class DocumentController{
 		$errors = '';
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
-			$arrItem = Category::getItemById(array(), $item_id);
+			$arrItem = Document::getItemById(array(), $item_id);
 			//FunctionLib::Debug($arrItem);
 		}
 
@@ -74,7 +75,7 @@ class DocumentController{
 				'document_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($document_name)),'require'=>0),
 				'document_status'=>array('value'=>FunctionLib::getIntParam('document_status',0)),
 				'document_order'=>array('value'=>FunctionLib::getIntParam('document_order',0)),
-				'document_type'=>array('value'=>CGlobal::document_dowload),
+				'document_type'=>array('value'=>FunctionLib::getIntParam('document_type',0)),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'document_meta_title'=>array('value'=>FunctionLib::getParam('document_meta_title',''),'require'=>0),

@@ -6,20 +6,19 @@
     </div>
     <div class="page-content-box paddingTop30">
          <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
-            
+            <div class="control-group">
+                 <label class="control-label">Danh mục</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="document_type">
+                         <?php echo $optionCategory;?>
+                     </select>
+                 </div>
+            </div>
             <div class="control-group">
                 <label class="control-label">Tên văn bản<span>*</span></label>
                 <div class="controls">
                     <input type="text" class="form-control input-sm" name="document_name" value="<?php if(isset($arrItem->document_name)){ echo $arrItem->document_name; } ?>">
                 </div>
-            </div>
-            <div class="control-group">
-                 <label class="control-label">Danh mục</label>
-                 <div class="controls">
-                     <select class="form-control input-sm" name="news_category">
-                         <?php echo $optionCategory;?>
-                     </select>
-                 </div>
             </div>
             <div class="control-group">
                  <label class="control-label">Upload file</label>
@@ -29,7 +28,7 @@
              </div>
 
              <div class="control-group">
-                 <label class="control-label">Thứ tự hiển thị</label>
+                 <label class="control-label">Thứ tự</label>
                  <div class="controls">
                      <input type="text"class="form-control input-sm" name="document_order" value="<?php if(isset($arrItem->document_order)){ echo $arrItem->document_order; } ?>">
                  </div>

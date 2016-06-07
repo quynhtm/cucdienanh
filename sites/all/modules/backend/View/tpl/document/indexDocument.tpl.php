@@ -8,7 +8,7 @@
 			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Danh mục</label>
-				<div><select class="form-control input-sm" name="news_category"><?php echo $optionCategory;?></select></div>
+				<div><select class="form-control input-sm" name="document_type"><?php echo $optionCategory;?></select></div>
 			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
@@ -50,8 +50,9 @@
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%" class="td_list">Tên file</th>
-						<th width="5%" class="td_list align_center">Vị trí</th>
-						<th width="5%" class="td_list align_center" >Status</th>
+						<th width="20%" class="td_list">Thuộc danh mục</th>
+						<th width="5%" class="td_list align_center">Thứ tự</th>
+						<th width="5%" class="td_list align_center" >Trạng thái</th>
 						<th width="5%" class="td_list align_center">Action</th>
 					</tr>
 					</thead>
@@ -63,7 +64,7 @@
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->document_id ?>" /></td>
 							<td><?php echo $item->document_name ?></td>
-
+							<td><?php echo isset($aryCatergoryDocument[$item->document_type])?$aryCatergoryDocument[$item->document_type]:'Chưa rõ'; ?></td>
 							<td class="align_center"><?php echo $item->document_order; ?></td>
 							<td class="align_center">
 								<?php echo ($item->document_status== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>

@@ -25,6 +25,12 @@ class Document{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
+					
+					if($field === 'document_type' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+
 					if($field === 'document_status' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
