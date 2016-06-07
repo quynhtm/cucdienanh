@@ -42,6 +42,7 @@ define('TABLE_SUPPORT_ONLINE', 	'web_support_online');
 define('TABLE_CONTACT',        	'web_contact');
 define('TABLE_BANNER',         	'web_banner');
 define('TABLE_VIDEO',			'web_video');
+define('TABLE_DOCUMENT',		'web_document');
 
 //Folder images
 define('FOLDER_DEFAULT', 'img_other');

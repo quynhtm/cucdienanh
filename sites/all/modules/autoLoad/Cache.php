@@ -20,6 +20,9 @@ class Cache {
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
     const CACHE_LIST_CATEGORY_NEWS = 'cache_list_category_news';
 
+    //cache Document
+    const CACHE_DOCUMENT_ID = 'cache_document_id_';
+
     //cache type chuyen m?c
     const CACHE_LIST_TYPE_CATEGORY = 'cache_list_type_category';
 

@@ -36,6 +36,13 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/document"] = array(
+        "title" => t('document'),
+        "description" => "document",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
     $items["admincp/news"] = array(
         "title" => t('News'),
@@ -155,6 +162,10 @@ function Admin_theme() {
         //Category
         'indexCategory'         => array('template' => 'View/tpl/category/indexCategory'),
         'addCategory'           => array('template' => 'View/tpl/category/addCategory'),
+
+        //document
+        'indexDocument'         => array('template' => 'View/tpl/document/indexDocument'),
+        'addDocument'           => array('template' => 'View/tpl/document/addDocument'),
         //News
         'indexNews'         => array('template' => 'View/tpl/news/indexNews'),
         'addNews'           => array('template' => 'View/tpl/news/addNews'),
@@ -192,6 +203,11 @@ function Admin_init(){
         //Category
         'Model/Category.php',
         'Controller/CategoryController.php',
+
+        //Category
+        'Model/Document.php',
+        'Controller/DocumentController.php',
+
         //News
         'Model/News.php',
         'Controller/NewsController.php',
