@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-06-04 09:30:28
+Date: 2016-06-07 14:58:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -968,12 +968,11 @@ CREATE TABLE `flood` (
   PRIMARY KEY (`fid`),
   KEY `allow` (`event`,`identifier`,`timestamp`),
   KEY `purge` (`expiration`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...';
 
 -- ----------------------------
 -- Records of flood
 -- ----------------------------
-INSERT INTO `flood` VALUES ('3', 'failed_login_attempt_ip', '127.0.0.1', '1464962224', '1464965824');
 
 -- ----------------------------
 -- Table structure for history
@@ -1390,18 +1389,6 @@ CREATE TABLE `menu_router` (
 -- ----------------------------
 -- Records of menu_router
 -- ----------------------------
-INSERT INTO `menu_router` VALUES ('0', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '0', 'Chân dung', 't', '', '', 'a:0:{}', '0', 'Chân dung', '', '0', '');
-INSERT INTO `menu_router` VALUES ('1', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '1', 'Văn hóa', 't', '', '', 'a:0:{}', '0', 'Văn hóa', '', '0', '');
-INSERT INTO `menu_router` VALUES ('1.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '1.html', 'Điện ảnh Việt Nam', 't', '', '', 'a:0:{}', '0', 'Điện ảnh Việt Nam', '', '0', '');
-INSERT INTO `menu_router` VALUES ('2', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '2', 'Xã hội', 't', '', '', 'a:0:{}', '0', 'Xã hội', '', '0', '');
-INSERT INTO `menu_router` VALUES ('2.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '2.html', 'Âm nhạc Việt Nam', 't', '', '', 'a:0:{}', '0', 'Âm nhạc Việt Nam', '', '0', '');
-INSERT INTO `menu_router` VALUES ('3', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '3', 'Âm nhạc Việt Nam', 't', '', '', 'a:0:{}', '0', 'Âm nhạc Việt Nam', '', '0', '');
-INSERT INTO `menu_router` VALUES ('3.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '3.html', 'Âm nhạc thế giới', 't', '', '', 'a:0:{}', '0', 'Âm nhạc thế giới', '', '0', '');
-INSERT INTO `menu_router` VALUES ('4', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '4', 'Âm nhạc thế giới', 't', '', '', 'a:0:{}', '0', 'Âm nhạc thế giới', '', '0', '');
-INSERT INTO `menu_router` VALUES ('4.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '4.html', 'Chân dung', 't', '', '', 'a:0:{}', '0', 'Chân dung', '', '0', '');
-INSERT INTO `menu_router` VALUES ('5', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '5', 'Điện ảnh Việt Nam', 't', '', '', 'a:0:{}', '0', 'Điện ảnh Việt Nam', '', '0', '');
-INSERT INTO `menu_router` VALUES ('5.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '5.html', 'Xã hội', 't', '', '', 'a:0:{}', '0', 'Xã hội', '', '0', '');
-INSERT INTO `menu_router` VALUES ('6.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32383A2253697465436F6E74726F6C6C65722F6765745365617263684E657773223B7D, '', '1', '1', '0', '', '6.html', 'Văn hóa', 't', '', '', 'a:0:{}', '0', 'Văn hóa', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admin', '', '', 'user_access', 0x613A313A7B693A303B733A32373A226163636573732061646D696E697374726174696F6E207061676573223B7D, 'system_admin_menu_block_page', 0x613A303A7B7D, '', '1', '1', '0', '', 'admin', 'Administration', 't', '', '', 'a:0:{}', '6', '', '', '9', 'modules/system/system.admin.inc');
 INSERT INTO `menu_router` VALUES ('admin/admincp', '', '', '1', 0x613A303A7B7D, 'admin_redirect', 0x613A303A7B7D, '', '3', '2', '0', '', 'admin/admincp', 'CMS', 't', '', '', 'a:0:{}', '6', 'Administration', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admin/appearance', '', '', 'user_access', 0x613A313A7B693A303B733A31373A2261646D696E6973746572207468656D6573223B7D, 'system_themes_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admin/appearance', 'Appearance', 't', '', '', 'a:0:{}', '6', 'Select and configure your themes.', 'left', '-6', 'modules/system/system.admin.inc');
@@ -1644,12 +1631,13 @@ INSERT INTO `menu_router` VALUES ('admin/tasks', '', '', 'user_access', 0x613A31
 INSERT INTO `menu_router` VALUES ('admincp', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '1', '1', '0', '', 'admincp', 'CMS', 't', '', '', 'a:0:{}', '0', 'Administration', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/banner', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/banner', 'Banner Quang cao', 't', '', '', 'a:0:{}', '0', 'banner', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/category', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/category', 'Category', 't', '', '', 'a:0:{}', '0', 'Category', '', '0', '');
+INSERT INTO `menu_router` VALUES ('admincp/comments', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/comments', 'comments', 't', '', '', 'a:0:{}', '0', 'comments', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/configinfo', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/configinfo', 'Config info', 't', '', '', 'a:0:{}', '0', 'Config info', '', '0', '');
+INSERT INTO `menu_router` VALUES ('admincp/document', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/document', 'document', 't', '', '', 'a:0:{}', '0', 'document', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/news', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/news', 'News', 't', '', '', 'a:0:{}', '0', 'News', '', '0', '');
+INSERT INTO `menu_router` VALUES ('admincp/slideimage', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/slideimage', 'Banner Quang cao', 't', '', '', 'a:0:{}', '0', 'banner', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/supportonline', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/supportonline', 'Support online', 't', '', '', 'a:0:{}', '0', 'Support online', '', '0', '');
-INSERT INTO `menu_router` VALUES ('admincp/techloginas', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A33333A22546563684C6F67696E4173436F6E74726F6C6C65722F746563684C6F67696E4173223B7D, '', '3', '2', '0', '', 'admincp/techloginas', 'Tech login as', 't', '', '', 'a:0:{}', '0', 'Tech login as', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/type', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/type', 'Type', 't', '', '', 'a:0:{}', '0', 'Type', '', '0', '');
-INSERT INTO `menu_router` VALUES ('admincp/usershop', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/usershop', 'User Shop', 't', '', '', 'a:0:{}', '0', 'User Shop', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/video', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/video', 'Video giai tri', 't', '', '', 'a:0:{}', '0', 'banner', '', '0', '');
 INSERT INTO `menu_router` VALUES ('ajax', '', '', '1', 0x613A303A7B7D, 'CoreAjax', 0x613A303A7B7D, '', '1', '1', '0', '', 'ajax', 'Ajax', 't', '', '', 'a:0:{}', '0', 'Ajax', '', '0', '');
 INSERT INTO `menu_router` VALUES ('ajax-action', '', '', '1', 0x613A303A7B7D, 'CoreAjaxAction', 0x613A303A7B7D, '', '1', '1', '0', '', 'ajax-action', 'Ajax action', 't', '', '', 'a:0:{}', '0', 'Ajax action', '', '0', '');
@@ -1660,7 +1648,6 @@ INSERT INTO `menu_router` VALUES ('comment/%/delete', 0x613A313A7B693A313B4E3B7D
 INSERT INTO `menu_router` VALUES ('comment/%/edit', 0x613A313A7B693A313B733A31323A22636F6D6D656E745F6C6F6164223B7D, '', 'comment_access', 0x613A323A7B693A303B733A343A2265646974223B693A313B693A313B7D, 'comment_edit_page', 0x613A313A7B693A303B693A313B7D, '', '5', '3', '1', 'comment/%', 'comment/%', 'Edit', 't', '', '', 'a:0:{}', '132', '', '', '0', '');
 INSERT INTO `menu_router` VALUES ('comment/%/view', 0x613A313A7B693A313B4E3B7D, '', 'user_access', 0x613A313A7B693A303B733A31353A2261636365737320636F6D6D656E7473223B7D, 'comment_permalink', 0x613A313A7B693A303B693A313B7D, '', '5', '3', '1', 'comment/%', 'comment/%', 'View comment', 't', '', '', 'a:0:{}', '140', '', '', '-10', '');
 INSERT INTO `menu_router` VALUES ('comment/reply/%', 0x613A313A7B693A323B733A393A226E6F64655F6C6F6164223B7D, '', 'node_access', 0x613A323A7B693A303B733A343A2276696577223B693A313B693A323B7D, 'comment_reply', 0x613A313A7B693A303B693A323B7D, '', '6', '3', '0', '', 'comment/reply/%', 'Add new comment', 't', '', '', 'a:0:{}', '6', '', '', '0', 'modules/comment/comment.pages.inc');
-INSERT INTO `menu_router` VALUES ('danh-muc/%/%', 0x613A323A7B693A313B4E3B693A323B4E3B7D, '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A33393A2253697465436F6E74726F6C6C65722F6765744C69737450726F64756374496E43617465676F7279223B7D, '', '4', '3', '0', '', 'danh-muc/%/%', 'Danh mục sản phẩm', 't', '', '', 'a:0:{}', '0', 'Danh mục sản phẩm', '', '0', '');
 INSERT INTO `menu_router` VALUES ('file/ajax', '', '', 'user_access', 0x613A313A7B693A303B733A31343A2261636365737320636F6E74656E74223B7D, 'file_ajax_upload', 0x613A303A7B7D, 'ajax_deliver', '3', '2', '0', '', 'file/ajax', '', 't', '', 'ajax_base_page_theme', 'a:0:{}', '0', '', '', '0', '');
 INSERT INTO `menu_router` VALUES ('file/progress', '', '', 'user_access', 0x613A313A7B693A303B733A31343A2261636365737320636F6E74656E74223B7D, 'file_ajax_progress', 0x613A303A7B7D, '', '3', '2', '0', '', 'file/progress', '', 't', '', 'ajax_base_page_theme', 'a:0:{}', '0', '', '', '0', '');
 INSERT INTO `menu_router` VALUES ('filter/tips', '', '', '1', 0x613A303A7B7D, 'filter_tips_long', 0x613A303A7B7D, '', '3', '2', '0', '', 'filter/tips', 'Compose tips', 't', '', '', 'a:0:{}', '20', '', '', '0', 'modules/filter/filter.pages.inc');
@@ -1680,7 +1667,6 @@ INSERT INTO `menu_router` VALUES ('node/add/page', '', '', 'node_access', 0x613A
 INSERT INTO `menu_router` VALUES ('page-403.html', '', '', '1', 0x613A303A7B7D, 'page_403', 0x613A303A7B7D, '', '1', '1', '0', '', 'page-403.html', '403', 't', '', '', 'a:0:{}', '0', '403', '', '0', '');
 INSERT INTO `menu_router` VALUES ('page-404.html', '', '', '1', 0x613A303A7B7D, 'page_404', 0x613A303A7B7D, '', '1', '1', '0', '', 'page-404.html', '404', 't', '', '', 'a:0:{}', '0', '404', '', '0', '');
 INSERT INTO `menu_router` VALUES ('rss.xml', '', '', 'user_access', 0x613A313A7B693A303B733A31343A2261636365737320636F6E74656E74223B7D, 'node_feed', 0x613A323A7B693A303B623A303B693A313B613A303A7B7D7D, '', '1', '1', '0', '', 'rss.xml', 'RSS feed', 't', '', '', 'a:0:{}', '0', '', '', '0', '');
-INSERT INTO `menu_router` VALUES ('san-pham-moi.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A33323A2253697465436F6E74726F6C6C65722F6765744C69737450726F647563744E6577223B7D, '', '1', '1', '0', '', 'san-pham-moi.html', 'Sản phẩm mới', 't', '', '', 'a:0:{}', '0', 'Sản phẩm mới', '', '0', '');
 INSERT INTO `menu_router` VALUES ('search', '', '', 'search_is_active', 0x613A303A7B7D, 'search_view', 0x613A303A7B7D, '', '1', '1', '0', '', 'search', 'Search', 't', '', '', 'a:0:{}', '20', '', '', '0', 'modules/search/search.pages.inc');
 INSERT INTO `menu_router` VALUES ('search/node', '', '', '_search_menu_access', 0x613A313A7B693A303B733A343A226E6F6465223B7D, 'search_view', 0x613A323A7B693A303B733A343A226E6F6465223B693A313B733A303A22223B7D, '', '3', '2', '1', 'search', 'search', 'Content', 't', '', '', 'a:0:{}', '132', '', '', '-10', 'modules/search/search.pages.inc');
 INSERT INTO `menu_router` VALUES ('search/node/%', 0x613A313A7B693A323B613A313A7B733A31343A226D656E755F7461696C5F6C6F6164223B613A323A7B693A303B733A343A22256D6170223B693A313B733A363A2225696E646578223B7D7D7D, 0x613A313A7B693A323B733A31363A226D656E755F7461696C5F746F5F617267223B7D, '_search_menu_access', 0x613A313A7B693A303B733A343A226E6F6465223B7D, 'search_view', 0x613A323A7B693A303B733A343A226E6F6465223B693A313B693A323B7D, '', '6', '3', '1', 'search/node', 'search/node/%', 'Content', 't', '', '', 'a:0:{}', '132', '', '', '0', 'modules/search/search.pages.inc');
@@ -1699,7 +1685,6 @@ INSERT INTO `menu_router` VALUES ('taxonomy/term/%/feed', 0x613A313A7B693A323B73
 INSERT INTO `menu_router` VALUES ('taxonomy/term/%/view', 0x613A313A7B693A323B733A31383A227461786F6E6F6D795F7465726D5F6C6F6164223B7D, '', 'user_access', 0x613A313A7B693A303B733A31343A2261636365737320636F6E74656E74223B7D, 'taxonomy_term_page', 0x613A313A7B693A303B693A323B7D, '', '13', '4', '1', 'taxonomy/term/%', 'taxonomy/term/%', 'View', 't', '', '', 'a:0:{}', '140', '', '', '0', 'modules/taxonomy/taxonomy.pages.inc');
 INSERT INTO `menu_router` VALUES ('tim-kiem-tin-tuc.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32353A2253697465436F6E74726F6C6C65722F7365617263684E657773223B7D, '', '1', '1', '0', '', 'tim-kiem-tin-tuc.html', 'Tìm kiếm tin tức', 't', '', '', 'a:0:{}', '0', 'Tìm kiếm tin tức', '', '0', '');
 INSERT INTO `menu_router` VALUES ('tim-kiem-video.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A32363A2253697465436F6E74726F6C6C65722F736561726368566964656F223B7D, '', '1', '1', '0', '', 'tim-kiem-video.html', 'Tìm kiếm video', 't', '', '', 'a:0:{}', '0', 'Tìm kiếm video', '', '0', '');
-INSERT INTO `menu_router` VALUES ('tim-kiem.html', '', '', '1', 0x613A303A7B7D, 'menuLoad', 0x613A313A7B693A303B733A33313A2253697465436F6E74726F6C6C65722F67657453656172636850726F64756374223B7D, '', '1', '1', '0', '', 'tim-kiem.html', 'Sản phẩm mới', 't', '', '', 'a:0:{}', '0', 'Sản phẩm mới', '', '0', '');
 INSERT INTO `menu_router` VALUES ('toolbar/toggle', '', '', 'user_access', 0x613A313A7B693A303B733A31343A2261636365737320746F6F6C626172223B7D, 'toolbar_toggle_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'toolbar/toggle', 'Toggle drawer visibility', 't', '', '', 'a:0:{}', '0', '', '', '0', '');
 INSERT INTO `menu_router` VALUES ('trang-chu.html', '', '', '1', 0x613A303A7B7D, 'page_default', 0x613A303A7B7D, '', '1', '1', '0', '', 'trang-chu.html', 'Trang chủ', 't', '', '', 'a:0:{}', '0', '', '', '0', '');
 INSERT INTO `menu_router` VALUES ('user', '', '', '1', 0x613A303A7B7D, 'user_page', 0x613A303A7B7D, '', '1', '1', '0', '', 'user', 'User account', 'user_menu_title', '', '', 'a:0:{}', '6', '', '', '-10', 'modules/user/user.pages.inc');
@@ -1860,7 +1845,7 @@ CREATE TABLE `queue` (
   PRIMARY KEY (`item_id`),
   KEY `name_created` (`name`,`created`),
   KEY `expire` (`expire`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Stores items in queues.';
 
 -- ----------------------------
 -- Records of queue
@@ -2392,7 +2377,7 @@ CREATE TABLE `role` (
   PRIMARY KEY (`rid`),
   UNIQUE KEY `name` (`name`),
   KEY `name_weight` (`name`,`weight`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Stores user roles.';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Stores user roles.';
 
 -- ----------------------------
 -- Records of role
@@ -2401,6 +2386,7 @@ INSERT INTO `role` VALUES ('3', 'Administrator', '2');
 INSERT INTO `role` VALUES ('1', 'anonymous user', '0');
 INSERT INTO `role` VALUES ('2', 'authenticated user', '1');
 INSERT INTO `role` VALUES ('4', 'Manager', '3');
+INSERT INTO `role` VALUES ('5', 'Poster', '4');
 
 -- ----------------------------
 -- Table structure for role_permission
@@ -2581,12 +2567,12 @@ DROP TABLE IF EXISTS `sequences`;
 CREATE TABLE `sequences` (
   `value` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The value of the sequence.',
   PRIMARY KEY (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Stores IDs.';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Stores IDs.';
 
 -- ----------------------------
 -- Records of sequences
 -- ----------------------------
-INSERT INTO `sequences` VALUES ('3');
+INSERT INTO `sequences` VALUES ('4');
 
 -- ----------------------------
 -- Table structure for sessions
@@ -2609,7 +2595,8 @@ CREATE TABLE `sessions` (
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
-INSERT INTO `sessions` VALUES ('1', 'CGf39F_j_fkRQp2ducAcE83Jq2ZP4KgaaZ3Y3Zjh8qk', '', '127.0.0.1', '1464971048', '0', '');
+INSERT INTO `sessions` VALUES ('1', '4Ma3oFUAZVfpVzD61RoeeA5n6Dd7oZwAwfPcsj88Ouo', '', '127.0.0.1', '1465283302', '0', '');
+INSERT INTO `sessions` VALUES ('1', 'VZOeKNLoCv8cz_MvqZTVN3CdQxAGsY_IuDiPxVU2Bzk', '', '127.0.0.1', '1465286097', '0', '');
 
 -- ----------------------------
 -- Table structure for shortcut_set
@@ -2916,9 +2903,8 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('0', '', '', '', '', '', null, '0', '0', '0', '0', null, '', '0', '', null);
-INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1464971045', '1464967967', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B);
-INSERT INTO `users` VALUES ('2', 'manager', '$S$D1Rva.ik7jWbtvTlhtfbZ5qwVgFW9WpN5QNh3cFNbVi7qG6aFw6n', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1462283903', '1462283903', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B);
-INSERT INTO `users` VALUES ('3', 'tthgiang0206', '$S$Dhb3at.88YoWFNlxeT.SE/9DST.e3rTud2ovCcSxrdMQA82WDISo', 'systemrv1@gmail.com', '', '', 'filtered_html', '1461294299', '1462437508', '1461729745', '1', 'Asia/Ho_Chi_Minh', '', '0', 'systemrv1@gmail.com', 0x623A303B);
+INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1465286097', '1465283894', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B);
+INSERT INTO `users` VALUES ('2', 'manager', '$S$DjI.XXZ1Iq7LElQHAxBqZDJ1MBDu8iJ6PiXsdmGSxx/f5rkMAuJu', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1462283903', '1462283903', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B);
 
 -- ----------------------------
 -- Table structure for users_roles
@@ -2936,7 +2922,6 @@ CREATE TABLE `users_roles` (
 -- ----------------------------
 INSERT INTO `users_roles` VALUES ('1', '3');
 INSERT INTO `users_roles` VALUES ('2', '4');
-INSERT INTO `users_roles` VALUES ('3', '4');
 
 -- ----------------------------
 -- Table structure for variable
@@ -2958,8 +2943,8 @@ INSERT INTO `variable` VALUES ('cache_lifetime', 0x733A313A2230223B);
 INSERT INTO `variable` VALUES ('clean_url', 0x733A313A2231223B);
 INSERT INTO `variable` VALUES ('comment_page', 0x693A303B);
 INSERT INTO `variable` VALUES ('cron_key', 0x733A34333A226C4C66375F5A3962513061305A7171356E4E7351354E5558594F366C34533477515279507A7062734A356F223B);
-INSERT INTO `variable` VALUES ('cron_last', 0x693A313436343936303935343B);
-INSERT INTO `variable` VALUES ('css_js_query_string', 0x733A363A226F3837636A6C223B);
+INSERT INTO `variable` VALUES ('cron_last', 0x693A313436353238343838323B);
+INSERT INTO `variable` VALUES ('css_js_query_string', 0x733A363A226F3865356139223B);
 INSERT INTO `variable` VALUES ('date_default_timezone', 0x733A31363A22417369612F486F5F4368695F4D696E68223B);
 INSERT INTO `variable` VALUES ('default_nodes_main', 0x733A323A223130223B);
 INSERT INTO `variable` VALUES ('drupal_http_request_fails', 0x623A303B);
@@ -2967,7 +2952,7 @@ INSERT INTO `variable` VALUES ('drupal_private_key', 0x733A34333A227158773331526
 INSERT INTO `variable` VALUES ('file_default_scheme', 0x733A363A227075626C6963223B);
 INSERT INTO `variable` VALUES ('file_private_path', 0x733A303A22223B);
 INSERT INTO `variable` VALUES ('file_public_path', 0x733A31393A2273697465732F64656661756C742F66696C6573223B);
-INSERT INTO `variable` VALUES ('file_temporary_path', 0x733A333A22746D70223B);
+INSERT INTO `variable` VALUES ('file_temporary_path', 0x733A31323A22443A5C78616D70705C746D70223B);
 INSERT INTO `variable` VALUES ('filter_fallback_format', 0x733A31303A22706C61696E5F74657874223B);
 INSERT INTO `variable` VALUES ('install_profile', 0x733A383A227374616E64617264223B);
 INSERT INTO `variable` VALUES ('install_task', 0x733A343A22646F6E65223B);
@@ -2988,7 +2973,7 @@ INSERT INTO `variable` VALUES ('site_404', 0x733A31333A22706167652D3430342E68746
 INSERT INTO `variable` VALUES ('site_default_country', 0x733A323A22564E223B);
 INSERT INTO `variable` VALUES ('site_frontpage', 0x733A31343A227472616E672D6368752E68746D6C223B);
 INSERT INTO `variable` VALUES ('site_mail', 0x733A32333A226E677579656E6475797074383640676D61696C2E636F6D223B);
-INSERT INTO `variable` VALUES ('site_name', 0x733A31303A224769616E2048C3A06E67223B);
+INSERT INTO `variable` VALUES ('site_name', 0x733A31393A2243E1BBA44320C49049E1BB864E20E1BAA24E48223B);
 INSERT INTO `variable` VALUES ('site_slogan', 0x733A303A22223B);
 INSERT INTO `variable` VALUES ('smtp_allowhtml', 0x693A313B);
 INSERT INTO `variable` VALUES ('smtp_debugging', 0x733A313A2232223B);
@@ -3033,7 +3018,7 @@ CREATE TABLE `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
 
 -- ----------------------------
 -- Records of watchdog
@@ -3071,18 +3056,6 @@ CREATE TABLE `web_banner` (
 -- ----------------------------
 -- Records of web_banner
 -- ----------------------------
-INSERT INTO `web_banner` VALUES ('1', 'Thời trang Tiki tưng bừng giảm giá', '10-08-55-04-05-2016-16081200x630affiliate.jpg', 'a:4:{i:0;s:25:\"02-06-33-20-04-2016-1.jpg\";i:1;s:25:\"02-13-05-20-04-2016-2.jpg\";i:2;s:25:\"02-13-16-20-04-2016-1.jpg\";i:3;s:45:\"10-08-55-04-05-2016-16081200x630affiliate.jpg\";}', 'http://click.accesstrade.vn/adv.php?rk=00018o000flp&at_sessionid=20221', '1', '0', '0', '1', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '1461135993', '1462374618');
-INSERT INTO `web_banner` VALUES ('3', 'Tặng ngay Coupon 70.000 đ', '10-12-36-04-05-2016-2040affiliate-1200x630.jpg', 'a:2:{i:0;s:25:\"02-11-43-20-04-2016-2.jpg\";i:1;s:46:\"10-12-36-04-05-2016-2040affiliate-1200x630.jpg\";}', 'http://click.accesstrade.vn/adv.php?rk=0001ko000flp&at_sessionid=20221 ', '2', '0', '0', '1', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '1461136303', '1462375479');
-INSERT INTO `web_banner` VALUES ('4', 'Giá tốt mỗi ngày với tiki.vn', '09-52-25-04-05-2016-1013310x236.jpg', 'a:2:{i:0;s:31:\"02-54-32-20-04-2016-hn-home.jpg\";i:1;s:35:\"09-52-25-04-05-2016-1013310x236.jpg\";}', 'http://click.accesstrade.vn/adv.php?rk=0000s5000flp&at_sessionid=20221', '1', '0', '0', '1', '0', '2', '1', '0', '1', '0', '0', '0', '0', '0', '1461138872', '1462374140');
-INSERT INTO `web_banner` VALUES ('5', 'Nhận quà thêm vui - shopcuatui.com.vn', '10-18-36-04-05-2016-2086gdn-336x280.jpg', 'a:3:{i:0;s:32:\"02-55-27-20-04-2016-home-hn2.jpg\";i:1;s:35:\"10-16-09-04-05-2016-2315300x250.jpg\";i:2;s:39:\"10-18-36-04-05-2016-2086gdn-336x280.jpg\";}', 'http://click.accesstrade.vn/adv.php?rk=0001ly000flp&at_sessionid=20221 ', '2', '0', '0', '1', '0', '2', '1', '0', '1', '0', '0', '0', '0', '0', '1461138927', '1462375547');
-INSERT INTO `web_banner` VALUES ('7', 'Quảng cáo cho danh mục mỹ phẩm', '02-07-37-22-04-2016-bi-quyet-lam-trang-da-cap-toc-bang-my-pham.jpg', 'a:1:{i:0;s:66:\"02-07-37-22-04-2016-bi-quyet-lam-trang-da-cap-toc-bang-my-pham.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c164/My-pham-lam-dep.html', '1', '0', '0', '0', '0', '1', '1', '164', '1', '0', '0', '0', '0', '0', '1461308857', '1462011483');
-INSERT INTO `web_banner` VALUES ('8', 'Danh mục mẹ và bé', '11-14-24-27-04-2016-banner-web-thoitrangbegai.jpg', 'a:3:{i:0;s:55:\"11-02-27-27-04-2016-thoi-trang-cho-me-va-be-696x308.jpg\";i:1;s:55:\"11-04-35-27-04-2016-thoi-trang-cho-me-va-be-696x308.jpg\";i:2;s:49:\"11-14-24-27-04-2016-banner-web-thoitrangbegai.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c41/Me-va-be.html', '0', '0', '0', '0', '0', '1', '1', '41', '1', '0', '0', '0', '0', '0', '1461772947', '1462011459');
-INSERT INTO `web_banner` VALUES ('9', 'Danh mục thời trang', '11-17-08-27-04-2016-quanaogiasithoitrangchonamnu.jpg', 'a:1:{i:0;s:52:\"11-17-08-27-04-2016-quanaogiasithoitrangchonamnu.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c97/Thoi-trang.html', '1', '0', '0', '0', '0', '1', '1', '97', '1', '0', '0', '0', '0', '0', '1461773828', '1462011434');
-INSERT INTO `web_banner` VALUES ('10', 'Điện tử công nghệ', '04-22-49-30-04-2016-apple-1170x300.jpg', 'a:3:{i:0;s:48:\"03-03-53-30-04-2016-635969604445475914htc-c1.png\";i:1;s:48:\"03-04-14-30-04-2016-635969604445475914htc-c1.png\";i:2;s:38:\"04-22-49-30-04-2016-apple-1170x300.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c43/Dien-tu-cong-nghe.html', '12', '0', '0', '0', '0', '1', '1', '43', '1', '0', '0', '0', '0', '0', '1462003433', '1462011401');
-INSERT INTO `web_banner` VALUES ('11', 'Gia dụng nội thất', '05-23-51-30-04-2016-banner-noi-that-quoc-cuong-2.jpg', 'a:1:{i:0;s:52:\"05-23-51-30-04-2016-banner-noi-that-quoc-cuong-2.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c86/Gia-dung-Noi-that.html', '1', '0', '0', '0', '0', '1', '1', '86', '1', '0', '0', '0', '0', '0', '1462011831', '1462011838');
-INSERT INTO `web_banner` VALUES ('13', 'Ẩm thực, Spa, giải trí', '06-25-43-30-04-2016-tien-ich-tai-condotel-nha-trang-vinpearl.jpg', 'a:2:{i:0;s:64:\"06-21-57-30-04-2016-tien-ich-tai-condotel-nha-trang-vinpearl.jpg\";i:1;s:64:\"06-25-43-30-04-2016-tien-ich-tai-condotel-nha-trang-vinpearl.jpg\";}', 'http://shopcuatui.com.vn/danh-muc/c7/Am-thuc-Spa-Giai-tri.html', '1', '7', '1462520365', '0', '0', '1', '1', '7', '1', '0', '0', '0', '0', '0', '1462015317', '1462015549');
-INSERT INTO `web_banner` VALUES ('14', 'Mua sắm tẹt ga', '09-06-18-03-05-2016-image1.php.jpg', 'a:2:{i:0;s:31:\"06-30-32-30-04-2016-mua-sam.jpg\";i:1;s:34:\"09-06-18-03-05-2016-image1.php.jpg\";}', 'http://shopcuatui.com.vn/', '2', '2', '1462522557', '0', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '1462015832', '1462374810');
-INSERT INTO `web_banner` VALUES ('15', 'Mua sắm tẹt ga', '09-03-59-03-05-2016-image.php.jpg', 'a:2:{i:0;s:70:\"06-47-38-30-04-2016-16-7-201551-676416418-7220-1437024452.jpg.aspx.jpg\";i:1;s:33:\"09-03-59-03-05-2016-image.php.jpg\";}', 'http://shopcuatui.com.vn/san-pham-moi.html', '4', '0', '0', '0', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '1462016858', '1462375231');
 
 -- ----------------------------
 -- Table structure for web_category
@@ -3103,18 +3076,54 @@ CREATE TABLE `web_category` (
   `category_status` tinyint(1) DEFAULT '0',
   `category_created` int(12) DEFAULT NULL,
   `language` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `meta_keywords` text COLLATE utf8_unicode_ci,
-  `meta_description` text COLLATE utf8_unicode_ci,
+  `category_meta_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `category_meta_keywords` text COLLATE utf8_unicode_ci,
+  `category_meta_description` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`category_id`),
   KEY `status` (`category_status`) USING BTREE,
   KEY `id_parrent` (`category_parent_id`,`category_status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=197 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of web_category
 -- ----------------------------
-INSERT INTO `web_category` VALUES ('183', null, null, 'Phát hành - phổ biến phim', null, '0', '1', '1', null, null, '1', '1', null, null, null, null, null);
+INSERT INTO `web_category` VALUES ('182', '8', '1', 'Thông tin hoạt động ngành', 'thong-tin-hoat-dong-nganh', '0', '0', '0', '1', '1', '1', '1', '1465264570', '', 'Thông tin hoạt động ngành', 'Thông tin hoạt động ngành', 'Thông tin hoạt động ngành');
+INSERT INTO `web_category` VALUES ('183', '8', '1', 'Phát hành - phổ biến phim', 'phat-hanh-pho-bien-phim', '0', '1', '0', '1', '1', '2', '1', '1465264570', '', 'Phát hành - phổ biến phim', 'Phát hành - phổ biến phim', 'Phát hành - phổ biến phim');
+INSERT INTO `web_category` VALUES ('186', '8', '1', 'Hợp tác quốc tế', 'hop-tac-quoc-te', '0', '0', '0', '1', '1', '3', '1', '1465264747', '', 'Hợp tác quốc tế', 'Hợp tác quốc tế', 'Hợp tác quốc tế');
+INSERT INTO `web_category` VALUES ('187', '9', '1', 'Dịch vụ công', 'dich-vu-cong', '0', '0', '0', '1', '0', '4', '1', '1465264832', '', 'Dịch vụ công', 'Dịch vụ công', 'Dịch vụ công');
+INSERT INTO `web_category` VALUES ('188', '8', '1', 'Tổ chức', 'to-chuc', '0', '0', '0', '0', '1', '5', '1', '1465264897', '', 'Tổ chức', 'Tổ chức', 'Tổ chức');
+INSERT INTO `web_category` VALUES ('189', '8', '1', 'Lịch xử phát triển ngành', 'lich-xu-phat-trien-nganh', '0', '0', '0', '0', '1', '6', '1', '1465264935', '', 'Lịch xử phát triển ngành', 'Lịch xử phát triển ngành', 'Lịch xử phát triển ngành');
+INSERT INTO `web_category` VALUES ('190', '9', '1', 'Chính sách - Văn bản', 'chinh-sach-van-ban', '0', '0', '0', '0', '1', '7', '1', '1465265044', '', 'Chính sách - Văn bản', 'Chính sách - Văn bản', 'Chính sách - Văn bản');
+INSERT INTO `web_category` VALUES ('191', '9', '1', 'Luật điện ảnh', 'luat-dien-anh', '190', '0', '0', '0', '1', '1', '1', '1465265143', '', 'Luật điện ảnh', 'Luật điện ảnh', 'Luật điện ảnh');
+INSERT INTO `web_category` VALUES ('192', '9', '1', 'Nghị định', 'nghi-dinh', '190', '0', '0', '0', '1', '2', '1', '1465265176', '', 'Nghị định', 'Nghị định', 'Nghị định');
+INSERT INTO `web_category` VALUES ('193', '9', '1', 'Chiến lược phát triển điện ảnh', 'chien-luoc-phat-trien-dien-anh', '190', '0', '0', '0', '1', '3', '1', '1465265212', '', 'Chiến lược phát triển điện ảnh', 'Chiến lược phát triển điện ảnh', 'Chiến lược phát triển điện ảnh');
+INSERT INTO `web_category` VALUES ('194', '9', '1', 'Quy hoạch', 'quy-hoach', '190', '0', '0', '0', '1', '4', '1', '1465265247', '', 'Quy hoạch', 'Quy hoạch', 'Quy hoạch');
+INSERT INTO `web_category` VALUES ('195', '9', '1', 'Thông tư', 'thong-tu', '190', '0', '0', '0', '1', '5', '1', '1465265277', '', 'Thông tư', 'Thông tư', 'Thông tư');
+INSERT INTO `web_category` VALUES ('196', '11', '1', 'Thư viện ảnh', 'thu-vien-anh', '0', '0', '0', '-1', '-1', '8', '1', '1465265844', '', 'Thư viện ảnh', 'Thư viện ảnh', 'Thư viện ảnh');
+
+-- ----------------------------
+-- Table structure for web_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `web_comment`;
+CREATE TABLE `web_comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment_parent_id` int(11) DEFAULT '0' COMMENT 'Comment cha, câu hỏi trước',
+  `comment_product_id` int(11) DEFAULT NULL,
+  `comment_product_name` varchar(255) DEFAULT NULL,
+  `comment_shop_id` int(11) DEFAULT NULL COMMENT 'Id shop được bình luận',
+  `comment_shop_name` varchar(255) DEFAULT NULL,
+  `comment_customer_name` varchar(255) DEFAULT NULL COMMENT 'tên khách comment',
+  `comment_content` tinytext COMMENT 'Nội dung conmetn',
+  `comment_is_reply` tinyint(5) DEFAULT '0' COMMENT '0: chưa trả lời, 1: đã trả lời',
+  `comment_create` int(11) DEFAULT NULL COMMENT 'tg hỏi',
+  `comment_reply` int(11) DEFAULT '0' COMMENT 'Thời gian trả lời',
+  `comment_status` tinyint(5) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_comment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for web_config_info
@@ -3139,10 +3148,60 @@ CREATE TABLE `web_config_info` (
 -- ----------------------------
 -- Records of web_config_info
 -- ----------------------------
-INSERT INTO `web_config_info` VALUES ('1', '1', 'Thông tin chân trang bên trái', 'SITE_FOOTER_LEFT', 'Hà Nội:\r\nSố 10 ngách 224/6 đường Hoàng Mai -Hoàng Văn Thụ - Hoàng Mai - Hà Nội\r\nĐT: 0946.721.638 - 0913.922.986\r\nEmail: hotro@sanphamredep.com', '<p>\r\n	<strong>H&agrave; Nội:</strong><br />\r\n	Số 10 ng&aacute;ch 224/6 đường Ho&agrave;ng Mai -Ho&agrave;ng Văn Thụ - Ho&agrave;ng Mai - H&agrave; Nội<br />\r\n	ĐT: 0946.721.638 - 0913.922.986<br />\r\n	Email: hotro@sanphamredep.com</p>', null, '1447794727', '1', '', '', '');
-INSERT INTO `web_config_info` VALUES ('2', '1', 'Thông tin giới thiệu', 'SITE_INTRO', '', '<p>\r\n	X&atilde; hội ng&agrave;y c&agrave;ng ph&aacute;t triển, cuộc sống ng&agrave;y c&agrave;ng được n&acirc;ng cao, v&agrave; những nhu cầu tiện nghi cho cuộc sống con người cũng v&igrave; thế m&agrave; n&acirc;ng l&ecirc;n, k&egrave;m theo đ&oacute; l&agrave; những th&uacute; vui sưu tầm v&agrave; sở hữu những gi&aacute; trị nghệ thuật ng&agrave;y c&agrave;ng lớn. Phụ kiện thời trang từ xưa đến nay lu&ocirc;n l&agrave; biểu tượng của thời gian. SanPhamReDep.COM l&agrave; nơi cung cấp v&agrave; phục vụ tốt nhất về c&aacute;c loại sản phẩm gi&uacute;p kh&aacute;ch h&agrave;ng trang bị cho m&igrave;nh phụ kiện thời trang ho&agrave;n mỹ nhất.</p>\r\n<p>\r\n	<strong>Mọi th&ocirc;ng tin chi tiết vui l&ograve;ng li&ecirc;n hệ về:</strong></p>\r\n<p>\r\n	Email hợp t&aacute;c: pt.soleil@gmail.com<br />\r\n	Địa chỉ: Số 64/68, Ho&agrave;ng Văn Thụ, Ho&agrave;ng Mai, H&agrave; Nội<br />\r\n	Li&ecirc;n hệ: 0913.922.986(Mr.Anh)</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>\r\n<p>\r\n	&nbsp;</p>', null, '1441430611', '1', '', '', '');
-INSERT INTO `web_config_info` VALUES ('4', '1', 'Thông tin bài liên hệ', 'SITE_CONTACT', '', '<p>\r\n	X&atilde; hội ng&agrave;y c&agrave;ng ph&aacute;t triển, cuộc sống ng&agrave;y c&agrave;ng được n&acirc;ng cao, v&agrave; những nhu cầu tiện nghi cho cuộc sống con người cũng v&igrave; thế m&agrave; n&acirc;ng l&ecirc;n, k&egrave;m theo đ&oacute; l&agrave; những th&uacute; vui sưu tầm v&agrave; sở hữu những sản phẩm phục vụ cho cuộc sống ng&agrave;y c&agrave;ng lớn. SanPhamReDep.COM l&agrave; nơi cung cấp v&agrave; phục vụ tốt nhất về c&aacute;c loại sản phẩm n&agrave;y.</p>', null, '1441430633', '1', '', '', '');
+INSERT INTO `web_config_info` VALUES ('1', '1', 'Thông tin chân trang bên trái', 'SITE_FOOTER_LEFT', 'CỤC ĐIỆN ẢNH VIỆT NAM\r\nTrưởng Ban Biên Tập: TS Ngô Phương Lan\r\nĐịa Chỉ: 147 Hoàng Hoa Thám, Ba Đình, Hà Nội\r\nĐiện thoại: 04.3.8452.402 *fax:04.3.8434.997\r\nEmail:cucdienanh@chinhphu.vn', '<p><strong>CỤC ĐIỆN ẢNH VIỆT NAM</strong><br />\r\nTrưởng Ban Bi&ecirc;n Tập: TS Ng&ocirc; Phương Lan<br />\r\nĐịa Chỉ: 147 Ho&agrave;ng Hoa Th&aacute;m, Ba Đ&igrave;nh, H&agrave; Nội<br />\r\nĐiện thoại: 04.3.8452.402 *fax:04.3.8434.997<br />\r\nEmail:cucdienanh@chinhphu.vn</p>\r\n', null, '1447794727', '1', '', '', '');
+INSERT INTO `web_config_info` VALUES ('2', '1', 'Thông tin giới thiệu', 'SITE_INTRO', '', '<p>Đang cập nhật...</p>\r\n', null, '1441430611', '1', '', '', '');
+INSERT INTO `web_config_info` VALUES ('4', '1', 'Thông tin bài liên hệ', 'SITE_CONTACT', '', '<p>Đang cập nhật...</p>\r\n', null, '1441430633', '1', '', '', '');
 INSERT INTO `web_config_info` VALUES ('9', '1', 'Nội dung meta SEO trang chủ', 'SITE_SEO_HOME', 'Không cần để nội dung...', '<p>Kh&ocirc;ng cần để nội dung...</p>\r\n', '07-2015/10-41-20-21-07-2015-sanphamtructuyen.jpg', '1437450080', '1', 'Trang chủ - CỤC ĐIỆN ẢNH', 'Trang chủ - CỤC ĐIỆN ẢNH', 'Trang chủ - CỤC ĐIỆN ẢNH');
+
+-- ----------------------------
+-- Table structure for web_document
+-- ----------------------------
+DROP TABLE IF EXISTS `web_document`;
+CREATE TABLE `web_document` (
+  `document_id` int(12) NOT NULL AUTO_INCREMENT,
+  `document_type` int(12) DEFAULT '1' COMMENT '1: file dowload',
+  `document_file` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'file cần upload và dowload',
+  `document_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `document_name_alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `document_order` int(12) DEFAULT '0',
+  `document_status` tinyint(1) DEFAULT '0',
+  `document_created` int(12) DEFAULT NULL,
+  `uid` int(12) DEFAULT NULL,
+  `language` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `document_meta_title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `document_meta_keywords` text COLLATE utf8_unicode_ci,
+  `document_meta_description` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`document_id`),
+  KEY `status` (`document_status`) USING BTREE,
+  KEY `id_parrent` (`document_status`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of web_document
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_images
+-- ----------------------------
+DROP TABLE IF EXISTS `web_images`;
+CREATE TABLE `web_images` (
+  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_title` varchar(255) DEFAULT NULL,
+  `image_desc_sort` text,
+  `image_image` varchar(255) DEFAULT NULL COMMENT 'ảnh đại diện của bài viết',
+  `image_image_other` longtext COMMENT 'Lưu ảnh của bài viết',
+  `image_status` tinyint(5) DEFAULT NULL,
+  `image_meta_title` text,
+  `image_meta_keyword` text,
+  `image_meta_description` text,
+  `image_create` int(11) DEFAULT NULL,
+  PRIMARY KEY (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_images
+-- ----------------------------
+INSERT INTO `web_images` VALUES ('2', 'list ảnh demo', 'list ảnh demo4', '02-40-31-07-06-2016-433.jpg', 'a:2:{i:0;s:27:\"02-40-31-07-06-2016-433.jpg\";i:1;s:27:\"02-40-42-07-06-2016-433.jpg\";}', '0', 'list ảnh demo4', 'list ảnh demo4', 'list ảnh demo4', '1465285264');
 
 -- ----------------------------
 -- Table structure for web_news
@@ -3158,100 +3217,17 @@ CREATE TABLE `web_news` (
   `news_type` tinyint(5) DEFAULT '1' COMMENT 'Kiểu tin',
   `news_category` int(11) DEFAULT NULL,
   `news_status` tinyint(5) DEFAULT NULL,
-  `new_meta_title` text,
-  `new_meta_keyword` text,
-  `new_meta_description` text,
+  `news_meta_title` text,
+  `news_meta_keyword` text,
+  `news_meta_description` text,
   `news_create` int(11) DEFAULT NULL,
   PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_news
 -- ----------------------------
-
--- ----------------------------
--- Table structure for web_province
--- ----------------------------
-DROP TABLE IF EXISTS `web_province`;
-CREATE TABLE `web_province` (
-  `province_id` int(11) NOT NULL AUTO_INCREMENT,
-  `province_name` varchar(255) NOT NULL,
-  `province_position` tinyint(4) NOT NULL,
-  `province_status` varchar(20) NOT NULL,
-  `province_area` tinyint(4) NOT NULL COMMENT 'Vùng miền của tỉnh thành',
-  PRIMARY KEY (`province_id`),
-  KEY `position` (`province_position`),
-  KEY `status` (`province_status`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of web_province
--- ----------------------------
-INSERT INTO `web_province` VALUES ('3', 'Bạc Liêu', '6', '1', '3');
-INSERT INTO `web_province` VALUES ('4', 'Bắc Cạn', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('5', 'Bắc Giang', '6', '1', '1');
-INSERT INTO `web_province` VALUES ('6', 'Bắc Ninh', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('7', 'Bến Tre', '8', '1', '3');
-INSERT INTO `web_province` VALUES ('8', 'Bình Dương', '9', '1', '3');
-INSERT INTO `web_province` VALUES ('9', 'Bình Định', '10', '1', '2');
-INSERT INTO `web_province` VALUES ('10', 'Bình Phước', '11', '1', '2');
-INSERT INTO `web_province` VALUES ('11', 'Bình Thuận', '12', '1', '2');
-INSERT INTO `web_province` VALUES ('12', 'Cà Mau', '13', '1', '3');
-INSERT INTO `web_province` VALUES ('13', 'Cao Bằng', '14', '1', '1');
-INSERT INTO `web_province` VALUES ('14', 'Cần Thơ', '8', '1', '3');
-INSERT INTO `web_province` VALUES ('15', 'Đà Nẵng', '3', '1', '2');
-INSERT INTO `web_province` VALUES ('17', 'Đồng Nai', '18', '1', '3');
-INSERT INTO `web_province` VALUES ('18', 'Đồng Tháp', '19', '1', '3');
-INSERT INTO `web_province` VALUES ('19', 'Gia Lai', '20', '1', '2');
-INSERT INTO `web_province` VALUES ('20', 'Hà Giang', '21', '1', '1');
-INSERT INTO `web_province` VALUES ('21', 'Hà Nam', '22', '1', '1');
-INSERT INTO `web_province` VALUES ('22', 'Hà Nội', '1', '1', '1');
-INSERT INTO `web_province` VALUES ('23', 'Hà Tây', '24', '1', '1');
-INSERT INTO `web_province` VALUES ('24', 'Hà Tĩnh', '25', '1', '2');
-INSERT INTO `web_province` VALUES ('25', 'Hải Dương', '26', '1', '1');
-INSERT INTO `web_province` VALUES ('26', 'Hải Phòng', '5', '1', '1');
-INSERT INTO `web_province` VALUES ('27', 'Hòa Bình', '28', '1', '1');
-INSERT INTO `web_province` VALUES ('28', 'Hưng Yên', '29', '1', '1');
-INSERT INTO `web_province` VALUES ('29', 'TP Hồ Chí Minh', '2', '1', '3');
-INSERT INTO `web_province` VALUES ('30', 'Khánh Hòa', '31', '1', '2');
-INSERT INTO `web_province` VALUES ('31', 'Kiên Giang', '32', '1', '3');
-INSERT INTO `web_province` VALUES ('32', 'Kon Tum', '33', '1', '2');
-INSERT INTO `web_province` VALUES ('33', 'Lai Châu', '34', '1', '1');
-INSERT INTO `web_province` VALUES ('34', 'Lạng Sơn', '35', '1', '1');
-INSERT INTO `web_province` VALUES ('35', 'Lào Cai', '36', '1', '1');
-INSERT INTO `web_province` VALUES ('36', 'Lâm Đồng', '37', '1', '2');
-INSERT INTO `web_province` VALUES ('37', 'Long An', '38', '1', '3');
-INSERT INTO `web_province` VALUES ('38', 'Nam Định', '39', '1', '1');
-INSERT INTO `web_province` VALUES ('39', 'Nghệ An', '40', '1', '2');
-INSERT INTO `web_province` VALUES ('40', 'Ninh Bình', '41', '1', '1');
-INSERT INTO `web_province` VALUES ('41', 'Ninh Thuận', '42', '1', '2');
-INSERT INTO `web_province` VALUES ('42', 'Phú Thọ', '43', '1', '1');
-INSERT INTO `web_province` VALUES ('43', 'Phú Yên', '44', '1', '2');
-INSERT INTO `web_province` VALUES ('44', 'Quảng Bình', '45', '1', '2');
-INSERT INTO `web_province` VALUES ('45', 'Quảng Nam', '46', '1', '2');
-INSERT INTO `web_province` VALUES ('46', 'Quảng Ngãi', '47', '1', '2');
-INSERT INTO `web_province` VALUES ('47', 'Quảng Ninh', '7', '1', '1');
-INSERT INTO `web_province` VALUES ('48', 'Quảng Trị', '49', '1', '2');
-INSERT INTO `web_province` VALUES ('49', 'Sóc Trăng', '50', '1', '3');
-INSERT INTO `web_province` VALUES ('50', 'Sơn La', '51', '1', '1');
-INSERT INTO `web_province` VALUES ('51', 'Tây Ninh', '52', '1', '3');
-INSERT INTO `web_province` VALUES ('52', 'Thái Bình', '53', '1', '1');
-INSERT INTO `web_province` VALUES ('53', 'Thái Nguyên', '54', '1', '1');
-INSERT INTO `web_province` VALUES ('54', 'Thanh Hóa', '55', '1', '1');
-INSERT INTO `web_province` VALUES ('55', 'Thừa Thiên Huế', '56', '1', '2');
-INSERT INTO `web_province` VALUES ('56', 'Tiền Giang', '57', '1', '3');
-INSERT INTO `web_province` VALUES ('57', 'Trà Vinh', '58', '1', '3');
-INSERT INTO `web_province` VALUES ('58', 'Tuyên Quang', '59', '1', '1');
-INSERT INTO `web_province` VALUES ('59', 'Vĩnh Long', '60', '1', '3');
-INSERT INTO `web_province` VALUES ('60', 'Vĩnh Phúc', '61', '1', '1');
-INSERT INTO `web_province` VALUES ('61', 'Yên Bái', '62', '1', '1');
-INSERT INTO `web_province` VALUES ('66', 'An giang', '62', '1', '3');
-INSERT INTO `web_province` VALUES ('67', 'Vũng Tàu', '6', '1', '3');
-INSERT INTO `web_province` VALUES ('68', 'Nha Trang', '4', '1', '0');
-INSERT INTO `web_province` VALUES ('69', 'Điện Biên', '0', '1', '0');
-INSERT INTO `web_province` VALUES ('70', 'Hậu Giang', '0', '1', '0');
-INSERT INTO `web_province` VALUES ('71', 'Đắk Nông', '0', '1', '0');
-INSERT INTO `web_province` VALUES ('72', 'Đắk Lắc', '0', '1', '0');
+INSERT INTO `web_news` VALUES ('1', 'Title tin tức', 'Title tin tức', '<p><img src=\"http://project.vn/DienAnh/cucdienanh.vn/image.php?type_dir=news&amp;id=1&amp;width=700&amp;height=700&amp;image=http://project.vn/DienAnh/cucdienanh.vn/uploads/news/1/08-36-23-07-06-2016-433.jpg\" /></p>\r\n', '08-36-23-07-06-2016-433.jpg', 'a:1:{i:0;s:27:\"02-35-21-07-06-2016-433.jpg\";}', '0', '183', '1', 'Title tin tức', 'Title tin tức', 'Title tin tức', '1465263435');
 
 -- ----------------------------
 -- Table structure for web_support_online
@@ -3293,64 +3269,14 @@ CREATE TABLE `web_type` (
   `type_created` int(11) DEFAULT '0',
   `type_status` tinyint(2) DEFAULT '0',
   PRIMARY KEY (`type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_type
 -- ----------------------------
-INSERT INTO `web_type` VALUES ('8', '1', 'Kiểu tin tức', 'group_news', '1', '1434424725', '1');
-INSERT INTO `web_type` VALUES ('9', '1', 'Kiểu văn bản', 'group_document', '2', '1464969411', '-1');
-
--- ----------------------------
--- Table structure for web_user_shop
--- ----------------------------
-DROP TABLE IF EXISTS `web_user_shop`;
-CREATE TABLE `web_user_shop` (
-  `shop_id` int(11) NOT NULL AUTO_INCREMENT,
-  `shop_name` varchar(250) DEFAULT NULL COMMENT 'Tên shop, cửa hàng hiển thị',
-  `user_shop` varchar(100) DEFAULT NULL COMMENT 'Tên dăng nhập của shop',
-  `user_password` varchar(100) DEFAULT NULL,
-  `shop_phone` varchar(255) DEFAULT NULL,
-  `shop_address` varchar(255) DEFAULT NULL,
-  `shop_email` varchar(100) DEFAULT NULL,
-  `shop_province` int(10) DEFAULT NULL COMMENT 'tinh thanh',
-  `shop_category` varchar(255) DEFAULT '0' COMMENT 'Danh muc cua shop dang su dung:lưu id danh mục cha: 1,2,3',
-  `shop_category_name` varchar(255) DEFAULT NULL,
-  `shop_about` text COMMENT 'gioi thieu shop',
-  `shop_transfer` text,
-  `number_limit_product` int(11) DEFAULT '12' COMMENT 'Giới hạn số lượng sản phẩm trong shop: 0: shop vip, 12: shop free',
-  `is_shop` tinyint(1) DEFAULT '0' COMMENT '0-thuong, 1-vip',
-  `is_login` tinyint(1) DEFAULT '0' COMMENT '0:not login, 1:login',
-  `shop_time_login` int(12) DEFAULT NULL,
-  `shop_time_logout` int(12) DEFAULT NULL,
-  `shop_status` tinyint(1) DEFAULT '0' COMMENT '0-an, 1-hoat dong, 2-khoa',
-  `shop_created` int(12) DEFAULT NULL COMMENT 'Ngày tạo',
-  `time_start_vip` int(12) DEFAULT NULL COMMENT 'Ngày bắt đầu vip',
-  `time_end_vip` int(12) DEFAULT NULL COMMENT 'Ngày hết hạn vip',
-  PRIMARY KEY (`shop_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of web_user_shop
--- ----------------------------
-INSERT INTO `web_user_shop` VALUES ('4', 'Shop Teen', 'nguyenduy', '$S$DJlJNA4U2IcbBXuolnbn0sepGLxC0Pq/3CcQ7RAgZ4DXbx.ngugd', '0913922986', '', 'nguyenduypt86@gmail.com', '22', '97,164', '', '<p>quỳnh đang test login ass</p>\r\n', '<p>quỳnh đang test login ass</p>\r\n', '12', '0', '0', '1461947925', '1461948742', '1', '1458564097', null, null);
-INSERT INTO `web_user_shop` VALUES ('5', 'Shop quần áo đẹp', 'shop_manhquynh', '$S$DtVyIbnpYxEcl56mHAVjAQqS/S2YA08yz9QjLYEwFKzcLcyJSix1', '0938413368', 'Việt Hưng - Long Biên Hà Nội', 'manhquynh1984@gmail.com', '22', '41', '', '<p>giới thiệu chung của shop quỳnh</p>\r\n', '<p>Ch&iacute;nh s&aacute;ch giao nhận của shop quỳnh</p>\r\n', '12', '0', '0', '1461774485', '1461778175', '1', '1459258585', null, null);
-INSERT INTO `web_user_shop` VALUES ('6', 'Hàng xách tay', 'hangxachtay', '$S$DU4eUbAi0fiqcF5OzH8IrlPN8b3XifgA7wi2wBS6efzFtxZ4a003', '0904 999 801 Zalo/Viber/Imsg', 'Ki ốt 6 Ngõ 49 Phố Đức Giang Long Biên Hà Nội', 'fullmoon2384@gmail.com', '22', '97,164', '', '<p>TO&Agrave;N BỘ H&Agrave;NG X&Aacute;CH TAY V&Agrave; ORD TỪ MỸ, &Uacute;C, NHẬT, ANH, ĐỨC, H&Agrave;N, NGA....DO NGƯỜI NH&Agrave; M&Igrave;NH MANG VỀ NH&Eacute; H&Agrave;NG CHUẨN 100% . KH&Aacute;CH C&Oacute; THỂ KIỂM TRA THOẢI M&Aacute;I LU&Ocirc;N Ạ.<br />\r\nH&Agrave;NG C&Oacute; SẴN TẠI: KI ỐT SỐ 6 NG&Otilde; 49 PHỐ ĐỨC GIANG,Q. LONG BI&Ecirc;N, TP. H&Agrave; NỘI.</p>\r\n\r\n<p>&nbsp;</p>\r\n', '<p><em>☎</em>&nbsp;L/H: QUA FB/ZALO/SDT:&nbsp;<strong>0904 999 801/0934401588</strong></p>\r\n\r\n<p><em>✈</em>&nbsp;SHIP TO&Agrave;N QUỐC, C&Oacute; SHIP CODE.</p>\r\n\r\n<p>H&Agrave;NG ORDER KH&Aacute;CH H&Agrave;NG VUI L&Ograve;NG CHUYỂN KHOẢN TRƯỚC 70% GI&Aacute; TRỊ SẢN PHẨM.</p>\r\n\r\n<p>STK :&nbsp;<strong>0541001532101 NGUYỄN THỊ NGUYỆT</strong>&nbsp;(Vietcombank chi nh&aacute;nh Chương Dương )</p>\r\n', '1000', '2', '0', '1461907161', '1462430532', '1', '1461230733', null, null);
-INSERT INTO `web_user_shop` VALUES ('7', 'Shop thời trang online ', 'shop_hathanh', '$S$D/medc1p5j90.sVhwgK42teM4AZisRT7z3Z9/0Yy0zhF9NQiobNL', '0943722595', 'Sài Đồng- Long Biên - Hà nội', 'nguyenthuha611983@gmail.com', '22', '164', 'Làm đẹp &amp; Sức khỏe', '<p>Giới thiệu chung của shop</p>\r\n', '<p>Ch&iacute;nh s&aacute;ch giao nhận của shop</p>\r\n', '100', '2', '0', null, null, '1', '1461293012', null, null);
-INSERT INTO `web_user_shop` VALUES ('8', 'Mum chip\'s shop', 'mumchipshop', '$S$DUhbj.pEhbrU8IJ1hR1w4/26va2NimF3lGVDYYfUywi5NLftS0lj', '0919866826', 'P801, tầng 8, 47 lê văn hưu, hai bà trưng', 'lecuc144@gmail.com', '22', '97', 'Thời trang nữ', '<p>Giới thiệu của shop</p>\r\n', '<p>Ch&iacute;nh s&aacute;ch vận chuyển, giao h&agrave;ng của shop</p>\r\n', '100', '2', '0', '1462334926', '1462346217', '1', '1461427074', null, null);
-INSERT INTO `web_user_shop` VALUES ('9', 'Quốc Đạt SmartPhone', 'hoantrang9', '$S$D1Lrx.6xdPFE5gxI5usd8dJOKuhHSR24rdT1pT3d.MPKMsKnOcrl', '0961087345', 'Số 173 - Ngã 4 TT Cao Thượng - Tân Yên- Bắc Giang', 'truongxuanhoan3790@gmail.com', '5', '43', 'Điện tử công nghệ', '<p><strong>Đi&ecirc;̣n thoại chính hãng </strong>. Cam k&ecirc;́t giá t&ocirc;́t nh&acirc;́t thị trường !</p>\r\n', '<p><strong>Chuy&ecirc;̉n phát nhanh - Thu&acirc;̣n ti&ecirc;̣n - Nhanh chóng - Uy tín</strong></p>\r\n', '100', '2', '0', null, null, '1', '1461474395', null, null);
-INSERT INTO `web_user_shop` VALUES ('10', 'HDmobileK3 Cầu Diễn', 'HDmobileK3', '$S$D4qwbVKAro8p0bN13I6J2.svqL/.LZPWQFJhR1bgFK6Im1j2g870', '0904536108', '108 Hoàng Công Chất - Cầu Diễn - Bắc Từ Liêm - Hà Nội', 'hd081082@gmail.com', '22', '43', 'Điện tử công nghệ', '<p>Cửa h&agrave;ng chuy&ecirc;n Mua - b&aacute;n - trao đổi c&aacute;c loại Điện thoại đi động. Cung cấp Linh - phụ kiện điện thoại ch&iacute;nh h&atilde;ng. Thay mặt k&iacute;nh - cảm ứng smartphone. Sửa chữa Điện thoại lấy ngay!!!</p>\r\n', '<p>Nhận h&agrave;ng xong thanh to&aacute;n.</p>\r\n', '100', '2', '0', null, null, '1', '1461667250', null, null);
-INSERT INTO `web_user_shop` VALUES ('11', null, 'Nonla', '$S$Dwee5hvCUwpKOrdrh23yQYf8/JyfSsX9bjzznrgtGS9LKrqSRyo5', '0904508526', null, 'chutho2208@yahoo.com', '22', '0', null, null, null, '20', '1', '0', '1461726862', null, '1', '1461726862', null, null);
-INSERT INTO `web_user_shop` VALUES ('12', 'Kid shop', 'Kid', '$S$Ddka7XOiu5TSMFyU7MLU2igRD.b4KH2y2UVMT.wlfzZxu7YxNOsA', '0902928596', 'Phan Thiết, bình thuận', 'tasaxarava@yahoo.com.sg', '11', '41', 'Mẹ và bé', '<p>C&aacute;c mẹ ơi, h&atilde;y nhanh tay chọn ngay cho b&eacute; y&ecirc;u &aacute;o đầm thật điệu để nổi bật trong c&aacute;c buổi tiệc sinh nhật, li&ecirc;n hoan, đ&aacute;m cưới...</p>\r\n\r\n<p>Kid shop ship h&agrave;ng to&agrave;n quốc.</p>\r\n', '<p>Giao h&agrave;ng nhận tiền</p>\r\n', '100', '2', '0', '1462168258', '1462319830', '1', '1461733408', null, null);
-INSERT INTO `web_user_shop` VALUES ('13', 'Hoàng Nguyên', 'HoangNguyen', '$S$D3GgHg9n1F4iL86.iLj42I2.Yp9iTfHSQ.5G91BBf.Qx1fLXpMtG', '01652206982', 'Quận Kiến An', 'hoangnguyen89tnhp@gmail.com', '26', '-1', null, '<p>Shop b&aacute;n h&agrave;ng thời trang, phụ kiện,cam kết chất lượng v&agrave; gi&aacute; th&agrave;nh rẻ ph&ugrave; hợp với từng đối tượng kh&aacute;ch h&agrave;ng</p>\r\n', '<p>Nhận h&agrave;ng thanh to&aacute;n hoặc chuyển khoản giao h&agrave;ng</p>\r\n', '20', '1', '0', '1461733567', null, '1', '1461733567', null, null);
-INSERT INTO `web_user_shop` VALUES ('14', 'Hangdepgiare', 'ChungPham', '$S$D4REt13WZyUBgv3Ie9mSTd4fVGvWTW3ZOrAVzeo5rMx11TAvJFBA', '01698971568', 'Hà Nội', 'hungchung1989@gmail.com', '22', '97', 'Thời trang', '<p>SHOP CHUY&Ecirc;N B&Aacute;N BU&Ocirc;N B&Aacute;N LẺ C&Aacute;C MẶT H&Agrave;NG THỜI TRANG C&Ocirc;NG SỞ TO&Agrave;N QUỐC. CHẾ ĐỘ B&Aacute;N BU&Ocirc;N CỰC ƯU Đ&Atilde;I.</p>\r\n', '<p>Ship h&agrave;ng to&agrave;n quốc thu tiền tại nh&agrave;</p>\r\n', '100', '2', '0', '1461741733', null, '1', '1461741733', null, null);
-INSERT INTO `web_user_shop` VALUES ('15', 'Thời trang nữ', 'shop_huongdieu', '$S$DPRBV1k4JGzHp8wX3L92SwGmcOm6d4lAV4uk.SGMhJ6tvWmqe9ox', '0914421868', 'Số 45 - Kim Quan - Việt Hưng - Long Biên - Hà Nội', 'nguyenhuongdieu1984@gmail.com', '22', '41,97', '', '<p>Chuy&ecirc;n h&agrave;ng thời trang nam - nữ Quảng Đ&ocirc;ng chất lượng cao.</p>\r\n', '<p>Số 45 - Kim Quan - Việt Hưng - Long Bi&ecirc;n - H&agrave; Nội</p>\r\n', '1000', '2', '0', '1462376004', '1462378869', '1', '1461980103', null, null);
-INSERT INTO `web_user_shop` VALUES ('16', 'Quang Huy Mobile', 'quanghuy_mobile', '$S$D6MlB8UN7Aif3fWHror9UGLr2N16PMzVtTjB2//M9UZE0Tg7jnMr', '0987709879', 'Số 53 - phố Việt Hưng - Long Biên - Hà Nội', 'quanghuy290984@gmail.com', '22', '43', '', '<p>Chuy&ecirc;n cung cấp&nbsp;điện thoại smart phone cao cấp..</p>\r\n\r\n<p>Chuy&ecirc;n sửa chữa, mua b&aacute;n - trao đổi m&aacute;y mới cũ</p>\r\n\r\n<p>Thay &eacute;p k&iacute;nh m&agrave;n h&igrave;nh Smart phone c&aacute;c h&atilde;ng</p>\r\n\r\n<p>Li&ecirc;n hệ: Quang Huy: 09877.09779</p>\r\n', '<p>giao nhận online hoặc tại cửa h&agrave;ng</p>\r\n', '100', '2', '0', '1462250540', '1462356676', '1', '1461985796', null, null);
-INSERT INTO `web_user_shop` VALUES ('17', 'Máy tính nguyệt thiện', 'ntcomputer', '$S$DUPfCdmE33xlrqSNluOGs/jg8YSc2giLSjgzfZuZyye5r6BI8QFX', '0987831368', '101 Phố Việt Hưng - Long Biên - Hà Nội', 'phanthienvnn@gmail.com', '22', '43', '', '<p>chuy&ecirc;n cung cấp linh phụ kiện m&aacute;y t&iacute;nh, m&aacute;y in, m&aacute;y fax</p>\r\n', '<p>phụ phụ kh&aacute;ch h&agrave;ng 24/24, chu đ&aacute;o v&agrave; tận nơi</p>\r\n', '100', '2', '0', '1461993761', '1461997824', '1', '1461991525', null, null);
-INSERT INTO `web_user_shop` VALUES ('18', 'Kho Đồ Sơ Sinh', 'khodososinh', '$S$Ds/Ko4YfS3fxMiER.14.jQ/xgGgMVdV40/U6/i1gNVSiThKuLmQO', '0932098385', '154/52 Âu Dương Lân, Phường 3, Quận 8, HCM', 'khodososinh@gmail.com', '29', '41', '', 'Nhập khẩu & phân phối đai địu Suoeguardo, bình sữa Pappi - Innomax và các vậy dụng khác dành cho trẻ em & sơ sinh.\r\nChúng tôi mong muốn được hợp tác với tất cả các cửa hàng trên toàn quốc.\r\nChi tiết xin liên hệ:\r\nHotline: 0932098385\r\nWebsite: http://khodososinh.com\r\nEmail: khodososinh@gmail.com\r\nFacebook: www.facebook.com/khodososinh', '', '100', '1', '0', '1462021088', '1462084055', '1', '1462021088', null, null);
-INSERT INTO `web_user_shop` VALUES ('19', 'Phụ kiện thời trang', 'Phukienthoitrang', '$S$DTS/W1SBQwtprqVjNQPv.8o4219R/3fnDI4uzabwmLd8kjQ8sMfN', '0986426636', 'Hà Nội', 'dothiluong1508@gmail.com', '22', '97', '', '', '<p>Giao h&agrave;ng to&agrave;n quốc</p>\r\n', '100', '1', '0', '1462021202', '1462072580', '1', '1462021202', null, null);
-INSERT INTO `web_user_shop` VALUES ('20', null, 'haixuan', '$S$DGywC1p1NjxFeWqDtProjzOU2OIco4GsxVRtcJypJcU.6aGyzMEo', '0989242700', null, 'nguoitimnhahanoi@yahoo.com.vn', '22', '0', null, null, null, '20', '1', '0', '1462148107', '1462249691', '1', '1462148107', null, null);
-INSERT INTO `web_user_shop` VALUES ('21', null, 'Nhatlyshop', '$S$DN2uxKQJByYL.Hs4Xf4BKPjNTAKeg1Peice8dNblxj5lccTGmZ7P', '0988291130', null, 'vanbong1988@gmail.com', '22', '0', null, null, null, '20', '1', '0', '1462377672', '1462414292', '1', '1462377672', null, null);
+INSERT INTO `web_type` VALUES ('8', '1', 'Kiểu tin tức', 'group_news', '1', '1465271622', '1');
+INSERT INTO `web_type` VALUES ('9', '1', 'Kiểu văn bản', 'group_document', '2', '1465263660', '1');
+INSERT INTO `web_type` VALUES ('11', '1', 'Thư viện ảnh', 'group_images', '3', '1465265764', '1');
 
 -- ----------------------------
 -- Table structure for web_video
@@ -3362,6 +3288,7 @@ CREATE TABLE `web_video` (
   `video_sort_desc` text CHARACTER SET utf8,
   `video_content` text CHARACTER SET utf8,
   `video_link` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `video_file` varchar(255) DEFAULT NULL,
   `video_img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `video_img_temp` varchar(255) DEFAULT NULL,
   `video_status` tinyint(5) DEFAULT NULL,
@@ -3369,9 +3296,8 @@ CREATE TABLE `web_video` (
   `video_time_creater` int(11) DEFAULT '0',
   `video_time_update` int(11) DEFAULT '0',
   PRIMARY KEY (`video_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of web_video
 -- ----------------------------
-INSERT INTO `web_video` VALUES ('1', 'ádasd', 'ádasd', 'ádasd', 'ádasd', '', null, '1', '0', '1464170318', '1464170318');
