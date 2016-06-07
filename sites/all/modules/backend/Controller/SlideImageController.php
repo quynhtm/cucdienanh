@@ -48,8 +48,8 @@ class SlideImageController{
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->image_image) && trim($value->image_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->image_image,$value->image_id,FOLDER_NEWS,60,60);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->image_image,$value->image_id,FOLDER_NEWS,300,150);
+					$value->url_image = FunctionLib::getThumbImage($value->image_image,$value->image_id,FOLDER_IMAGE,60,60);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->image_image,$value->image_id,FOLDER_IMAGE,300,150);
 				}
 			}
 		}
