@@ -9,13 +9,13 @@
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
 		 	
              <div class="control-group">
-                <label class="control-label">Title tin tức<span>*</span></label>
+                <label class="control-label">Tiêu đề<span>*</span></label>
                 <div class="controls">
                     <input type="text" class="form-control input-sm" name="news_title" value="<?php if(isset($arrItem->news_title)){ echo $arrItem->news_title; } ?>">
                 </div>
              </div>
              <div class="control-group">
-                 <label class="control-label">Danh mục tin</label>
+                 <label class="control-label">Danh mục</label>
                  <div class="controls">
                      <select class="form-control input-sm" name="news_category">
                          <?php echo $optionCategory;?>

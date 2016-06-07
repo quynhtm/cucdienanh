@@ -8,13 +8,20 @@
          <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
             
             <div class="control-group">
-                <label class="control-label">Tên document<span>*</span></label>
+                <label class="control-label">Tên văn bản<span>*</span></label>
                 <div class="controls">
                     <input type="text" class="form-control input-sm" name="document_name" value="<?php if(isset($arrItem->document_name)){ echo $arrItem->document_name; } ?>">
                 </div>
             </div>
-
-             <div class="control-group">
+            <div class="control-group">
+                 <label class="control-label">Danh mục</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="news_category">
+                         <?php echo $optionCategory;?>
+                     </select>
+                 </div>
+            </div>
+            <div class="control-group">
                  <label class="control-label">Upload file</label>
                  <div class="controls">
                      <input type="file" name="document_file">
@@ -50,7 +57,7 @@
                 </div>
             </div>
              <div class="control-group">
-                <label class="control-label">Meta miêu tả</label>
+                <label class="control-label">Meta description</label>
                 <div class="controls">
                     <textarea name="document_meta_description" class="form-control input-sm"><?php if(isset($arrItem->document_meta_description)){ echo $arrItem->document_meta_description; } ?></textarea>
                 </div>
