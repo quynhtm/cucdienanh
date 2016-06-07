@@ -9,18 +9,11 @@ global $base_url;
 ?>
 <div class="wrapper-admin-cpanel">
 	<div class="notification-global">
-		<div class="title-global"><h2>CMS Control panel </h2></div>
+		<div class="title-global"><h3>CMS Control panel</h3></div>
 	</div>
 	<div class="content-global">
 		<div class="wrapp-content-global">
 			<!--Row 1-->
-			<div class="col-lg-2 align_center">
-				<a class="a_control" target="_blank" title="Home Site" href="<?php echo $base_url ?>">
-					<div class="boder_admin padding10">
-						<i class="icon-home icon-4x"></i> <br/>Trang chủ quản trị
-					</div>
-				</a>
-			</div>
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Kiểu dữ liệu" href="<?php echo $base_url ?>/admincp/type">
 					<div class="boder_admin padding10">
@@ -42,6 +35,27 @@ global $base_url;
 					</div>
 				</a>
 			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Quản lý Video" href="<?php echo $base_url ?>/admincp/video">
+					<div class="boder_admin padding10">
+						<i class="icon-facetime-video icon-4x"></i> <br/>Quản lý video
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Quản lý document" href="<?php echo $base_url ?>/admincp/document">
+					<div class="boder_admin padding10">
+						<i class="icon-file-text icon-4x"></i> <br/>Quản lý document
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Comment" href="<?php echo $base_url ?>/admincp/comments">
+					<div class="boder_admin padding10">
+					<i class="icon-align-left icon-4x"></i> <br/>Comment
+					</div>
+				</a>
+			</div>
 			<!--Row 2-->
 			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
@@ -52,9 +66,16 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Người dùng" href="<?php echo $base_url ?>/admincp/user">
+					<div class="boder_admin padding10">
+					<i class="icon-user icon-4x"></i> <br/>Người dùng
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Nick hỗ trợ" href="<?php echo $base_url ?>/admincp/supportonline">
 					<div class="boder_admin padding10">
-					<i class="icon-skype icon-4x"></i> <br/>Nick hỗ trợ
+					<i class="icon-comments-alt icon-4x"></i> <br/>Nick hỗ trợ
 					</div>
 				</a>
 			</div>
@@ -66,9 +87,9 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý Video" href="<?php echo $base_url ?>/admincp/video">
+				<a class="a_control" title="Thư viện ảnh" href="<?php echo $base_url ?>/admincp/slideimage">
 					<div class="boder_admin padding10">
-						<i class="icon-facetime-video icon-4x"></i> <br/>Quản lý video
+					<i class="icon-picture icon-4x"></i> <br/>Thư viện ảnh
 					</div>
 				</a>
 			</div>
