@@ -54,7 +54,6 @@ function Core_permission() {
 require_once 'autoload.php';
 
 function Core_init(){
-    Session::setSessionAnonymousUserShop();
     $uri = request_uri();
     if(preg_match("/(\/admin)/", $uri)==0){
         $files = array(
