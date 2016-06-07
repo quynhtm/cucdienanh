@@ -5,6 +5,7 @@
 class CommentsController{
 	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrReply = array(-1 => 'Tất cả', COMMENT_OK_REPLY => 'Đã trả lời', COMMENT_NOT_REPLY => 'Chưa trả lời');
+	private $arrCommentType = array();
 	public function __construct(){
 			$files = array(
 				'bootstrap/lib/ckeditor/ckeditor.js',
@@ -26,28 +27,35 @@ class CommentsController{
 	            'View/js/admin.js',
 	        );
 	        Loader::load('Admin', $files);
+		$this->arrCommentType = CGlobal::$arrCommentType;
 	}
 
 	function indexComments(){
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
-		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
+		$dataSearch['comment_object_name'] = FunctionLib::getParam('comment_object_name','');
+		$dataSearch['comment_customer_name'] = FunctionLib::getParam('comment_customer_name','');
+		$dataSearch['comment_status'] = FunctionLib::getIntParam('comment_status', -1);
+		$dataSearch['comment_type'] = FunctionLib::getIntParam('comment_type', -1);
+		$dataSearch['comment_is_reply'] = FunctionLib::getIntParam('comment_is_reply', -1);
 
 		$getFields = array();
 		$result = Comments::getSearchListItems($dataSearch,$limit,$getFields);
 
 		//build option
-		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
-		$optionReply = FunctionLib::getOption($this->arrReply, $dataSearch['province_status']);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['comment_status']);
+		$optionReply = FunctionLib::getOption($this->arrReply, $dataSearch['comment_is_reply']);
+		$optionCommentType = FunctionLib::getOption(array(-1=>'-- Chọn kiểu đối tượng --')+$this->arrCommentType, $dataSearch['comment_type']);
 
 		return $view = theme('indexComments',array(
 									'title'=>'Danh sách liên hệ',
 									'result' => $result['data'],
+									'arrCommentType' => $this->arrCommentType,
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionReply' => $optionReply,
+									'optionCommentType' => $optionCommentType,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -85,7 +93,7 @@ class CommentsController{
 				drupal_goto($base_url.'/admincp/comment');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->province_status) ? $arrItem->province_status: -1);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->comment_status) ? $arrItem->comment_status: -1);
 		return $view = theme('addComments',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,

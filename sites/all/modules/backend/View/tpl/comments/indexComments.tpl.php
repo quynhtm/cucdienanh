@@ -4,31 +4,20 @@
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 			<div class="paddingTop20">
 				<div class="col-lg-3">
-					<label class="control-label">Id sản phẩm</label>
-					<div><input type="text" class="form-control input-sm" placeholder ="ID sản phẩm" id="comment_product_id" name="comment_product_id" value="<?php echo (isset($dataSearch['comment_product_id']) && $dataSearch['comment_product_id'] > 0) ?$dataSearch['comment_product_id']:''; ?>"/></div>
+					<label class="control-label">Tên đối tượng comment</label>
+					<div><input type="text" class="form-control input-sm" placeholder ="Tên sản phẩm" id="comment_object_name" name="comment_object_name" value="<?php echo (isset($dataSearch['comment_object_name']) && $dataSearch['comment_object_name'] != '') ?$dataSearch['comment_object_name']:''; ?>"/></div>
 				</div>
-				<div class="col-lg-3">
-					<label class="control-label">Tên sản phẩm</label>
-					<div><input type="text" class="form-control input-sm" placeholder ="Tên sản phẩm" id="comment_product_name" name="comment_product_name" value="<?php echo (isset($dataSearch['comment_product_name']) && $dataSearch['comment_product_name'] != '') ?$dataSearch['comment_product_name']:''; ?>"/></div>
-				</div>
-				<div class="col-lg-3">
-					<label class="control-label">Id Shop</label>
-					<div><input type="text" class="form-control input-sm" placeholder ="ID Shop" id="comment_shop_id" name="comment_shop_id" value="<?php echo (isset($dataSearch['comment_shop_id']) && $dataSearch['comment_shop_id'] > 0) ?$dataSearch['comment_shop_id']:''; ?>"/></div>
-				</div>
-				<div class="col-lg-3">
-					<label class="control-label">Tên sản phẩm</label>
-					<div><input type="text" class="form-control input-sm" placeholder ="Tên shop" id="comment_shop_name" name="comment_shop_name" value="<?php echo (isset($dataSearch['comment_shop_name']) && $dataSearch['comment_shop_name'] != '') ?$dataSearch['comment_shop_name']:''; ?>"/></div>
-				</div>
-			</div>
-			<div class="clear"></div>
-			<div class="paddingTop10">
-				<div class="col-lg-3">
+		 		<div class="col-lg-3">
 					<label class="control-label">Tên khách bình luận</label>
 					<div><input type="text" class="form-control input-sm" placeholder ="Tên khách bình luận" id="comment_customer_name" name="comment_customer_name" value="<?php echo (isset($dataSearch['comment_customer_name']) && $dataSearch['comment_customer_name'] != '') ?$dataSearch['comment_customer_name']:''; ?>"/></div>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-2">
 					<label class="control-label">Trạng thái</label>
 					<div><select class="form-control input-sm" name="comment_status"><?php echo $optionStatus;?></select></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Loại đối tượng</label>
+					<div><select class="form-control input-sm" name="comment_type"><?php echo $optionCommentType;?></select></div>
 				</div>
 				<div class="col-lg-3">
 					<label class="control-label">Kiểu trả lời</label>
@@ -68,13 +57,13 @@
 					<tr>
 						<th width="2%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
-						<th width="20%">Sản phẩm</th>
-						<th width="15%">Shop</th>
+						<th width="20%">Đối tượng BL</th>
 						<th width="15%">Khách BL</th>
-						<th width="40%">Nội dung</th>
+						<th width="30%">Nội dung</th>
+						<th width="10%">Loại đối tượng</th>
 						<th width="5%">Reply</th>
 						<th width="5%">Status</th>
-						<th width="5%">Action</th>
+						<!--<th width="5%">Action</th>-->
 					</tr>
 					</thead>
 					<tbody>
@@ -82,20 +71,20 @@
 					<tr>
 						<td><?php echo $key+1 ?></td>
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->comment_id ?>" /></td>
-						<td><?php echo ($item->comment_product_id > 0)?'['.$item->comment_product_id.'] '.$item->comment_product_name : ''; ?></td>
-						<td><?php echo ($item->comment_shop_id > 0)?'['.$item->comment_shop_id.'] '.$item->comment_shop_name : ''; ?></td>
+						<td><?php echo ($item->comment_object_id > 0)?'['.$item->comment_object_id.'] '.$item->comment_object_name : ''; ?></td>
 						<td><?php echo $item->comment_customer_name; ?></td>
 						<td><?php echo $item->comment_content; ?></td>
+						<td><?php echo isset($arrCommentType[$item->comment_type])? $arrCommentType[$item->comment_type]: 'chưa xác đinh'; ?></td>
 						<td>
 							<?php echo ($item->comment_is_reply == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td>
 							<?php echo ($item->province_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
-						<td>
+						<!--<td>
 							<?php $linkEdit = $base_url.'/admincp/province/edit/'.$item->comment_id; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-						</td>
+						</td>-->
 					</tr>
 					<?php }?>
 					</tbody>

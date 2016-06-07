@@ -89,8 +89,8 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
     $items["admincp/slideimage"] = array(
-        "title" => t('Banner Quang cao'),
-        "description" => "banner",
+        "title" => t('Thu vien anh'),
+        "description" => "Thu vien anh",
         'page callback' => 'router_page',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,

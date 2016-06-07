@@ -5,7 +5,7 @@
 class Comments{
 	static $table_action = TABLE_COMMENT;
 	static $primary_key = 'comment_id';
-	static $arrFields = array('comment_id','comment_parent_id', 'comment_product_id', 'comment_product_name','comment_shop_id','comment_shop_name',
+	static $arrFields = array('comment_id','comment_parent_id', 'comment_object_id', 'comment_object_name','comment_type',
 		'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
@@ -24,11 +24,7 @@ class Comments{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'comment_product_id' && $value != -1){
-						$sql->condition('i.'.$field, $value, '=');
-						array_push($arrCond, $field.' = '.$value);
-					}
-					if($field === 'comment_shop_id' && $value != -1){
+					if($field === 'comment_type' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
@@ -40,18 +36,13 @@ class Comments{
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
-					if($field === 'comment_product_name' && $value != ''){
+					if($field === 'comment_object_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);
 						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
 					}
-					if($field === 'comment_shop_name' && $value != ''){
-						$db_or = db_or();
-						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
-						$sql->condition($db_or);
-						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
-					}
+
 				}
 				if(!empty($arrCond)){
 					$cond = implode(' AND ', $arrCond);
