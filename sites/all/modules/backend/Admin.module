@@ -51,6 +51,13 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/comments"] = array(
+        "title" => t('comments'),
+        "description" => "comments",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
      $items["admincp/video"] = array(
         "title" => t('Video giai tri'),
         "description" => "banner",
@@ -75,6 +82,13 @@ function Admin_menu() {
 		'type' => MENU_CALLBACK,
 	);
     $items["admincp/banner"] = array(
+        "title" => t('Banner Quang cao'),
+        "description" => "banner",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+    $items["admincp/slideimage"] = array(
         "title" => t('Banner Quang cao'),
         "description" => "banner",
         'page callback' => 'router_page',
@@ -156,9 +170,11 @@ function Admin_theme() {
         'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
       	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
         'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
+
         //Type
         'indexType'         => array('template' => 'View/tpl/type/indexType'),
         'addType'           => array('template' => 'View/tpl/type/addType'),
+
         //Category
         'indexCategory'         => array('template' => 'View/tpl/category/indexCategory'),
         'addCategory'           => array('template' => 'View/tpl/category/addCategory'),
@@ -166,18 +182,31 @@ function Admin_theme() {
         //document
         'indexDocument'         => array('template' => 'View/tpl/document/indexDocument'),
         'addDocument'           => array('template' => 'View/tpl/document/addDocument'),
+
+        //lien he
+        'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
+        'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
+
         //News
         'indexNews'         => array('template' => 'View/tpl/news/indexNews'),
         'addNews'           => array('template' => 'View/tpl/news/addNews'),
+
+        //SlideImage
+        'indexSlideImage'         => array('template' => 'View/tpl/slideimage/indexSlideImage'),
+        'addSlideImage'           => array('template' => 'View/tpl/slideimage/addSlideImage'),
+
         //ConfigInfo
         'indexConfigInfo'       => array('template' => 'View/tpl/configInfo/indexConfigInfo'),
         'addConfigInfo'         => array('template' => 'View/tpl/configInfo/addConfigInfo'),
+
         //SupportOnline
         'indexSupportOnline'    => array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline'      => array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+
         //Banner
         'indexBanner'       => array('template' => 'View/tpl/banner/indexBanner'),
         'addBanner'         => array('template' => 'View/tpl/banner/addBanner'),
+
         //Video
         'indexVideo'        => array('template' => 'View/tpl/video/indexVideo'),
         'addVideo'      => array('template' => 'View/tpl/video/addVideo'), 
@@ -208,18 +237,30 @@ function Admin_init(){
         'Model/Document.php',
         'Controller/DocumentController.php',
 
+        //Comments
+        'Model/Comments.php',
+        'Controller/CommentsController.php',
+
         //News
         'Model/News.php',
         'Controller/NewsController.php',
+
+        //News
+        'Model/SlideImage.php',
+        'Controller/SlideImageController.php',
+
         //ConfigInfo
         'Model/ConfigInfo.php',
         'Controller/ConfigInfoController.php',
+
 		//SupportOnline
 		'Model/SupportOnline.php',
 		'Controller/SupportOnlineController.php',
+
         //Banner
         'Model/Banner.php',
         'Controller/BannerController.php',
+
 		//Video
         'Model/Video.php',
         'Controller/VideoController.php',  

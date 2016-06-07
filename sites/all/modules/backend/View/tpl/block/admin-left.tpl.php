@@ -14,14 +14,16 @@
         	<a title="<?php echo t('Bảng điều khiển')?>" href="<?php echo $base_url?>/admincp"><i class="icon-dashboard"></i>Trang chủ quản trị</a>
         </li>
         
-        <li <?php if($param[1]=='type' || $param[1]=='category' || $param[1]=='news' || $param[1]=='video'|| $param[1]=='document'){?> class="active" <?php } ?>>
+        <li <?php if($param[1]=='type' || $param[1]=='category' || $param[1]=='news' || $param[1]=='video'|| $param[1]=='document'|| $param[1]=='comments'|| $param[1]=='slideimage'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-cogs"></i> Quản lý nội dung<i class="icon-arrow"></i></a>
             <ul class="sub">
                 <li <?php if($param[1]=='type'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/type"><i class="icon-minus"></i> Kiểu dữ liệu</a></li>
                 <li <?php if($param[1]=='category'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/category"><i class="icon-minus"></i> Chuyên mục</a></li>
                 <li <?php if($param[1]=='news'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/news"><i class="icon-minus"></i> Quản lý bài viết</a></li>
                 <li <?php if($param[1]=='video'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/video"><i class="icon-minus"></i> Quản lý Video</a></li>
-                <li <?php if($param[1]=='document'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/document"><i class="icon-minus"></i> Quản lý Video</a></li>
+                <li <?php if($param[1]=='comments'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/comments"><i class="icon-minus"></i> Quản lý Comment</a></li>
+                <li <?php if($param[1]=='document'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/document"><i class="icon-minus"></i> Quản lý Document</a></li>
+                <li <?php if($param[1]=='slideimage'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/slideimage"><i class="icon-minus"></i> QL thư viện ảnh</a></li>
             </ul>
         </li>
 
