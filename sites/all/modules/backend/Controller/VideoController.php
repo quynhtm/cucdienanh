@@ -5,6 +5,13 @@
 class VideoController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	public function __construct(){
+		
+		$files = array(
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
+		    );
+		Loader::loadJSExt('Core', $files);
+
 		$files = array(
 			'bootstrap/css/bootstrap.css',
 			'css/font-awesome.css',
@@ -79,7 +86,7 @@ class VideoController{
 			$video_img_old = trim(FunctionLib::getParam('img_old', ''));
 			$dataInput = array(
 				'video_name'=>array('value'=>FunctionLib::getParam('video_name',''), 'require'=>1, 'messages'=>'Tên Video không được bỏ trống!'),
-				'video_link'=>array('value'=>FunctionLib::getParam('video_link',''), 'require'=>1, 'messages'=>'Link video không được bỏ trống!'),
+				'video_link'=>array('value'=>FunctionLib::getParam('video_link','')),
 				'video_img'=>array('value'=>$video_img, 'require'=>0),
 				'video_status'=>array('value'=>FunctionLib::getParam('video_status',STASTUS_SHOW)),
 				'video_sort_desc'=>array('value'=>FunctionLib::getParam('video_sort_desc','')),

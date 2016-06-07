@@ -725,6 +725,9 @@ div#load_file_ajax_gift .rowprocess p{
     display: inline-block;
     width: 100%;
 }
+.control-label span{
+    color: #ff0000;
+}
 /*media*/
 /*
 @media (max-width: 560px) {

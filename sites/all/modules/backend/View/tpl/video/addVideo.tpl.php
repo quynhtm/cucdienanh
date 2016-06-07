@@ -13,7 +13,7 @@
                          <div><input type="text" class="form-control input-sm" name="video_name" value="<?php if(isset($arrItem->video_name)){ echo $arrItem->video_name; } ?>"></div>
                     </div>
                     <div class="col-lg-12 paddingTop10">
-                         <label class="control-label">Link view<span>*</span></label>
+                         <label class="control-label">Link view (Youtube)</label>
                          <div><input type="text" class="form-control input-sm" name="video_link" value="<?php if(isset($arrItem->video_link)){ echo $arrItem->video_link; } ?>"></div>
                     </div>
                     <div class="col-lg-12 paddingTop10">
@@ -32,7 +32,7 @@
                      <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Mô tả ngắn</label>
                          <div>
-                             <textarea id="video_sort_desc" name="video_sort_desc" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->video_sort_desc)) { echo $arrItem->video_sort_desc; } ?></textarea>
+                             <textarea id="video_sort_desc" name="video_sort_desc" class="form-control input-sm" cols="30" rows="5"><?php if(isset($arrItem->video_sort_desc)) { echo $arrItem->video_sort_desc; } ?></textarea>
                          </div>
                      </div>
                      <div class="col-lg-12 paddingTop10">
@@ -87,3 +87,7 @@
     </div>
 </div>
 <!--Popup upload ảnh-->
+
+<script>
+    CKEDITOR.replace('video_content', {height:200});
+</script>
