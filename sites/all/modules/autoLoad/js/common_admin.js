@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
         jQuery("#div_hover_" + id).hide();
     });
 
-
+    Common_admin.deleteVideoUpload();
 });
 
 var Common_admin = {
@@ -231,9 +231,8 @@ var Common_admin = {
         }
         jQuery("#sys_mulitplefileuploader").uploadFile(settings);
     },
-
     /**
-     * Upload banner quảng cáo
+     * Upload banner
      */
     uploadBannerAdvanced: function(type) {
         jQuery('#sys_PopupUploadImgOtherPro').modal('show');
@@ -280,6 +279,61 @@ var Common_admin = {
             }
         }
         jQuery("#sys_mulitplefileuploader").uploadFile(settings);
+    },
+    /**
+     * Upload video
+    */
+    uploadVideoAdvanced: function(type) {
+        jQuery('#sys_PopupUploadVideoOtherPro').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_ext';
+        var id_hiden = document.getElementById('id_hiden').value;
+
+        var settings = {
+            url: urlAjaxUpload,
+            method: "POST",
+            allowedTypes:"flv,mp4,3gp,mp3",
+            fileName: "multipleFileExt",
+            formData: {id: id_hiden,type: type},
+            multiple: false,
+            onSubmit:function(){
+                jQuery( "#sys_show_button_upload_video").hide();
+                jQuery("#statusVideo").html("<font color='green'>Đang upload...</font>");
+            },
+            onSuccess:function(files,xhr,data){
+                dataResult = JSON.parse(xhr);
+                if(dataResult.intIsOK === 1){
+                    //gan lai id item cho id hiden: dung cho them moi, sua item
+                    jQuery('#id_hiden').val(dataResult.id_item);
+                    jQuery( "#sys_show_button_upload_video").show();
+                    //show file
+                    var html = '<a target="_blank" href="' + dataResult.info.src + '">'+dataResult.info.name_file+'</a><span data="'+dataResult.info.name_file+'" class="remove_file_video">X</span>';
+                        html +='<input name="video_file" type="hidden" id="video_file" value="'+dataResult.info.name_file+'">';
+
+                    jQuery('#sys_show_video').html(html);
+                    //onSuccess
+                    jQuery("#statusVideo").html("<font color='green'>Upload is success</font>");
+                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
+                    setTimeout( "jQuery('#statusVideo').hide();",2000 );
+                    setTimeout( "jQuery('#sys_PopupUploadVideoOtherPro').modal('hide');",2500 );
+
+                    Common_admin.deleteVideoUpload();
+                }
+            },
+            onError: function(files,status,errMsg){
+                jQuery("#statusVideo").html("<font color='red'>Upload is Failed</font>");
+            }
+        }
+        jQuery("#sys_mulitplefileuploaderVideo").uploadFile(settings);
+    },
+
+    deleteVideoUpload:function(){
+        jQuery('.remove_file_video').click(function(){
+            if(confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+                jQuery("#sys_show_video").html('');
+                return true;
+            }
+        });
     },
 
     checkedImage: function(nameImage,key){

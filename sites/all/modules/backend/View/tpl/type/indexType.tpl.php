@@ -62,7 +62,9 @@
 						<td><?php echo $item->type_keyword ?></td>
 						<td><?php echo $item->type_order ?></td>
 						<td><?php echo date('d-m-Y h:i:s',$item->type_created) ?></td>
-						<td><?php echo isset($arrStatus[$item->type_status]) ? $arrStatus[$item->type_status] : ''; ?> </td>
+						<td>
+							<?php echo ($item->type_status== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+						</td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/type/edit/'.$item->type_id; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>

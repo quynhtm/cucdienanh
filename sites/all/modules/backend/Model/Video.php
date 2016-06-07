@@ -6,7 +6,7 @@ class Video{
 	static $table_action = TABLE_VIDEO;
 	static $primary_key = 'video_id';
 	static $arrFields = array('video_id', 'video_name', 'video_link','video_status',
-		'video_view', 'video_time_creater', 'video_time_update','video_sort_desc','video_content','video_img');
+		'video_view', 'video_time_creater', 'video_time_update','video_sort_desc','video_content','video_img','video_file');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all

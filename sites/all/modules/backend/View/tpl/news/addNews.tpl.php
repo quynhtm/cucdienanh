@@ -90,19 +90,19 @@
                 </div>
             </div>
              <div class="control-group">
-                 <label class="control-label">Title Seo</label>
+                 <label class="control-label">Meta title</label>
                  <div class="controls">
                      <input type="text" class="form-control input-sm" name="news_meta_title" value="<?php if(isset($arrItem->new_meta_title)){ echo $arrItem->new_meta_title; } ?>">
                  </div>
              </div>
              <div class="control-group">
-                 <label class="control-label">Keywork Seo</label>
+                 <label class="control-label">Meta keyword</label>
                  <div class="controls">
                      <textarea name="news_meta_keyword" class="form-control input-sm"><?php if(isset($arrItem->new_meta_keyword)){ echo $arrItem->new_meta_keyword; } ?></textarea>
                  </div>
              </div>
              <div class="control-group">
-                 <label class="control-label">Mô tả Seo</label>
+                 <label class="control-label">Meta description</label>
                  <div class="controls">
                      <textarea name="news_meta_description" class="form-control input-sm"><?php if(isset($arrItem->new_meta_description)){ echo $arrItem->new_meta_description; } ?></textarea>
                  </div>

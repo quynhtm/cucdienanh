@@ -106,32 +106,4 @@ class Upload{
             return strtolower($str);
         }
 	}
-	//check upload and unlink img current
-	public static function check_upload_file($name_input_file, $current_path_img='', $name_folder=''){
-		$path_img='';
-		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='jpg,jpeg,png,gif,swf', $_max_file_size=20*1024*1024, $name_folder,  $type_json=0);
-		if($path_img!=''){
-			if($current_path_img!=''){
-				$dir = PATH_UPLOAD.'/'.$name_folder.'/'.$current_path_img;
-				if(is_file($dir)){
-					unlink($dir);
-				}
-			}
-		}
-		return $path_img;
-	}
-	//check upload and unlink img current
-	public static function check_upload_file_download($name_input_file, $current_path_img='', $name_folder=''){
-		$path_img='';
-		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='xls,xlsx,doc,docx,pdf,rar,zip,tar', $_max_file_size=20*1024*1024, $name_folder,  $type_json=0);
-		if($path_img!=''){
-			if($current_path_img!=''){
-				$dir = PATH_UPLOAD.'/'.$name_folder.'/'.$current_path_img;
-				if(is_file($dir)){
-					unlink($dir);
-				}
-			}
-		}
-		return $path_img;
-	}
 }

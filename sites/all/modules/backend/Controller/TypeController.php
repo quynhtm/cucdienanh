@@ -6,7 +6,7 @@
 * @Version	 : 1.0
 */
 class TypeController{
-	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	public function __construct(){
 	
         $files = array(
@@ -92,7 +92,7 @@ class TypeController{
 				drupal_goto($base_url.'/admincp/type');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, -1);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->type_status) ? $arrItem->type_status: STASTUS_SHOW);
 		return $view = theme('addType',array('arrItem'=>$arrItem, 'optionStatus' => $optionStatus));
 	}
 

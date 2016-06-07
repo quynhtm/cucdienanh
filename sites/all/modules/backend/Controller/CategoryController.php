@@ -151,7 +151,6 @@ class CategoryController{
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = Category::getItemById(array(), $item_id);
-			//FunctionLib::Debug($arrItem);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
