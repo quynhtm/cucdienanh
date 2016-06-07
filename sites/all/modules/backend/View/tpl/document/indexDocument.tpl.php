@@ -6,7 +6,10 @@
 				<label class="control-label">Tên file</label>
 				<div><input type="text" class="form-control input-sm" placeholder ="Tên danh mục" id="document_name" class="keyword" name="document_name" value="<?php echo $dataSearch['document_name'] ?>"/></div>
 			</div>
-
+			<div class="col-lg-3">
+				<label class="control-label">Danh mục</label>
+				<div><select class="form-control input-sm" name="news_category"><?php echo $optionCategory;?></select></div>
+			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="document_status"><?php echo $optionStatus;?></select></div>

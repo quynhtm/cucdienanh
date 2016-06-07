@@ -21,6 +21,9 @@ class DocumentController{
             'View/js/admin.js',
         );
         Loader::load('Admin', $files);
+
+        $aryCatergoryDocument = DataCommon::getListCategoryNews('group_document');
+		$this->aryCatergoryDocument = array(-1 => '--- Chọn danh mục văn bản ---') + $aryCatergoryDocument;
 	}
 	function indexDocument(){
 		global $base_url;
@@ -38,11 +41,14 @@ class DocumentController{
 		//FunctionLib::Debug($treeCategroy);
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['document_status']);
+		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, $dataSearch['document_type']);
+
 		return $view = theme('indexDocument',array(
 									'title'=>'Danh sách Document dowload',
 									'result' => $data,
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionCategory' => $optionCategory,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -95,11 +101,13 @@ class DocumentController{
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->document_status) ? $arrItem->document_status: STASTUS_SHOW);
+		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, isset($arrItem->document_type) ? $arrItem->document_type: -1);
 		return $view = theme('addDocument',
 			array('arrItem'=>$arrItem,
 				'errors'=>$errors,
 				'item_id'=>$item_id,
 				'optionStatus'=>$optionStatus,
+				'optionCategory'=>$optionCategory,
 				'title'=>'dowload file'));
 	}
 
