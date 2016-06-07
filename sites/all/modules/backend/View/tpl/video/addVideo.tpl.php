@@ -26,6 +26,19 @@
                          <input name="img" type="hidden" id="img" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
                          <input name="img_old" type="hidden" id="img_old" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
                     </div>
+                    <div class="col-lg-12 paddingTop10">
+                        <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadVideoAdvanced(4);">Upload video</a>
+                        <div id="sys_show_video">
+                             <?php 
+                                if(isset($arrItem->video_file) && $arrItem->video_file !=''){
+                                $path = DRUPAL_ROOT.'/uploads/video/'.$arrItem->video_id.'/'.$arrItem->video_file;
+                                if(is_file($path)){
+                            ?>
+                            <a target="_blank" href="<?php echo $base_url.'/uploads/video/'.$arrItem->video_id.'/'.$arrItem->video_file ?>"><?php echo $arrItem->video_file ?></a> <span data="<?php echo $arrItem->video_file ?>" class="remove_file_video">X</span>
+                            <input name="video_file" type="hidden" id="video_file" value="<?php if(isset($arrItem->video_file)){ echo $arrItem->video_file; } ?>">
+                            <?php } }?>
+                        </div>
+                    </div>
                  </div>
 
                  <div class="col-lg-6">
@@ -87,6 +100,35 @@
     </div>
 </div>
 <!--Popup upload ảnh-->
+
+<!--Popup upload video-->
+<div class="modal fade" id="sys_PopupUploadVideoOtherPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabelVideo">Upload Video</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadVideo" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div id="sys_show_button_upload_video">
+                            <div id="sys_mulitplefileuploaderVideo" class="btn btn-primary">Upload Video</div>
+                        </div>
+                        <div id="statusVideo"></div>
+
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_video"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Popup upload video-->
+
 
 <script>
     CKEDITOR.replace('video_content', {height:200});

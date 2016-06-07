@@ -17,7 +17,11 @@ class AjaxUpload{
             case 'upload_image' :
 				$this->upload_image();
 				break;
-            //up anh chen vao noi dung mo ta
+            //upload file ext: video, zar, zip,...
+            case 'upload_ext' :
+                $this->upload_ext();
+                break;
+            //up images insert to content
             case 'upload_image_insert_content' :
 				$this->upload_image_insert_content();
 				break;
@@ -36,8 +40,8 @@ class AjaxUpload{
 		die("Nothing to do...");
 	}
     /*
-     * Upload ?nh news, product
-     * */
+     * Upload image news, product
+    */
 	function upload_image() {
         $id_hiden = FunctionLib::getIntParam('id', 0);
         $type = FunctionLib::getIntParam('type', 1);
@@ -294,5 +298,77 @@ class AjaxUpload{
             $aryData['msg'] = "Data exists!";
             return $aryData;
         }
+    }
+
+    /*
+     * Upload file ext
+    */
+    function upload_ext() {
+        $id_hiden = FunctionLib::getIntParam('id', 0);
+        $type = FunctionLib::getIntParam('type', 1);
+        $dataExt = $_FILES["multipleFileExt"];
+        $aryData = array();
+        $aryData['intIsOK'] = -1;
+        $aryData['msg'] = "Data not exists!";
+        switch( $type ){
+            case 4 ://img video
+                $aryData = $this->uploadExtToFolderOnce($dataExt, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_file', self::$primary_key_video);
+                break;
+            default:
+                break;
+        }
+        echo json_encode($aryData);
+        exit();
+    }
+    function uploadExtToFolderOnce($dataExt, $id_hiden, $table_action, $folder, $field_ext='', $primary_key){
+        global $base_url;
+
+        $aryData = array();
+        $aryData['intIsOK'] = -1;
+        $aryData['msg'] = "Upload ext!";
+        $item_id = 0;
+        if (!empty($dataExt)) {
+            if($id_hiden == 0){
+                if($field_ext == 'video_file'){
+                    $new_row['video_time_creater'] = time();
+                    $new_row['video_status'] = IMAGE_ERROR;
+                }
+                $item_id = DB::insertOneItem($table_action, $new_row);
+            }elseif($id_hiden > 0){
+                $item_id = $id_hiden;
+            }
+
+            $aryError = $tmpImg = array();
+            $file_name = Upload::uploadFile('multipleFileExt',
+                               $_file_ext = 'flv,mp4,3gp,mp3', 
+                               $_max_file_size = 200*1024*1024, 
+                               $_folder = $folder.'/'.$item_id,
+                               $type_json=0);
+            
+            if ($file_name != '' && empty($aryError)) {
+                $tmpFile['name_file'] = $file_name;
+                $tmpFile['id_key'] = rand(10000, 99999);
+                $tmpFile['src'] = $base_url.'/uploads/'.$folder.'/'.$item_id.'/'.$file_name;
+
+                if($field_ext != ''){
+                    $arrItem = DB::getItemById($table_action, $primary_key, array($field_ext), $item_id);
+                    if(!empty($arrItem)){
+                        $path_file = ($arrItem[0]->$field_ext != '')? $arrItem[0]->$field_ext : '';
+                        //Delte file current in db
+                        if($path_file != ''){
+                            $folder_file = 'uploads/'.$folder;
+                            $this->unlinkFileAndFolder($path_file, $item_id, $folder_file, 0);
+                        }
+                    }
+                    $path_file = $file_name;
+                    $new_row[$field_ext] = $path_file;
+                    DB::updateId($table_action, $primary_key, $new_row, $item_id);
+                }
+            }
+            $aryData['intIsOK'] = 1;
+            $aryData['id_item'] = $item_id;
+            $aryData['info'] = $tmpFile;
+        }
+        return $aryData;
     }
 }

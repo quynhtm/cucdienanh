@@ -956,3 +956,9 @@ form#formListItem {
 #sys_drag_sort .div_img_upload img {
     border-bottom: 1px solid #ddd;
 }
+.remove_file_video{
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
