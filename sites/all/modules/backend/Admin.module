@@ -37,8 +37,8 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
     $items["admincp/document"] = array(
-        "title" => t('document'),
-        "description" => "document",
+        "title" => t('Document'),
+        "description" => "Document",
         'page callback' => 'router_page',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,

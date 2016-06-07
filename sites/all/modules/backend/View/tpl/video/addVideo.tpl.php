@@ -7,7 +7,7 @@
 	</div>
 	<div class="page-content-box paddingTop10">
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
-                 <div class="col-lg-6">
+                <div class="col-lg-6">
                     <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Tên video<span>*</span></label>
                          <div><input type="text" class="form-control input-sm" name="video_name" value="<?php if(isset($arrItem->video_name)){ echo $arrItem->video_name; } ?>"></div>
@@ -39,9 +39,9 @@
                             <?php } }?>
                         </div>
                     </div>
-                 </div>
+                </div>
 
-                 <div class="col-lg-6">
+                <div class="col-lg-6">
                      <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Mô tả ngắn</label>
                          <div>

@@ -50,8 +50,9 @@
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%" class="td_list">Tên file</th>
-						<th width="20%" class="td_list">Thuộc danh mục</th>
+						<th width="10%" class="td_list">Thuộc danh mục</th>
 						<th width="5%" class="td_list align_center">Thứ tự</th>
+						<th width="7%" class="td_list align_center">Ngày tạo</th>
 						<th width="5%" class="td_list align_center" >Trạng thái</th>
 						<th width="5%" class="td_list align_center">Action</th>
 					</tr>
@@ -66,6 +67,13 @@
 							<td><?php echo $item->document_name ?></td>
 							<td><?php echo isset($aryCatergoryDocument[$item->document_type])?$aryCatergoryDocument[$item->document_type]:'Chưa rõ'; ?></td>
 							<td class="align_center"><?php echo $item->document_order; ?></td>
+							<td>
+								<?php
+									if($item->document_created > 0){
+										echo date('d-m-Y h:i:s',$item->document_created);
+									}
+								?>
+							</td>
 							<td class="align_center">
 								<?php echo ($item->document_status== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>

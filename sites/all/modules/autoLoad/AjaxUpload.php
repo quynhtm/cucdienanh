@@ -11,6 +11,7 @@ class AjaxUpload{
     static $primary_key_banner = 'banner_id';
     static $primary_key_video = 'video_id';
     static $primary_key_image = 'image_id';
+    static $primary_key_document = 'document_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
@@ -318,8 +319,11 @@ class AjaxUpload{
         $aryData['intIsOK'] = -1;
         $aryData['msg'] = "Data not exists!";
         switch( $type ){
-            case 4 ://img video
+            case 4 ://file video
                 $aryData = $this->uploadExtToFolderOnce($dataExt, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_file', self::$primary_key_video);
+                break;
+            case 5 ://file document
+                $aryData = $this->uploadExtToFolderOnce($dataExt, $id_hiden, TABLE_DOCUMENT, FOLDER_DOCUMENT, 'document_file', self::$primary_key_document);
                 break;
             default:
                 break;
@@ -339,18 +343,32 @@ class AjaxUpload{
                 if($field_ext == 'video_file'){
                     $new_row['video_time_creater'] = time();
                     $new_row['video_status'] = IMAGE_ERROR;
+                }elseif($field_ext == 'document_file'){
+                    $new_row['document_created'] = time();
+                    $new_row['document_status'] = IMAGE_ERROR;
                 }
+
                 $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){
                 $item_id = $id_hiden;
             }
 
             $aryError = $tmpImg = array();
+            
+            if($table_action == TABLE_VIDEO){
+                $_file_ext = 'flv,mp4,3gp,mp3';
+            }elseif($table_action == TABLE_DOCUMENT){
+                $_file_ext = 'xls,xlsx,doc,docx,pdf,rar,zip,tar';
+            }else{
+                $_file_ext = '';
+            }
+
             $file_name = Upload::uploadFile('multipleFileExt',
-                               $_file_ext = 'flv,mp4,3gp,mp3', 
-                               $_max_file_size = 200*1024*1024, 
-                               $_folder = $folder.'/'.$item_id,
-                               $type_json=0);
+                                   $_file_ext, 
+                                   $_max_file_size = 200*1024*1024, 
+                                   $_folder = $folder.'/'.$item_id,
+                                   $type_json=0);
+
             
             if ($file_name != '' && empty($aryError)) {
                 $tmpFile['name_file'] = $file_name;

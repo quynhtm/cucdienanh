@@ -7,6 +7,11 @@ class DocumentController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 
 	public function __construct(){
+		$files = array(
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
+		    );
+		Loader::loadJSExt('Core', $files);
 
         $files = array(
             'bootstrap/css/bootstrap.css',
@@ -38,7 +43,6 @@ class DocumentController{
 		$result = Document::getSearchListItems($dataSearch,$limit,array());
 		$data = $result['data'];
 
-		//FunctionLib::Debug($treeCategroy);
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['document_status']);
 		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, $dataSearch['document_type']);
@@ -58,6 +62,16 @@ class DocumentController{
 
 	function formDocumentAction(){
 		global $base_url,$user;
+		
+		$files = array(
+			'bootstrap/lib/upload/cssUpload.css',
+			'bootstrap/js/bootstrap.min.js',
+			'bootstrap/lib/upload/jquery.uploadfile.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+
+
 		$param = arg();
 		$arrItem = array();
 		$item_id = 0;
@@ -69,14 +83,18 @@ class DocumentController{
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$item_id = FunctionLib::getParam('id', 0);
 			$document_name = FunctionLib::getParam('document_name','');
+			$document_file = trim(FunctionLib::getParam('document_file', ''));
+
 			$dataInput = array(
 				'document_name'=>array('value'=>$document_name, 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
 				'document_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($document_name)),'require'=>0),
 				'document_status'=>array('value'=>FunctionLib::getIntParam('document_status',0)),
 				'document_order'=>array('value'=>FunctionLib::getIntParam('document_order',0)),
 				'document_type'=>array('value'=>FunctionLib::getIntParam('document_type',0)),
-
+				'document_content'=>array('value'=>FunctionLib::getParam('document_content',0)),
+				'document_file'=>array('value'=>$document_file, 'require'=>0),
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'document_meta_title'=>array('value'=>FunctionLib::getParam('document_meta_title',''),'require'=>0),
 				'document_meta_keywords'=>array('value'=>FunctionLib::getParam('document_meta_keywords',''),'require'=>0),
@@ -94,6 +112,14 @@ class DocumentController{
 					drupal_goto($base_url.'/admincp/document/add');
 				}
 			}else{
+				if(isset($arrItem->document_file) && $document_file == '' && $arrItem->document_file !='' && $item_id > 0){
+					//xoa file document
+					$path = PATH_UPLOAD.'/'.FOLDER_DOCUMENT.'/'.$item_id;
+					if(is_file($path.'/'.$arrItem->document_file)){
+						@unlink($path.'/'.$arrItem->document_file);
+					}
+				}
+
 				Document::save($dataInput,$item_id);
 				if(Cache::CACHE_ON){
 					$this->removeCache($item_id);

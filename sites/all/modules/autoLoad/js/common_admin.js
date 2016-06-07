@@ -11,6 +11,7 @@ jQuery(document).ready(function($) {
     });
 
     Common_admin.deleteVideoUpload();
+    Common_admin.deleteDocumentUpload();
 });
 
 var Common_admin = {
@@ -335,7 +336,61 @@ var Common_admin = {
             }
         });
     },
+    /**
+     * Upload document
+    */
+    uploadDocumentAdvanced: function(type) {
+        jQuery('#sys_PopupUploadDocumentOtherPro').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_ext';
+        var id_hiden = document.getElementById('id_hiden').value;
 
+        var settings = {
+            url: urlAjaxUpload,
+            method: "POST",
+            allowedTypes:"xls,xlsx,doc,docx,pdf,rar,zip,tar",
+            fileName: "multipleFileExt",
+            formData: {id: id_hiden,type: type},
+            multiple: false,
+            onSubmit:function(){
+                jQuery( "#sys_show_button_upload_document").hide();
+                jQuery("#statusDocument").html("<font color='green'>Đang upload...</font>");
+            },
+            onSuccess:function(files,xhr,data){
+                dataResult = JSON.parse(xhr);
+                if(dataResult.intIsOK === 1){
+                    //gan lai id item cho id hiden: dung cho them moi, sua item
+                    jQuery('#id_hiden').val(dataResult.id_item);
+                    jQuery( "#sys_show_button_upload_document").show();
+                    //show file
+                    var html = '<a target="_blank" href="' + dataResult.info.src + '">'+dataResult.info.name_file+'</a><span data="'+dataResult.info.name_file+'" class="remove_file_document">X</span>';
+                        html +='<input name="document_file" type="hidden" id="document_file" value="'+dataResult.info.name_file+'">';
+
+                    jQuery('#sys_show_document').html(html);
+                    //onSuccess
+                    jQuery("#statusDocument").html("<font color='green'>Upload is success</font>");
+                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
+                    setTimeout( "jQuery('#statusDocument').hide();",2000 );
+                    setTimeout( "jQuery('#sys_PopupUploadDocumentOtherPro').modal('hide');",2500 );
+
+                    Common_admin.deleteDocumentUpload();
+                }
+            },
+            onError: function(files,status,errMsg){
+                jQuery("#statusDocument").html("<font color='red'>Upload is Failed</font>");
+            }
+        }
+        jQuery("#sys_mulitplefileuploaderDocument").uploadFile(settings);
+    },
+
+    deleteDocumentUpload:function(){
+        jQuery('.remove_file_document').click(function(){
+            if(confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+                jQuery("#sys_show_document").html('');
+                return true;
+            }
+        });
+    },
     checkedImage: function(nameImage,key){
         if (confirm('Bạn có muốn chọn ảnh này làm ảnh đại diện?')) {
             jQuery('#image_primary').val(nameImage);

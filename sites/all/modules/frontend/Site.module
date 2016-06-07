@@ -16,7 +16,7 @@ function Site_menu() {
     );
 
 	//news link
-	$arrCategoryNew = CGlobal::$aryCatergoryNews;
+	$arrCategoryNew = array();
 	foreach($arrCategoryNew as $key => $val){
 		//category
 		$key_cat = $key.'.html';

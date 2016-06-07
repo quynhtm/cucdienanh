@@ -52,7 +52,7 @@ define('FOLDER_BANNER', 'banner');
 define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
 define('FOLDER_IMAGE', 'slide_image');
-
+define('FOLDER_DOCUMENT', 'document');
 //Common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);

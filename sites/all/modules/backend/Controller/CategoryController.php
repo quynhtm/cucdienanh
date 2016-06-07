@@ -133,7 +133,7 @@ class CategoryController{
 		if($cat_id <= $max) {
 			foreach ($aryDataInput as $chk => $chval) {
 				if($chval['category_parent_id'] == $cat_id) {
-					$chval['padding_left'] = '---------- ';
+					$chval['padding_left'] = '----';
 					$chval['category_parent_name'] = $cat_name;
 					$aryData[] = $chval;
 					self::showSubCategory($chval['category_id'],$chval['category_name'], $max, $aryDataInput, $aryData);

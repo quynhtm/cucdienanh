@@ -95,8 +95,10 @@ class SlideImageController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
+			$image_title = FunctionLib::getParam('image_title','');
 			$dataInput = array(
 				'image_title'=>array('value'=>FunctionLib::getParam('image_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
+				'image_title_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($image_title)),'require'=>0),
 				'image_desc_sort'=>array('value'=>FunctionLib::getParam('image_desc_sort','')),
 				'image_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'image_meta_title'=>array('value'=>FunctionLib::getParam('image_meta_title','')),

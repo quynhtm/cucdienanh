@@ -66,9 +66,6 @@ class VideoController{
 			'bootstrap/js/bootstrap.min.js',
 			'bootstrap/lib/upload/jquery.uploadfile.js',
 			'js/common_admin.js',
-
-			'bootstrap/lib/datetimepicker/datetimepicker.css',
-			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);
 		Loader::load('Core', $files);
 
@@ -84,11 +81,12 @@ class VideoController{
 			$item_id = FunctionLib::getParam('id', 0);
 			$video_img = trim(FunctionLib::getParam('img', ''));
 			$video_img_old = trim(FunctionLib::getParam('img_old', ''));
-
 			$video_file = trim(FunctionLib::getParam('video_file', ''));
-			
+			$video_name = FunctionLib::getParam('video_name','');
+
 			$dataInput = array(
 				'video_name'=>array('value'=>FunctionLib::getParam('video_name',''), 'require'=>1, 'messages'=>'Tên Video không được bỏ trống!'),
+				'video_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($video_name)),'require'=>0),
 				'video_link'=>array('value'=>FunctionLib::getParam('video_link','')),
 				'video_img'=>array('value'=>$video_img, 'require'=>0),
 				'video_file'=>array('value'=>$video_file, 'require'=>0),

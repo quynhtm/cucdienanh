@@ -105,6 +105,8 @@ class NewsController{
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
 			$news_category = FunctionLib::getIntParam('news_category',0);
+			$news_title = FunctionLib::getParam('news_title','');
+			
 			$news_type = 0;
 			if($news_category > 0){
 				$inforCategory = DataCommon::getCategoryById($news_category);
@@ -112,6 +114,7 @@ class NewsController{
 			}
 			$dataInput = array(
 				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
+				'news_title_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($news_title)),'require'=>0),
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
 				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
