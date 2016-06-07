@@ -16,6 +16,7 @@ class Cache {
     const VERSION_CACHE = 'ver_1_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
     //cache Category
+    const CACHE_TYPE_ID = 'cache_type_id_';
     const CACHE_CATEGORY_ID = 'cache_category_id_';
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
     const CACHE_LIST_CATEGORY_NEWS = 'cache_list_category_news';
