@@ -10,6 +10,7 @@ class AjaxUpload{
     static $primary_key_product = 'product_id';
     static $primary_key_banner = 'banner_id';
     static $primary_key_video = 'video_id';
+    static $primary_key_image = 'image_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
@@ -49,6 +50,9 @@ class AjaxUpload{
             case 1://img news
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
                 break;
+            case 2://slide ?nh
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_IMAGE, FOLDER_IMAGE, 'image_image_other', self::$primary_key_image);
+                break;
             case 3 ://img banner quang cao
                 $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image', self::$primary_key_banner);
                 break;
@@ -72,6 +76,9 @@ class AjaxUpload{
                 if($field_img_other == 'news_image_other'){
                     $new_row['news_create'] = time();
                     $new_row['news_status'] = IMAGE_ERROR;
+                }elseif($field_img_other == 'image_image_other'){
+                    $new_row['image_create'] = time();
+                    $new_row['image_status'] = IMAGE_ERROR;
                 }
                 elseif($field_img_other == 'banner_image_temp'){
                     $new_row['banner_create_time'] = time();

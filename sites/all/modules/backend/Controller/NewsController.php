@@ -54,7 +54,7 @@ class NewsController{
 				}
 				$value->news_category_alias = 'tin-tuc';
 				if($value->news_category > 0){
-					$value->news_category_alias = isset(CGlobal::$aryNameAliasNews[$value->news_category]) ? CGlobal::$aryNameAliasNews[$value->news_category]: $value->news_category_alias;
+					$value->news_category_alias = '';
 				}
 			}
 		}

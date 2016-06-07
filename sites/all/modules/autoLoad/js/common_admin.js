@@ -181,7 +181,6 @@ var Common_admin = {
         jQuery('.ajax-upload-dragdrop').remove();
         var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image';
         var id_hiden = document.getElementById('id_hiden').value;
-
         var settings = {
             url: urlAjaxUpload,
             method: "POST",

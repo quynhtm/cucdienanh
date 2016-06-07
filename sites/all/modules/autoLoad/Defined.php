@@ -51,6 +51,7 @@ define('FOLDER_DEFAULT', 'img_other');
 define('FOLDER_BANNER', 'banner');
 define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
+define('FOLDER_IMAGE', 'slide_image');
 
 //Common
 define('STASTUS_HIDE', 0);
