@@ -59,7 +59,7 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
      $items["admincp/video"] = array(
-        "title" => t('Video giai tri'),
+        "title" => t('Video'),
         "description" => "banner",
         'page callback' => 'router_page',
         'access callback' => TRUE,
@@ -82,14 +82,14 @@ function Admin_menu() {
 		'type' => MENU_CALLBACK,
 	);
     $items["admincp/banner"] = array(
-        "title" => t('Banner Quang cao'),
+        "title" => t('Banner ads'),
         "description" => "banner",
         'page callback' => 'router_page',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
     $items["admincp/slideimage"] = array(
-        "title" => t('Banner Quang cao'),
+        "title" => t('Slide image'),
         "description" => "banner",
         'page callback' => 'router_page',
         'access callback' => TRUE,

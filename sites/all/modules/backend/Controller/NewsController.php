@@ -49,8 +49,8 @@ class NewsController{
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->news_image) && trim($value->news_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
+					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_IMAGE,60,60);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_IMAGE,300,150);
 				}
 				$value->news_category_alias = 'tin-tuc';
 				if($value->news_category > 0){
