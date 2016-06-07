@@ -725,6 +725,9 @@ div#load_file_ajax_gift .rowprocess p{
     display: inline-block;
     width: 100%;
 }
+.control-label span{
+    color: #ff0000;
+}
 /*media*/
 /*
 @media (max-width: 560px) {
@@ -952,4 +955,10 @@ form#formListItem {
 }
 #sys_drag_sort .div_img_upload img {
     border-bottom: 1px solid #ddd;
+}
+.remove_file_video{
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
 }

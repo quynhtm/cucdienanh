@@ -5,6 +5,13 @@
 class VideoController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	public function __construct(){
+		
+		$files = array(
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
+		    );
+		Loader::loadJSExt('Core', $files);
+
 		$files = array(
 			'bootstrap/css/bootstrap.css',
 			'css/font-awesome.css',
@@ -77,10 +84,14 @@ class VideoController{
 			$item_id = FunctionLib::getParam('id', 0);
 			$video_img = trim(FunctionLib::getParam('img', ''));
 			$video_img_old = trim(FunctionLib::getParam('img_old', ''));
+
+			$video_file = trim(FunctionLib::getParam('video_file', ''));
+			
 			$dataInput = array(
 				'video_name'=>array('value'=>FunctionLib::getParam('video_name',''), 'require'=>1, 'messages'=>'Tên Video không được bỏ trống!'),
-				'video_link'=>array('value'=>FunctionLib::getParam('video_link',''), 'require'=>1, 'messages'=>'Link video không được bỏ trống!'),
+				'video_link'=>array('value'=>FunctionLib::getParam('video_link','')),
 				'video_img'=>array('value'=>$video_img, 'require'=>0),
+				'video_file'=>array('value'=>$video_file, 'require'=>0),
 				'video_status'=>array('value'=>FunctionLib::getParam('video_status',STASTUS_SHOW)),
 				'video_sort_desc'=>array('value'=>FunctionLib::getParam('video_sort_desc','')),
 				'video_content'=>array('value'=>FunctionLib::getParam('video_content','')),
@@ -106,6 +117,14 @@ class VideoController{
 						@unlink($path.'/'.$video_img_old);
 					}
 					FunctionLib::delteImageCacheItem(FOLDER_VIDEO, $item_id);
+				}
+
+				if(isset($arrItem->video_file) && $video_file == '' && $arrItem->video_file !='' && $item_id > 0){
+					//xoa file video
+					$path = PATH_UPLOAD.'/'.FOLDER_VIDEO.'/'.$item_id;
+					if(is_file($path.'/'.$arrItem->video_file)){
+						@unlink($path.'/'.$arrItem->video_file);
+					}
 				}
 
 				//FunctionLib::Debug($dataInput);
