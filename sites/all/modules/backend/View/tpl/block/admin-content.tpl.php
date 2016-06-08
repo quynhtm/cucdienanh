@@ -66,7 +66,7 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý người dùng" href="<?php echo $base_url ?>/admincp/user">
+				<a class="a_control" title="Quản lý người dùng" href="<?php echo $base_url ?>/admincp/users">
 					<div class="boder_admin padding10">
 					<i class="icon-user icon-4x"></i> <br/>Quản lý người dùng
 					</div>

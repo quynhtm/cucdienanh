@@ -28,23 +28,25 @@ define('WEB_SITE', 'Cucdienanh.vn');//suffix link and alt
 
 define('IS_DEV', 1);// 0:local, 1:web
 define('NOT_POST', 'Chưa có bài viết nào...');
-define('SESSION_SHOP_TIME_OUT', 3600);
-
 
 //Tables for website
 define('TABLE_TYPE', 			'web_type');
 define('TABLE_CATEGORY',       	'web_category');
 define('TABLE_NEWS',           	'web_news');
 define('TABLE_COMMENT',         'web_comment');
-
-define('TABLE_CONFIG_INFO',    	'web_config_info');
-define('TABLE_SUPPORT_ONLINE', 	'web_support_online');
-
 define('TABLE_CONTACT',        	'web_contact');
+
 define('TABLE_BANNER',         	'web_banner');
 define('TABLE_VIDEO',			'web_video');
 define('TABLE_DOCUMENT',		'web_document');
 define('TABLE_IMAGE',		    'web_images');
+
+define('TABLE_USERS',		    'users');
+define('TABLE_ROLE',		    'role');
+define('TABLE_USERS_ROLES',		'users_roles');
+
+define('TABLE_CONFIG_INFO',    	'web_config_info');
+define('TABLE_SUPPORT_ONLINE', 	'web_support_online');
 
 //Folder images
 define('FOLDER_DEFAULT', 'img_other');
@@ -53,6 +55,7 @@ define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
 define('FOLDER_IMAGE', 'slide_image');
 define('FOLDER_DOCUMENT', 'document');
+
 //Common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);

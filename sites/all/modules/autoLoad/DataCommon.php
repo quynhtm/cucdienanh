@@ -12,6 +12,9 @@ class DataCommon{
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
 
+	public static $table_users = TABLE_ROLE;
+	public static $table_users_role = TABLE_USERS_ROLES;
+
 	public static function getListCategoryParent(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT;
 		$categoryParent = array();
@@ -241,6 +244,32 @@ class DataCommon{
 			}
 		}
 		return $type;
+	}
+
+	public static function getUsersById($uid = 0){
+		$arrItem = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_UID.$uid;
+		if($uid <= 0) return $arrItem;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$arrItem = $cache->do_get($key_cache);
+		}
+		if( $arrItem == null || empty($arrItem)){
+			$query = db_select(self::$table_users, 'n')
+				->innerjoin(self::$table_users_role, 'r', 'n.rid = r.rid')
+				->condition('n.uid', $uid, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $v){
+					$arrItem = $v;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $arrItem, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $arrItem;
 	}
 	/**
 	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner tr�i, 4 banner ph?i,5: banner trong list s?n ph?m

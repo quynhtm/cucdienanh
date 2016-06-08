@@ -48,7 +48,7 @@ class DocumentController{
 		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, $dataSearch['document_type']);
 
 		return $view = theme('indexDocument',array(
-									'title'=>'Danh sách Document dowload',
+									'title'=>'Quản lý văn bản',
 									'result' => $data,
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

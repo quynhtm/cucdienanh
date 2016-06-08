@@ -8,7 +8,7 @@
 function check_login(){
 	global $user;
 	$isLogin = 0;
-	if( in_array('Administrator', $user->roles) || in_array('Manager', $user->roles) ){
+	if( in_array('Administrator', $user->roles) || in_array('Manager', $user->roles) || in_array('Poster', $user->roles) ){
 		$isLogin = 1;
 	}else{
 		$isLogin = 0;

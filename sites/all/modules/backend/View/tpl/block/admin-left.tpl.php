@@ -27,11 +27,11 @@
             </ul>
         </li>
 
-        <li <?php if($param[1]=='configinfo'|| $param[1]=='supportonline' || $param[1]=='banner' || $param[1]=='user'){?> class="active" <?php } ?>>
+        <li <?php if($param[1]=='configinfo'|| $param[1]=='supportonline' || $param[1]=='banner' || $param[1]=='users'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-folder-open"></i> Quản lý ứng dụng<i class="icon-arrow"></i></a>
             <ul class="sub">
                 <li <?php if($param[1]=='configinfo'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/configinfo"><i class="icon-minus"></i> Quản lý cấu hình chung</a></li>
-                <li <?php if($param[1]=='user'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/user"><i class="icon-minus"></i> Quản lý người dùng</a></li>
+                <li <?php if($param[1]=='user'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/users"><i class="icon-minus"></i> Quản lý người dùng</a></li>
                 <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline"><i class="icon-minus"></i> Quản lý nick hỗ trợ</a></li>
                 <li <?php if($param[1]=='banner'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/banner"><i class="icon-minus"></i> Quản lý quảng cáo</a></li>
             </ul>

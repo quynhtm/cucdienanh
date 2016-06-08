@@ -45,7 +45,7 @@ class ConfiginfoController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
 		return $view = theme('indexConfigInfo',array(
-									'title'=>'Cấu hình chung',
+									'title'=>'Quản lý cấu hình chung',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

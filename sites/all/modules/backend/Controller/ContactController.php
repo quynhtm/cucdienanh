@@ -46,7 +46,7 @@ class ContactController{
 		$optionReason = FunctionLib::getOption($this->arrReason, $dataSearch['contact_reason']);
 
 		return $view = theme('indexContact',array(
-									'title'=>'Danh sách liên hệ',
+									'title'=>'Quản lý danh sách liên hệ',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

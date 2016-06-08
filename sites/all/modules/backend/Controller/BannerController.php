@@ -66,7 +66,7 @@ class BannerController{
 		$optionPage = FunctionLib::getOption($this->arrPage	, $dataSearch['banner_page']);
 		$optionIsShop = FunctionLib::getOption($this->arrIsShop	, $dataSearch['banner_is_shop']);
 		return $view = theme('indexBanner',array(
-									'title'=>'Banner quảng cáo',
+									'title'=>'Quản lý quảng cáo',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

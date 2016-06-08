@@ -48,7 +48,7 @@ class VideoController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['video_status']);
 		return $view = theme('indexVideo',array(
-									'title'=>'Video',
+									'title'=>'Quản lý Video',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

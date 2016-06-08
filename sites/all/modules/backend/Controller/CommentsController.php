@@ -49,7 +49,7 @@ class CommentsController{
 		$optionCommentType = FunctionLib::getOption(array(-1=>'-- Chọn kiểu đối tượng --')+$this->arrCommentType, $dataSearch['comment_type']);
 
 		return $view = theme('indexComments',array(
-									'title'=>'Danh sách liên hệ',
+									'title'=>'Quản lý danh sách comment',
 									'result' => $result['data'],
 									'arrCommentType' => $this->arrCommentType,
 									'dataSearch' => $dataSearch,

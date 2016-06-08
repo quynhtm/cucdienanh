@@ -58,7 +58,7 @@ class SlideImageController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['image_status']);
 		return $view = theme('indexSlideImage',array(
-									'title'=>'Tin tức',
+									'title'=>'Quản lý thư viện ảnh',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

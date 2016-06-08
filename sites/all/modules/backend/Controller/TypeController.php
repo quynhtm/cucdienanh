@@ -37,7 +37,7 @@ class TypeController{
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['type_status']);
 		return $view = theme('indexType',array(
-									'title'=>'Kiểu dữ liệu',
+									'title'=>'Quản lý kiểu dữ liệu',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

@@ -64,7 +64,7 @@ class NewsController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['news_category']);
 		return $view = theme('indexNews',array(
-									'title'=>'Tin tức',
+									'title'=>'Quản lý tin tức',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

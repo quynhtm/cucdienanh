@@ -41,7 +41,7 @@ class SupportonlineController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
 
 		$view = theme('indexSupportOnline',array(
-									'title'=>'Danh sách nick hỗ trợ trực tuyến',
+									'title'=>'Quản lý nick hỗ trợ',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,

@@ -95,6 +95,13 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/users"] = array(
+        "title" => t('Users'),
+        "description" => "Users",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
   return $items;
 }
@@ -179,11 +186,11 @@ function Admin_theme() {
         'indexCategory'         => array('template' => 'View/tpl/category/indexCategory'),
         'addCategory'           => array('template' => 'View/tpl/category/addCategory'),
 
-        //document
+        //Document
         'indexDocument'         => array('template' => 'View/tpl/document/indexDocument'),
         'addDocument'           => array('template' => 'View/tpl/document/addDocument'),
 
-        //lien he
+        //Comments
         'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
         'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
 
@@ -209,7 +216,11 @@ function Admin_theme() {
 
         //Video
         'indexVideo'        => array('template' => 'View/tpl/video/indexVideo'),
-        'addVideo'      => array('template' => 'View/tpl/video/addVideo'), 
+        'addVideo'      => array('template' => 'View/tpl/video/addVideo'),
+
+        //Users
+        'indexUsers'        => array('template' => 'View/tpl/users/indexUsers'),
+        'addUsers'      => array('template' => 'View/tpl/users/addUsers'), 
     );
 }
 
@@ -232,38 +243,33 @@ function Admin_init(){
         //Category
         'Model/Category.php',
         'Controller/CategoryController.php',
-
-        //Category
+        //Document
         'Model/Document.php',
         'Controller/DocumentController.php',
-
         //Comments
         'Model/Comments.php',
         'Controller/CommentsController.php',
-
         //News
         'Model/News.php',
         'Controller/NewsController.php',
-
-        //News
+        //SlideImage
         'Model/SlideImage.php',
         'Controller/SlideImageController.php',
-
         //ConfigInfo
         'Model/ConfigInfo.php',
         'Controller/ConfigInfoController.php',
-
 		//SupportOnline
 		'Model/SupportOnline.php',
 		'Controller/SupportOnlineController.php',
-
         //Banner
         'Model/Banner.php',
         'Controller/BannerController.php',
-
 		//Video
         'Model/Video.php',
-        'Controller/VideoController.php',  
+        'Controller/VideoController.php',
+        //Users
+        'Model/Users.php',
+        'Controller/UsersController.php',
 	);
 	Loader::load('Admin', $files);
 }
