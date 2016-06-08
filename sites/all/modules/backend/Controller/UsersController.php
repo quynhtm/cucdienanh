@@ -103,15 +103,14 @@ class UsersController{
 							$data['pass']['value'] = $hash_pass;
 							unset($data['repass']);
 						}
-
-						$check = Users::getItemByCond($id, $name);
-						if(empty($check)){
-							drupal_set_message('Người dùng này ko tồn tại!', 'error');
-							drupal_goto($base_url.'/admincp/users');
-						}
+					}
+					$check = Users::getItemByCond($id, $name);
+					if(empty($check)){
+						drupal_set_message('Người dùng này ko tồn tại!', 'error');
+						drupal_goto($base_url.'/admincp/users');
 					}
 				}else{//Other
-					if($user->uid == $id){
+					if($user->uid == $id && $user->uid == $name){
 						unset($data['rid']);
 						unset($data['status']);
 
