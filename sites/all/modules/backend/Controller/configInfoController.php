@@ -77,8 +77,9 @@ class ConfiginfoController{
 						'meta_title'=>array('value'=>FunctionLib::getParam('meta_title',''), 'require'=>0, 'messages'=>''),
 						'meta_keywords'=>array('value'=>FunctionLib::getParam('meta_keywords',''), 'require'=>0, 'messages'=>''),
 						'meta_description'=>array('value'=>FunctionLib::getParam('meta_description',''), 'require'=>0, 'messages'=>''),
-						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
 						'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+
+						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
 					);
 
 			$errors = ValidForm::validInputData($data);

@@ -39,6 +39,24 @@
                             <?php } }?>
                         </div>
                     </div>
+                    <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Meta title</label>
+                     <div>
+                         <input type="text" class="form-control input-sm" name="video_meta_title" value="<?php if(isset($arrItem->video_meta_title)){ echo $arrItem->video_meta_title; } ?>">
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Meta keyword</label>
+                     <div>
+                         <textarea name="video_meta_keyword" class="form-control input-sm"><?php if(isset($arrItem->video_meta_keyword)){ echo $arrItem->video_meta_keyword; } ?></textarea>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Meta description</label>
+                     <div>
+                         <textarea name="video_meta_description" class="form-control input-sm"><?php if(isset($arrItem->video_meta_description)){ echo $arrItem->video_meta_description; } ?></textarea>
+                     </div>
+                 </div>
                 </div>
 
                 <div class="col-lg-6">

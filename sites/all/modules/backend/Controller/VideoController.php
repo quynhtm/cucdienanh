@@ -59,7 +59,7 @@ class VideoController{
 	}
 
 	function formVideoAction(){
-		global $base_url;
+		global $base_url, $user;
 
 		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
@@ -94,6 +94,13 @@ class VideoController{
 				'video_sort_desc'=>array('value'=>FunctionLib::getParam('video_sort_desc','')),
 				'video_content'=>array('value'=>FunctionLib::getParam('video_content','')),
 				'video_time_update'=>array('value'=>time()),
+
+				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+				
+				'video_meta_title'=>array('value'=>FunctionLib::getParam('video_meta_title',''),'require'=>0),
+				'video_meta_keyword'=>array('value'=>FunctionLib::getParam('video_meta_keyword',''),'require'=>0),
+				'video_meta_description'=>array('value'=>FunctionLib::getParam('video_meta_description',''),'require'=>0),
 			);
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){

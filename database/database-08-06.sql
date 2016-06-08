@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-06-07 22:30:07
+Date: 2016-06-08 09:46:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -2596,7 +2596,7 @@ CREATE TABLE `sessions` (
 -- Records of sessions
 -- ----------------------------
 INSERT INTO `sessions` VALUES ('1', '4Ma3oFUAZVfpVzD61RoeeA5n6Dd7oZwAwfPcsj88Ouo', '', '127.0.0.1', '1465283302', '0', '');
-INSERT INTO `sessions` VALUES ('1', 'b-DVeFG1UUSRlFLjE4ucY0zRIR6h5HpeQTGxeh05USA', '', '127.0.0.1', '1465313244', '0', '');
+INSERT INTO `sessions` VALUES ('2', 'dpVbrF_yW8UlwV0dkyNARCALZEY975znPaikPA32sxU', '', '127.0.0.1', '1465353827', '0', '');
 INSERT INTO `sessions` VALUES ('1', 'VZOeKNLoCv8cz_MvqZTVN3CdQxAGsY_IuDiPxVU2Bzk', '', '127.0.0.1', '1465287303', '0', '');
 
 -- ----------------------------
@@ -2904,8 +2904,8 @@ CREATE TABLE `users` (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('0', '', '', '', '', '', null, '0', '0', '0', '0', null, '', '0', '', null);
-INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1465313229', '1465287749', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B);
-INSERT INTO `users` VALUES ('2', 'manager', '$S$DjI.XXZ1Iq7LElQHAxBqZDJ1MBDu8iJ6PiXsdmGSxx/f5rkMAuJu', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1462283903', '1462283903', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B);
+INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1465315082', '1465287749', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B);
+INSERT INTO `users` VALUES ('2', 'manager', '$S$DjI.XXZ1Iq7LElQHAxBqZDJ1MBDu8iJ6PiXsdmGSxx/f5rkMAuJu', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1465353827', '1465315164', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B);
 
 -- ----------------------------
 -- Table structure for users_roles
@@ -2944,7 +2944,7 @@ INSERT INTO `variable` VALUES ('cache_lifetime', 0x733A313A2230223B);
 INSERT INTO `variable` VALUES ('clean_url', 0x733A313A2231223B);
 INSERT INTO `variable` VALUES ('comment_page', 0x693A303B);
 INSERT INTO `variable` VALUES ('cron_key', 0x733A34333A226C4C66375F5A3962513061305A7171356E4E7351354E5558594F366C34533477515279507A7062734A356F223B);
-INSERT INTO `variable` VALUES ('cron_last', 0x693A313436353330383532343B);
+INSERT INTO `variable` VALUES ('cron_last', 0x693A313436353334393636343B);
 INSERT INTO `variable` VALUES ('css_js_query_string', 0x733A363A226F386571676D223B);
 INSERT INTO `variable` VALUES ('date_default_timezone', 0x733A31363A22417369612F486F5F4368695F4D696E68223B);
 INSERT INTO `variable` VALUES ('default_nodes_main', 0x733A323A223130223B);
@@ -3019,7 +3019,7 @@ CREATE TABLE `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
 
 -- ----------------------------
 -- Records of watchdog
@@ -3031,6 +3031,7 @@ CREATE TABLE `watchdog` (
 DROP TABLE IF EXISTS `web_banner`;
 CREATE TABLE `web_banner` (
   `banner_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
   `banner_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `banner_image` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `banner_image_temp` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'Lưu image lỗi để sau xóa',
@@ -3176,14 +3177,14 @@ CREATE TABLE `web_document` (
   PRIMARY KEY (`document_id`),
   KEY `status` (`document_status`) USING BTREE,
   KEY `id_parrent` (`document_status`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of web_document
 -- ----------------------------
 INSERT INTO `web_document` VALUES ('1', '187', '10-01-45-07-06-2016-shop.docx', 'Chính sách điện ảnh', 'chinh-sach-dien-anh', '<p>Ch&iacute;nh s&aacute;ch điện ảnh</p>\r\n', '1', '1', '1465294377', '1', '', 'Chính sách điện ảnh', 'Chính sách điện ảnh', 'Chính sách điện ảnh');
 INSERT INTO `web_document` VALUES ('3', '192', '10-09-06-07-06-2016-giao-dien-moi-donghoredep-vn1.xlsx', 'Nghi định', 'nghi-dinh', '<p>Nghi định</p>\r\n', '2', '1', '1465312201', '1', '', 'Nghi định', 'Nghi định', 'Nghi định');
-INSERT INTO `web_document` VALUES ('4', '190', '10-13-09-07-06-2016-shop.docx', 'Nghi định', 'nghi-dinh', '<p>a</p>\r\n', '0', '1', '1465312389', null, '', '', '', '');
+INSERT INTO `web_document` VALUES ('5', '190', '', '1', '1', '<p>1</p>\r\n', '1', '1', '1465353156', '2', '', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for web_images
@@ -3191,23 +3192,25 @@ INSERT INTO `web_document` VALUES ('4', '190', '10-13-09-07-06-2016-shop.docx', 
 DROP TABLE IF EXISTS `web_images`;
 CREATE TABLE `web_images` (
   `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
   `image_title` varchar(255) DEFAULT NULL,
   `image_title_alias` varchar(255) DEFAULT NULL,
   `image_desc_sort` text,
   `image_image` varchar(255) DEFAULT NULL COMMENT 'ảnh đại diện của bài viết',
   `image_image_other` longtext COMMENT 'Lưu ảnh của bài viết',
   `image_status` tinyint(5) DEFAULT NULL,
+  `image_create` int(11) DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
   `image_meta_title` text,
   `image_meta_keyword` text,
   `image_meta_description` text,
-  `image_create` int(11) DEFAULT NULL,
   PRIMARY KEY (`image_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_images
 -- ----------------------------
-INSERT INTO `web_images` VALUES ('2', 'list ảnh demo2', 'list-anh-demo2', 'list ảnh demo2', '02-40-31-07-06-2016-433.jpg', 'a:2:{i:0;s:27:\"02-40-31-07-06-2016-433.jpg\";i:1;s:27:\"02-40-42-07-06-2016-433.jpg\";}', '0', 'list ảnh demo2', 'list ảnh demo2', 'list ảnh demo2', '1465313244');
+INSERT INTO `web_images` VALUES ('2', '2', 'list ảnh demo2', 'list-anh-demo2', 'list ảnh demo2', '02-40-31-07-06-2016-433.jpg', 'a:2:{i:0;s:27:\"02-40-31-07-06-2016-433.jpg\";i:1;s:27:\"02-40-42-07-06-2016-433.jpg\";}', '1', '1465353413', '', 'list ảnh demo2', 'list ảnh demo2', 'list ảnh demo2');
 
 -- ----------------------------
 -- Table structure for web_news
@@ -3215,6 +3218,7 @@ INSERT INTO `web_images` VALUES ('2', 'list ảnh demo2', 'list-anh-demo2', 'lis
 DROP TABLE IF EXISTS `web_news`;
 CREATE TABLE `web_news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
   `news_title` varchar(255) DEFAULT NULL,
   `news_title_alias` varchar(255) DEFAULT NULL,
   `news_desc_sort` text,
@@ -3224,17 +3228,18 @@ CREATE TABLE `web_news` (
   `news_type` tinyint(5) DEFAULT '1' COMMENT 'Kiểu tin',
   `news_category` int(11) DEFAULT NULL,
   `news_status` tinyint(5) DEFAULT NULL,
+  `news_create` int(11) DEFAULT NULL,
+  `language` varchar(255) DEFAULT NULL,
   `news_meta_title` text,
   `news_meta_keyword` text,
   `news_meta_description` text,
-  `news_create` int(11) DEFAULT NULL,
   PRIMARY KEY (`news_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_news
 -- ----------------------------
-INSERT INTO `web_news` VALUES ('1', 'Title tin tức', 'title-tin-tuc', 'Title tin tức', '<p><img src=\"http://project.vn/DienAnh/cucdienanh.vn/image.php?type_dir=news&amp;id=1&amp;width=700&amp;height=700&amp;image=http://project.vn/DienAnh/cucdienanh.vn/uploads/news/1/02-35-21-07-06-2016-433.jpg\" /></p>\r\n', '02-35-21-07-06-2016-433.jpg', 'a:2:{i:0;s:27:\"02-35-21-07-06-2016-433.jpg\";i:1;s:27:\"03-15-51-07-06-2016-433.jpg\";}', '8', '182', '1', '', '', '', '1465312872');
+INSERT INTO `web_news` VALUES ('1', '2', 'Khai mạc đợt phim chào mừng Đại hội Đảng toàn quốc lần thứ XII', 'khai-mac-dot-phim-chao-mung-dai-hoi-dang-toan-quoc-lan-thu-xii', 'Tham dự buổi khai mạc có ông Vương Duy Biên - Thứ trưởng Bộ Văn hóa, Thể thao & Du lịch (VH, TT & DL); ông Vũ Công Hội - Vụ trưởng Vụ Văn hoá - Nghệ thuật, Ban Tuyên giáo TW; bà Ngô Phương Lan - Cục trưởng Cục Điện ảnh; ông Nguyễn Hữu Giới - Chủ tịch công đoàn Bộ VH, TT & DL; ông Nguyễn Danh Dương – Giám đốc Trung tâm chiếu phim Quốc gia và đông đảo khán giả Thủ đô.', '<p>Tham dự buổi khai mạc c&oacute; &ocirc;ng Vương Duy Bi&ecirc;n - Thứ trưởng Bộ Văn h&oacute;a, Thể thao &amp; Du lịch (VH, TT &amp; DL); &ocirc;ng Vũ C&ocirc;ng Hội - Vụ trưởng Vụ Văn ho&aacute; - Nghệ thuật, Ban Tuy&ecirc;n gi&aacute;o TW; b&agrave; Ng&ocirc; Phương Lan - Cục trưởng Cục Điện ảnh; &ocirc;ng Nguyễn Hữu Giới - Chủ tịch c&ocirc;ng đo&agrave;n Bộ VH, TT &amp; DL; &ocirc;ng Nguyễn Danh Dương &ndash; Gi&aacute;m đốc Trung t&acirc;m chiếu phim Quốc gia v&agrave; đ&ocirc;ng đảo kh&aacute;n giả Thủ đ&ocirc;.</p>\r\n\r\n<p><img src=\"http://project.vn/DienAnh/cucdienanh.vn/image.php?type_dir=news&amp;id=1&amp;width=700&amp;height=700&amp;image=http://project.vn/DienAnh/cucdienanh.vn/uploads/news/1/08-53-44-08-06-2016-img9718.jpg\" /></p>\r\n\r\n<p><em>Thứ trưởng Bộ VH, TT &amp; DL Vương Duy Bi&ecirc;n ph&aacute;t biểu tại buổi khai mạc</em></p>\r\n\r\n<p>Trong khu&ocirc;n khổ đợt phim ch&agrave;o mừng Đại hội Đảng to&agrave;n quốc lần thứ XII, kỷ niệm 86 năm ng&agrave;y th&agrave;nh lập Đảng Cộng sản Việt Nam (3/2/1930 &ndash; 3/2/2016) v&agrave; mừng Xu&acirc;n B&iacute;nh Th&acirc;n 2016, đợt phim sẽ diễn ra ở H&agrave; Nội v&agrave; B&igrave;nh Thuận từ ng&agrave;y 18/1 đến ng&agrave;y 5/2.<br />\r\nCũng trong buổi khai mạc, kh&aacute;n giả được thưởng thức bộ phim t&agrave;i liệu Đất nước đổi mới (đạo diễn &ndash; NSƯT Đ&agrave;o Thanh T&ugrave;ng) do c&ocirc;ng ty TNHH MTV H&atilde;ng phim T&agrave;i liệu v&agrave; Khoa học TW sản xuất v&agrave; phim truyện điện ảnh Tr&ecirc;n đỉnh b&igrave;nh y&ecirc;n (đạo diễn &ndash; NSƯT Nguyễn Hữu Mười) do c&ocirc;ng ty Cổ phần phim Truyện I sản xuất. Bộ phim t&agrave;i liệu Đất nước đổi mới đưa đến kh&aacute;n giả c&aacute;i nh&igrave;n tổng qu&aacute;t những chặng đường ph&aacute;t triển, những th&agrave;nh tựu nổi bật m&agrave; đất nước ta đ&atilde; đạt được dưới sự l&atilde;nh đạo của Đảng trong thời kỳ đổi mới v&agrave; hội nhập.</p>\r\n\r\n<p><img src=\"http://project.vn/DienAnh/cucdienanh.vn/image.php?type_dir=news&amp;id=1&amp;width=700&amp;height=700&amp;image=http://project.vn/DienAnh/cucdienanh.vn/uploads/news/1/08-53-54-08-06-2016-img9726.jpg\" /></p>\r\n\r\n<p><em>Thứ trưởng Vương Duy Bi&ecirc;n tặng hoa cho hai đo&agrave;n l&agrave;m phim<br />\r\nĐất nước đổi mới v&agrave; Tr&ecirc;n đỉnh b&igrave;nh y&ecirc;n</em></p>\r\n\r\n<p>B&ecirc;n cạnh những c&acirc;u chuyện dung dị, đời thường, bộ phim điện ảnh Tr&ecirc;n đỉnh b&igrave;nh y&ecirc;n c&ograve;n l&agrave; những trăn trở của nghệ nh&acirc;n d&acirc;n tộc Chăm. Trong c&ocirc;ng cuộc đổi mới v&agrave; hội nhập của đất nước, họ vẫn lu&ocirc;n tr&acirc;n trọng v&agrave; g&igrave;n giữ tinh hoa văn ho&aacute; d&acirc;n tộc được phản &aacute;nh qua những phong tục tập qu&aacute;n của đồng b&agrave;o d&acirc;n tộc Chăm được thể hiện rất hấp dẫn trong phim. Tr&ecirc;n đỉnh b&igrave;nh y&ecirc;n c&ograve;n g&acirc;y x&uacute;c động cho người xem bởi những c&acirc;u chuyện t&igrave;nh y&ecirc;u, t&igrave;nh bạn, t&igrave;nh cảm gia đ&igrave;nh hết sức gần gũi.</p>\r\n\r\n<p><img src=\"http://project.vn/DienAnh/cucdienanh.vn/image.php?type_dir=news&amp;id=1&amp;width=700&amp;height=700&amp;image=http://project.vn/DienAnh/cucdienanh.vn/uploads/news/1/08-54-02-08-06-2016-img9736.jpg\" /></p>\r\n\r\n<p><em>Đạo diễn &ndash; NSƯT Nguyễn Hữu Mười thay mặt đo&agrave;n phim ph&aacute;t biểu tại buổi khai mạc</em></p>\r\n\r\n<p>Trong đợt phim n&agrave;y, nhiều bộ phim do Nh&agrave; nước đặt h&agrave;ng cũng được chiếu phục vụ kh&aacute;n giả tại c&aacute;c địa phương tr&ecirc;n cả nước như: Nh&agrave; ti&ecirc;n tri, Thầu Ch&iacute;n ở Xi&ecirc;m, Những người viết huyền thoại, Đường xuy&ecirc;n rừng, Những đứa con của l&agrave;ng, Giải ph&oacute;ng S&agrave;i G&ograve;n, Đừng đốt, Ng&atilde; ba Đồng Lộc,&hellip;.<br />\r\nBuổi khai mạc đợt phim tại B&igrave;nh Thuận sẽ diễn ra v&agrave;o tối 19/1/2016.<br />\r\nKh&aacute;nh H&ograve;a - Điện ảnh Việt Nam</p>\r\n', '08-53-44-08-06-2016-img9718.jpg', 'a:3:{i:0;s:31:\"08-53-44-08-06-2016-img9718.jpg\";i:1;s:31:\"08-53-54-08-06-2016-img9726.jpg\";i:2;s:31:\"08-54-02-08-06-2016-img9736.jpg\";}', '8', '182', '1', '1465352109', '', 'Khai mạc đợt phim chào mừng Đại hội Đảng toàn quốc lần thứ XII', 'Khai mạc đợt phim chào mừng Đại hội Đảng toàn quốc lần thứ XII', 'Tham dự buổi khai mạc có ông Vương Duy Biên - Thứ trưởng Bộ Văn hóa, Thể thao & Du lịch (VH, TT & DL); ông Vũ Công Hội - Vụ trưởng Vụ Văn hoá - Nghệ thuật');
 
 -- ----------------------------
 -- Table structure for web_support_online
@@ -3291,6 +3296,7 @@ INSERT INTO `web_type` VALUES ('11', '1', 'Thư viện ảnh', 'group_images', '
 DROP TABLE IF EXISTS `web_video`;
 CREATE TABLE `web_video` (
   `video_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
   `video_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `video_name_alias` varchar(255) DEFAULT NULL,
   `video_sort_desc` text CHARACTER SET utf8,
@@ -3302,11 +3308,15 @@ CREATE TABLE `web_video` (
   `video_status` tinyint(5) DEFAULT NULL,
   `video_view` int(11) DEFAULT '0' COMMENT 'lượt view xem video tren site',
   `video_time_creater` int(11) DEFAULT '0',
+  `language` varchar(255) DEFAULT NULL,
   `video_time_update` int(11) DEFAULT '0',
+  `video_meta_title` varchar(255) DEFAULT NULL,
+  `video_meta_keyword` varchar(255) DEFAULT NULL,
+  `video_meta_description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`video_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of web_video
 -- ----------------------------
-INSERT INTO `web_video` VALUES ('1', 'Tên video', 'ten-video', '', '', 'Tên video', '10-24-15-07-06-2016-learn-communication-english.flv', '10-24-00-07-06-2016-433.jpg', null, '1', '0', '1465313040', '1465313086');
+INSERT INTO `web_video` VALUES ('1', '2', 'Tên video', 'ten-video', 'Tên video', '<p>T&ecirc;n video</p>\r\n', 'Tên video', '10-24-15-07-06-2016-learn-communication-english.flv', '10-24-00-07-06-2016-433.jpg', null, '1', '0', '1465313040', '', '1465352692', 'Tên video', 'Tên video', 'Tên video');

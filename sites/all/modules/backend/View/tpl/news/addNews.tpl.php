@@ -87,22 +87,22 @@
                     </select>
                 </div>
             </div>
-             <div class="control-group">
+            <div class="control-group">
                  <label class="control-label">Meta title</label>
                  <div class="controls">
-                     <input type="text" class="form-control input-sm" name="news_meta_title" value="<?php if(isset($arrItem->new_meta_title)){ echo $arrItem->new_meta_title; } ?>">
+                     <input type="text" class="form-control input-sm" name="news_meta_title" value="<?php if(isset($arrItem->news_meta_title)){ echo $arrItem->news_meta_title; } ?>">
                  </div>
              </div>
              <div class="control-group">
                  <label class="control-label">Meta keyword</label>
                  <div class="controls">
-                     <textarea name="news_meta_keyword" class="form-control input-sm"><?php if(isset($arrItem->new_meta_keyword)){ echo $arrItem->new_meta_keyword; } ?></textarea>
+                     <textarea name="news_meta_keyword" class="form-control input-sm"><?php if(isset($arrItem->news_meta_keyword)){ echo $arrItem->news_meta_keyword; } ?></textarea>
                  </div>
              </div>
              <div class="control-group">
                  <label class="control-label">Meta description</label>
                  <div class="controls">
-                     <textarea name="news_meta_description" class="form-control input-sm"><?php if(isset($arrItem->new_meta_description)){ echo $arrItem->new_meta_description; } ?></textarea>
+                     <textarea name="news_meta_description" class="form-control input-sm"><?php if(isset($arrItem->news_meta_description)){ echo $arrItem->news_meta_description; } ?></textarea>
                  </div>
              </div>
             <div class="form-actions">

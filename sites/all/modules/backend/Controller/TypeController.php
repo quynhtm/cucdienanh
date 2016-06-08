@@ -72,8 +72,9 @@ class TypeController{
 						'type_keyword'=>array('value'=>FunctionLib::getParam('type_keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
 						'type_status'=>array('value'=>FunctionLib::getIntParam('type_status',''), 'require'=>0, 'messages'=>''),
 						'type_order'=>array('value'=>FunctionLib::getIntParam('type_order',''), 'require'=>0,),
-						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
 						'type_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+						
+						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
 					);
 
 			$errors = ValidForm::validInputData($data);

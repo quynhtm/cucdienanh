@@ -77,7 +77,7 @@ class NewsController{
 	}
 
 	function formNewsAction(){
-		global $base_url;
+		global $base_url, $user;
 	
 		$param = arg();
 		$arrItem = $arrImageOther = array();
@@ -118,13 +118,17 @@ class NewsController{
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
 				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
-				'news_meta_title'=>array('value'=>FunctionLib::getParam('news_meta_title','')),
-				'news_meta_keyword'=>array('value'=>FunctionLib::getParam('news_meta_keyword','')),
-				'news_meta_description'=>array('value'=>FunctionLib::getParam('news_meta_description','')),
 				'news_status'=>array('value'=>FunctionLib::getIntParam('news_status',0)),
 				'news_category'=>array('value'=> $news_category, 'require'=>1, 'messages'=>'Danh mục tin tức không được bỏ trống!'),
 				'news_create'=>array('value'=>time()),
 				'news_type'=>array('value'=>$news_type),
+				
+				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+				
+				'news_meta_title'=>array('value'=>FunctionLib::getParam('news_meta_title',''),'require'=>0),
+				'news_meta_keyword'=>array('value'=>FunctionLib::getParam('news_meta_keyword',''),'require'=>0),
+				'news_meta_description'=>array('value'=>FunctionLib::getParam('news_meta_description',''),'require'=>0),
 			);
 
 			//lấy lại vị trí sắp xếp của ảnh khác

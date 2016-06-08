@@ -96,11 +96,14 @@ class DocumentController{
 				'document_content'=>array('value'=>FunctionLib::getParam('document_content',0)),
 				'document_file'=>array('value'=>$document_file, 'require'=>0),
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'document_created'=>array('value'=>time(), 'require'=>0),
+
+				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+				
 				'document_meta_title'=>array('value'=>FunctionLib::getParam('document_meta_title',''),'require'=>0),
 				'document_meta_keywords'=>array('value'=>FunctionLib::getParam('document_meta_keywords',''),'require'=>0),
 				'document_meta_description'=>array('value'=>FunctionLib::getParam('document_meta_description',''),'require'=>0),
-				'uid'=>array('value'=>$user->uid, 'require'=>0),
-				'document_created'=>array('value'=>time(), 'require'=>0),
 			);
 
 			$errors = ValidForm::validInputData($dataInput);

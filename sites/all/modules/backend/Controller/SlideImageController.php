@@ -69,7 +69,7 @@ class SlideImageController{
 	}
 
 	function formSlideImageAction(){
-		global $base_url;
+		global $base_url, $user;
 	
 		$param = arg();
 		$arrItem = $arrImageOther = array();
@@ -101,11 +101,15 @@ class SlideImageController{
 				'image_title_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($image_title)),'require'=>0),
 				'image_desc_sort'=>array('value'=>FunctionLib::getParam('image_desc_sort','')),
 				'image_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
+				'image_status'=>array('value'=>FunctionLib::getIntParam('image_status',0)),
+				'image_create'=>array('value'=>time()),
+
+				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+
 				'image_meta_title'=>array('value'=>FunctionLib::getParam('image_meta_title','')),
 				'image_meta_keyword'=>array('value'=>FunctionLib::getParam('image_meta_keyword','')),
 				'image_meta_description'=>array('value'=>FunctionLib::getParam('image_meta_description','')),
-				'image_status'=>array('value'=>FunctionLib::getIntParam('image_status',0)),
-				'image_create'=>array('value'=>time()),
 			);
 
 			//lấy lại vị trí sắp xếp của ảnh khác

@@ -83,6 +83,8 @@ class BannerController{
 	}
 
 	function formBannerAction(){
+		global $base_url, $user;
+
 		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
@@ -93,8 +95,7 @@ class BannerController{
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);
 		Loader::load('Core', $files);
-
-		global $base_url;
+		
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
@@ -122,6 +123,8 @@ class BannerController{
 				'banner_shop_id'=>array('value'=>FunctionLib::getParam('banner_shop_id',0)),
 				'banner_is_shop'=>array('value'=>FunctionLib::getParam('banner_is_shop',BANNER_NOT_SHOP)),
 				'banner_update_time'=>array('value'=>FunctionLib::getParam('banner_update_time',0)),
+
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
 			);
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){

@@ -6,7 +6,7 @@ class News{
 	static $table_action = TABLE_NEWS;
 	static $primary_key = 'news_id';
 	static $arrFields = array('news_id', 'news_title', 'news_desc_sort', 'news_content', 'news_image', 'news_image_other',
-		'news_type', 'news_create', 'news_category', 'news_status');
+		'news_type', 'news_create', 'news_category', 'news_status', 'news_meta_title', 'news_meta_keyword', 'news_meta_description');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all

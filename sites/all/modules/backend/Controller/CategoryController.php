@@ -158,23 +158,21 @@ class CategoryController{
 			$dataInput = array(
 				'category_name'=>array('value'=>$category_name, 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
 				'category_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($category_name)),'require'=>0),
-
 				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
 				'type_id'=>array('value'=>FunctionLib::getParam('type_id',''), 'require'=>1, 'messages'=>'Chưa chọn kiểu chuyên mục!'),
 				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getIntParam('category_order',0)),
+				'category_horizontal'=>array('value'=>FunctionLib::getParam('category_horizontal',STASTUS_HIDE),'require'=>0),
+				'category_vertical'=>array('value'=>FunctionLib::getParam('category_vertical',STASTUS_HIDE),'require'=>0),
+				'category_created'=>array('value'=>time(), 'require'=>0),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
+				'uid'=>array('value'=>$user->uid, 'require'=>0),
+				
 				'category_meta_title'=>array('value'=>FunctionLib::getParam('category_meta_title',''),'require'=>0),
 				'category_meta_keywords'=>array('value'=>FunctionLib::getParam('category_meta_keywords',''),'require'=>0),
 				'category_meta_description'=>array('value'=>FunctionLib::getParam('category_meta_description',''),'require'=>0),
-
-				'category_horizontal'=>array('value'=>FunctionLib::getParam('category_horizontal',STASTUS_HIDE),'require'=>0),
-				'category_vertical'=>array('value'=>FunctionLib::getParam('category_vertical',STASTUS_HIDE),'require'=>0),
-
-				'uid'=>array('value'=>$user->uid, 'require'=>0),
-				'category_created'=>array('value'=>time(), 'require'=>0),
 			);
 
 			$errors = ValidForm::validInputData($dataInput);
