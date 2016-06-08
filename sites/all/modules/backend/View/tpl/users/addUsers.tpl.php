@@ -1,3 +1,4 @@
+<?php global $user; ?>
 <div class="inner-box">
     <div class="page-title-box">
         <div class="wrapper">
