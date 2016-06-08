@@ -2335,8 +2335,9 @@ function user_login_submit($form, &$form_state) {
   if (isset($_GET['destination'])) {
     unset($_GET['destination']);
   }
-  if( in_array('administrator', $user->roles) 
-    || in_array('moderator', $user->roles)){
+  if( in_array('Administrator', $user->roles) 
+    || in_array('Manager', $user->roles)
+    || in_array('Poster', $user->roles)){
     drupal_goto('admincp');
   }else{
     drupal_goto('admincp');
