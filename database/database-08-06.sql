@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2016-06-08 09:46:51
+Date: 2016-06-08 15:58:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -968,11 +968,14 @@ CREATE TABLE `flood` (
   PRIMARY KEY (`fid`),
   KEY `allow` (`event`,`identifier`,`timestamp`),
   KEY `purge` (`expiration`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Flood controls the threshold of events, such as the...';
 
 -- ----------------------------
 -- Records of flood
 -- ----------------------------
+INSERT INTO `flood` VALUES ('1', 'failed_login_attempt_ip', '127.0.0.1', '1465372856', '1465376456');
+INSERT INTO `flood` VALUES ('3', 'failed_login_attempt_ip', '127.0.0.1', '1465373275', '1465376875');
+INSERT INTO `flood` VALUES ('4', 'failed_login_attempt_ip', '127.0.0.1', '1465373286', '1465376886');
 
 -- ----------------------------
 -- Table structure for history
@@ -1638,6 +1641,7 @@ INSERT INTO `menu_router` VALUES ('admincp/news', '', '', '1', 0x613A303A7B7D, '
 INSERT INTO `menu_router` VALUES ('admincp/slideimage', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/slideimage', 'Slide image', 't', '', '', 'a:0:{}', '0', 'banner', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/supportonline', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/supportonline', 'Support online', 't', '', '', 'a:0:{}', '0', 'Support online', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/type', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/type', 'Type', 't', '', '', 'a:0:{}', '0', 'Type', '', '0', '');
+INSERT INTO `menu_router` VALUES ('admincp/users', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/users', 'Users', 't', '', '', 'a:0:{}', '0', 'Users', '', '0', '');
 INSERT INTO `menu_router` VALUES ('admincp/video', '', '', '1', 0x613A303A7B7D, 'router_page', 0x613A303A7B7D, '', '3', '2', '0', '', 'admincp/video', 'Video', 't', '', '', 'a:0:{}', '0', 'banner', '', '0', '');
 INSERT INTO `menu_router` VALUES ('ajax', '', '', '1', 0x613A303A7B7D, 'CoreAjax', 0x613A303A7B7D, '', '1', '1', '0', '', 'ajax', 'Ajax', 't', '', '', 'a:0:{}', '0', 'Ajax', '', '0', '');
 INSERT INTO `menu_router` VALUES ('ajax-action', '', '', '1', 0x613A303A7B7D, 'CoreAjaxAction', 0x613A303A7B7D, '', '1', '1', '0', '', 'ajax-action', 'Ajax action', 't', '', '', 'a:0:{}', '0', 'Ajax action', '', '0', '');
@@ -2567,12 +2571,12 @@ DROP TABLE IF EXISTS `sequences`;
 CREATE TABLE `sequences` (
   `value` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'The value of the sequence.',
   PRIMARY KEY (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Stores IDs.';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Stores IDs.';
 
 -- ----------------------------
 -- Records of sequences
 -- ----------------------------
-INSERT INTO `sequences` VALUES ('4');
+INSERT INTO `sequences` VALUES ('12');
 
 -- ----------------------------
 -- Table structure for sessions
@@ -2596,7 +2600,8 @@ CREATE TABLE `sessions` (
 -- Records of sessions
 -- ----------------------------
 INSERT INTO `sessions` VALUES ('1', '4Ma3oFUAZVfpVzD61RoeeA5n6Dd7oZwAwfPcsj88Ouo', '', '127.0.0.1', '1465283302', '0', '');
-INSERT INTO `sessions` VALUES ('2', 'dpVbrF_yW8UlwV0dkyNARCALZEY975znPaikPA32sxU', '', '127.0.0.1', '1465353827', '0', '');
+INSERT INTO `sessions` VALUES ('9', 'ERxnLxB_ReinuspVUe6_8ZWuX1TlhajsTQ492tCSyQw', '', '127.0.0.1', '1465375721', '0', '');
+INSERT INTO `sessions` VALUES ('9', 'FLi3SCJFl0dfYCj21ot8wk38pCnHdfKQjc8orY1McT8', '', '127.0.0.1', '1465376278', '0', '');
 INSERT INTO `sessions` VALUES ('1', 'VZOeKNLoCv8cz_MvqZTVN3CdQxAGsY_IuDiPxVU2Bzk', '', '127.0.0.1', '1465287303', '0', '');
 
 -- ----------------------------
@@ -2892,6 +2897,7 @@ CREATE TABLE `users` (
   `picture` int(11) NOT NULL DEFAULT '0' COMMENT 'Foreign key: file_managed.fid of user’s picture.',
   `init` varchar(254) DEFAULT '' COMMENT 'E-mail address used for initial account creation.',
   `data` longblob COMMENT 'A serialized array of name value pairs that are related to the user. Any form values posted during user edit are stored and are loaded into the $user object during user_load(). Use of this field is discouraged and it will likely disappear in a future...',
+  `rid` int(11) DEFAULT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `name` (`name`),
   KEY `access` (`access`),
@@ -2903,9 +2909,10 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('0', '', '', '', '', '', null, '0', '0', '0', '0', null, '', '0', '', null);
-INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1465315082', '1465287749', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B);
-INSERT INTO `users` VALUES ('2', 'manager', '$S$DjI.XXZ1Iq7LElQHAxBqZDJ1MBDu8iJ6PiXsdmGSxx/f5rkMAuJu', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1465353827', '1465315164', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B);
+INSERT INTO `users` VALUES ('0', '', '', '', '', '', null, '0', '0', '0', '0', null, '', '0', '', null, null);
+INSERT INTO `users` VALUES ('1', 'admin', '$S$DblqiZ8G3j2KqgWe0jMGknBDo99L3UOoR3o964Rju.fHU78GqRU5', 'nguyenduypt86@gmail.com', '', '', 'filtered_html', '1458142935', '1465375410', '1465375410', '1', 'Asia/Ho_Chi_Minh', '', '0', 'nguyenduypt86@gmail.com', 0x623A303B, '3');
+INSERT INTO `users` VALUES ('2', 'manager', '$S$DRm18osWuUobqzfoCnRaWwBDxETQfe7PVwN1qR9UTYccIQVkySVS', 'pt.soleil@gmail.com', '', '', 'filtered_html', '1458146407', '1465375362', '1465375362', '1', 'Asia/Ho_Chi_Minh', '', '0', 'pt.soleil@gmail.com', 0x623A303B, '4');
+INSERT INTO `users` VALUES ('9', 'poster', '$S$DITkjJ.1oDlrFFMgibAIzozG6KT/X/vIeT7n1y.pa9hV.hPBU6x5', 'systemrv1@gmail.com', '', '', 'filtered_html', '1465375990', '1465376241', '1465375876', '1', 'Asia/Ho_Chi_Minh', '', '0', 'systemrv1@gmail.com', null, '5');
 
 -- ----------------------------
 -- Table structure for users_roles
@@ -2923,6 +2930,7 @@ CREATE TABLE `users_roles` (
 -- ----------------------------
 INSERT INTO `users_roles` VALUES ('1', '3');
 INSERT INTO `users_roles` VALUES ('2', '4');
+INSERT INTO `users_roles` VALUES ('9', '5');
 
 -- ----------------------------
 -- Table structure for variable
@@ -2944,8 +2952,8 @@ INSERT INTO `variable` VALUES ('cache_lifetime', 0x733A313A2230223B);
 INSERT INTO `variable` VALUES ('clean_url', 0x733A313A2231223B);
 INSERT INTO `variable` VALUES ('comment_page', 0x693A303B);
 INSERT INTO `variable` VALUES ('cron_key', 0x733A34333A226C4C66375F5A3962513061305A7171356E4E7351354E5558594F366C34533477515279507A7062734A356F223B);
-INSERT INTO `variable` VALUES ('cron_last', 0x693A313436353334393636343B);
-INSERT INTO `variable` VALUES ('css_js_query_string', 0x733A363A226F386571676D223B);
+INSERT INTO `variable` VALUES ('cron_last', 0x693A313436353337323234363B);
+INSERT INTO `variable` VALUES ('css_js_query_string', 0x733A363A226F38666F3363223B);
 INSERT INTO `variable` VALUES ('date_default_timezone', 0x733A31363A22417369612F486F5F4368695F4D696E68223B);
 INSERT INTO `variable` VALUES ('default_nodes_main', 0x733A323A223130223B);
 INSERT INTO `variable` VALUES ('drupal_http_request_fails', 0x623A303B);
@@ -3019,7 +3027,7 @@ CREATE TABLE `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
+) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='Table that contains logs of all system events.';
 
 -- ----------------------------
 -- Records of watchdog
