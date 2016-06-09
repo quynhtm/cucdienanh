@@ -66,19 +66,20 @@ define('CONTACT_OK', 2);
 define('COMMENT_OK_REPLY', 0);//comment_is_reply
 define('COMMENT_NOT_REPLY', 1);
 
+
+define('BANNER_TYPE_CONTENT_HOME', 1);
+define('BANNER_TYPE_LEFT', 2);
+define('BANNER_TYPE_RIGHT', 3);
+
 define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
+
 define('BANNER_NOT_TARGET_BLANK', 0);
 define('BANNER_TARGET_BLANK', 1);
-define('BANNER_TYPE_HOME_BIG', 1);
-define('BANNER_TYPE_HOME_SMALL', 2);
-define('BANNER_TYPE_HOME_LEFT', 3);
-define('BANNER_TYPE_HOME_RIGHT', 4);
-define('BANNER_TYPE_HOME_LIST', 5);
+
 define('BANNER_PAGE_HOME', 1);
-define('BANNER_PAGE_LIST', 2);
+define('BANNER_PAGE_CATEGORY', 2);
 define('BANNER_PAGE_DETAIL', 3);
-define('BANNER_PAGE_CATEGORY', 4);
 
 //Link nofolow
 define('LINK_NOFOLLOW', 0);

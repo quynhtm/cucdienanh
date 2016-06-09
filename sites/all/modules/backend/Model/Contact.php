@@ -101,7 +101,7 @@ class Contact{
 		//update
 		if($id > 0){
 			self::updateId($data_post, $id);
-			drupal_set_message('Upadate success.');
+			drupal_set_message('Cập nhật thành công.');
 			return true;
 		}
 

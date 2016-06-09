@@ -82,14 +82,14 @@ class Comments{
 		//update
 		if($id > 0){
 			self::updateId($data_post, $id);
-			drupal_set_message('Upadate success.');
+			drupal_set_message('Cập nhật thành công.');
 			return true;
 		}
 		//insert
 		else{
 			$query = self::insert($data_post);
 			if($query){
-				drupal_set_message('Insert success.');
+				drupal_set_message('Thêm mới thành công.');
 				return true;
 			}
 		}

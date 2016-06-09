@@ -63,8 +63,6 @@ class NewsController{
 		global $base_url, $user;
 		
 		$files = array(
-			'bootstrap/lib/ckeditor/ckeditor.js',
-			'bootstrap/lib/ckeditor/config.js',
 			'bootstrap/lib/dragsort/jquery.dragsort.js',
 	    );
 	    Loader::loadJSExt('Core', $files);

@@ -9,16 +9,16 @@ class BannerController{
 	private $arrRel = array(LINK_NOFOLLOW => 'Nofollow', LINK_FOLLOW => 'Follow');
 	
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
-		BANNER_TYPE_HOME_BIG => 'Banner home to',
-		BANNER_TYPE_HOME_SMALL => 'Banner home nhỏ',
-		BANNER_TYPE_HOME_LEFT => 'Banner trái-phải',
-		BANNER_TYPE_HOME_LIST => 'Banner trang list');
+		BANNER_TYPE_CONTENT_HOME => 'Banner nội dung trang chủ',
+		BANNER_TYPE_LEFT => 'Banner trái',
+		BANNER_TYPE_RIGHT => 'Banner phải',
+	);
 
 	private $arrPage = array(-1 => '--Chọn page--',
 		BANNER_PAGE_HOME => 'Page trang chủ',
-		BANNER_PAGE_LIST => 'Page danh sách',
+		BANNER_PAGE_CATEGORY => 'Page danh mục',
 		BANNER_PAGE_DETAIL=> 'Page chi tiết',
-		BANNER_PAGE_CATEGORY => 'Page danh mục');
+	);
 
 	private $arrCategoryParent = array();
 	public function __construct(){
@@ -66,14 +66,15 @@ class BannerController{
 									'title'=>'Quản lý quảng cáo',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
+									
 									'optionStatus' => $optionStatus,
 									'optionTypeBanner' => $optionTypeBanner,
 									'optionPage' => $optionPage,
-									
 									'arrProductStatus' => $this->arrStatus,
 									
 									'arrTypeBanner' => $this->arrTypeBanner,
 									'arrPage' => $this->arrPage,
+									
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));

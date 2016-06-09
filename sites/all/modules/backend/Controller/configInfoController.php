@@ -49,12 +49,7 @@ class ConfiginfoController{
 
 	public function formConfiginfoAction(){
 		global $base_url, $user;
-		$files = array(
-	       'bootstrap/lib/ckeditor/ckeditor.js',
-	       'bootstrap/lib/ckeditor/config.js',
-	    );
-	    Loader::loadJSExt('Core', $files);
-		    
+	
 		$param = arg();
 		$id = 0;
 		$arrOneItem = array();

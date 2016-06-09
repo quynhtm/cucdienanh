@@ -59,12 +59,6 @@ class ContactController{
 	function formContactAction(){
 		global $base_url;
 		
-		$files = array(
-			'bootstrap/lib/ckeditor/ckeditor.js',
-			'bootstrap/lib/ckeditor/config.js',
-		);
-		Loader::loadJSExt('Core', $files);
-
 		$param = arg();
 		$contact = array();
 		$item_id = 0;

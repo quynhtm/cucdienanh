@@ -57,12 +57,7 @@ class DocumentController{
 
 	function formDocumentAction(){
 		global $base_url,$user;
-		$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-		    );
-		Loader::loadJSExt('Core', $files);
-
+	
 		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',

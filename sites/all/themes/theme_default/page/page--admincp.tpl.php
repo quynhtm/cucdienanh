@@ -1,4 +1,12 @@
-<?php global $base_url;?>
+<?php 
+    global $base_url;
+    $param = arg();
+    if(isset($param[2]) && ($param[2]=='edit' || $param[2]=='add')){
+?>
+<script type="text/javascript" src="<?php echo $base_url?>/sites/all/modules/autoLoad/bootstrap/lib/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="<?php echo $base_url?>/sites/all/modules/autoLoad/bootstrap/lib/ckeditor/config.js"></script>
+<?php } ?>
+
 <div class="pageWrapper">
     <?php if ($page['header']){ ?>
     <div class="headerRegion">
