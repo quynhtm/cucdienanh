@@ -6,7 +6,6 @@ class BannerController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrTarget = array(-1 => '--Chọn target link--', BANNER_NOT_TARGET_BLANK => 'Link trên site', BANNER_TARGET_BLANK => 'Mở tab mới');
 	private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
-	private $arrIsShop = array(-1 => '--Tất cả--', BANNER_NOT_SHOP => 'Banner của site', BANNER_IS_SHOP => 'Banner của shop');
 	private $arrRel = array(LINK_NOFOLLOW => 'Nofollow', LINK_FOLLOW => 'Follow');
 	
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
@@ -49,9 +48,7 @@ class BannerController{
 		$dataSearch['banner_id'] = FunctionLib::getIntParam('banner_id', -1);
 		$dataSearch['banner_page'] = FunctionLib::getParam('banner_page', -1);
 		$dataSearch['banner_type'] = FunctionLib::getParam('banner_type', -1);
-		$dataSearch['banner_is_shop'] = FunctionLib::getParam('banner_is_shop', -1);
-		//FunctionLib::Debug($dataSearch);
-
+		
 		$result = Banner::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
@@ -65,7 +62,6 @@ class BannerController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['banner_status']);
 		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, $dataSearch['banner_type']);
 		$optionPage = FunctionLib::getOption($this->arrPage	, $dataSearch['banner_page']);
-		$optionIsShop = FunctionLib::getOption($this->arrIsShop	, $dataSearch['banner_is_shop']);
 		return $view = theme('indexBanner',array(
 									'title'=>'Quản lý quảng cáo',
 									'result' => $result['data'],
@@ -73,9 +69,9 @@ class BannerController{
 									'optionStatus' => $optionStatus,
 									'optionTypeBanner' => $optionTypeBanner,
 									'optionPage' => $optionPage,
-									'optionIsShop' => $optionIsShop,
+									
 									'arrProductStatus' => $this->arrStatus,
-									'arrIsShop' => $this->arrIsShop,
+									
 									'arrTypeBanner' => $this->arrTypeBanner,
 									'arrPage' => $this->arrPage,
 									'base_url' => $base_url,
@@ -120,8 +116,6 @@ class BannerController{
 				'banner_category_id'=>array('value'=>FunctionLib::getParam('banner_category_id',0)),
 				'banner_status'=>array('value'=>FunctionLib::getParam('banner_status',STASTUS_HIDE)),
 				'banner_is_run_time'=>array('value'=>$banner_is_run_time),
-				'banner_shop_id'=>array('value'=>FunctionLib::getParam('banner_shop_id',0)),
-				'banner_is_shop'=>array('value'=>FunctionLib::getParam('banner_is_shop',BANNER_NOT_SHOP)),
 				'banner_update_time'=>array('value'=>FunctionLib::getParam('banner_update_time',0)),
 
 				'uid'=>array('value'=>$user->uid, 'require'=>0),
@@ -158,7 +152,7 @@ class BannerController{
 				//FunctionLib::Debug($dataInput);
 				Banner::save($dataInput, $item_id);
 				if(Cache::CACHE_ON){
-					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$dataInput['banner_type']['value'].'_'.$dataInput['banner_page']['value'].'_'.$dataInput['banner_category_id']['value'].'_'.$dataInput['banner_shop_id']['value'];
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$dataInput['banner_type']['value'].'_'.$dataInput['banner_page']['value'].'_'.$dataInput['banner_category_id']['value'];
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
 				}
@@ -167,7 +161,6 @@ class BannerController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->banner_status) ? $arrItem->banner_status: STASTUS_HIDE);
 		$optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($arrItem->banner_is_run_time) ? $arrItem->banner_is_run_time: BANNER_NOT_RUN_TIME);
-		$optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($arrItem->banner_is_shop) ? $arrItem->banner_is_shop: BANNER_NOT_SHOP);
 		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($arrItem->banner_type) ? $arrItem->banner_type: -1);
 		$optionPage = FunctionLib::getOption($this->arrPage, isset($arrItem->banner_page) ? $arrItem->banner_page: -1);
 		$optionTarget = FunctionLib::getOption($this->arrTarget, isset($arrItem->banner_is_target) ? $arrItem->banner_is_target: BANNER_TARGET_BLANK);
@@ -180,7 +173,6 @@ class BannerController{
 				'title'=>'banner quảng cáo',
 				'optionCategory'=>$optionCategory,
 				'optionTarget'=>$optionTarget,
-				'optionIsShop'=>$optionIsShop,
 				'optionPage'=>$optionPage,
 				'optionTypeBanner'=>$optionTypeBanner,
 				'optionRunTime'=>$optionRunTime,

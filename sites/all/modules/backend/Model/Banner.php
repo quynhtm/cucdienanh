@@ -7,8 +7,8 @@ class Banner{
 	static $primary_key = 'banner_id';
 	static $arrFields = array('banner_id', 'banner_name', 'banner_image',
 		'banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
-		'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop',
-		'banner_shop_id', 'banner_create_time', 'banner_update_time', 'banner_is_rel', 'banner_time_click', 'banner_total_click');
+		'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time',
+		'banner_create_time', 'banner_update_time', 'banner_is_rel', 'banner_time_click', 'banner_total_click');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
@@ -40,11 +40,7 @@ class Banner{
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
-					if($field === 'banner_is_shop' && $value != -1){
-						$sql->condition('i.'.$field, $value, '=');
-						array_push($arrCond, $field.' = '.$value);
-					}
-
+					
 					if($field === 'banner_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');

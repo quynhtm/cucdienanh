@@ -16,10 +16,6 @@
 				<div><select class="form-control input-sm" name="banner_status"><?php echo $optionStatus;?></select></div>
 			</div>
 			<div class="col-lg-3">
-				<label class="control-label">Banner thuộc</label>
-				<div><select class="form-control input-sm" name="banner_is_shop"><?php echo $optionIsShop;?></select></div>
-			</div>
-			<div class="col-lg-3">
 				<label class="control-label">Loại banner</label>
 				<div><select class="form-control input-sm" name="banner_type"><?php echo $optionTypeBanner;?></select></div>
 			</div>
@@ -104,7 +100,6 @@
 								<?php
 									echo '<b>Loại:</b> '.(isset($arrTypeBanner[$item->banner_type])?$arrTypeBanner[$item->banner_type].'<br/>': 'Chưa chọn loại <br/>');
 									echo '<b>Page:</b> '.(isset($arrPage[$item->banner_page])?$arrPage[$item->banner_page].'<br/>': 'Chưa chọn page <br/>');
-									echo '<b>Shop:</b> '.(isset($arrIsShop[$item->banner_is_shop])?$arrIsShop[$item->banner_is_shop].'<br/>': 'Chưa chọn shop <br/>');
 									echo '<b>Danh mục id:</b> '.$item->banner_category_id;
 									echo ($item->banner_total_click > 0)?'<br/><b class="price_sell">'.$item->banner_total_click.' lượt click </b>': '';
 									echo ($item->banner_time_click > 0)?'<span class="font_9"> '. date('d-m-Y h:i:s',$item->banner_time_click).'</span>':'';

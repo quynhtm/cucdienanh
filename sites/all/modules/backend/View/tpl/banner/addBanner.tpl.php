@@ -60,12 +60,6 @@
                          </select>
                      </div>
                      <div class="col-lg-12 paddingTop10">
-                         <label class="control-label">Quảng cáo cho</label>
-                         <select class="form-control input-sm" name="banner_is_shop">
-                             <?php echo $optionIsShop;?>
-                         </select>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Thời gian chạy quảng cáo</label>
                          <select class="form-control input-sm" name="banner_is_run_time">
                              <?php echo $optionRunTime;?>

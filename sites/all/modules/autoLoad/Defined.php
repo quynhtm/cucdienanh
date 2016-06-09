@@ -70,8 +70,6 @@ define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
 define('BANNER_NOT_TARGET_BLANK', 0);
 define('BANNER_TARGET_BLANK', 1);
-define('BANNER_NOT_SHOP', 0);
-define('BANNER_IS_SHOP', 1);
 define('BANNER_TYPE_HOME_BIG', 1);
 define('BANNER_TYPE_HOME_SMALL', 2);
 define('BANNER_TYPE_HOME_LEFT', 3);
@@ -81,21 +79,6 @@ define('BANNER_PAGE_HOME', 1);
 define('BANNER_PAGE_LIST', 2);
 define('BANNER_PAGE_DETAIL', 3);
 define('BANNER_PAGE_CATEGORY', 4);
-
-
-define('NEW_CATEGORY_CUSTOMER', 1);
-define('NEW_CATEGORY_SHOP', 2);
-define('NEW_CATEGORY_GIOI_THIEU', 3);
-define('NEW_CATEGORY_GIAI_TRI', 4);
-define('NEW_CATEGORY_THI_TRUONG', 5);
-define('NEW_CATEGORY_GOC_GIA_DINH', 6);
-define('NEW_CATEGORY_TIN_TUC_CHUNG', 7);
-define('NEW_CATEGORY_QUANG_CAO', 8);
-define('NEW_TYPE_DAC_BIET', 1);// di voi danh muc: 1,2,3
-define('NEW_TYPE_NOI_BAT', 2);// di voi danh muc: 4,5,6,7
-define('NEW_TYPE_TIN_TUC', 3);// di voi danh muc: 4,5,6,7
-define('NEW_TYPE_QUANG_CAO', 4);// di voi danh muc: 8
-
 
 //Link nofolow
 define('LINK_NOFOLLOW', 0);
