@@ -21,19 +21,30 @@
 <div class="bg-menu">
 	<div class="wrapp">
 		<ul>
-			<li><a href="" title="Trang chủ">Trang chủ</a></li>
-			<li><a href="" title="Thông tin hoạt động ngành">Thông tin hoạt động ngành</a></li>
+			<li><a href="<?php echo $base_url ?>" title="Trang chủ">Trang chủ</a></li>
+			<?php 
+				$i=0;
+				foreach($listCategory as $k=>$v){
+					if(!empty($v)){
+						if($v['category_horizontal'] == 1){
+							$i++;
+							if($i <= 6){
+			?>
 			<li>
-				<a href="" title="Phát hành - phổ biến phim">Phát hành - phổ biến phim</a>
+				<a href="<?php echo FunctionLib::buildLinkCategory($v['category_id'], $v['category_name_alias']); ?>" title="<?php echo $v['category_name'] ?>"><?php echo $v['category_name'] ?></a>
+				<?php if( isset($v['sub']) ){?>
 				<ul class="submenu">
-					<li><a href="" title="Thông tin hoạt động ngành">Thông tin hoạt động ngành</a></li>
-					<li><a href="" title="Phát hành - phổ biến phim">Phát hành - phổ biến phim</a></li>
-					<li><a href="" title="Hợp tác quốc tế">Hợp tác quốc tế</a></li>
-					<li><a href="" title="Dịch vụ công">Dịch vụ công</a></li>
+					<?php foreach($v['sub'] as $s){ ?>
+					<li><a href="<?php echo FunctionLib::buildLinkCategory($s['category_id'], $s['category_name_alias']); ?>" title="<?php echo $s['category_name'] ?>"><?php echo $s['category_name'] ?></a></li>
+					<?php } ?>
 				</ul>
+				<?php } ?>
 			</li>
-			<li><a href="" title="Hợp tác quốc tế">Hợp tác quốc tế</a></li>
-			<li><a href="" title="Dịch vụ công">Dịch vụ công</a></li>
+			<?php 			}
+						} 
+				 	}
+				} 
+			?>
 		</ul>
 	</div>
 </div>

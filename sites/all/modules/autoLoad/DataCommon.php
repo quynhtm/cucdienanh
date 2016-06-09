@@ -59,6 +59,25 @@ class DataCommon{
 				foreach($data as $k=>$va){
 					$listCategory[$k] = (array)$va;
 				}
+
+				//Sort data
+				$arrParent = array();
+				foreach($listCategory as $k=>$v){
+					if($v['category_parent_id'] == 0){
+						$arrParent[$k] = $listCategory[$k];
+						unset($listCategory[$k]);
+					}
+				}
+				foreach($arrParent as $key=>$val){
+					foreach($listCategory as $k=>$v){
+						if($val['category_id'] == $v['category_parent_id']){
+							$arrParent[$key]['sub'][] = $listCategory[$k];
+							unset($listCategory[$k]);
+						}
+					}
+				}
+				$listCategory = $arrParent;
+
 				if (Cache::CACHE_ON) {
 					$cache->do_put($key_cache, $listCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}

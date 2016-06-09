@@ -449,44 +449,21 @@ class FunctionLib{
 		return '';
 	}
 
-	public static function buildLinkCategory($shop_id = 0, $shop_name = 'shop', $category_id = 0, $category_name = 'danh muc'){
+	public static function buildLinkCategory($category_id = 0, $category_name_alias = 'danh-muc'){
 		global $base_url;
 		
 		$url = '';
-		if($shop_id > 0 && $category_id > 0 && $category_name !=''){
-			$url = $base_url.'/gian-hang/'.$shop_id.'/c'.$category_id.'/'.self::safe_title($category_name).'.html';
-		}
-		elseif($shop_id > 0 && $shop_name !=''){
-			$url = $base_url.'/gian-hang/'.$shop_id.'/'.self::safe_title($shop_name).'.html';
-		}elseif($category_id > 0 && $category_name !=''){
-			$url = $base_url.'/danh-muc/c'.$category_id.'/'.self::safe_title($category_name).'.html';
+		if($category_id > 0 && $category_name_alias !=''){
+			$url = $base_url.'/'.$category_name_alias.'.html';
 		}
 		return $url;
 	}
 
-	public static function buildLinkDetail($product_id = 0, $product_name = ''){
+	public static function buildLinkDetail($item_id = 0, $cat_name_alias = '', $title_name_alias = ''){
 		global $base_url;
 		$url = '';
-		if($product_id > 0 && $product_name !=''){
-			$url = $base_url.'/san-pham/p'.$product_id.'/'.self::safe_title($product_name).'.html';
-		}
-		return $url;
-	}
-
-	public static function buildLinkNewsDetail($cat_alias='', $news_id = 0, $news_title = ''){
-		global $base_url;
-		$url = '';
-		if($cat_alias !='' && $news_id > 0 && $news_title !=''){
-			$url = $base_url.'/'.$cat_alias.'/t'.$news_id.'/'.self::safe_title($news_title).'.html';
-		}
-		return $url;
-	}
-
-	public static function buildLinkVideoDetail($cat_alias='', $video_id = 0, $video_name = ''){
-		global $base_url;
-		$url = '';
-		if($cat_alias !='' && $video_id > 0 && $video_name !=''){
-			$url = $base_url.'/'.$cat_alias.'/v'.$video_id.'/'.self::safe_title($video_name).'.html';
+		if($item_id > 0 && $cat_name_alias !='' && $title_name_alias !=''){
+			$url = $base_url.'/'.$cat_name_alias.'/'.$title_name_alias.'.html';
 		}
 		return $url;
 	}

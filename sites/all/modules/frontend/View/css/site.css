@@ -99,7 +99,7 @@ a{
 .bg-menu li {
     display: inline-block;
     line-height: 39px;
-    padding-right: 65px;
+    padding-right: 38px;
     position: relative;
 }
 .bg-menu li a{
@@ -117,6 +117,8 @@ a{
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
     display: none;
+    z-index: 2;
+    width: 250px;
 }
 .bg-menu li:hover ul.submenu{
     display: block;

@@ -166,11 +166,6 @@ function Site_init() {
 			'View/css/site.css',
 		);
 		Loader::load('Site', $files);
-
-		$files = array(
-			'View/js/fancySelect.js',
-		);
-		Loader::loadJSExt('Site', $files);
 	}
 }
 
@@ -202,8 +197,8 @@ function page_default(){
 }
 
 function block_header(){
-	
-	return theme('block-header');
+	$listCategory = DataCommon::getListCategoryFull();
+	return theme('block-header', array('listCategory'=>$listCategory));
 }
 function block_slide(){
 	

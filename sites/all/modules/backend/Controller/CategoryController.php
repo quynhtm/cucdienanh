@@ -240,6 +240,7 @@ class CategoryController{
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
 		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
 		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS);
+		$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_FULL);
 		$cache->do_remove($key_cache);
 	}
 }
