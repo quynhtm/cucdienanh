@@ -27,13 +27,6 @@ function Core_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    $items["ajax-action"] = array(
-        "title" => t("Ajax action"),
-        "description" => t("Ajax action"),
-        'page callback' => 'CoreAjaxAction',
-        'access callback' => TRUE,
-        'type' => MENU_CALLBACK,
-    );
   return $items;
 }
 function Core_theme() {
@@ -80,25 +73,6 @@ function CoreAjax(){
     if($action != ''){
         $AjaxUpload = new AjaxUpload();
         $AjaxUpload->playme();
-    }else{
-        echo "Access denied!";die;
-    }
-}
-
-function CoreAjaxAction(){
-    global $base_url;
-
-    if(IS_DEV){
-        Utility::headerReferer();
-        if(!preg_match(AJAX_DOMAIN, $base_url, $Matches)){
-            Utility::pageAccessDenied();
-        }
-    }
-
-    $action = FunctionLib::getParam('act', '');
-    if($action != ''){
-        $AjaxAction = new AjaxAction();
-        $AjaxAction->run($action);
     }else{
         echo "Access denied!";die;
     }

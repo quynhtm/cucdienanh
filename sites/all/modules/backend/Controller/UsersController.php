@@ -10,7 +10,7 @@ class UsersController{
 
 	public function __construct(){
 	
-        $$files = array(
+        $files = array(
 			'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
