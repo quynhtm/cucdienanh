@@ -112,7 +112,7 @@ class BannerController{
 				'banner_name'=>array('value'=>FunctionLib::getParam('banner_name',''), 'require'=>1, 'messages'=>'Tên banner không được bỏ trống!'),
 				'banner_link'=>array('value'=>FunctionLib::getParam('banner_link',''), 'require'=>1, 'messages'=>'Link banner không được bỏ trống!'),
 				'banner_image'=>array('value'=>$banner_image, 'require'=>1, 'messages'=>'Chưa nhập ảnh cho banner quảng cáo!'),
-				'banner_order'=>array('value'=>FunctionLib::getParam('banner_order',1)),
+				'banner_order'=>array('value'=>FunctionLib::getIntParam('banner_order',1)),
 				'banner_is_target'=>array('value'=>FunctionLib::getParam('banner_is_target',BANNER_NOT_TARGET_BLANK)),
 				'banner_is_rel'=>array('value'=>FunctionLib::getParam('banner_is_rel',LINK_NOFOLLOW)),
 				'banner_type'=>array('value'=>FunctionLib::getParam('banner_type',0)),

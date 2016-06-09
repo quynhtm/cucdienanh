@@ -72,8 +72,8 @@ class SupportonlineController{
 						'skyper'=>array('value'=>FunctionLib::getParam('skyper',''), 'require'=>0, 'messages'=>''),
 						'mobile'=>array('value'=>FunctionLib::getParam('mobile',''), 'require'=>0, 'messages'=>''),
 						'email'=>array('value'=>FunctionLib::getParam('email',''), 'require'=>0, 'messages'=>''),
-						'order_no'=>array('value'=>FunctionLib::getParam('order_no',''), 'require'=>0, 'messages'=>''),
-						'status'=>array('value'=>FunctionLib::getParam('status',''), 'require'=>0, 'messages'=>''),
+						'order_no'=>array('value'=>FunctionLib::getIntParam('order_no',''), 'require'=>0, 'messages'=>''),
+						'status'=>array('value'=>FunctionLib::getIntParam('status',''), 'require'=>0, 'messages'=>''),
 						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
 						'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 					);
