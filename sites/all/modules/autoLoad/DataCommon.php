@@ -40,6 +40,33 @@ class DataCommon{
 		return $categoryParent;
 	}
 
+	public static function getListCategoryFull(){
+		
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_FULL;
+
+		$listCategory = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$listCategory = $cache->do_get($key_cache);
+		}
+		if($listCategory == null || empty($listCategory)) {
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->orderBy('category_order', 'ASC')
+				->fields('c', array('category_id', 'category_name', 'category_parent_id', 'category_name_alias', 'category_order', 'category_content_front', 'category_content_front_order', 'category_horizontal', 'category_vertical', 'type_keyword', 'type_id', 'category_meta_title', 'category_meta_keywords', 'category_meta_description'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach($data as $k=>$va){
+					$listCategory[$k] = (array)$va;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $listCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $listCategory;
+	}
+
 	/*
 	 * Build tree chuyen muc
 	 * */
@@ -148,7 +175,6 @@ class DataCommon{
 		}
 		return $typeCategory;
 	}
-
 	public static function getNewsById($news_id = 0){
 		$news = array();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$news_id;
@@ -245,7 +271,6 @@ class DataCommon{
 		}
 		return $type;
 	}
-
 	public static function getUsersById($uid = 0){
 		$arrItem = array();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_UID.$uid;

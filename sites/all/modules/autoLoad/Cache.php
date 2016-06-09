@@ -20,6 +20,7 @@ class Cache {
     const CACHE_CATEGORY_ID = 'cache_category_id_';
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
     const CACHE_LIST_CATEGORY_NEWS = 'cache_list_category_news';
+    const CACHE_LIST_CATEGORY_FULL = 'cache_list_category_full';
 
     //cache Document
     const CACHE_DOCUMENT_ID = 'cache_document_id_';
