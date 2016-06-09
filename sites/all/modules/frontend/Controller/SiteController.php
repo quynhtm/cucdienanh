@@ -7,8 +7,8 @@
 */
 
 class SiteController{
-	public static function searchNews(){
-
-		return theme('pageNewsSearch');
+	public static function getMenuLoad(){
+		echo "Testing...";die;
+		return '';
 	}
 }

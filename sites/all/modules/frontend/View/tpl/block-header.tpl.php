@@ -6,11 +6,11 @@
 		</div>
 		<div class="right-header">
 			<div class="list-lang">
-				<a href="" class="vi">Vi</a>
-				<a href="" class="en">En</a>
+				<a href="<?php echo $base_url.'?lang=vi' ?>" class="vi">Vi</a>
+				<a href="<?php echo $base_url.'?lang=en' ?>" class="en">En</a>
 			</div>
 			<div class="search">
-				<form action="" method="GET">
+				<form action="<?php echo $base_url.'/tim-kiem' ?>" method="GET">
 					<input type="text" placeholder="Search" name="keyword" class="keyword"/>
 					<span class="btnSearch">Tìm kiếm</span>
 				</form>
