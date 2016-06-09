@@ -233,43 +233,45 @@ function Admin_permission() {
 }
 
 function Admin_init(){
-	
-	$files = array(
-        //Block
-		'Controller/BlockController.php',
-        //Type
-        'Model/Type.php',
-        'Controller/TypeController.php',
-        //Category
-        'Model/Category.php',
-        'Controller/CategoryController.php',
-        //Document
-        'Model/Document.php',
-        'Controller/DocumentController.php',
-        //Comments
-        'Model/Comments.php',
-        'Controller/CommentsController.php',
-        //News
-        'Model/News.php',
-        'Controller/NewsController.php',
-        //SlideImage
-        'Model/SlideImage.php',
-        'Controller/SlideImageController.php',
-        //ConfigInfo
-        'Model/ConfigInfo.php',
-        'Controller/ConfigInfoController.php',
-		//SupportOnline
-		'Model/SupportOnline.php',
-		'Controller/SupportOnlineController.php',
-        //Banner
-        'Model/Banner.php',
-        'Controller/BannerController.php',
-		//Video
-        'Model/Video.php',
-        'Controller/VideoController.php',
-        //Users
-        'Model/Users.php',
-        'Controller/UsersController.php',
-	);
-	Loader::load('Admin', $files);
+	$uri = request_uri();
+    if(preg_match("/admincp/", $uri) != 0){
+    	$files = array(
+            //Block
+    		'Controller/BlockController.php',
+            //Type
+            'Model/Type.php',
+            'Controller/TypeController.php',
+            //Category
+            'Model/Category.php',
+            'Controller/CategoryController.php',
+            //Document
+            'Model/Document.php',
+            'Controller/DocumentController.php',
+            //Comments
+            'Model/Comments.php',
+            'Controller/CommentsController.php',
+            //News
+            'Model/News.php',
+            'Controller/NewsController.php',
+            //SlideImage
+            'Model/SlideImage.php',
+            'Controller/SlideImageController.php',
+            //ConfigInfo
+            'Model/ConfigInfo.php',
+            'Controller/ConfigInfoController.php',
+    		//SupportOnline
+    		'Model/SupportOnline.php',
+    		'Controller/SupportOnlineController.php',
+            //Banner
+            'Model/Banner.php',
+            'Controller/BannerController.php',
+    		//Video
+            'Model/Video.php',
+            'Controller/VideoController.php',
+            //Users
+            'Model/Users.php',
+            'Controller/UsersController.php',
+    	);
+    	Loader::load('Admin', $files);
+    }
 }

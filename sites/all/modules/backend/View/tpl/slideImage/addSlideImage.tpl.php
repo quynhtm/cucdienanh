@@ -41,7 +41,7 @@
                                                <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
                                         onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
                                         <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
-                                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->image_id)){ echo $arrItem->image_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+                                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->image_id)){ echo $arrItem->image_id; } ?>','<?php echo $v ?>','2');">Xóa ảnh</a>
                                         <span style="display: none"><b><?php echo $k ?></b></span>
                                     </div>
                                     <?php
@@ -65,7 +65,12 @@
                     <textarea name="image_desc_sort"><?php if(isset($arrItem->image_desc_sort)){ echo $arrItem->image_desc_sort; } ?></textarea>
                 </div>
             </div>
-
+            <div class="control-group">
+                <label class="control-label">Nội dung</label>
+                <div class="controls">
+                    <textarea name="image_content" class="form-control input-sm"><?php if(isset($arrItem->image_content)){ echo $arrItem->image_content; } ?></textarea>
+                </div>
+            </div>
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
@@ -170,4 +175,7 @@
         var data = jQuery("#sys_drag_sort li div span").map(function() { return jQuery(this).children().html(); }).get();
         jQuery("input[name=list1SortOrder]").val(data.join(","));
     };
+</script>
+<script>
+    CKEDITOR.replace('image_content', {height:500});
 </script>

@@ -16,13 +16,14 @@ class CategoryController{
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
-            'js/common_admin.js',
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
         );
         Loader::load('Core', $files);
 
         $files = array(
         	'View/css/admin.css',
-            'View/js/admin.js',
+			'View/js/admin.js',
         );
         Loader::load('Admin', $files);
 	}

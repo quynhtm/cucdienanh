@@ -1,14 +1,4 @@
 /*site*/
-body{
-    overflow-x: hidden;
-    background: #fff url(../img/bg.png) repeat 0 0;
-    position: relative;
-}
-a{
-    color: #fff;
-    outline: medium none;
-    text-decoration: none;
-}
 .header-top{
     height: 150px;
     background: #008fe6 url(../img/bg-firm-header.png) no-repeat top right;

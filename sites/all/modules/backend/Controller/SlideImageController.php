@@ -7,32 +7,20 @@ class SlideImageController{
 	private $arrCategoryNew = array();
 
 	public function __construct(){
-		
-			$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-				'bootstrap/lib/dragsort/jquery.dragsort.js',
-		    );
-		    Loader::loadJSExt('Core', $files);
+		$files = array(
+			'bootstrap/css/bootstrap.css',
+            'css/font-awesome.css',
+            'css/core.css',
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 
-	        $files = array(
-	            'bootstrap/lib/upload/cssUpload.css',
-	            'bootstrap/css/bootstrap.css',
-	            'css/font-awesome.css',
-	            'css/core.css',
-	            
-	            'bootstrap/js/bootstrap.min.js',
-	            'bootstrap/lib/upload/jquery.uploadfile.js',
-	            'js/common_admin.js',
-
-	        );
-	        Loader::load('Core', $files);
-
-	        $files = array(
-	        	'View/css/admin.css',
-	            'View/js/admin.js',
-	        );
-	        Loader::load('Admin', $files);
 		$aryCatergoryNews = DataCommon::getListCategoryNews();
 		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + $aryCatergoryNews;
 	}
@@ -70,7 +58,21 @@ class SlideImageController{
 
 	function formSlideImageAction(){
 		global $base_url, $user;
-	
+		
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+			'bootstrap/lib/dragsort/jquery.dragsort.js',
+	    );
+		Loader::loadJSExt('Core', $files);
+
+		$files = array(
+            'bootstrap/lib/upload/cssUpload.css',
+            'bootstrap/js/bootstrap.min.js',
+            'bootstrap/lib/upload/jquery.uploadfile.js',
+        );
+        Loader::load('Core', $files);
+
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
@@ -79,7 +81,7 @@ class SlideImageController{
 			$item_id = (int)$param[3];
 			$arrItem = SlideImage::getItemById(array(), $item_id);
 
-			//lấy mảng ảnh khách của item để chèn vào nội dung
+			//lấy mảng ảnh khác của item để chèn vào nội dung
 			if(!empty($arrItem)){
 				if(isset($arrItem->image_image_other) && trim($arrItem->image_image_other) != ''){
 					$arrOther = unserialize($arrItem->image_image_other);
@@ -100,6 +102,7 @@ class SlideImageController{
 				'image_title'=>array('value'=>FunctionLib::getParam('image_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
 				'image_title_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($image_title)),'require'=>0),
 				'image_desc_sort'=>array('value'=>FunctionLib::getParam('image_desc_sort','')),
+				'image_content'=>array('value'=>FunctionLib::getParam('image_content',0)),
 				'image_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'image_status'=>array('value'=>FunctionLib::getIntParam('image_status',0)),
 				'image_create'=>array('value'=>time()),

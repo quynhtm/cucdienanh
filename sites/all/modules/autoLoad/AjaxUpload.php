@@ -204,6 +204,17 @@ class AjaxUpload{
                     }
                 }
                 break;
+            case 2:// thu vien anh
+                $folder_image = 'uploads/'.FOLDER_IMAGE;
+                $table_action = TABLE_IMAGE;
+                if($id > 0 && $nameImage != '' && $folder_image != ''){
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_image, $id, 'image_image_other', $nameImage, $folder_image);
+                    if($delete_action == 1){
+                        $aryData['intIsOK'] = 1;
+                        $aryData['msg'] = "Remove Img!";
+                    }
+                }
+                break;
 
             default:
                 $folder_image = '';

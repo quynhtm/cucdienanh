@@ -7,15 +7,10 @@ class VideoController{
 	public function __construct(){
 		
 		$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-		    );
-		Loader::loadJSExt('Core', $files);
-
-		$files = array(
 			'bootstrap/css/bootstrap.css',
-			'css/font-awesome.css',
-			'css/core.css',
+            'css/font-awesome.css',
+            'css/core.css',
+            'js/jquery.alerts.js',
 			'js/common_admin.js',
 		);
 		Loader::load('Core', $files);
@@ -24,6 +19,7 @@ class VideoController{
 			'View/js/admin.js',
 		);
 		Loader::load('Admin', $files);
+
 	}
 
 	function indexVideo(){
@@ -60,14 +56,17 @@ class VideoController{
 
 	function formVideoAction(){
 		global $base_url, $user;
-
 		$files = array(
-			'bootstrap/lib/upload/cssUpload.css',
-			'bootstrap/js/bootstrap.min.js',
-			'bootstrap/lib/upload/jquery.uploadfile.js',
-			'js/common_admin.js',
-		);
-		Loader::load('Core', $files);
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
+		    );
+		Loader::loadJSExt('Core', $files);
+		$files = array(
+            'bootstrap/lib/upload/cssUpload.css',
+            'bootstrap/js/bootstrap.min.js',
+            'bootstrap/lib/upload/jquery.uploadfile.js',
+        );
+        Loader::load('Core', $files);
 
 		
 		$param = arg();

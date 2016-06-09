@@ -25,8 +25,9 @@ class BannerController{
 	public function __construct(){
 		$files = array(
 			'bootstrap/css/bootstrap.css',
-			'css/font-awesome.css',
-			'css/core.css',
+            'css/font-awesome.css',
+            'css/core.css',
+            'js/jquery.alerts.js',
 			'js/common_admin.js',
 		);
 		Loader::load('Core', $files);
@@ -89,8 +90,7 @@ class BannerController{
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
 			'bootstrap/lib/upload/jquery.uploadfile.js',
-			'js/common_admin.js',
-
+			
 			'bootstrap/lib/datetimepicker/datetimepicker.css',
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);

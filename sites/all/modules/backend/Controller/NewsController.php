@@ -7,32 +7,21 @@ class NewsController{
 	private $arrCategoryNew = array();
 
 	public function __construct(){
-		
-			$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-				'bootstrap/lib/dragsort/jquery.dragsort.js',
-		    );
-		    Loader::loadJSExt('Core', $files);
 
-	        $files = array(
-	            'bootstrap/lib/upload/cssUpload.css',
-	            'bootstrap/css/bootstrap.css',
-	            'css/font-awesome.css',
-	            'css/core.css',
-	            
-	            'bootstrap/js/bootstrap.min.js',
-	            'bootstrap/lib/upload/jquery.uploadfile.js',
-	            'js/common_admin.js',
+		$files = array(
+			'bootstrap/css/bootstrap.css',
+            'css/font-awesome.css',
+            'css/core.css',
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 
-	        );
-	        Loader::load('Core', $files);
-
-	        $files = array(
-	        	'View/css/admin.css',
-	            'View/js/admin.js',
-	        );
-	        Loader::load('Admin', $files);
 		$aryCatergoryNews = DataCommon::getListCategoryNews('group_news');
 		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + $aryCatergoryNews;
 	}
@@ -52,15 +41,9 @@ class NewsController{
 					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
 					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
 				}
-				$value->news_category_alias = 'tin-tuc';
-				if($value->news_category > 0){
-					$value->news_category_alias = '';
-				}
 			}
 		}
 
-		//FunctionLib::Debug($result['data']);
-		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['news_category']);
 		return $view = theme('indexNews',array(
@@ -78,7 +61,21 @@ class NewsController{
 
 	function formNewsAction(){
 		global $base_url, $user;
-	
+		
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+			'bootstrap/lib/dragsort/jquery.dragsort.js',
+	    );
+	    Loader::loadJSExt('Core', $files);
+
+	    $files = array(
+            'bootstrap/lib/upload/cssUpload.css',
+            'bootstrap/js/bootstrap.min.js',
+            'bootstrap/lib/upload/jquery.uploadfile.js',
+        );
+        Loader::load('Core', $files);
+
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;

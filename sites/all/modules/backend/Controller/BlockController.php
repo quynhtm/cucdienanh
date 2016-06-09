@@ -27,14 +27,14 @@ function blockAdminLeft(){
     return $view;
 }
 function blockAdminContent(){
-   
     $files = array(
         'bootstrap/css/bootstrap.css',
         'css/font-awesome.css',
         'css/core.css',
+        'js/jquery.alerts.js',
+        'js/common_admin.js',
     );
     Loader::load('Core', $files);
-
     $files = array(
         'View/css/admin.css',
         'View/js/admin.js',

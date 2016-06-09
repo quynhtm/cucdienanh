@@ -8,23 +8,20 @@ class ContactController{
 	private $arrReason = array(-1 => 'Tất cả', CONTACT_REASON_CUSTOMER => 'Khách hàng gửi', CONTACT_REASON_SHOP => 'Shop gửi');
 
 	public function __construct(){
-		$files = array(
-			'bootstrap/lib/ckeditor/ckeditor.js',
-			'bootstrap/lib/ckeditor/config.js',
-		);
-		Loader::loadJSExt('Core', $files);
-        $files = array(
-            'bootstrap/css/bootstrap.css',
+		
+       $files = array(
+			'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
-        );
-        Loader::load('Core', $files);
-
-        $files = array(
-        	'View/css/admin.css',
-            'View/js/admin.js',
-        );
-        Loader::load('Admin', $files);
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 	}
 
 	function indexContact(){
@@ -61,6 +58,13 @@ class ContactController{
 
 	function formContactAction(){
 		global $base_url;
+		
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+		);
+		Loader::loadJSExt('Core', $files);
+
 		$param = arg();
 		$contact = array();
 		$item_id = 0;

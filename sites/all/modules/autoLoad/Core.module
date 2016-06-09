@@ -54,16 +54,7 @@ function Core_permission() {
 require_once 'autoload.php';
 
 function Core_init(){
-    $uri = request_uri();
-    if(preg_match("/(\/admin)/", $uri)==0){
-        $files = array(
-            'bootstrap/css/bootstrap.css',
-            'css/font-awesome.css',
-            'css/core.css',
-            'js/jquery.alerts.js'
-        );
-        Loader::load('Core', $files);
-    }
+    
 }
 function page_403(){
 

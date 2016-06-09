@@ -7,12 +7,7 @@ class DocumentController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 
 	public function __construct(){
-		$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-		    );
-		Loader::loadJSExt('Core', $files);
-
+		
         $files = array(
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
@@ -62,15 +57,18 @@ class DocumentController{
 
 	function formDocumentAction(){
 		global $base_url,$user;
-		
+		$files = array(
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
+		    );
+		Loader::loadJSExt('Core', $files);
+
 		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
 			'bootstrap/lib/upload/jquery.uploadfile.js',
-			'js/common_admin.js',
 		);
 		Loader::load('Core', $files);
-
 
 		$param = arg();
 		$arrItem = array();
@@ -93,6 +91,7 @@ class DocumentController{
 				'document_status'=>array('value'=>FunctionLib::getIntParam('document_status',0)),
 				'document_order'=>array('value'=>FunctionLib::getIntParam('document_order',0)),
 				'document_type'=>array('value'=>FunctionLib::getIntParam('document_type',0)),
+				'document_desc_sort'=>array('value'=>FunctionLib::getParam('document_desc_sort',0)),
 				'document_content'=>array('value'=>FunctionLib::getParam('document_content',0)),
 				'document_file'=>array('value'=>$document_file, 'require'=>0),
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),

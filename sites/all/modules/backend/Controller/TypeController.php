@@ -10,18 +10,18 @@ class TypeController{
 	public function __construct(){
 	
         $files = array(
-            'bootstrap/css/bootstrap.css',
+			'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
-            'js/common_admin.js',
-        );
-        Loader::load('Core', $files);
-
-        $files = array(
-        	'View/css/admin.css',
-            'View/js/admin.js',
-        );
-        Loader::load('Admin', $files);
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 	}
 
 	public function indexType(){
@@ -49,13 +49,7 @@ class TypeController{
 
 	public function formTypeAction(){
 		global $base_url, $user;
-
-		$files = array(
-	       'bootstrap/lib/ckeditor/ckeditor.js',
-	       'bootstrap/lib/ckeditor/config.js',
-	    );
-	    Loader::loadJSExt('Core', $files);
-
+		
 		$param = arg();
 		$id = 0;
 		$arrItem = array();

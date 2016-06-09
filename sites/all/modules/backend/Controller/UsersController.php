@@ -10,19 +10,20 @@ class UsersController{
 
 	public function __construct(){
 	
-        $files = array(
-            'bootstrap/css/bootstrap.css',
+        $$files = array(
+			'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
-            'js/common_admin.js',
-        );
-        Loader::load('Core', $files);
+            'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 
-        $files = array(
-        	'View/css/admin.css',
-            'View/js/admin.js',
-        );
-        Loader::load('Admin', $files);
 	}
 
 	public function indexUsers(){

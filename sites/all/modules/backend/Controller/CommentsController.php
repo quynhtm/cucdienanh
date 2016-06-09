@@ -7,26 +7,19 @@ class CommentsController{
 	private $arrReply = array(-1 => 'Tất cả', COMMENT_OK_REPLY => 'Đã trả lời', COMMENT_NOT_REPLY => 'Chưa trả lời');
 	private $arrCommentType = array();
 	public function __construct(){
-			$files = array(
-				'bootstrap/lib/ckeditor/ckeditor.js',
-				'bootstrap/lib/ckeditor/config.js',
-		    );
-		    Loader::loadJSExt('Core', $files);
-	        $files = array(
-	            'bootstrap/css/bootstrap.css',
-	            'css/font-awesome.css',
-	            'css/core.css',
-	            
-	            'bootstrap/js/bootstrap.min.js',
-	            'bootstrap/lib/upload/jquery.uploadfile.js',
-	            'js/common_admin.js',
-	        );
-	        Loader::load('Core', $files);
-	        $files = array(
-	        	'View/css/admin.css',
-	            'View/js/admin.js',
-	        );
-	        Loader::load('Admin', $files);
+        $files = array(
+			'bootstrap/css/bootstrap.css',
+	        'css/font-awesome.css',
+	        'css/core.css',
+	        'js/jquery.alerts.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 		$this->arrCommentType = CGlobal::$arrCommentType;
 	}
 

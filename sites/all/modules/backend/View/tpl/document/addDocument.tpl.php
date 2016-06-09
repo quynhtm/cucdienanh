@@ -22,6 +22,12 @@
                 </div>
             </div>
             <div class="control-group">
+                <label class="control-label">Mô tả ngắn</label>
+                <div class="controls">
+                    <textarea name="document_desc_sort" class="form-control input-sm"><?php if(isset($arrItem->document_desc_sort)){ echo $arrItem->document_desc_sort; } ?></textarea>
+                </div>
+            </div>
+            <div class="control-group">
                 <label class="control-label">Nội dung</label>
                 <div class="controls">
                     <textarea name="document_content" class="form-control input-sm"><?php if(isset($arrItem->document_content)){ echo $arrItem->document_content; } ?></textarea>
