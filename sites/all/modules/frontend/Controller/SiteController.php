@@ -20,7 +20,15 @@ class SiteController{
 		$result = DataCommon::getBannerAds(BANNER_TYPE_RIGHT, 100);
 		return $result;
 	}
-
+	public static function blockRightVideo(){
+		$files = array(
+            '/bootstrap/lib/flvplayer/swfobject.js',
+			'/bootstrap/lib/flvplayer/video.js',
+		);
+		Loader::load('Core', $files);
+		$result = DataCommon::getListVideoHot(10);
+		return $result;
+	}
 	public static function getMenuLoad(){
 		global $base_url;
 		$param = arg();

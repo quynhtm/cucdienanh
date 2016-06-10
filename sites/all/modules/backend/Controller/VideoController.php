@@ -68,7 +68,6 @@ class VideoController{
         );
         Loader::load('Core', $files);
 
-		
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
@@ -138,6 +137,7 @@ class VideoController{
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_VIDEO_ID.$item_id;
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_VIDEO_HOT);
 				}
 				drupal_goto($base_url.'/admincp/video');
 			}

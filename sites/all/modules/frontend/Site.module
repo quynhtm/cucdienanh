@@ -305,7 +305,8 @@ function block_left_banner(){
 
 //Right
 function block_right_video(){
-	return theme('block-right-video');
+	$listVideoHot = SiteController::blockRightVideo();
+	return theme('block-right-video', array('listVideoHot'=>$listVideoHot));
 }
 function block_right_document(){
 	$listCategory = DataCommon::getListCategoryFull();

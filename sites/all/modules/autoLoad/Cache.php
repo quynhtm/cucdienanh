@@ -25,17 +25,18 @@ class Cache {
     //cache Document
     const CACHE_DOCUMENT_ID = 'cache_document_id_';
 
-    //cache type chuyen m?c
+    //cache type
     const CACHE_LIST_TYPE_CATEGORY = 'cache_list_type_category';
 
     //cache banner
     const CACHE_BANNER_ADVANCED = 'cache_banner_advanced_';
 
-    //cacheNew
+    //cache news
     const CACHE_NEWS_CATEGORY = 'cache_news_category_';
     const CACHE_NEWS_ID = 'cache_news_id_';
 
     //cache video
+    const CACHE_VIDEO_HOT = 'cache_video_hot';
     const CACHE_VIDEO_ID = 'cache_video_id_';
     
     //cache user id

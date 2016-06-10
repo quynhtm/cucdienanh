@@ -352,4 +352,43 @@ class DataCommon{
 		return $bannerAdvanced;
 	}
 
+	public static function getListVideoHot($limit=0){
+		$videoHot = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$videoHot = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_VIDEO_HOT);
+		}
+		if($videoHot == null || empty($videoHot)) {
+			$arrFields = array('video_id', 'video_name', 'video_link', 'video_status', 'video_hot',
+								'video_view', 'video_time_creater', 'video_time_update','video_sort_desc','video_content',
+								'video_img','video_file','video_meta_title','video_meta_keyword','video_meta_description');
+
+			$query = db_select(self::$table_video, 'c')
+				->condition('c.video_status', STASTUS_SHOW, '=')
+				->condition('c.video_hot', STASTUS_SHOW, '=')
+
+				->condition('c.video_file', '', '<>')
+				->condition('c.video_img', '', '<>')
+				
+				->orderBy('video_id', 'DESC')
+				->fields('c', $arrFields);
+				
+				if($limit > 0){
+					$query->range(0, $limit);
+				}else{
+					$query->range(0, 1);
+				}
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $video) {
+					$videoHot[] = $video;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_VIDEO_HOT, $videoHot, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $videoHot;
+	}
+
 }

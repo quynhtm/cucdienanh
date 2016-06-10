@@ -69,7 +69,6 @@ define('CONTACT_OK', 2);
 define('COMMENT_OK_REPLY', 0);//comment is reply
 define('COMMENT_NOT_REPLY', 1);
 
-
 define('BANNER_TYPE_CONTENT_HOME', 1);
 define('BANNER_TYPE_LEFT', 2);
 define('BANNER_TYPE_RIGHT', 3);
