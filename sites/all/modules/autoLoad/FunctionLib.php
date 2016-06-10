@@ -467,4 +467,27 @@ class FunctionLib{
 		}
 		return $url;
 	}
+
+	public static function sessionLang(){
+		global $lang;
+		if (!drupal_session_started()){
+			drupal_session_start();
+		}
+		$lang = FunctionLib::getParam('lang','');
+		if($lang != ''){
+			if($lang == 'vi'){
+				$_SESSION['lang'] = 'vi';
+			}elseif($lang == 'en'){
+				$_SESSION['lang'] = 'en';
+			}else{
+				$_SESSION['lang'] = 'vi';
+			}
+		}else{
+			if(!isset($_SESSION['lang'])){
+				$_SESSION['lang'] = 'vi';
+			}
+		}
+		$lang = $_SESSION['lang'];
+		return $lang;
+	}
 }
