@@ -2,7 +2,7 @@
 	global $base_url;
 ?>
 <div class="item-box">
-	<?php foreach($leftBanner as $v){
+	<?php foreach($rightBanner as $v){
 		if($v->banner_is_rel == 0){
 			$rel = 'rel="nofollow"';
 		}else{

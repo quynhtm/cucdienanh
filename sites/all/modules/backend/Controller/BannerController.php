@@ -9,18 +9,11 @@ class BannerController{
 	private $arrRel = array(LINK_NOFOLLOW => 'Nofollow', LINK_FOLLOW => 'Follow');
 	
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
-		BANNER_TYPE_CONTENT_HOME => 'Banner nội dung trang chủ',
+		BANNER_TYPE_CONTENT_HOME => 'Banner giữa trang chủ',
 		BANNER_TYPE_LEFT => 'Banner trái',
 		BANNER_TYPE_RIGHT => 'Banner phải',
 	);
 
-	private $arrPage = array(-1 => '--Chọn page--',
-		BANNER_PAGE_HOME => 'Page trang chủ',
-		BANNER_PAGE_CATEGORY => 'Page danh mục',
-		BANNER_PAGE_DETAIL=> 'Page chi tiết',
-	);
-
-	private $arrCategoryParent = array();
 	public function __construct(){
 		$files = array(
 			'bootstrap/css/bootstrap.css',
@@ -35,8 +28,6 @@ class BannerController{
 			'View/js/admin.js',
 		);
 		Loader::load('Admin', $files);
-
-		$this->arrCategoryParent = DataCommon::getListCategoryParent();
 	}
 
 	function indexBanner(){
@@ -61,20 +52,15 @@ class BannerController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['banner_status']);
 		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, $dataSearch['banner_type']);
-		$optionPage = FunctionLib::getOption($this->arrPage	, $dataSearch['banner_page']);
+		
 		return $view = theme('indexBanner',array(
 									'title'=>'Quản lý quảng cáo',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
-									
 									'optionStatus' => $optionStatus,
 									'optionTypeBanner' => $optionTypeBanner,
-									'optionPage' => $optionPage,
 									'arrProductStatus' => $this->arrStatus,
-									
 									'arrTypeBanner' => $this->arrTypeBanner,
-									'arrPage' => $this->arrPage,
-									
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -105,6 +91,7 @@ class BannerController{
 			$banner_image = trim(FunctionLib::getParam('img', ''));
 			$banner_image_old = trim(FunctionLib::getParam('img_old', ''));
 			$banner_is_run_time = FunctionLib::getParam('banner_is_run_time',BANNER_NOT_RUN_TIME);
+		
 			$dataInput = array(
 				'banner_name'=>array('value'=>FunctionLib::getParam('banner_name',''), 'require'=>1, 'messages'=>'Tên banner không được bỏ trống!'),
 				'banner_link'=>array('value'=>FunctionLib::getParam('banner_link',''), 'require'=>1, 'messages'=>'Link banner không được bỏ trống!'),
@@ -113,12 +100,11 @@ class BannerController{
 				'banner_is_target'=>array('value'=>FunctionLib::getParam('banner_is_target',BANNER_NOT_TARGET_BLANK)),
 				'banner_is_rel'=>array('value'=>FunctionLib::getParam('banner_is_rel',LINK_NOFOLLOW)),
 				'banner_type'=>array('value'=>FunctionLib::getParam('banner_type',0)),
-				'banner_page'=>array('value'=>FunctionLib::getParam('banner_page',0)),
-				'banner_category_id'=>array('value'=>FunctionLib::getParam('banner_category_id',0)),
 				'banner_status'=>array('value'=>FunctionLib::getParam('banner_status',STASTUS_HIDE)),
+				
 				'banner_is_run_time'=>array('value'=>$banner_is_run_time),
 				'banner_update_time'=>array('value'=>FunctionLib::getParam('banner_update_time',0)),
-
+				
 				'uid'=>array('value'=>$user->uid, 'require'=>0),
 			);
 			$errors = ValidForm::validInputData($dataInput);
@@ -153,7 +139,7 @@ class BannerController{
 				//FunctionLib::Debug($dataInput);
 				Banner::save($dataInput, $item_id);
 				if(Cache::CACHE_ON){
-					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$dataInput['banner_type']['value'].'_'.$dataInput['banner_page']['value'].'_'.$dataInput['banner_category_id']['value'];
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$dataInput['banner_type']['value'];
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
 				}
@@ -163,18 +149,14 @@ class BannerController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->banner_status) ? $arrItem->banner_status: STASTUS_HIDE);
 		$optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($arrItem->banner_is_run_time) ? $arrItem->banner_is_run_time: BANNER_NOT_RUN_TIME);
 		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($arrItem->banner_type) ? $arrItem->banner_type: -1);
-		$optionPage = FunctionLib::getOption($this->arrPage, isset($arrItem->banner_page) ? $arrItem->banner_page: -1);
 		$optionTarget = FunctionLib::getOption($this->arrTarget, isset($arrItem->banner_is_target) ? $arrItem->banner_is_target: BANNER_TARGET_BLANK);
-		$optionCategory = FunctionLib::getOption(array(0=>'Chọn danh mục quảng cáo')+$this->arrCategoryParent, isset($arrItem->banner_category_id) ? $arrItem->banner_category_id: 0);
 		$optionRel = FunctionLib::getOption($this->arrRel, isset($arrItem->banner_is_rel) ? $arrItem->banner_is_rel: LINK_NOFOLLOW);
 
 		return $view = theme('addBanner',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'title'=>'banner quảng cáo',
-				'optionCategory'=>$optionCategory,
 				'optionTarget'=>$optionTarget,
-				'optionPage'=>$optionPage,
 				'optionTypeBanner'=>$optionTypeBanner,
 				'optionRunTime'=>$optionRunTime,
 				'optionStatus'=>$optionStatus,

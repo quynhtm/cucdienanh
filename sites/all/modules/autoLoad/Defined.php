@@ -57,13 +57,16 @@ define('FOLDER_IMAGE', 'slide_image');
 define('FOLDER_DOCUMENT', 'document');
 
 //Common
+define('STASTUS_MENU_LEFT', 1);
+define('STASTUS_MENU_RIGHT', 2);
+
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
 
 define('CONTACT_NEW', 1);
 define('CONTACT_OK', 2);
 
-define('COMMENT_OK_REPLY', 0);//comment_is_reply
+define('COMMENT_OK_REPLY', 0);//comment is reply
 define('COMMENT_NOT_REPLY', 1);
 
 

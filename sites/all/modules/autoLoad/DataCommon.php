@@ -316,36 +316,36 @@ class DataCommon{
 		return $arrItem;
 	}
 	/**
-	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner tr�i, 4 banner ph?i,5: banner trong list s?n ph?m
-	 * @param int $banner_page: 1: trang ch?, 2: trang list,3: trang detail, 4: trang list danh m?c
-	 * @param int $banner_category_id
-	 * @param int $banner_shop_id
+	 * @param int $banner_type: 1:giua trang chu, 2:trai, 3:phai
 	 * @return array
 	 */
-	public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_shop_id = 0){
+	public static function getBannerAds($banner_type = 0, $limit=0){
 		$bannerAdvanced = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$bannerAdvanced = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id);
+			$bannerAdvanced = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type);
 		}
 		if($bannerAdvanced == null || empty($bannerAdvanced)) {
-			$arrField = array('banner_id', 'banner_name', 'banner_image','banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
-				'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop','banner_shop_id', 'banner_is_rel');
+			$arrField = array('banner_id', 'banner_name', 'banner_image','banner_link', 'banner_order', 'banner_is_target','banner_type',
+				'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_rel');
 			$query = db_select(self::$table_banner, 'c')
 				->condition('c.banner_status', STASTUS_SHOW, '=')
 				->condition('c.banner_type', $banner_type, '=')
-				->condition('c.banner_page', $banner_page, '=')
-				->condition('c.banner_category_id', $banner_category_id, '=')
-				->condition('c.banner_shop_id', $banner_shop_id, '=')
-				->orderBy('banner_order', 'ASC')//ORDER BY created
+				->orderBy('banner_order', 'ASC')
 				->fields('c', $arrField);
+				
+				if($limit > 0){
+					$query->range(0, $limit);
+				}else{
+					$query->range(0, 1);
+				}
 			$data = $query->execute();
 			if (!empty($data)) {
 				foreach ($data as $k => $banner) {
 					$bannerAdvanced[] = $banner;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}

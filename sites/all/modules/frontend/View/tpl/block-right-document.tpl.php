@@ -1,7 +1,13 @@
 <?php 
 	global $base_url;
 ?>
-<div class="item-box">
+<?php
+	foreach($listCategory as $k=>$v){
+		if(!empty($v)){
+			if($v['category_vertical'] == STASTUS_MENU_RIGHT ){
+				
+?>
+<div class="item-box ext">
 	<div class="title-box">Chính sách - Văn bản</div>
 	<div class="content-box">
 		<ul>
@@ -13,3 +19,8 @@
 		</ul>
 	</div>
 </div>
+<?php 		
+			}
+	 	}
+	} 
+?>

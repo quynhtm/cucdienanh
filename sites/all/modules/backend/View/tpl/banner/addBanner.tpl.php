@@ -36,7 +36,7 @@
                          <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced(3);">Upload ảnh quảng cáo</a>
                          <div id="sys_show_image_banner">
                              <?php if(isset($arrItem->banner_image) && $arrItem->banner_image !=''){?>
-                                 <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,400,300)?>'/>
+                                 <img width='300' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,300,0)?>'/>
                              <?php }?>
                          </div>
                          <input name="img" type="hidden" id="img" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
@@ -54,12 +54,6 @@
                          </select>
                      </div>
                      <div class="col-lg-12 paddingTop10">
-                         <label class="control-label">Page quảng cáo</label>
-                         <select class="form-control input-sm" name="banner_page">
-                             <?php echo $optionPage;?>
-                         </select>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Thời gian chạy quảng cáo</label>
                          <select class="form-control input-sm" name="banner_is_run_time">
                              <?php echo $optionRunTime;?>
@@ -72,12 +66,6 @@
                      <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Ngày kết thúc</label>
                          <div><input type="text" class="form-control input-sm date" placeholder ="Ngày kết thúc" name="banner_end_time" value="<?php if(isset($arrItem->banner_end_time) && $arrItem->banner_end_time > 0){ echo date('d-m-Y',$arrItem->banner_end_time); } ?>"/></div>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
-                         <label class="control-label">Danh mục quảng cáo</label>
-                         <select class="form-control input-sm" name="banner_category_id">
-                             <?php echo $optionCategory;?>
-                         </select>
                      </div>
                      <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Trạng thái</label>

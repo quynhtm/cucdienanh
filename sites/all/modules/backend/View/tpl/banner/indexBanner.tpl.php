@@ -10,20 +10,14 @@
 				<label class="control-label">Tên banner</label>
 				<div><input type="text" class="form-control input-sm" placeholder ="Tên banner" id="banner_name" name="banner_name" value="<?php if(isset($dataSearch['banner_name'])){echo $dataSearch['banner_name'];}?>"/></div>
 			</div>
-
-			<div class="col-lg-3">
-				<label class="control-label">Trạng thái</label>
-				<div><select class="form-control input-sm" name="banner_status"><?php echo $optionStatus;?></select></div>
-			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Loại banner</label>
 				<div><select class="form-control input-sm" name="banner_type"><?php echo $optionTypeBanner;?></select></div>
 			</div>
 			<div class="col-lg-3">
-				<label class="control-label">Page banner</label>
-				<div><select class="form-control input-sm" name="banner_page"><?php echo $optionPage;?></select></div>
+				<label class="control-label">Trạng thái</label>
+				<div><select class="form-control input-sm" name="banner_status"><?php echo $optionStatus;?></select></div>
 			</div>
-
 			<div class="col-lg-3">
 				<label class="control-label">&nbsp;</label>
 				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
@@ -59,8 +53,8 @@
 						<th width="2%"class="td_list">STT <input type="checkbox" id="checkAll"/></th>
 						<th width="6%" class="td_list">Ảnh</th>
 						<th width="15%" class="td_list">Tên banner</th>
-						<th width="15%" class="td_list">Thông tin banner</th>
-						<th width="15%" class="td_list">Url link</th>
+						<th width="15%" class="td_list">Vị trí</th>
+						<th width="15%" class="td_list">Liên kết</th>
 						<th width="5%" class="td_list">Follow</th>
 						<th width="10%" class="td_list">Ngày chạy</th>
 						<th width="6%" class="td_list">Action</th>
@@ -92,17 +86,13 @@
 							<td>
 								<?php
 								echo '<b>B: </b>['.$item->banner_id.'] '.$item->banner_name.'<br/>';
-								echo '<span class="font_9">Ngày tạo:'. date('d-m-Y h:i:s',$item->banner_create_time).'</span>';
+								echo '<span class="font_10">Ngày tạo:'. date('d-m-Y h:i:s',$item->banner_create_time).'</span>';
 								?>
 							</td>
 
 							<td>
 								<?php
 									echo '<b>Loại:</b> '.(isset($arrTypeBanner[$item->banner_type])?$arrTypeBanner[$item->banner_type].'<br/>': 'Chưa chọn loại <br/>');
-									echo '<b>Page:</b> '.(isset($arrPage[$item->banner_page])?$arrPage[$item->banner_page].'<br/>': 'Chưa chọn page <br/>');
-									echo '<b>Danh mục id:</b> '.$item->banner_category_id;
-									echo ($item->banner_total_click > 0)?'<br/><b class="price_sell">'.$item->banner_total_click.' lượt click </b>': '';
-									echo ($item->banner_time_click > 0)?'<span class="font_9"> '. date('d-m-Y h:i:s',$item->banner_time_click).'</span>':'';
 								?>
 							</td>
 
@@ -125,8 +115,8 @@
 							<td>
 								<?php
 								if($item->banner_is_run_time == BANNER_IS_RUN_TIME){
-									echo 'Start: '.date('d-m-Y h:i:s',$item->banner_start_time);
-									echo '<br/>End: '.date('d-m-Y h:i:s',$item->banner_end_time);
+									echo 'Bắt đầu: '.date('d-m-Y h:i:s',$item->banner_start_time);
+									echo '<br/>Kết thúc: '.date('d-m-Y h:i:s',$item->banner_end_time);
 								}else{
 									echo 'Không giới hạn ngày chạy';
 								}

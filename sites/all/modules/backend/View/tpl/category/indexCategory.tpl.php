@@ -103,7 +103,15 @@
 							<?php echo ($item['category_horizontal']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td class="align_center">
-							<?php echo ($item['category_vertical']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							<?php 
+								if($item['category_vertical']== STASTUS_MENU_LEFT){
+									echo 'Trái';
+								}elseif($item['category_vertical']== STASTUS_MENU_RIGHT) {
+									echo 'Phải';
+								}else{
+									echo 'Chưa xác định';
+								}
+							?>
 						</td>
 						<td class="align_center"><?php echo $item['category_order']; ?></td>
 						<td class="align_center">

@@ -103,6 +103,13 @@ function Site_block_info() {
 		'weight'	=> 0,
 		'visibility' => 1,
 	);
+	$blocks['block-right-banner'] = array(
+		'info' => t('Block right banner'),
+		'status'	=> TRUE,
+		'region'	=> 'right',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
    return $blocks;
 }
 function Site_theme() {
@@ -140,6 +147,10 @@ function Site_theme() {
 	    'block-right-images' => array(
 	      'template' => 'View/tpl/block-right-images'
 	    ),
+	    'block-right-banner' => array(
+	      'template' => 'View/tpl/block-right-banner'
+	    ),
+
 
 	    'pageNews' => array(
 	      'template' => 'View/tpl/pageNews'
@@ -208,6 +219,10 @@ function Site_block_view($delta='') {
 		case 'block-right-images':
 		  $block['subject'] = t('Block right images');
 		  $block['content'] = block_right_images();
+		  break;
+		case 'block-right-banner':
+		  $block['subject'] = t('Block right banner');
+		  $block['content'] = block_right_banner();
 		  break; 
 	}
 	return $block;
@@ -262,35 +277,44 @@ function block_header(){
 	return theme('block-header', array('listCategory'=>$listCategory));
 }
 function block_slide(){
-	
-	return theme('block-slide');
+	$contentBanner = SiteController::blockContentHomeBanner();
+	return theme('block-slide', array('contentBanner'=>$contentBanner));
 }
 
 function block_content(){
-	
 	return theme('block-content');
 }
 function block_footer(){
 	
 	return theme('block-footer');
 }
-function block_left_category(){
 
-	return theme('block-left-category');
+//Left
+function block_left_category(){
+	$listCategory = DataCommon::getListCategoryFull();
+	return theme('block-left-category', array('listCategory'=>$listCategory));
 }
 function block_left_services_focus(){
 
 	return theme('block-left-services-focus');
 }
 function block_left_banner(){
-	return theme('block-left-banner');
+	$leftBanner = SiteController::blockLeftBanner();
+	return theme('block-left-banner', array('leftBanner'=>$leftBanner));
 }
+
+//Right
 function block_right_video(){
 	return theme('block-right-video');
 }
 function block_right_document(){
-	return theme('block-right-document');
+	$listCategory = DataCommon::getListCategoryFull();
+	return theme('block-right-document', array('listCategory'=>$listCategory));
 }
 function block_right_images(){
 	return theme('block-right-images');
+}
+function block_right_banner(){
+	$rightBanner = SiteController::blockRightBanner();
+	return theme('block-right-banner', array('rightBanner'=>$rightBanner));
 }

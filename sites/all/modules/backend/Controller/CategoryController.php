@@ -5,12 +5,15 @@
 class CategoryController{
 
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrCategoryHorizontal = array(-1 => '--Chọn Menu ngang--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrCategoryVertical = array(-1 => '--Chọn Menu dọc--', STASTUS_MENU_LEFT => 'Menu trái', STASTUS_MENU_RIGHT => 'Menu phải');
+
 	private $arrCategoryParent = array();
 	private $arrTypeCategory = array();
 
 	public function __construct(){
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
-		$this->arrTypeCategory = DataCommon::getListTypeCategory();//kieu chuyen muc
+		$this->arrTypeCategory = DataCommon::getListTypeCategory();
 
         $files = array(
             'bootstrap/css/bootstrap.css',
@@ -66,8 +69,8 @@ class CategoryController{
 		//FunctionLib::Debug($treeCategroy);
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
-		$optionCategoryHorizontal = FunctionLib::getOption($this->arrStatus, $dataSearch['category_horizontal']);
-		$optionCategoryVertical = FunctionLib::getOption($this->arrStatus, $dataSearch['category_vertical']);
+		$optionCategoryHorizontal = FunctionLib::getOption($this->arrCategoryHorizontal, $dataSearch['category_horizontal']);
+		$optionCategoryVertical = FunctionLib::getOption($this->arrCategoryVertical, $dataSearch['category_vertical']);
 		$optionCategoryParent = FunctionLib::getOption(array(-1 =>'--Chọn danh mục cha--')+$this->arrCategoryParent, $dataSearch['category_parent_id']);
 		$optionTypeCategory = FunctionLib::getOption(array(-1 =>'--Chọn kiểu chuyên mục--')+$this->arrTypeCategory, $dataSearch['type_id']);
 
@@ -201,11 +204,11 @@ class CategoryController{
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: STASTUS_SHOW);
-		$optionCategoryHorizontal = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_horizontal) ? $arrItem->category_horizontal: STASTUS_HIDE);
-		$optionCategoryVertical = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_vertical) ? $arrItem->category_vertical: STASTUS_HIDE);
+		$optionCategoryHorizontal = FunctionLib::getOption($this->arrCategoryHorizontal, isset($arrItem->category_horizontal) ? $arrItem->category_horizontal: STASTUS_HIDE);
+		$optionCategoryVertical = FunctionLib::getOption($this->arrCategoryVertical, isset($arrItem->category_vertical) ? $arrItem->category_vertical: STASTUS_HIDE);
 		$optionCategoryParent = FunctionLib::getOption(array(0 =>'--Chọn danh mục cha--')+$this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: 0);
 		$optionTypeCategory = FunctionLib::getOption(array(0 =>'--Chọn kiểu chuyên mục--')+$this->arrTypeCategory, isset($arrItem->type_id) ? $arrItem->type_id: 0);
-
+		
 		return $view = theme('addCategory',
 			array('arrItem'=>$arrItem,
 				'errors'=>$errors,

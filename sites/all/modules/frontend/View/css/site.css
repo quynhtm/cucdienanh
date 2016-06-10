@@ -173,6 +173,15 @@
     padding: 10px 0 10px 22px;
     width: 93%;
 }
+.item-box .content-box .submenu {
+    background: #f2f2f2;
+    border: none;
+}
+.item-box .content-box .submenu a {
+    font-weight: normal;
+    background: none;
+}
+
 .item-box .content-box a:hover{
     text-decoration: underline;
 }
