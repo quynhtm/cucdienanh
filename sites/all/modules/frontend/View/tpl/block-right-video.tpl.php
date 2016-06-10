@@ -17,14 +17,14 @@
 				$url_img = '';
 			}
 	?>
+	<?php if($i == 1){?>
 	<div class="video" id="jwplayer_lblMedia">
-		<?php if($i == 1){?>
 		<embed id="MediaPlayer" height="186" width="230" type="application/x-shockwave-flash" 
 		src="<?php echo $base_url ?>/sites/all/modules/autoLoad/bootstrap/lib/flvplayer/mediaplayer.swf" 
 		style="" id="single" name="single" bgcolor="#ffffff" quality="high" allowfullscreen="true" allowscriptaccess="always" wmode="transparent" 
 		flashvars="width=230&amp;height=186&amp;autostart=false&amp;showdigits=true&amp;showdownload=false&amp;file=<?php echo $url_video ?><?php echo $url_img ?>">
-		<?php } ?>
 	</div>
+	<?php } ?>
 	<?php }else{ unset($listVideoHot[$k]); } ?>
 	<?php } ?>
 	<div class="list-video-other" id="jwplayer_tblOther">
