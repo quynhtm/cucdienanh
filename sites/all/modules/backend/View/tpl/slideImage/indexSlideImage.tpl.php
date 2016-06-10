@@ -6,7 +6,10 @@
 				<label class="control-label">Tiêu đề bài viết</label>
 				<div><input type="text" class="form-control input-sm" placeholder ="Tiêu đề bài viết" id="image_title" class="keyword" name="image_title" value="<?php echo $dataSearch['image_title'] ?>"/></div>
 			</div>
-
+			<div class="col-lg-3">
+				<label class="control-label">Nổi bật</label>
+				<div><select class="form-control input-sm" name="image_hot"><?php echo $optionHot;?></select></div>
+			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="image_status"><?php echo $optionStatus;?></select></div>
@@ -48,7 +51,8 @@
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
 						<th width="5%" class="td_list align_center">Ảnh</th>
 						<th width="40%" class="td_list">Tên bài viết</th>
-						<th width="5%" class="td_list align_center">Status</th>
+						<th width="10%" class="td_list">Nổi bật</th>
+						<th width="5%" class="td_list align_center">Trạng thái</th>
 						<th width="5%" class="td_list align_center">Action</th>
 					</tr>
 					</thead>
@@ -75,10 +79,14 @@
 							<td>
 								<?php echo $item->image_title ?>
 							</td>
-
+							<td><?php
+								echo ($item->image_hot == STASTUS_SHOW) ? '<i class="icon-ok icon-admin green"></i>' : '<i class="icon-minus-sign icon-admin red"></i>';
+							?>
+							</td>
 							<td class="align_center">
 								<?php echo ($item->image_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>
+
 							<td class="align_center">
 								<?php $linkEdit = $base_url.'/admincp/slideimage/edit/'.$item->image_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>

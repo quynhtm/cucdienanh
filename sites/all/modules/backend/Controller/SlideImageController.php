@@ -4,6 +4,8 @@
 */
 class SlideImageController{
 	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrHot = array(STASTUS_HIDE => 'Không', STASTUS_SHOW => 'Nổi bật');
+
 	private $arrCategoryNew = array();
 
 	public function __construct(){
@@ -31,6 +33,7 @@ class SlideImageController{
 		//search
 		$dataSearch['image_title'] = FunctionLib::getParam('image_title','');
 		$dataSearch['image_status'] = FunctionLib::getParam('image_status', -1);
+		$dataSearch['image_hot'] = FunctionLib::getParam('image_hot', -1);
 
 		$result = SlideImage::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -45,11 +48,13 @@ class SlideImageController{
 		//FunctionLib::Debug($result['data']);
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['image_status']);
+		$optionHot = FunctionLib::getOption($this->arrHot, $dataSearch['image_hot']);
 		return $view = theme('indexSlideImage',array(
 									'title'=>'Quản lý thư viện ảnh',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionHot' => $optionHot,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -103,6 +108,7 @@ class SlideImageController{
 				'image_content'=>array('value'=>FunctionLib::getParam('image_content',0)),
 				'image_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'image_status'=>array('value'=>FunctionLib::getIntParam('image_status',0)),
+				'image_hot'=>array('value'=>FunctionLib::getIntParam('image_hot',0)),
 				'image_create'=>array('value'=>time()),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
@@ -145,19 +151,22 @@ class SlideImageController{
 				SlideImage::save($dataInput, $item_id);
 				if(Cache::CACHE_ON) {
 					$cache = new Cache();
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$item_id);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_IMAGE_ID.$item_id);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_IMAGE_HOT);
 				}
 				drupal_goto($base_url.'/admincp/slideimage');
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->image_status) ? $arrItem->image_status: STASTUS_SHOW);
+		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->image_hot) ? $arrItem->image_hot: 0);
 		return $view = theme('addSlideImage',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
 				'errors'=>$errors,
 				'title'=>'tin tức',
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'optionHot'=>$optionHot));
 	}
 
 	function deleteSlideImageAction(){

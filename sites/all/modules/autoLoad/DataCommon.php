@@ -11,6 +11,7 @@ class DataCommon{
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
+	public static $table_image = TABLE_IMAGE;
 
 	public static $table_users = TABLE_ROLE;
 	public static $table_users_role = TABLE_USERS_ROLES;
@@ -315,6 +316,30 @@ class DataCommon{
 		}
 		return $arrItem;
 	}
+	public static function getImageById($image_id = 0){
+		$image = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_IMAGE_ID.$image_id;
+		if($image_id <= 0) return $image;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$image = $cache->do_get($key_cache);
+		}
+		if( $image == null || empty($image)){
+			$query = db_select(self::$table_image, 'n')
+				->condition('n.image_id', $image_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$image = $new;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $image, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $image;
+	}
 	/**
 	 * @param int $banner_type: 1:giua trang chu, 2:trai, 3:phai
 	 * @return array
@@ -389,6 +414,43 @@ class DataCommon{
 			}
 		}
 		return $videoHot;
+	}
+
+	public static function getListImageHot($limit=0){
+		$imageHot = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$imageHot = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_IMAGE_HOT);
+		}
+		if($imageHot == null || empty($imageHot)) {
+			static $arrFields = array('image_id', 'image_title', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot', 'image_title_alias',
+		 							'image_create','image_meta_title','image_meta_keyword','image_meta_description', 'image_status');
+
+			$query = db_select(self::$table_image, 'c')
+				->condition('c.image_status', STASTUS_SHOW, '=')
+				->condition('c.image_hot', STASTUS_SHOW, '=')
+
+				->condition('c.image_image_other', '', '<>')
+				
+				->orderBy('image_id', 'DESC')
+				->fields('c', $arrFields);
+				
+				if($limit > 0){
+					$query->range(0, $limit);
+				}else{
+					$query->range(0, 1);
+				}
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $img) {
+					$imageHot[] = $img;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_IMAGE_HOT, $imageHot, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $imageHot;
 	}
 
 }

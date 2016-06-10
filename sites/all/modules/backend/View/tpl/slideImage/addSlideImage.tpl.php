@@ -72,6 +72,14 @@
                 </div>
             </div>
             <div class="control-group">
+                 <label class="control-label">Nổi bật</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="image_hot">
+                         <?php echo $optionHot;?>
+                     </select>
+                 </div>
+             </div> 
+            <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
                     <select class="form-control input-sm" name="image_status">

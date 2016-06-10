@@ -38,6 +38,10 @@ class Cache {
     //cache video
     const CACHE_VIDEO_HOT = 'cache_video_hot';
     const CACHE_VIDEO_ID = 'cache_video_id_';
+
+    //cache image
+    const CACHE_IMAGE_HOT = 'cache_image_hot';
+    const CACHE_IMAGE_ID = 'cache_image_id_';
     
     //cache user id
     const CACHE_UID = 'cache_uid_';

@@ -313,7 +313,8 @@ function block_right_document(){
 	return theme('block-right-document', array('listCategory'=>$listCategory));
 }
 function block_right_images(){
-	return theme('block-right-images');
+	$listImageHot = SiteController::blockRightImage();
+	return theme('block-right-images', array('listImageHot'=>$listImageHot));
 }
 function block_right_banner(){
 	$rightBanner = SiteController::blockRightBanner();

@@ -29,6 +29,12 @@ class SiteController{
 		$result = DataCommon::getListVideoHot(10);
 		return $result;
 	}
+
+	public static function blockRightImage(){
+		$result = DataCommon::getListImageHot(10);
+		return $result;
+	}
+
 	public static function getMenuLoad(){
 		global $base_url;
 		$param = arg();
