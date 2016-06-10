@@ -12,6 +12,10 @@
 				<div><select class="form-control input-sm" name="news_category"><?php echo $optionCategory;?></select></div>
 			</div>
 			<div class="col-lg-3">
+				<label class="control-label">Nổi bật</label>
+				<div><select class="form-control input-sm" name="video_status"><?php echo $optionHot;?></select></div>
+			</div>
+			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="news_status"><?php echo $optionStatus;?></select></div>
 			</div>
@@ -53,6 +57,7 @@
 						<th width="5%" class="td_list align_center">Ảnh</th>
 						<th width="40%" class="td_list">Tên bài viết</th>
 						<th width="20%" class="td_list">Thuộc danh mục</th>
+						<th width="10%" class="td_list">Nổi bật</th>
 						<th width="20%" class="td_list">Ngày tạo</th>
 						<th width="5%" class="td_list align_center">Trạng thái</th>
 						<th width="5%" class="td_list align_center">Action</th>
@@ -80,6 +85,11 @@
 							</td>
 							<td><?php echo $item->news_title ?></td>
 							<td><?php echo isset($arrCategoryNew[$item->news_category])?$arrCategoryNew[$item->news_category]:'Chưa rõ'; ?></td>
+							<td>
+								<?php
+									echo ($item->news_hot == STASTUS_SHOW) ? '<i class="icon-ok icon-admin green"></i>' : '<i class="icon-minus-sign icon-admin red"></i>';
+								?>
+							</td>
 							<td>
 								<?php
 									if($item->news_create > 0){

@@ -37,6 +37,13 @@ class Category{
 						array_push($arrCond, $field.' = '.$value);
 						$check_search = 1;
 					}
+
+					if($field === 'category_content_front' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+						$check_search = 1;
+					}
+
 					if($field === 'type_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);

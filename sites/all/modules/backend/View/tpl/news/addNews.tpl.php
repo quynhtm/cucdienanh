@@ -78,7 +78,14 @@
                     <textarea name="news_content"><?php if(isset($arrItem->news_content)){ echo $arrItem->news_content; } ?></textarea>
                 </div>
             </div>
-        
+            <div class="control-group">
+                 <label class="control-label">Nổi bật</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="video_hot">
+                         <?php echo $optionHot;?>
+                     </select>
+                </div>
+             </div> 
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">

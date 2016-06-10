@@ -50,6 +50,14 @@
                      </select>
                  </div>
             </div>
+            <div class="control-group">
+                 <label class="control-label">Hiện ở content trang chủ</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="category_content_front">
+                         <?php echo $optionCategoryContentHome;?>
+                     </select>
+                 </div>
+            </div>
              <div class="control-group">
                  <label class="control-label">Trạng thái</label>
                  <div class="controls">

@@ -330,6 +330,7 @@ body{
     padding: 2px;
     width: 100%;
     font-weight: bold;
+    color: #fff;
 }
 .content-post-cat .content-cat .title a:hover{
     color: #fff;

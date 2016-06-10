@@ -282,7 +282,8 @@ function block_slide(){
 }
 
 function block_content(){
-	return theme('block-content');
+	$listCategory = DataCommon::getListCategoryFull();
+	return theme('block-content', array('listCategory'=>$listCategory));
 }
 function block_footer(){
 	

@@ -4,6 +4,8 @@
 */
 class NewsController{
 	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrHot = array(STASTUS_HIDE => 'Không', STASTUS_SHOW => 'Nổi bật');
+
 	private $arrCategoryNew = array();
 
 	public function __construct(){
@@ -33,6 +35,7 @@ class NewsController{
 		$dataSearch['news_title'] = FunctionLib::getParam('news_title','');
 		$dataSearch['news_status'] = FunctionLib::getParam('news_status', -1);
 		$dataSearch['news_category'] = FunctionLib::getParam('news_category', -1);
+		$dataSearch['news_hot'] = FunctionLib::getParam('news_hot', -1);
 
 		$result = News::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -46,11 +49,14 @@ class NewsController{
 
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['news_category']);
+		$optionHot = FunctionLib::getOption($this->arrHot, $dataSearch['news_hot']);
+
 		return $view = theme('indexNews',array(
 									'title'=>'Quản lý tin tức',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionHot' => $optionHot,
 									'optionCategory' => $optionCategory,
 									'arrCategoryNew' => $this->arrCategoryNew,
 									'base_url' => $base_url,
@@ -117,7 +123,8 @@ class NewsController{
 				'news_category'=>array('value'=> $news_category, 'require'=>1, 'messages'=>'Danh mục tin tức không được bỏ trống!'),
 				'news_create'=>array('value'=>time()),
 				'news_type'=>array('value'=>$news_type),
-				
+				'news_hot'=>array('value'=>FunctionLib::getIntParam('video_hot',STASTUS_HIDE)),
+
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'uid'=>array('value'=>$user->uid, 'require'=>0),
 				
@@ -165,6 +172,7 @@ class NewsController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_SHOW);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: -1);
+		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->news_hot) ? $arrItem->video_hot: STASTUS_HIDE);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
@@ -172,7 +180,8 @@ class NewsController{
 				'optionCategory'=>$optionCategory,
 				'errors'=>$errors,
 				'title'=>'tin tức',
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'optionHot'=>$optionHot));
 	}
 
 	function deleteNewsAction(){

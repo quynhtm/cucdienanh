@@ -22,10 +22,13 @@
 				<div><select class="form-control input-sm" name="category_vertical"><?php echo $optionCategoryVertical;?></select></div>
 			</div>
 			<div class="col-lg-3">
+				<label class="control-label">Hiện content trang chủ</label>
+				<div><select class="form-control input-sm" name="category_content_front"><?php echo $optionCategoryContentHome;?></select></div>
+			</div>
+			<div class="col-lg-3">
 				<label class="control-label">Kiểu dữ liệu</label>
 				<div><select class="form-control input-sm" name="type_id"><?php echo $optionTypeCategory;?></select></div>
 			</div>
-
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="category_status"><?php echo $optionStatus;?></select></div>
@@ -70,6 +73,7 @@
 						<th width="10%" class="td_list align_center">Kiểu dữ liệu</th>
 						<th width="10%" class="td_list align_center">Menu ngang</th>
 						<th width="10%" class="td_list align_center">Menu dọc</th>
+						<th width="10%" class="td_list align_center">Content trang chủ</th>
 						<th width="5%" class="td_list align_center">Thứ tự</th>
 						<th width="7%" class="td_list align_center">Trạng thái</th>
 						<th width="5%" class="td_list">Action</th>
@@ -104,12 +108,21 @@
 						</td>
 						<td class="align_center">
 							<?php 
-								if($item['category_vertical']== STASTUS_MENU_LEFT){
+								if($item['category_vertical']== STASTUS_SHOW){
 									echo 'Trái';
 								}elseif($item['category_vertical']== STASTUS_MENU_RIGHT) {
 									echo 'Phải';
 								}else{
 									echo 'Chưa xác định';
+								}
+							?>
+						</td>
+						<td class="align_center">
+							<?php 
+								if($item['category_content_front'] == STASTUS_SHOW){
+									echo 'Hiển thị';
+								}else{
+									echo "Ẩn";
 								}
 							?>
 						</td>

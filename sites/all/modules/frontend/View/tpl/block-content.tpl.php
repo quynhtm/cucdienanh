@@ -3,9 +3,15 @@
 ?>
 <div class="content-post-cat">
 	<ul>
+		<?php
+			foreach($listCategory as $k=>$v){
+				if(!empty($v)){
+					if($v['category_content_front'] == STASTUS_SHOW ){
+						
+		?>
 		<li>
 			<div class="title-cat">
-				<a href="">Phát hành và Phổ biến phim</a><span></span>
+				<a href="<?php echo FunctionLib::buildLinkCategory($v['category_id'], $v['category_name_alias']); ?>" title="<?php echo $v['category_name'] ?>"><?php echo $v['category_name'] ?></a><span></span>
 			</div>
 			<div class="content-cat">
 				<div class="thumb">
@@ -25,27 +31,10 @@
 				</ul>
 			</div>
 		</li>
-		<li>
-			<div class="title-cat">
-				<a href="">Hợp tác quốc tế</a><span></span>
-			</div>
-			<div class="content-cat">
-				<div class="thumb">
-					<a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/cat2.jpg" alt=""></a>
-				</div>
-				<div class="title">
-					<a href="">Đan Trường: Bỏ tiền cho âm nhạc, không chạy theo hàng hiệu</a>
-				</div>
-			</div>
-			<div class="list-content-cat">
-				<ul>
-					<li><a href="">Hồ Quang 8: “Không quá đao to búa lớn”</a></li>
-					<li><a href="">Ariana Grande: Thành công bắt đầu từ đâu</a></li>
-					<li><a href="">Danh ca Khánh Ly tâm sự cuộc đời trong lỗi</a></li>
-					<li><a href="">Triệu Trang chào năm mới bằng sêri album</a></li>
-					<li><a href="">Quảng bá sâu rộng cho nét tinh tế từ áo dài</a></li>
-				</ul>
-			</div>
-		</li>
+		<?php 		
+					} 
+			 	}
+			} 
+		?>
 	</ul>
 </div>
