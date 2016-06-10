@@ -1,7 +1,7 @@
 <?php 
 	global $base_url;
 ?>
-<div class="item-box">
+<div class="item-box video">
 	<?php 
 	$i=0;
 	foreach($listVideoHot as $k => $v){

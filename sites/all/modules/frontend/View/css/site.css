@@ -587,7 +587,7 @@ body{
     margin: 0 5px;
     padding: 5px 15px;
 }
-#block-site-block-right-video .item-box{
+.item-box.video{
     background: #fafafa;
 }
 .list-video-other {
@@ -601,10 +601,49 @@ body{
     padding-bottom: 4px;
     padding-left: 26px;
 }
-.item-box .video-other li:last-child{
+.item-box.video .video-other li:last-child{
     border-bottom: none;
 }
-
+.item-box.images .jcarousel-control-prev {
+    border-radius: 100%;
+    height: 20px !important;
+    line-height: 19px !important;
+    left: 0;
+    margin-top: -10px;
+    width: 20px;
+    color: #fff;
+    opacity: 0.8
+}
+.item-box.images .jcarousel-control-next{
+    border-radius: 100%;
+    height: 20px !important;
+    line-height: 19px !important;
+    right: 0;
+    margin-top: -10px;
+    width: 20px;
+    color: #fff;
+    opacity: 0.8
+}
+.item-box.images .item-img {
+    clear: both;
+    margin-bottom: 10px;
+}
+.item-box.images  .jcarousel{
+    width: 100%!important;
+}
+.item-box.images  .jcarousel li {
+    height: 45px!important;
+    overflow: hidden!important;
+}
+.item-box.images  .jcarousel li img {
+    width: 100%!important;
+}
+.item-box.images .jcarousel-wrapper {
+    margin-top: -3px;
+}
+.item-box.images .item-first img {
+    width: 100% !important;
+}
 /*Ext*/
 /*Left center right*/
 #wrapper-c .site-left{

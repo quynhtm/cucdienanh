@@ -31,6 +31,13 @@ class SiteController{
 	}
 
 	public static function blockRightImage(){
+		$files = array(
+            '/bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
+            '/bootstrap/lib/jcarousel/jcarousel.responsive.js',
+			'/bootstrap/lib/jcarousel/jcarousel.responsive.css',
+		);
+		Loader::load('Core', $files);
+		
 		$result = DataCommon::getListImageHot(10);
 		return $result;
 	}
