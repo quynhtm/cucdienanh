@@ -72,7 +72,13 @@
                              <textarea id="video_content" name="video_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->video_content)) { echo $arrItem->video_content; } ?></textarea>
                          </div>
                      </div>
-                     <div class="col-lg-12 paddingTop10">
+                    <div class="col-lg-12 paddingTop10">
+                         <label class="control-label">Nổi bật</label>
+                         <select class="form-control input-sm" name="video_hot">
+                             <?php echo $optionHot;?>
+                         </select>
+                     </div> 
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Trạng thái</label>
                          <select class="form-control input-sm" name="video_status">
                              <?php echo $optionStatus;?>

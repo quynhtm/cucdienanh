@@ -5,7 +5,7 @@
 class Video{
 	static $table_action = TABLE_VIDEO;
 	static $primary_key = 'video_id';
-	static $arrFields = array('video_id', 'video_name', 'video_link','video_status',
+	static $arrFields = array('video_id', 'video_name', 'video_link','video_status','video_hot',
 		'video_view', 'video_time_creater', 'video_time_update','video_sort_desc','video_content','video_img','video_file','video_meta_title','video_meta_keyword','video_meta_description' );
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
@@ -34,6 +34,10 @@ class Video{
 						array_push($arrCond, $field.' = '.$value);
 					}
 
+					if($field === 'video_hot' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
 
 					if($field === 'video_name' && $value != ''){
 						$db_or = db_or();

@@ -4,6 +4,8 @@
 */
 class VideoController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrHot = array(STASTUS_HIDE => 'Không', STASTUS_SHOW => 'Nổi bật');
+
 	public function __construct(){
 		
 		$files = array(
@@ -26,11 +28,10 @@ class VideoController{
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-
-
 		$dataSearch['video_id'] = FunctionLib::getParam('video_id', -1);
 		$dataSearch['video_name'] = FunctionLib::getParam('video_name', '');
 		$dataSearch['video_status'] = FunctionLib::getIntParam('video_status', -1);
+		$dataSearch['video_hot'] = FunctionLib::getIntParam('video_hot', -1);
 
 		$result = Video::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -43,11 +44,14 @@ class VideoController{
 		}
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['video_status']);
+		$optionHot = FunctionLib::getOption($this->arrHot, $dataSearch['video_hot']);
+
 		return $view = theme('indexVideo',array(
 									'title'=>'Quản lý Video',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionHot' => $optionHot,
 									'arrProductStatus' => $this->arrStatus,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
@@ -85,7 +89,8 @@ class VideoController{
 				'video_link'=>array('value'=>FunctionLib::getParam('video_link','')),
 				'video_img'=>array('value'=>$video_img, 'require'=>0),
 				'video_file'=>array('value'=>$video_file, 'require'=>0),
-				'video_status'=>array('value'=>FunctionLib::getParam('video_status',STASTUS_SHOW)),
+				'video_status'=>array('value'=>FunctionLib::getIntParam('video_status',STASTUS_SHOW)),
+				'video_hot'=>array('value'=>FunctionLib::getIntParam('video_hot',STASTUS_HIDE)),
 				'video_sort_desc'=>array('value'=>FunctionLib::getParam('video_sort_desc','')),
 				'video_content'=>array('value'=>FunctionLib::getParam('video_content','')),
 				'video_time_update'=>array('value'=>time()),
@@ -138,11 +143,14 @@ class VideoController{
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->video_status) ? $arrItem->video_status: STASTUS_SHOW);
+		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->video_hot) ? $arrItem->video_hot: STASTUS_HIDE);
+
 		return $view = theme('addVideo',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'title'=>'Video giải trí',
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'optionHot'=>$optionHot));
 	}
 
 	function deleteVideoAction(){

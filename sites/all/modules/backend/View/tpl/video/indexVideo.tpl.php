@@ -12,6 +12,11 @@
 			</div>
 
 			<div class="col-lg-3">
+				<label class="control-label">Nổi bật</label>
+				<div><select class="form-control input-sm" name="video_status"><?php echo $optionHot;?></select></div>
+			</div>
+
+			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="video_status"><?php echo $optionStatus;?></select></div>
 			</div>
@@ -54,6 +59,7 @@
 						<th width="30%" class="td_list">Link video</th>
 						<th width="10%" class="td_list">Lượt view</th>
 						<th width="20%" class="td_list">Ngày tạo</th>
+						<th width="10%" class="td_list">Nổi bật</th>
 						<th width="6%" class="td_list">Action</th>
 					</tr>
 					</thead>
@@ -103,6 +109,11 @@
 								if($item->video_time_update > 0){
 									echo '<br/>Ngày edit: '.date('d-m-Y h:i:s',$item->video_time_update);
 								}
+								?>
+							</td>
+							<td>
+								<?php
+									echo ($item->video_hot == STASTUS_SHOW) ? '<i class="icon-ok icon-admin green"></i>' : '<i class="icon-minus-sign icon-admin red"></i>';
 								?>
 							</td>
 							<td>

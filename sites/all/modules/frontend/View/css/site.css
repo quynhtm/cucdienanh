@@ -151,6 +151,9 @@
     line-height: 30px;
     text-transform: uppercase;
 }
+.item-box .title-box a {
+    color: #fff;
+}
 .item-box .content-box{
     clear: both;
     background: #eeeeee;
