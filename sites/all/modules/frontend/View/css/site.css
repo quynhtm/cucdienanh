@@ -302,11 +302,10 @@ body{
     border-bottom: 2px solid #ff6600;
     clear: both;
 }
-.content-post-cat .content-cat{
+.content-post-cat .content-cat {
     clear: both;
-    margin-top: 8px;
-    border:2px solid #e2e2e2;
     position: relative;
+    border: 1px solid #e2e2e2;
 }
 .content-post-cat .content-cat .thumb{
     position: relative;
@@ -327,7 +326,7 @@ body{
 }
 .content-post-cat .content-cat .title a {
     display: inline-block;
-    padding: 2px;
+    padding: 1px 2px;
     width: 100%;
     font-weight: bold;
     color: #fff;
@@ -337,16 +336,16 @@ body{
     text-decoration: underline;
 }
 .content-post-cat .list-content-cat {
-    background: #f4f4f4;
     display: inline-block;
     width: 100%;
-    border: 1px solid #e2e2e2;
     border-top: none;
     overflow: hidden;
 }
-.content-post-cat .list-content-cat li{
-    clear: both;
+.content-post-cat .list-content-cat li {
     border-bottom: 1px dashed #e2e2e2;
+    clear: both;
+    height: 42px;
+    overflow: hidden;
 }
 .content-post-cat .list-content-cat li:last-child{
     border-bottom: none;
@@ -644,6 +643,16 @@ body{
 }
 .item-box.images .item-first img {
     width: 100% !important;
+}
+#block-site-block-content .content-post-cat > ul > li {
+    height: 400px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+#block-site-block-content .content-post-cat > ul > li .wrapp-item-post{
+    border: 1px solid #e2e2e2;
+    margin-top: 10px;
+    background: #f4f4f4;
 }
 /*Ext*/
 /*Left center right*/

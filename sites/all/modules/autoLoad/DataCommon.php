@@ -384,7 +384,7 @@ class DataCommon{
 			$videoHot = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_VIDEO_HOT);
 		}
 		if($videoHot == null || empty($videoHot)) {
-			$arrFields = array('video_id', 'video_name', 'video_link', 'video_status', 'video_hot',
+			$arrFields = array('video_id', 'video_name', 'video_link', 'video_status', 'video_hot', 'video_category',
 								'video_view', 'video_time_creater', 'video_time_update','video_sort_desc','video_content',
 								'video_img','video_file','video_meta_title','video_meta_keyword','video_meta_description');
 
@@ -423,7 +423,7 @@ class DataCommon{
 			$imageHot = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_IMAGE_HOT);
 		}
 		if($imageHot == null || empty($imageHot)) {
-			static $arrFields = array('image_id', 'image_title', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot', 'image_title_alias',
+			static $arrFields = array('image_id', 'image_title', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot', 'image_title_alias', 'image_category',
 		 							'image_create','image_meta_title','image_meta_keyword','image_meta_description', 'image_status');
 
 			$query = db_select(self::$table_image, 'c')

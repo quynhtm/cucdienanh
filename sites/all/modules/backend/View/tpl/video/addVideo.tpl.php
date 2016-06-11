@@ -9,6 +9,14 @@
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
                 <div class="col-lg-6">
                     <div class="col-lg-12 paddingTop10">
+                          <label class="control-label">Danh mục</label>
+                         <div>
+                             <select class="form-control input-sm" name="video_category">
+                                 <?php echo $optionCategory;?>
+                             </select>
+                         </div>
+                    </div>
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Tên video<span>*</span></label>
                          <div><input type="text" class="form-control input-sm" name="video_name" value="<?php if(isset($arrItem->video_name)){ echo $arrItem->video_name; } ?>"></div>
                     </div>

@@ -9,7 +9,7 @@
 			if($k == 0){
 		?>
 			<div class="item-first">
-				<a href="<?php echo FunctionLib::buildLinkDetail($v->image_id, 'thu-vien-anh', $v->image_title_alias) ?>" title="<?php echo $v->image_title ?>">
+				<a href="<?php echo FunctionLib::buildLinkDetail($v->image_id, $v->image_category, $v->image_title_alias) ?>" title="<?php echo $v->image_title ?>">
 					<img src="<?php echo FunctionLib::getThumbImage($v->image_image, $v->image_id, FOLDER_IMAGE, 230, 0) ?>" alt="<?php echo $v->image_title ?>"/>
 				</a>
 			</div>
@@ -21,7 +21,7 @@
                 <ul>
                     <?php foreach($listImageHot as $k=>$v){?>
                     <li>
-                    	<a href="<?php echo FunctionLib::buildLinkDetail($v->image_id, 'thu-vien-anh', $v->image_title_alias) ?>" title="<?php echo $v->image_title ?>">
+                    	<a href="<?php echo FunctionLib::buildLinkDetail($v->image_id, $v->image_category, $v->image_title_alias) ?>" title="<?php echo $v->image_title ?>">
 							<img src="<?php echo FunctionLib::getThumbImage($v->image_image, $v->image_id, FOLDER_IMAGE, 230, 0) ?>" alt="<?php echo $v->image_title ?>"/>
 						</a>
                     </li>

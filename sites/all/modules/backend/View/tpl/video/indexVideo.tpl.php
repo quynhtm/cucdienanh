@@ -10,7 +10,10 @@
 				<label class="control-label">Tên Video</label>
 				<div><input type="text" class="form-control input-sm" placeholder ="Tên video" id="video_name" name="video_name" value="<?php if(isset($dataSearch['video_name'])){echo $dataSearch['video_name'];}?>"/></div>
 			</div>
-
+			<div class="col-lg-3">
+				<label class="control-label">Danh mục</label>
+				<div><select class="form-control input-sm" name="video_category"><?php echo $optionCategory;?></select></div>
+			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Nổi bật</label>
 				<div><select class="form-control input-sm" name="video_status"><?php echo $optionHot;?></select></div>
@@ -56,6 +59,7 @@
 						<th width="2%"class="td_list">STT <input type="checkbox" id="checkAll"/></th>
 						<th width="6%" class="td_list">Ảnh</th>
 						<th width="20%" class="td_list">Tên Video</th>
+						<th width="20%" class="td_list">Thuộc danh mục</th>
 						<th width="30%" class="td_list">Link video</th>
 						<th width="10%" class="td_list">Lượt view</th>
 						<th width="20%" class="td_list">Ngày tạo</th>
@@ -91,6 +95,7 @@
 									echo '<b>Video: </b>['.$item->video_id.'] '.$item->video_name.'<br/>';
 								?>
 							</td>
+							<td><?php echo isset($arrCategoryNew[$item->video_category])?$arrCategoryNew[$item->video_category]:'Chưa rõ'; ?></td>
 							<td>
 								<?php
 									echo $item->video_link;

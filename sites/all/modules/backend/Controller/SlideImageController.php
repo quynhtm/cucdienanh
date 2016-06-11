@@ -23,7 +23,7 @@ class SlideImageController{
 		);
 		Loader::load('Admin', $files);
 
-		$aryCatergoryNews = DataCommon::getListCategoryNews();
+		$aryCatergoryNews = DataCommon::getListCategoryNews('group_images');
 		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục tin tức ---') + $aryCatergoryNews;
 	}
 
@@ -34,6 +34,7 @@ class SlideImageController{
 		$dataSearch['image_title'] = FunctionLib::getParam('image_title','');
 		$dataSearch['image_status'] = FunctionLib::getParam('image_status', -1);
 		$dataSearch['image_hot'] = FunctionLib::getParam('image_hot', -1);
+		$dataSearch['image_category'] = FunctionLib::getParam('image_category', -1);
 
 		$result = SlideImage::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -45,16 +46,19 @@ class SlideImageController{
 			}
 		}
 
-		//FunctionLib::Debug($result['data']);
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['image_status']);
 		$optionHot = FunctionLib::getOption($this->arrHot, $dataSearch['image_hot']);
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['image_category']);
+
 		return $view = theme('indexSlideImage',array(
 									'title'=>'Quản lý thư viện ảnh',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionHot' => $optionHot,
+									'optionCategory' => $optionCategory,
+									'arrCategoryNew'=>$this->arrCategoryNew,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -101,6 +105,8 @@ class SlideImageController{
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
 			$image_title = FunctionLib::getParam('image_title','');
+			$image_category = FunctionLib::getIntParam('image_category',0);
+			
 			$dataInput = array(
 				'image_title'=>array('value'=>FunctionLib::getParam('image_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
 				'image_title_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($image_title)),'require'=>0),
@@ -110,6 +116,7 @@ class SlideImageController{
 				'image_status'=>array('value'=>FunctionLib::getIntParam('image_status',0)),
 				'image_hot'=>array('value'=>FunctionLib::getIntParam('image_hot',0)),
 				'image_create'=>array('value'=>time()),
+				'image_category'=>array('value'=> $image_category, 'require'=>1, 'messages'=>'Danh mục ảnh không được bỏ trống!'),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'uid'=>array('value'=>$user->uid, 'require'=>0),
@@ -159,10 +166,12 @@ class SlideImageController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->image_status) ? $arrItem->image_status: STASTUS_SHOW);
 		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->image_hot) ? $arrItem->image_hot: 0);
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->image_category) ? $arrItem->image_category: -1);
 		return $view = theme('addSlideImage',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
+				'optionCategory'=>$optionCategory,
 				'errors'=>$errors,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus,

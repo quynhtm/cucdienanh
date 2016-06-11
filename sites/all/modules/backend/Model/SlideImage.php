@@ -5,7 +5,7 @@
 class SlideImage{
 	static $table_action = TABLE_IMAGE;
 	static $primary_key = 'image_id';
-	static $arrFields = array('image_id', 'image_title', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot',
+	static $arrFields = array('image_id', 'image_title', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot', 'image_category',
 		 'image_create','image_meta_title','image_meta_keyword','image_meta_description', 'image_status');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
@@ -29,6 +29,10 @@ class SlideImage{
 						array_push($arrCond, $field.' = '.$value);
 					}
 					if($field === 'image_hot' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+					if($field === 'image_category' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}

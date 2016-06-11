@@ -42,6 +42,31 @@ class SiteController{
 		return $result;
 	}
 
+	public static function getListPostInCategory($category_id=0){
+		$arrCatId = array();
+		$arrPost = array();
+		if($category_id > 0){
+			$listCategory = DataCommon::getListCategoryFull();
+			foreach($listCategory as $k => $v){
+				if(!empty($v)){
+					if($category_id == $v['category_id']){
+						array_push($arrCatId, $v['category_id']);
+
+						if(isset($v['sub']) && !empty($v['sub'])){
+							foreach($v['sub'] as $s){
+								array_push($arrCatId, $s['category_id']);
+							}
+						}
+					}
+				}
+			}
+		}
+		if(!empty($arrCatId)){
+			$arrPost = Site::getListPostInCategory($arrCatId, 5, $arrFields=array());
+		}
+		return $arrPost;
+	}
+
 	public static function getMenuLoad(){
 		global $base_url;
 		$param = arg();

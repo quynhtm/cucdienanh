@@ -5,7 +5,6 @@
 class NewsController{
 	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrHot = array(STASTUS_HIDE => 'Không', STASTUS_SHOW => 'Nổi bật');
-
 	private $arrCategoryNew = array();
 
 	public function __construct(){

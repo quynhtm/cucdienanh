@@ -6,7 +6,6 @@
 				<label class="control-label">Tiêu đề bài viết</label>
 				<div><input type="text" class="form-control input-sm" placeholder ="Tiêu đề bài viết" id="news_title" class="keyword" name="news_title" value="<?php echo $dataSearch['news_title'] ?>"/></div>
 			</div>
-
 			<div class="col-lg-3">
 				<label class="control-label">Danh mục</label>
 				<div><select class="form-control input-sm" name="news_category"><?php echo $optionCategory;?></select></div>

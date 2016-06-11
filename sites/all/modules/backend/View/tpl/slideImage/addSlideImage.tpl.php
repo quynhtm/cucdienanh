@@ -7,7 +7,14 @@
 	</div>
 	<div class="page-content-box paddingTop30">
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
-		 	
+		 	<div class="control-group">
+                 <label class="control-label">Danh mục<span>*</span></label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="image_category">
+                         <?php echo $optionCategory;?>
+                     </select>
+                 </div>
+            </div>
              <div class="control-group">
                 <label class="control-label">Title slide ảnh<span>*</span></label>
                 <div class="controls">

@@ -5,6 +5,7 @@
 class VideoController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrHot = array(STASTUS_HIDE => 'Không', STASTUS_SHOW => 'Nổi bật');
+	private $arrCategoryNew = array();
 
 	public function __construct(){
 		
@@ -22,6 +23,8 @@ class VideoController{
 		);
 		Loader::load('Admin', $files);
 
+		$aryCatergoryNews = DataCommon::getListCategoryNews('group_video');
+		$this->arrCategoryNew = array(-1 => '--- Chọn danh mục video ---') + $aryCatergoryNews;
 	}
 
 	function indexVideo(){
@@ -32,6 +35,7 @@ class VideoController{
 		$dataSearch['video_name'] = FunctionLib::getParam('video_name', '');
 		$dataSearch['video_status'] = FunctionLib::getIntParam('video_status', -1);
 		$dataSearch['video_hot'] = FunctionLib::getIntParam('video_hot', -1);
+		$dataSearch['video_category'] = FunctionLib::getParam('video_category', -1);
 
 		$result = Video::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -45,6 +49,7 @@ class VideoController{
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['video_status']);
 		$optionHot = FunctionLib::getOption($this->arrHot, $dataSearch['video_hot']);
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['video_category']);
 
 		return $view = theme('indexVideo',array(
 									'title'=>'Quản lý Video',
@@ -52,7 +57,9 @@ class VideoController{
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionHot' => $optionHot,
-									'arrProductStatus' => $this->arrStatus,
+									'optionCategory' => $optionCategory,
+									'arrStatus' => $this->arrStatus,
+									'arrCategoryNew' => $this->arrCategoryNew,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -81,6 +88,7 @@ class VideoController{
 			$video_img_old = trim(FunctionLib::getParam('img_old', ''));
 			$video_file = trim(FunctionLib::getParam('video_file', ''));
 			$video_name = FunctionLib::getParam('video_name','');
+			$video_category = FunctionLib::getIntParam('video_category',0);
 
 			$dataInput = array(
 				'video_name'=>array('value'=>FunctionLib::getParam('video_name',''), 'require'=>1, 'messages'=>'Tên Video không được bỏ trống!'),
@@ -93,6 +101,7 @@ class VideoController{
 				'video_sort_desc'=>array('value'=>FunctionLib::getParam('video_sort_desc','')),
 				'video_content'=>array('value'=>FunctionLib::getParam('video_content','')),
 				'video_time_update'=>array('value'=>time()),
+				'video_category'=>array('value'=> $video_category, 'require'=>1, 'messages'=>'Danh mục video không được bỏ trống!'),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'uid'=>array('value'=>$user->uid, 'require'=>0),
@@ -144,12 +153,14 @@ class VideoController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->video_status) ? $arrItem->video_status: STASTUS_SHOW);
 		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->video_hot) ? $arrItem->video_hot: STASTUS_HIDE);
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->video_category) ? $arrItem->video_category: -1);
 
 		return $view = theme('addVideo',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'title'=>'Video giải trí',
 				'optionStatus'=>$optionStatus,
+				'optionCategory'=>$optionCategory,
 				'optionHot'=>$optionHot));
 	}
 

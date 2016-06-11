@@ -459,10 +459,16 @@ class FunctionLib{
 		return $url;
 	}
 
-	public static function buildLinkDetail($item_id = 0, $cat_name_alias = '', $title_name_alias = ''){
+	public static function buildLinkDetail($item_id = 0, $cat_id = 0, $title_name_alias = ''){
 		global $base_url;
 		$url = '';
-		if($item_id > 0 && $cat_name_alias !='' && $title_name_alias !=''){
+		if($item_id > 0 && $cat_id > 0 && $title_name_alias !=''){
+			$arrCat = DataCommon::getCategoryById($cat_id);
+			if(!empty($arrCat)){
+				$cat_name_alias = $arrCat->category_name_alias;
+			}else{
+				$cat_name_alias = 'tin-tuc';	
+			}
 			$url = $base_url.'/'.$cat_name_alias.'/'.$title_name_alias.'.html';
 		}
 		return $url;
