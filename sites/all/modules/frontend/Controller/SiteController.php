@@ -46,7 +46,7 @@ class SiteController{
 		$arrCatId = array();
 		$arrPost = array();
 		if($category_id > 0){
-			$listCategory = DataCommon::getListCategoryFull();
+			$listCategory = DataCommon::getListCategoryFull('sort');
 			foreach($listCategory as $k => $v){
 				if(!empty($v)){
 					if($category_id == $v['category_id']){
@@ -81,11 +81,12 @@ class SiteController{
 
 	public static function getMenuLoad(){
 		global $base_url;
-		$param = arg();
 		
+		$param = arg();
+		$listCategory = DataCommon::getListCategoryFull('notsort');
+
 		if(count($param) == 1 && $param[0] != ''){
 			$cat_alias = substr($param[0], 0, -5);
-			$listCategory = DataCommon::getListCategoryFull();
 			foreach($listCategory as $k=>$v){
 				if(!empty($v)){
 					
@@ -93,7 +94,7 @@ class SiteController{
 					$type_keyword = $v['type_keyword'];
 					$category_name_alias = $v['category_name_alias'];
 					$cat_id= $v['category_id'];
-					
+
 					if($type_keyword == 'group_news' && $cat_alias == $category_name_alias){
 						return self::get_list_item_news($type_id, $cat_id);
 					}elseif($type_keyword == 'group_document' && $cat_alias == $category_name_alias){
@@ -105,33 +106,32 @@ class SiteController{
 					}
 				}
 			}
-			drupal_goto($base_url);
+			drupal_goto($base_url.'/page-404');
 		}elseif(count($param) == 2 && $param[1] != ''){
-			$listCategory = DataCommon::getListCategoryFull();
+			$cat_alias = $param[0];
 			foreach($listCategory as $k=>$v){
-				
-				$type_id= $v['type_id'];
+		
 				$type_keyword = $v['type_keyword'];
-				$category_name_alias = $v['category_name_alias'];
-				$cat_id= $v['category_id'];
 				$title_alias = $param[1];
-
-				if($type_keyword == 'group_news' && $cat_alias == $category_name_alias){
-					return self::get_item_view_news($title_alias, $cat_id);
-				}elseif($type_keyword == 'group_document' && $cat_alias == $category_name_alias){
-					return self::get_item_view_document($title_alias, $cat_id);
-				}elseif($type_keyword == 'group_images' && $cat_alias == $category_name_alias){
-					return self::get_item_view_images($title_alias, $cat_id);
-				}elseif($type_keyword == 'group_video' && $cat_alias == $category_name_alias){
-					return self::get_item_view_video($title_alias, $cat_id);
+				$category_name_alias = $v['category_name_alias'];
+				
+				if($type_keyword == 'group_news' && $cat_alias == $category_name_alias && $title_alias != ''){
+					return self::get_item_view_news($title_alias, $cat_alias);
+				}elseif($type_keyword == 'group_document' && $cat_alias == $category_name_alias && $title_alias != ''){
+					return self::get_item_view_document($title_alias, $cat_alias);
+				}elseif($type_keyword == 'group_images' && $cat_alias == $category_name_alias && $title_alias != ''){
+					return self::get_item_view_images($title_alias, $cat_alias);
+				}elseif($type_keyword == 'group_video' && $cat_alias == $category_name_alias && $title_alias != ''){
+					return self::get_item_view_video($title_alias, $cat_alias);
 				}
 			}
-			drupal_goto($base_url);
+			drupal_goto($base_url.'/page-404');
 		}
 	}
 
 	public static function get_list_item_news(){
-		echo "News...";die;
+		//echo "News...";die;
+		return '';
 	}
 	public static function get_list_item_document(){
 		echo "Document";die;
@@ -141,5 +141,10 @@ class SiteController{
 	}
 	public static function get_list_item_video(){
 		echo "Video";die;
+	}
+
+	public static function get_item_view_news($title_alias, $cat_id){
+
+		return theme('pageNewsDetail');
 	}
 }

@@ -41,9 +41,13 @@ class DataCommon{
 		return $categoryParent;
 	}
 
-	public static function getListCategoryFull(){
+	public static function getListCategoryFull($sort='notsort'){
 		
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_FULL;
+		if($sort == 'sort'){
+			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_FULL.'_notsort';
+		}else{
+			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_FULL;
+		}
 
 		$listCategory = array();
 		if(Cache::CACHE_ON){
@@ -60,25 +64,25 @@ class DataCommon{
 				foreach($data as $k=>$va){
 					$listCategory[$k] = (array)$va;
 				}
-
-				//Sort data
-				$arrParent = array();
-				foreach($listCategory as $k=>$v){
-					if($v['category_parent_id'] == 0){
-						$arrParent[$k] = $listCategory[$k];
-						unset($listCategory[$k]);
-					}
-				}
-				foreach($arrParent as $key=>$val){
+				if($sort != 'notsort'){
+					//Sort data
+					$arrParent = array();
 					foreach($listCategory as $k=>$v){
-						if($val['category_id'] == $v['category_parent_id']){
-							$arrParent[$key]['sub'][] = $listCategory[$k];
+						if($v['category_parent_id'] == 0){
+							$arrParent[$k] = $listCategory[$k];
 							unset($listCategory[$k]);
 						}
 					}
+					foreach($arrParent as $key=>$val){
+						foreach($listCategory as $k=>$v){
+							if($val['category_id'] == $v['category_parent_id']){
+								$arrParent[$key]['sub'][] = $listCategory[$k];
+								unset($listCategory[$k]);
+							}
+						}
+					}
+					$listCategory = $arrParent;
 				}
-				$listCategory = $arrParent;
-
 				if (Cache::CACHE_ON) {
 					$cache->do_put($key_cache, $listCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}

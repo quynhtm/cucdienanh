@@ -3,7 +3,7 @@ body{
     background: #fff url(../img/bg.png) repeat 0 0;
 }
 .header-top{
-    height: 150px;
+    height: 128px;
     background: #008fe6 url(../img/bg-firm-header.png) no-repeat top right;
     width:100%;
     overflow: hidden;
@@ -16,7 +16,7 @@ body{
     border-radius: 5px;
     float: left;
     margin-right: 10px;
-    margin-top: 45px;
+    margin-top: 40px;
     overflow: hidden;
     width: 255px;
 }
@@ -57,7 +57,7 @@ body{
 .right-header .search {
     background: #fff none repeat scroll 0 0;
     border-radius: 15px;
-    bottom: 0;
+    bottom: 20px;
     display: inline-block;
     height: 30px;
     padding-left: 10px;
@@ -705,6 +705,10 @@ body{
 .bx-wrapper .title-slider a:hover{
     text-decoration: underline;
 }
+.not-front .bg-content {
+    min-height: 350px;
+    background: none;
+}
 /*Ext*/
 /*Left center right*/
 #wrapper-c .site-left{
@@ -731,7 +735,7 @@ body{
 }
 #wrapper-l .site-content {
     display: inline-block;
-    float: left;
+    float: right;
     margin: 0 0 0 10px;
     width: 820px;
 }

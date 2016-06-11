@@ -14,10 +14,21 @@ function Site_menu() {
         'type' => MENU_CALLBACK,
     );
 	//Category link
-	$listCategory = DataCommon::getListCategoryFull();
+	$listCategory = DataCommon::getListCategoryFull('notsort');
 	foreach($listCategory as $key => $val){
+		//Category
 		$key_cat = $val['category_name_alias'].'.html';
 		$items[$key_cat] = array(
+			"title" => $val['category_name'],
+			"description" => $val['category_name'],
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getMenuLoad'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
+		//Detail
+		$key_detail = $val['category_name_alias'];
+		$items[$key_detail.'/%'] = array(
 			"title" => $val['category_name'],
 			"description" => $val['category_name'],
 			'page callback' => 'menuLoad',
@@ -76,6 +87,27 @@ function Site_block_info() {
 	);
 	$blocks['block-left-banner'] = array(
 		'info' => t('Block left banner'),
+		'status'	=> TRUE,
+		'region'	=> 'left',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-left-images'] = array(
+		'info' => t('Block left images'),
+		'status'	=> TRUE,
+		'region'	=> 'left',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-left-document'] = array(
+		'info' => t('Block left document'),
+		'status'	=> TRUE,
+		'region'	=> 'left',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-left-video'] = array(
+		'info' => t('Block left video'),
 		'status'	=> TRUE,
 		'region'	=> 'left',
 		'weight'	=> 0,
@@ -207,6 +239,18 @@ function Site_block_view($delta='') {
 		  $block['subject'] = t('Block left banner');
 		  $block['content'] = block_left_banner();
 		  break;
+		case 'block-left-images':
+		  $block['subject'] = t('Block left images');
+		  $block['content'] = block_left_images();
+		  break;
+		case 'block-left-document':
+		  $block['subject'] = t('Block left document');
+		  $block['content'] = block_left_document();
+		  break;
+		case 'block-left-video':
+		  $block['subject'] = t('Block left video');
+		  $block['content'] = block_left_video();
+		  break;
 		//Right
 		case 'block-right-video':
 		  $block['subject'] = t('Block right video');
@@ -273,7 +317,7 @@ function page_default(){
 }
 
 function block_header(){
-	$listCategory = DataCommon::getListCategoryFull();
+	$listCategory = DataCommon::getListCategoryFull('sort');
 	return theme('block-header', array('listCategory'=>$listCategory));
 }
 function block_slide(){
@@ -283,7 +327,7 @@ function block_slide(){
 }
 
 function block_content(){
-	$listCategory = DataCommon::getListCategoryFull();
+	$listCategory = DataCommon::getListCategoryFull('sort');
 	return theme('block-content', array('listCategory'=>$listCategory));
 }
 function block_footer(){
@@ -293,7 +337,7 @@ function block_footer(){
 
 //Left
 function block_left_category(){
-	$listCategory = DataCommon::getListCategoryFull();
+	$listCategory = DataCommon::getListCategoryFull('sort');
 	return theme('block-left-category', array('listCategory'=>$listCategory));
 }
 function block_left_services_focus(){
@@ -304,14 +348,25 @@ function block_left_banner(){
 	$leftBanner = SiteController::blockLeftBanner();
 	return theme('block-left-banner', array('leftBanner'=>$leftBanner));
 }
-
+function block_left_images(){
+	$listImageHot = SiteController::blockRightImage();
+	return theme('block-right-images', array('listImageHot'=>$listImageHot));
+}
+function block_left_document(){
+	$listCategory = DataCommon::getListCategoryFull('sort');
+	return theme('block-right-document', array('listCategory'=>$listCategory));
+}
+function block_left_video(){
+	$listVideoHot = SiteController::blockRightVideo();
+	return theme('block-right-video', array('listVideoHot'=>$listVideoHot));
+}
 //Right
 function block_right_video(){
 	$listVideoHot = SiteController::blockRightVideo();
 	return theme('block-right-video', array('listVideoHot'=>$listVideoHot));
 }
 function block_right_document(){
-	$listCategory = DataCommon::getListCategoryFull();
+	$listCategory = DataCommon::getListCategoryFull('sort');
 	return theme('block-right-document', array('listCategory'=>$listCategory));
 }
 function block_right_images(){
