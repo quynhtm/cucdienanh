@@ -415,6 +415,7 @@ body{
     padding: 5px 8px;
     text-transform: none;
     color: #333;
+    font-size: 14px;
 }
 .link-breadcrumb a {
     display: inline-block;
@@ -459,9 +460,9 @@ body{
     background: rgba(0, 0, 0, 0) url("../img/bookmark.png") no-repeat scroll 3px 5px;
     border: 1px solid #e2e2e2;
     display: inline-block;
-    height: 23px;
-    padding: 2px 7px 5px 20px;
+    padding: 2px 7px 2px 20px;
     vertical-align: top;
+    cursor: pointer;
 }
 .line-save .print {
     background: rgba(0, 0, 0, 0) url("../img/icon-print.png") no-repeat scroll 0 3px;
@@ -472,6 +473,7 @@ body{
     top: 2px;
     color: #222;
     font-weight: bold;
+    cursor: pointer;
 }
 .line-save .date-created{
     display: inline-block;
@@ -501,6 +503,7 @@ body{
     top: 2px;
     color: #222;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .line-save .commment {
@@ -512,6 +515,7 @@ body{
     top: 2px;
     color: #222;
     font-weight: bold;
+    cursor: pointer;
 }
 .line-save .back {
     background: rgba(0, 0, 0, 0) url("../img/icon-back.png") no-repeat scroll 0 3px;
@@ -521,6 +525,17 @@ body{
     position: relative;
     top: 2px;
     color: #222;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.line-intro-view{
+    margin-top: 10px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 14px;
+    color: #222;
+    text-align: justify;
     font-weight: bold;
 }
 
@@ -533,7 +548,7 @@ body{
     text-align: justify;
 }
 .line-content-view p{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 14px;
     color: #222;
 }
@@ -581,7 +596,7 @@ body{
     clear: both;
 }
 .content-same-post ul li a {
-    background: rgba(0, 0, 0, 0) url("../img/dot-red.png") no-repeat scroll left center;
+    background: rgba(0, 0, 0, 0) url("../img/dot-red.png") no-repeat scroll 0px 9px;
     color: #333333;
     display: block;
     font-weight: bold;

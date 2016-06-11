@@ -1,26 +1,44 @@
-<?php global $base_url;?>
+<?php 
+	global $base_url;
+
+	$news_id = $result->news_id;
+	$news_category = $result->news_category;
+	$news_title = $result->news_title;
+	$news_title_alias = $result->news_title_alias;
+	$news_desc_sort = $result->news_desc_sort;
+	$news_content = $result->news_content;
+	$news_create = $result->news_create;
+
+	$news_meta_title = $result->news_meta_title;
+	$news_meta_keyword = $result->news_meta_keyword;
+	$news_meta_description = $result->news_meta_description;
+	
+	$news_image = $result->news_image;
+	if($result->news_image != ''){
+		$news_image = FunctionLib::getThumbImage($result->news_image, $news_id, FOLDER_NEWS,400,500);
+	}
+	if($news_meta_title == ''){
+		$news_meta_title = $news_title;
+	}
+	SeoMeta::SEO($news_title.' - '.WEB_SITE, $news_image, $news_meta_title.' - '.WEB_SITE, $news_meta_keyword.' - '.WEB_SITE, $news_meta_description.' - '.WEB_SITE);
+?>
+
 <div class="link-breadcrumb">
-	<a title="Trang chủ" href="">Trang chủ</a> > 
-	<a title="Điện ảnh Việt Nam" href="">Điện ảnh Việt Nam</a>
+	<a title="Trang chủ" href="<?php echo $base_url ?>">Trang chủ</a> › 
+	<a href="<?php echo FunctionLib::buildLinkCategory($arrCat->category_id, $arrCat->category_name_alias); ?>" title="<?php echo $arrCat->category_name ?>"><?php echo $arrCat->category_name ?></a>
 </div>
 <div class="box-content-view">
-	<div class="title"><a href="">Những ngọn nến trong đêm phần 2 – Hé lộ hậu trường showbiz</a> <span></span></div>
+	<div class="title"><a href="<?php echo FunctionLib::buildLinkDetail($news_id, $news_category, $news_title_alias); ?>" title="<?php echo $news_title ?>"><?php echo $news_title ?></a> <span></span></div>
 	<div class="line-save">
 		<div class="bookmark">Bookmark</div>
-		<div class="print">In bài viết</div>
-		<div class="date-created">3/02/2016 01:53:00</div>
+		<div class="print" data-cat='<?php echo $news_category ?>' data-post="<?php echo $news_title_alias.'-'.$news_id.'.html' ?>">In bài viết</div>
+		<div class="date-created"><?php echo date('d/m/Y h:i', $news_create)?></div>
 	</div>
-	<div class="line-content-view">
-		Sau thành công của phần 1 cách đây đã 14 năm, bộ phim Những ngọn nến trong đêm phần 2 sắp tái ngộ khán giả màn ảnh nhỏ với dàn 
-		diễn viên “quen mà lạ”. Những gương mặt thân quen của phần 1 là “cô Trúc” Mai Thu Huyền và Văn – Bá Anh nhưng 
-		dàn diễn viên mới của phần 2 cũng hứa hẹn nhiều thú vị khi họ đều là những tên tuổi đắt show như Bình Minh, Chi Bảo, Kỳ Hân, 
-		NSƯT Mỹ Uyên, Đan Lê, NSND Lan Hương… Tuy nhiên, điểm mấu chốt mang lại sức hấp dẫn cho Những ngọn nến trong đêm phần 2 không 
-		phải hiệu ứng từ phần 1, cũng không phải dàn diễn viên hạng sao hùng hậu mà chính nội dung câu chuyện và các tình huống phim được 
-		xử lý thông minh, hiện đại và độ chín của trải nghiệm. Câu chuyện của phụ nữ
-	</div>
+	<div class="line-intro-view"><?php echo $news_desc_sort ?></div>
+	<div class="line-content-view"><?php echo $news_content ?></div>
 	<div class="line-save ext">
 		<div class="bookmark">Bookmark</div>
-		<div class="print">In bài viết</div>
+		<div class="print" data-cat='<?php echo $news_category ?>' data-post="<?php echo $news_title_alias.'-'.$news_id.'.html' ?>">In bài viết</div>
 		<div class="view">Xem phản hồi</div>
 		<div class="commment">Gửi phản hồi</div>
 		<div class="back">Trở về</div>
@@ -28,18 +46,24 @@
 	<div class="title-same">Tin khác<span></span></div>
 	<div class="content-same-post">
 		<ul>
-			<li><a href="">Hồ Quang 8: “Không quá đao to búa lớn”</a></li>
-			<li><a href="">Ariana Grande: Thành công bắt đầu từ đâu</a></li>
-			<li><a href="">Danh ca Khánh Ly tâm sự cuộc đời trong lỗi</a></li>
-			<li><a href="">Triệu Trang chào năm mới bằng sêri album</a></li>
-			<li><a href="">Quảng bá sâu rộng cho nét tinh tế từ áo dài</a></li>
+			<?php foreach($arrSame as $k=>$item){
+				if($k<5){
+			?>
+			<li><a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a></li>
+			<?php 
+				} 
+			}
+			?>
 		</ul>
 		<ul>
-			<li><a href="">Hồ Quang 8: “Không quá đao to búa lớn”</a></li>
-			<li><a href="">Ariana Grande: Thành công bắt đầu từ đâu</a></li>
-			<li><a href="">Danh ca Khánh Ly tâm sự cuộc đời trong lỗi</a></li>
-			<li><a href="">Triệu Trang chào năm mới bằng sêri album</a></li>
-			<li><a href="">Quảng bá sâu rộng cho nét tinh tế từ áo dài</a></li>
+			<?php foreach($arrSame as $k=>$item){
+				if($k>=5){
+			?>
+			<li><a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a></li>
+			<?php 
+				} 
+			}
+			?>
 		</ul>
 	</div>
 </div>

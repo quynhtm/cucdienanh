@@ -17,7 +17,7 @@ function Site_menu() {
 	$listCategory = DataCommon::getListCategoryFull('notsort');
 	foreach($listCategory as $key => $val){
 		//Category
-		$key_cat = $val['category_name_alias'].'.html';
+		$key_cat = $val['category_name_alias'].'-'.$val['category_id'].'.html';
 		$items[$key_cat] = array(
 			"title" => $val['category_name'],
 			"description" => $val['category_name'],
@@ -37,6 +37,14 @@ function Site_menu() {
 			'type' => MENU_CALLBACK,
 		);
 	}
+	$items['print/%/%'] = array(
+			"title" => 'In bài viết',
+			"description" => 'In bài viết',
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getItemPrint'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
   return $items;
 }
 
@@ -183,16 +191,17 @@ function Site_theme() {
 	      'template' => 'View/tpl/block-right-banner'
 	    ),
 
-
+	    
 	    'pageNews' => array(
 	      'template' => 'View/tpl/pageNews'
-	    ), 
+	    ),
 	    'pageNewsDetail' => array(
 	      'template' => 'View/tpl/pageNewsDetail'
 	    ), 
 	    'pageNewsSearch' => array(
 	      'template' => 'View/tpl/pageNewsSearch'
 	    ),
+
 
 	    'pageVideo' => array(
 	      'template' => 'View/tpl/pageVideo'
@@ -284,6 +293,7 @@ function Site_init() {
 		Loader::load('Site', $files);
 		$files = array(
 	        'css/core.css',
+	        'js/jquery.alerts.js',
 	    );
 	    Loader::load('Core', $files);
 	}

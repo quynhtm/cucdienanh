@@ -454,7 +454,7 @@ class FunctionLib{
 		
 		$url = '';
 		if($category_id > 0 && $category_name_alias !=''){
-			$url = $base_url.'/'.$category_name_alias.'.html';
+			$url = $base_url.'/'.$category_name_alias.'-'.$category_id.'.html';
 		}
 		return $url;
 	}
@@ -469,9 +469,19 @@ class FunctionLib{
 			}else{
 				$cat_name_alias = 'tin-tuc';	
 			}
-			$url = $base_url.'/'.$cat_name_alias.'/'.$title_name_alias.'.html';
+			$url = $base_url.'/'.$cat_name_alias.'/'.$title_name_alias.'-'.$item_id.'.html';
 		}
 		return $url;
+	}
+
+	public static function getIdItemInLink($str=''){
+		$id=0;
+		if($str != ''){
+			$str_alias = substr($str, 0, -5);
+			$arrStr = explode('-', $str_alias);
+			$id = intval(end($arrStr));
+		}
+		return $id;
 	}
 
 	public static function sessionLang(){

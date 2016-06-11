@@ -1,11 +1,11 @@
 jQuery(document).ready(function($){
-	BACK_TOP.init();
-	HOVER_CATEGORY.init();
-	AJAX_LOAD.product_new();
+	SITE.back_top();
+	SITE.bookmark();
+	SITE.history_back();
+	SITE.print();
 });
-
-BACK_TOP={
-	init:function(){
+SITE={
+	back_top:function(){
 		 jQuery(window).scroll(function() {
             if(jQuery(window).scrollTop() > 0) {
 				jQuery("#back-to-top").fadeIn();
@@ -17,48 +17,27 @@ BACK_TOP={
 			jQuery("html, body").animate({scrollTop: 0}, 1000);
 			return false;
 		});
-	}
-}
-HOVER_CATEGORY = {
-	init:function(){
-		jQuery('.box-menu-hover').hover(
-			function(){
-				jQuery('body').append('<div class="bg-opacity"></div>');
-				jQuery(this).addClass('act');
-			},
-			function(){
-				jQuery('body').find('div.bg-opacity').remove();
-				jQuery(this).removeClass('act');
-			}
-		);
-	}
-}
-AJAX_LOAD = {
-	product_new:function(){
-		var check_page = jQuery('body #main-product-new').size();
-		if(check_page > 0){
-			jQuery(window).scroll(function() {
-				if(jQuery(window).scrollTop() >= jQuery(document).height()/2){
-					var currentPage = parseInt(jQuery('input#currentPage').val()),
-						totalPage = parseInt(jQuery('input#totalPage').val()),
-						url = BASEPARAMS.base_url + '/san-pham-moi.html';
-				
-					if(currentPage <= totalPage){
-						jQuery('input#currentPage').val(currentPage + 1);
-						jQuery.ajax({
-							type: "POST",
-							url: url,
-							data: "currentPage="+encodeURI(currentPage),
-							success: function(data){
-								if(data != ''){
-									jQuery('#main-product-new ul').append(data);
-								}
-								return false;
-							}
-						});
-					}
-	            }
-			});
-		}
+	},
+	bookmark:function(){
+		jQuery(".line-save .bookmark").click(function(e){
+			jAlert( 'Nhấn CTRL+D và click link để bookmark!', 'Cảnh báo');
+		});
+	},
+	history_back:function(){
+		jQuery(".line-save .back").click(function(){
+	   		window.history.back();
+	   });
+	},
+	print:function(){
+		jQuery(".line-save .print").click(function(){
+			var w  = 600;
+			var left = (window.screen.width / 2) - ((w / 2) + 10);
+    		var data_cat_alias = jQuery(this).attr('data-cat');
+    		var data_post = jQuery(this).attr('data-post');
+    		window.open(BASEPARAMS.base_url+'/print/'+data_cat_alias+'/'+data_post, 'In bài viết', 'width='+w+', resizable=yes, scrollbars=yes, status=yes, screenX='+left);
+		});
+		jQuery(".right-print").click(function(){
+			window.print();
+		});
 	}
 }
