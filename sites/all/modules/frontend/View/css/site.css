@@ -224,9 +224,10 @@ body{
 .list-item-slider {
     clear: both;
     display: inline-block;
+    height: 170px;
     margin-top: 10px;
-    width: 100%;
     overflow: hidden;
+    width: 100%;
 }
 .list-item-slider ul{
     margin-right: -50px;
@@ -318,9 +319,9 @@ body{
     width: 100%;
 }
 .content-post-cat .content-cat .title {
-    background: rgba(0, 0, 0, 0) url("../img/bg-cat-title.png") repeat-x scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/bg-cat-title.png") repeat scroll 0 0;
     bottom: 0px;
-    height: 36px;
+    height: auto;
     overflow: hidden;
     position: absolute;
 }
@@ -653,6 +654,56 @@ body{
     border: 1px solid #e2e2e2;
     margin-top: 10px;
     background: #f4f4f4;
+}
+.bx-wrapper .sliderPostHot img{
+    height: 300px!important;
+}
+.bx-wrapper .bx-controls-direction{
+    display: none;
+}
+.bx-wrapper:hover .bx-controls-direction{
+    display: block;
+}
+.bx-wrapper .bx-controls-direction a{
+    background: #d1d1d1 none repeat scroll 0 0;
+    border-radius: 100%;
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 28px;
+    opacity: 0.8;
+    text-align: center;
+    text-indent: 0 !important;
+}
+.bx-wrapper .bx-controls-direction .bx-prev{
+    left: 10px;
+}
+.bx-wrapper .bx-controls-direction .bx-next{
+    right: 10px;
+}
+.slide.item-slider {
+    position: relative;
+    height: 300px;
+    width: 100% !important;
+    overflow: hidden;
+}
+.bx-wrapper .title-slider {
+    background: rgba(0, 0, 0, 0) url("../img/bg-cat-title.png") repeat scroll 0 0;
+    bottom: 0;
+    height: auto;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+.bx-wrapper .title-slider a {
+    color: #fff;
+    display: inline-block;
+    font-size: 17px;
+    padding: 5px 10px;
+    width: 100%;
+}
+.bx-wrapper .title-slider a:hover{
+    text-decoration: underline;
 }
 /*Ext*/
 /*Left center right*/

@@ -28,4 +28,24 @@ class Site{
 		}
 		return $arrItem;
 	}
+
+	public static function getListPostSlider($limit=10, $arrFields){
+		if(empty($arrFields)){
+			$arrFields = self::$arrFields;
+		}
+		$arrItem = array();
+		if($limit > 0){
+			$sql = db_select(self::$table_action_news, 'i');
+			foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            
+            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+            $sql->condition('i.news_hot', STASTUS_SHOW, '=');
+
+            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+		}
+		return $arrItem;
+	}
 }

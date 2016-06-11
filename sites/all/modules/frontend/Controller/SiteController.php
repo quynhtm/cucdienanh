@@ -67,6 +67,18 @@ class SiteController{
 		return $arrPost;
 	}
 
+	public static function getListPostSlider(){
+
+		$files = array(
+            '/bootstrap/lib/bxslider/bxslider.min.js',
+			'/bootstrap/lib/bxslider/bxslider.css',
+		);
+		Loader::load('Core', $files);
+
+		$result = Site::getListPostSlider(10, array());
+		return $result;
+	}
+
 	public static function getMenuLoad(){
 		global $base_url;
 		$param = arg();
@@ -88,6 +100,8 @@ class SiteController{
 						return self::get_list_item_document($type_id, $cat_id);
 					}elseif($type_keyword == 'group_images' && $cat_alias == $category_name_alias){
 						return self::get_list_item_images($type_id, $cat_id);
+					}elseif($type_keyword == 'group_video' && $cat_alias == $category_name_alias){
+						return self::get_list_item_video($type_id, $cat_id);
 					}
 				}
 			}
@@ -108,6 +122,8 @@ class SiteController{
 					return self::get_item_view_document($title_alias, $cat_id);
 				}elseif($type_keyword == 'group_images' && $cat_alias == $category_name_alias){
 					return self::get_item_view_images($title_alias, $cat_id);
+				}elseif($type_keyword == 'group_video' && $cat_alias == $category_name_alias){
+					return self::get_item_view_video($title_alias, $cat_id);
 				}
 			}
 			drupal_goto($base_url);
@@ -122,5 +138,8 @@ class SiteController{
 	}
 	public static function get_list_item_images(){
 		echo "Images";die;
+	}
+	public static function get_list_item_video(){
+		echo "Video";die;
 	}
 }

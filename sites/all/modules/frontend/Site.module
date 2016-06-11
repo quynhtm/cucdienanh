@@ -277,8 +277,9 @@ function block_header(){
 	return theme('block-header', array('listCategory'=>$listCategory));
 }
 function block_slide(){
+	$arrSliderPost = SiteController::getListPostSlider();
 	$contentBanner = SiteController::blockContentHomeBanner();
-	return theme('block-slide', array('contentBanner'=>$contentBanner));
+	return theme('block-slide', array('contentBanner'=>$contentBanner, 'arrSliderPost'=>$arrSliderPost));
 }
 
 function block_content(){
