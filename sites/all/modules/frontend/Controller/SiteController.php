@@ -7,7 +7,7 @@
 */
 
 class SiteController{
-	
+	//Block
 	public static function blockLeftBanner(){
 		$result = DataCommon::getBannerAds(BANNER_TYPE_LEFT, 100);
 		return $result;
@@ -29,7 +29,6 @@ class SiteController{
 		$result = DataCommon::getListVideoHot(10);
 		return $result;
 	}
-
 	public static function blockRightImage(){
 		$files = array(
             '/bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
@@ -66,7 +65,6 @@ class SiteController{
 		}
 		return $arrPost;
 	}
-
 	public static function getListPostSlider(){
 
 		$files = array(
@@ -78,7 +76,6 @@ class SiteController{
 		$result = Site::getListPostSlider(10, array());
 		return $result;
 	}
-
 	public static function getMenuLoad(){
 		global $base_url;
 		
@@ -132,10 +129,35 @@ class SiteController{
 			drupal_goto($base_url.'/page-404');
 		}
 	}
-
+	//List post
 	public static function get_list_item_news($cat_id){
-		//echo "News...";die;
-		return '';
+		global $base_url;
+
+		$result = array();
+		$arrCategory = array();
+
+		$category_title = '';
+		$category_meta_title = '';
+		$category_meta_keywords = '';
+		$category_meta_description = '';
+
+		if($cat_id > 0){
+			
+			$arrCategory = DataCommon::getCategoryById($cat_id);
+			if(!empty($arrCategory)){
+				$category_title = $arrCategory->category_name;
+				$category_meta_title = $arrCategory->category_meta_title;
+				$category_meta_keywords = $arrCategory->category_meta_keywords;
+				$category_meta_description = $arrCategory->category_meta_description;
+			}
+
+			$arrFields = array('news_id', 'news_title', 'news_title_alias', 'news_category','news_image', 'news_desc_sort', 'news_content');
+	   		$result = Site::getPostNewsInCategory($cat_id, 20, $arrFields);
+		}
+
+	    SeoMeta::SEO($category_title.' - '.WEB_SITE, '', $category_meta_title.' - '.WEB_SITE, $category_meta_keywords.' - '.WEB_SITE, $category_meta_description.' - '.WEB_SITE);
+
+		return theme('pageNews', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory));
 	}
 	public static function get_list_item_document($cat_id){
 		echo "Document";die;
@@ -146,7 +168,7 @@ class SiteController{
 	public static function get_list_item_video($cat_id){
 		echo "Video";die;
 	}
-
+	//View post
 	public static function get_item_view_news($id, $cat_id){
 		global $base_url;
 
@@ -176,8 +198,7 @@ class SiteController{
 					'arrSame'=>$arrSame,
 					));
 	}
-
-
+	//Print post
 	public static function getItemPrint(){
 		global $base_url;
 

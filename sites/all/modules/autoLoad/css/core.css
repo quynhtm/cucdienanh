@@ -60,6 +60,7 @@ input[type="text"], input[type="password"],select option, textarea{
 }
 .showListPage .item-list ul li {
     margin: 0 !important;
+    padding: 0;
 }
 .pager a {
     background: none repeat scroll 0 0 #f2f2f2;

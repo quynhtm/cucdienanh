@@ -68,4 +68,32 @@ class Site{
 		}
 		return $arrItem;
 	}
+
+	public static function getPostNewsInCategory($category_id = 0, $limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields) && $category_id > 0){
+       
+            $sql = db_select(self::$table_action_news, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+            $sql->condition('i.news_category', $category_id, '=');
+            
+            $result = $sql->limit($limit)->orderBy('i.news_create', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            
+			return $data;
+
+        }else{
+            drupal_goto($base_url.'/page-404');
+        }
+        
+        return array();
+    }
 }

@@ -6,7 +6,6 @@
 	<?php } ?>
 	<div id="content">
 		<div class="wrapper-content">
-			<?php if(!isset($messages)) $messages = ''; echo $messages; ?>
 			<div class="wrapp" <?php if ($page['left'] && $page['right']){ ?>id="wrapper-c"<?php }elseif($page['left'] && !$page['right']){?>id="wrapper-l"<?php }elseif(!$page['left'] && $page['right']){?>id="wrapper-r"<?php }elseif(!$page['left'] && !$page['right']){?>id="wrapper-cc"<?php }else{ ?>id="wrapper-f"<?php } ?>>
 				<div class="bg-content">
 					<?php if(!isset($messages)) $messages = ''; echo $messages; ?>

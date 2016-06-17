@@ -171,7 +171,7 @@ class NewsController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_SHOW);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: -1);
-		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->news_hot) ? $arrItem->video_hot: STASTUS_HIDE);
+		$optionHot = FunctionLib::getOption($this->arrHot, isset($arrItem->news_hot) ? $arrItem->news_hot: STASTUS_HIDE);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,

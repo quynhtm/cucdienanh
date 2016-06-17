@@ -69,7 +69,7 @@
     margin-bottom: 20px;
     color: #333;
     float: left;
-    font: 400 14px arial;
+    font: 400 14px/24px arial;
     overflow: hidden;
     padding: 0 2% 0 0;
     width: 98%;
@@ -79,4 +79,9 @@ img {
     font-size: 0;
     line-height: 0;
     max-width: 100%;
+}
+.content-common p{
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 100%;
 }

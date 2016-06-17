@@ -1,6 +1,7 @@
 /*site*/
 body{
     background: #fff url(../img/bg.png) repeat 0 0;
+    font-size: 13px;
 }
 .header-top{
     height: 128px;
@@ -352,7 +353,7 @@ body{
     border-bottom: none;
 }
 .content-post-cat .list-content-cat li a {
-    background: rgba(0, 0, 0, 0) url("../img/dot-red.png") no-repeat scroll left center;
+    background: rgba(0, 0, 0, 0) url("../img/dot-red.png") no-repeat scroll 0px 10px;
     color: #333333;
     display: block;
     font-weight: bold;
@@ -478,7 +479,7 @@ body{
 .line-save .date-created{
     display: inline-block;
     float: right;
-    color: #222;
+    color: #555;
     float: right;
     font-size: 12px;
     font-style: italic;
@@ -532,7 +533,6 @@ body{
 .line-intro-view{
     margin-top: 10px;
     display: inline-block;
-    line-height: 24px;
     font-size: 14px;
     color: #222;
     text-align: justify;
@@ -542,14 +542,14 @@ body{
 .line-content-view{
     margin-top: 10px;
     display: inline-block;
-    line-height: 24px;
+    line-height: 22px;
     font-size: 14px;
     color: #222;
     text-align: justify;
 }
 .line-content-view p{
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 13px;
     color: #222;
 }
 .line-save.ext{
@@ -724,7 +724,81 @@ body{
     min-height: 350px;
     background: none;
 }
-/*Ext*/
+.box-content-list-view h1.title-news {
+    border-left: 3px solid #12428a;
+    clear: both;
+    color: #333;
+    font-size: 18px;
+    font-style: italic;
+    height: 20px;
+    line-height: 18px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+    padding-left: 5px;
+}
+.item-news.item-1 .post-img img {
+    width: 100%;
+}
+.item-news.item-1 h2 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.item-news.item-1 .post-content {
+    color: #222;
+    font-size: 13px;
+}
+.item-news.item-1 {
+    border-bottom: 1px solid #ddd;
+    clear: both;
+}
+.item-news.item-1 .post-img{
+    width: 100%;
+    clear: both;
+    float: none;
+    margin-right: 0;
+}
+.item-news.item-1 .post-img img{
+    border: none;
+}
+.item-news.item-1 h2.post-title {
+    font-size: 15px;
+}
+.item-news.item-1 .post-title a {
+    color: #337ab7;
+    text-transform: uppercase;
+}
+.item-news {
+    border-bottom: 1px dotted #ddd;
+    clear: both;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+.post-img {
+    display: inline-block;
+    float: left;
+    margin-right: 15px;
+    width: 175px;
+}
+.post-img img{
+    border: 2px solid #ddd;
+    width: 100%;
+}
+.item-news h2.post-title{
+    font-size: 14px;
+    line-height: 20px;
+}
+.item-news .post-title a {
+    color: #333;
+}
+.item-news .post-title a:hover{
+    color:#cc0000;
+}
+.item-news.not-border {
+    border-bottom: none;
+}
+/*Ext theme*/
 /*Left center right*/
 #wrapper-c .site-left{
     display: inline-block;
