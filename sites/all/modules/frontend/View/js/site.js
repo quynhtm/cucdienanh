@@ -4,6 +4,7 @@ jQuery(document).ready(function($){
 	SITE.history_back();
 	SITE.print();
 	SITE.search();
+	SITE.comment();
 });
 SITE={
 	back_top:function(){
@@ -49,6 +50,16 @@ SITE={
 			}else{
 				jQuery('form#frmSearch').submit();
 			}
+		});
+	},
+	comment:function(){
+		jQuery('.line-save.ext .view').click(function(){
+			jQuery('.box-comment-post .item-comment').toggleClass('act');
+			jQuery('.box-comment-post .form-comment-post').removeClass('act');
+		});
+		jQuery('.line-save.ext .commment').click(function(){
+			jQuery('.box-comment-post .item-comment').removeClass('act');
+			jQuery('.box-comment-post .form-comment-post').toggleClass('act');
 		});
 	}
 }
