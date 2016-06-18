@@ -9,6 +9,7 @@ class Site{
 	static $table_action_news = TABLE_NEWS;
 	static $table_action_video = TABLE_VIDEO;
     static $table_action_images = TABLE_IMAGE;
+    static $table_action_comment = TABLE_COMMENT;
     
 	static $primary_key_news = 'news_id';
 	static $primary_key_video = 'video_id';
@@ -238,5 +239,12 @@ class Site{
         }
 
         return $data;
+    }
+
+    public static function insertComment($dataInsert){
+        if(!empty($dataInsert)){
+            return DB::insertOneItem(self::$table_action_comment, $dataInsert);
+        }
+        return false;
     }
 }

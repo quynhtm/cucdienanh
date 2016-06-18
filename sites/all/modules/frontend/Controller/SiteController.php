@@ -238,6 +238,11 @@ class SiteController{
 			}
 
 			$arrSame = Site::getListPostSameNewsInCategory($cat_id, $id, 10, array());
+
+			//Comment
+			if(!empty($_POST)){
+				SiteController::sendComment(FunctionLib::buildLinkDetail($result->news_id, $result->news_category, $result->news_title_alias), 1);
+			}
 		}else{
 			drupal_goto($base_url);
 		}
@@ -339,6 +344,8 @@ class SiteController{
 		
 		if($id > 0){
 			$result = DataCommon::getNewsById($id);
+
+			header('Content-Type: text/html; charset=utf-8');
 			$html .='<link href="'.$base_url.'/sites/all/modules/frontend/View/css/print.css" type="text/css" rel="stylesheet">';
 			$html .= '<script src="'.$base_url.'/misc/jquery.js" type="text/javascript"></script>';
 			$html .= '<script src="'.$base_url.'/sites/all/modules/frontend/View/js/site.js" type="text/javascript"></script>';
@@ -369,5 +376,63 @@ class SiteController{
 		$result = Site::getItemSearh($keyword, array(), 30);
 
 		return theme('pageNewsSearch', array('result'=>$result['data'], 'pager' =>$result['pager']));
+	}
+
+	//Comment
+	public static function sendComment($link = '', $type=''){
+		
+		$itemid = FunctionLib::getParam('itemid', 0);
+		$catid = FunctionLib::getParam('catid', 0);
+
+		$name = FunctionLib::getParam('name','');
+		$email = FunctionLib::getParam('email','');
+		$title = FunctionLib::getParam('title','');
+		$content = FunctionLib::getParam('content','');
+		$captcha = FunctionLib::getParam('captcha','');
+
+		$dataInput = array(
+						'comment_object_id'=>array('value'=>trim($itemid), 'require'=>0),
+						'comment_category'=>array('value'=>trim($catid), 'require'=>0),
+						'comment_link'=>array('value'=>trim($link), 'require'=>0),
+						'comment_type'=>array('value'=>trim($type), 'require'=>0),
+
+						'comment_customer_name'=>array('value'=>trim($name), 'require'=>1, 'messages'=>'Họ tên không được trống!'),
+						'comment_mail'=>array('value'=>trim($email), 'require'=>0),
+						
+						'comment_object_name'=>array('value'=>trim($title), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+						'comment_content'=>array('value'=>trim($content), 'require'=>1, 'messages'=>'Nội dung không được trống!'),
+						
+						'captcha'=>array('value'=>trim($captcha), 'require'=>1, 'messages'=>'Mã an toàn không được trống!'),
+						'comment_create'=>array('value'=>time(), 'require'=>0),
+					);
+
+		$errors = ValidForm::validInputData($dataInput);
+
+		if($email != ''){
+			$check_valid_mail = ValidForm::checkRegexEmail($email);
+			if(!$check_valid_mail){
+				$errors .= 'Email không đúng định dạng<br/>';
+			}
+		}
+
+		if($captcha != ''){
+
+		}
+
+		if($errors != ''){
+			drupal_set_message($errors, 'error');
+		}
+
+		if($name != '' && $title != '' && $content != ''){
+			$data_post = array();
+			unset($dataInput['captcha']);
+			if(!empty($dataInput)){
+				foreach($dataInput as $key=>$val){
+					$data_post[$key] = $val['value'];
+				}
+				Site::insertComment($data_post);
+				drupal_set_message('Gửi nhận xét thành công!');
+			}
+		}
 	}
 }

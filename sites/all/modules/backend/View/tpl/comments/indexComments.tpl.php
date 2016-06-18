@@ -57,13 +57,14 @@
 					<tr>
 						<th width="2%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
-						<th width="20%">Đối tượng BL</th>
+						<th width="20%">Tiêu đề BL</th>
 						<th width="15%">Khách BL</th>
+						<th width="15%">Bài viết BL</th>
 						<th width="30%">Nội dung</th>
 						<th width="10%">Loại đối tượng</th>
-						<th width="5%">Reply</th>
-						<th width="5%">Status</th>
-						<!--<th width="5%">Action</th>-->
+						<!-- <th width="5%">Trả lời</th> -->
+						<th width="5%">Duyệt</th>
+						<th width="5%">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -73,18 +74,19 @@
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->comment_id ?>" /></td>
 						<td><?php echo ($item->comment_object_id > 0)?'['.$item->comment_object_id.'] '.$item->comment_object_name : ''; ?></td>
 						<td><?php echo $item->comment_customer_name; ?></td>
+						<td><a href="<?php echo $item->comment_link; ?>" target="_blank"><?php echo $item->comment_link; ?></a></td>
 						<td><?php echo $item->comment_content; ?></td>
 						<td><?php echo isset($arrCommentType[$item->comment_type])? $arrCommentType[$item->comment_type]: 'chưa xác đinh'; ?></td>
-						<td>
+						<!-- <td>
 							<?php echo ($item->comment_is_reply == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+						</td> -->
+						<td>
+							<?php echo ($item->comment_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td>
-							<?php echo ($item->province_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
-						</td>
-						<!--<td>
-							<?php $linkEdit = $base_url.'/admincp/province/edit/'.$item->comment_id; ?>
+							<?php $linkEdit = $base_url.'/admincp/comments/edit/'.$item->comment_id; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-						</td>-->
+						</td>
 					</tr>
 					<?php }?>
 					</tbody>

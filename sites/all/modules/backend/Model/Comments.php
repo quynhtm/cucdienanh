@@ -6,7 +6,7 @@ class Comments{
 	static $table_action = TABLE_COMMENT;
 	static $primary_key = 'comment_id';
 	static $arrFields = array('comment_id','comment_parent_id', 'comment_object_id', 'comment_object_name','comment_type',
-		'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status');
+		'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status', 'comment_link', 'comment_mail');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all

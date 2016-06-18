@@ -61,5 +61,47 @@ SITE={
 			jQuery('.box-comment-post .item-comment').removeClass('act');
 			jQuery('.box-comment-post .form-comment-post').toggleClass('act');
 		});
+
+
+		jQuery("#buttonFormCommentSubmit").click(function(){
+			var name = jQuery(".form-comment-post input.frmName");
+			var title = jQuery(".form-comment-post input.frmTitle");
+			var captcha = jQuery(".form-comment-post input.frmCaptcha");
+			var content = jQuery(".form-comment-post textarea.frmContent");
+
+			if(name.val() == ''){
+				jAlert('Họ tên không được trống!', 'Cảnh báo');
+				name.addClass('error').focus();
+				return false;
+			}else{
+				name.removeClass('error');
+			}
+
+			if(title.val() == ''){
+				jAlert('Tiêu đề không được trống!', 'Cảnh báo');
+				title.addClass('error').focus();
+				return false;
+			}else{
+				title.removeClass('error');
+			}
+
+			if(captcha.val() == ''){
+				jAlert('Mã an toàn không được trống!', 'Cảnh báo');
+				captcha.addClass('error').focus();
+				return false;
+			}else{
+				captcha.removeClass('error');
+			}
+
+			if(content.val() == ''){
+				jAlert('Nội dung không được trống!', 'Cảnh báo');
+				content.addClass('error').focus();
+				return false;
+			}else{
+				content.removeClass('error');
+			}
+			
+			jQuery("form.frmComment").submit();
+		});
 	}
 }
