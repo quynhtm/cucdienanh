@@ -212,7 +212,14 @@ function Site_theme() {
 	    'pageVideoSearch' => array(
 	      'template' => 'View/tpl/pageVideoSearch'
 	    ),
-	    
+
+
+	    'pageImage' => array(
+	      'template' => 'View/tpl/pageImage'
+	    ),
+	    'pageImageDetail' => array(
+	      'template' => 'View/tpl/pageImageDetail'
+	    ),
 	);
 }
 function Site_block_view($delta='') {

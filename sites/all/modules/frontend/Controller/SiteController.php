@@ -162,9 +162,6 @@ class SiteController{
 	public static function get_list_item_document($cat_id){
 		echo "Document";die;
 	}
-	public static function get_list_item_images($cat_id){
-		echo "Images";die;
-	}
 	public static function get_list_item_video($cat_id){
 		if($cat_id > 0){
 			$files = array(
@@ -187,6 +184,34 @@ class SiteController{
 			
 			SeoMeta::SEO($category_title.' - '.WEB_SITE, '', $category_meta_title.' - '.WEB_SITE, $category_meta_keywords.' - '.WEB_SITE, $category_meta_description.' - '.WEB_SITE);
 			return theme('pageVideo', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory));
+			
+		}else{
+			drupal_goto($base_url.'/page-404');
+		}
+		
+	}
+	public static function get_list_item_images($cat_id){
+		if($cat_id > 0){
+			$files = array(
+	            'css/font-awesome.css',
+	        );
+        	Loader::load('Core', $files);
+
+			$arrCategory = DataCommon::getCategoryById($cat_id);
+			if(!empty($arrCategory)){
+				$category_title = $arrCategory->category_name;
+				$category_meta_title = $arrCategory->category_meta_title;
+				$category_meta_keywords = $arrCategory->category_meta_keywords;
+				$category_meta_description = $arrCategory->category_meta_description;
+			}
+
+			$arrCat = array($cat_id);	
+			DataCommon::makeArrCatID($cat_id, 0, $arrCat, 100);
+			
+			$result = Site::getListImagesInArrCategory($arrCat, 30, array());
+			
+			SeoMeta::SEO($category_title.' - '.WEB_SITE, '', $category_meta_title.' - '.WEB_SITE, $category_meta_keywords.' - '.WEB_SITE, $category_meta_description.' - '.WEB_SITE);
+			return theme('pageImage', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory));
 			
 		}else{
 			drupal_goto($base_url.'/page-404');
@@ -254,6 +279,47 @@ class SiteController{
 		}
 
 		return theme('pageVideoDetail', array(
+					'result'=>$result,
+					'arrCat'=>$arrCat,
+					'arrSame'=>$arrSame,
+					));
+	}
+	public static function get_item_view_images($id, $cat_id){
+		global $base_url;
+
+		$arrCat = array();
+		$result = array();
+		$arrSame = array();
+
+		if($id > 0){
+
+        	$files = array(
+	             'css/font-awesome.css',
+	            '/bootstrap/lib/slider-magnific/magnific-popup.min.js',
+				'/bootstrap/lib/slider-magnific/magnific-popup.css',
+				
+				'/bootstrap/lib/bxslider/bxslider.min.js',
+				'/bootstrap/lib/bxslider/bxslider.css',
+			);
+			Loader::load('Core', $files);
+
+			$arrCat = DataCommon::getCategoryById($cat_id);
+			if(empty($arrCat)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+			$result = DataCommon::getImageById($id);
+
+			if(empty($result)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+			$arrSame = Site::getListPostSameImageInCategory($cat_id, $id, 30, array());
+		}else{
+			drupal_goto($base_url);
+		}
+
+		return theme('pageImageDetail', array(
 					'result'=>$result,
 					'arrCat'=>$arrCat,
 					'arrSame'=>$arrSame,

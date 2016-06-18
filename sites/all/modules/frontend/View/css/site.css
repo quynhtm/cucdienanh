@@ -817,7 +817,8 @@ body{
 .post-format:hover {
     background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
 }
-.post-format .icon-play {
+.post-format .icon-play,
+.post-format .icon-picture {
     border: 2px solid #fff;
     border-radius: 100%;
     color: #fff;
@@ -834,7 +835,8 @@ body{
     transition: all 0.2s ease 0s;
     width: 40px;
 }
-.post-format:hover .icon-play{
+.post-format:hover .icon-play,
+.post-format:hover .icon-picture{
     transform: scale(1, 1);
 }
 .list-news-post.video .item-news.item-1{
@@ -878,7 +880,7 @@ body{
     clear: none;
     display: inline-block;
     float: left;
-    height: 250px;
+    height: 255px;
     margin: 0 13px 15px;
     overflow: hidden;
     width: 30%;
@@ -902,7 +904,9 @@ body{
 .content-same-post .same-vieo-list li .post-title{
     clear: both;
 }
-.content-same-post .same-vieo-list li .post-img{
+.content-same-post .same-vieo-list li .post-img {
+    height: 160px;
+    overflow: hidden;
     width: 100%;
 }
 .content-same-post .same-vieo-list li .post-img img{
@@ -912,6 +916,61 @@ body{
 .line-video-view {
     margin: 10px auto;
     width: 560px;
+}
+.list-news-post.image {
+    margin-right: -13px;
+}
+.list-news-post.image .item-news {
+    clear: none !important;
+    float: left;
+    height: 292px;
+    margin-right: 19px;
+    overflow: hidden;
+    width: 31% !important;
+    border-bottom: none!important;
+}
+.list-news-post.image .post-data {
+    clear: both;
+    display: inline-block;
+    width: 100%;
+}
+.list-news-post.image .post-img {
+    height: 168px;
+    overflow: hidden;
+    width: 100%;
+}
+.list-news-post.image .post-title{
+    margin-top: 5px!important;
+    margin-bottom: 5px!important;
+    display: inline;
+    width: 100%;
+    clear: both;
+}
+.list-news-post.image .post-title a{
+    text-transform: none;
+}
+.list-news-post.image .post-img img{
+    border: none;
+}
+.view-img-slider {
+    margin: 10px auto 0;
+    width: 800px;
+}
+.view-img-slider > i {
+    display: inline-block;
+    height: 100px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    overflow: hidden;
+    vertical-align: top;
+}
+.view-img-slider img {
+    width: 100%;
+    height: 100px;
+}
+.bxSliderViewImage {
+    clear: both;
+    margin-top: 10px;
 }
 /*Ext theme*/
 /*Left center right*/
