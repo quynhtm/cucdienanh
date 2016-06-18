@@ -1,4 +1,7 @@
-<?php global $base_url;?>
+<?php 
+	global $base_url;
+	$keyword = FunctionLib::getParam('keyword','');
+?>
 <div class="header-top">
 	<div class="wrapp">
 		<div class="logo">
@@ -10,9 +13,9 @@
 				<a href="<?php echo $base_url.'?lang=en' ?>" class="en">En</a>
 			</div>
 			<div class="search">
-				<form action="<?php echo $base_url.'/tim-kiem' ?>" method="GET">
-					<input type="text" placeholder="Search" name="keyword" class="keyword"/>
-					<span class="btnSearch">Tìm kiếm</span>
+				<form action="<?php echo $base_url.'/tim-kiem.html' ?>" method="GET" id="frmSearch">
+					<input type="text" placeholder="Tìm kiếm" name="keyword" class="keyword" value="<?php echo $keyword ?>"/>
+					<span id="btnSearch" class="btnSearch">Tìm kiếm</span>
 				</form>
 			</div>
 		</div>

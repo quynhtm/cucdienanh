@@ -362,4 +362,12 @@ class SiteController{
 		
 		echo $html;
 	}
+	//Search
+	public static function getItemSearh(){
+		//Search news
+		$keyword = FunctionLib::getParam('keyword','');
+		$result = Site::getItemSearh($keyword, array(), 30);
+
+		return theme('pageNewsSearch', array('result'=>$result['data'], 'pager' =>$result['pager']));
+	}
 }

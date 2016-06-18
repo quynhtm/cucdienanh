@@ -204,4 +204,39 @@ class Site{
         }
         return $arrItem;
     }
+
+    public static function getItemSearh($keyword='', $arrFields= array(), $limit=30){
+        
+        $data['data'] = array();
+        $data['pager'] = array();
+        $data['total'] = 0;
+
+        if(empty($arrFields)){
+            $arrFields = self::$arrFields;
+        }
+        
+        if($keyword != ''){
+
+            $sql = db_select(self::$table_action_news, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+            
+            $db_or = db_or();
+                $db_or->condition('i.news_title', '%'.$keyword.'%', 'LIKE');
+                $db_or->condition('i.news_title_alias', '%'.$keyword.'%', 'LIKE');
+                $db_or->condition('i.news_desc_sort', '%'.$keyword.'%', 'LIKE');
+            $sql->condition($db_or);
+
+            $result = $sql->limit($limit)->orderBy('i.news_create', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+        }
+
+        return $data;
+    }
 }

@@ -3,6 +3,7 @@ jQuery(document).ready(function($){
 	SITE.bookmark();
 	SITE.history_back();
 	SITE.print();
+	SITE.search();
 });
 SITE={
 	back_top:function(){
@@ -38,6 +39,16 @@ SITE={
 		});
 		jQuery(".right-print").click(function(){
 			window.print();
+		});
+	},
+	search:function(){
+		jQuery('#btnSearch').click(function(){
+			var keyword = jQuery('.keyword').val();
+			if(keyword == ''){
+				jAlert( 'Vui lòng nhập từ khóa để tìm kiếm!', 'Cảnh báo');
+			}else{
+				jQuery('form#frmSearch').submit();
+			}
 		});
 	}
 }

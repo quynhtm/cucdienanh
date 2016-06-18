@@ -975,6 +975,10 @@ body{
     clear: both;
     margin-top: 10px;
 }
+
+.title-news > i {
+    color: #cc0000;
+}
 /*Ext theme*/
 /*Left center right*/
 #wrapper-c .site-left{
