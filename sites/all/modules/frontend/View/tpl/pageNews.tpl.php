@@ -3,7 +3,7 @@
 ?>
 <div class="link-breadcrumb">
 	<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a> › 
-	<a href="<?php echo $base_url.'/'.$arrCategory->category_name_alias ?>.html" title="<?php echo $arrCategory->category_name ?>"><?php echo $arrCategory->category_name ?></a>
+	<a href="<?php echo FunctionLib::buildLinkCategory($arrCategory->category_id, $arrCategory->category_name_alias) ?>" title="<?php echo $arrCategory->category_name ?>"><?php echo $arrCategory->category_name ?></a>
 </div>
 <div class="box-content-list-view">
 	<h1 class="title-news"><?php echo $arrCategory->category_name ?></h1>
@@ -18,9 +18,6 @@
 					<?php if($item->news_image != ''){?>
 					<img alt="<?php echo $item->news_title ?>"
 					src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,400,400) ?>">
-					<div class="post-format">
-						<i class="icon-file-text"></i>
-					</div>
 					<?php }else{ ?>
 					<img src="<?php echo IMAGE_DEFAULT ?>"/>
 					<?php } ?>

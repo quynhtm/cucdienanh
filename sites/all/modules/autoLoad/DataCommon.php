@@ -457,4 +457,34 @@ class DataCommon{
 		return $imageHot;
 	}
 
+	public static function makeArrCatID($catid='', $level=0, &$arrCat, $limit=100){
+		global $language;
+		$listcat = explode(',', $catid);
+		$arrListCat = array();
+
+		if(!empty($listcat)){
+			$where = '(';
+			foreach($listcat as $cat){
+				if($cat != end($listcat)){
+					$where .= 'category_parent_id = '.$cat.' OR ';
+				}else{
+					$where .= 'category_parent_id = '.$cat;
+				}
+			}
+			$where .= ')';
+			$arrListCat = DB::getItembyCond(self::$table_category, 'category_id', '', 'category_id ASC', 'category_status='.STASTUS_SHOW.' AND '.$where, $limit);
+		}else{
+			$arrListCat = DB::getItembyCond(self::$table_category, 'category_id', '', 'category_id ASC', 'category_status='.STASTUS_SHOW.' AND category_parent_id='.$catid, $limit);
+		}
+		
+		if (is_array($arrListCat)){
+			foreach ($arrListCat as $k => $v){
+				array_push($arrCat, $v->category_id);
+				self::makeArrCatID($v->category_id, $level+1, $arrCat);
+			}
+			return '';
+		}else{
+			return '';
+		}
+	}
 }

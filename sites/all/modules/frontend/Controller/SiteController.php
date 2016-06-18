@@ -166,7 +166,32 @@ class SiteController{
 		echo "Images";die;
 	}
 	public static function get_list_item_video($cat_id){
-		echo "Video";die;
+		if($cat_id > 0){
+			$files = array(
+	            'css/font-awesome.css',
+	        );
+        	Loader::load('Core', $files);
+
+			$arrCategory = DataCommon::getCategoryById($cat_id);
+			if(!empty($arrCategory)){
+				$category_title = $arrCategory->category_name;
+				$category_meta_title = $arrCategory->category_meta_title;
+				$category_meta_keywords = $arrCategory->category_meta_keywords;
+				$category_meta_description = $arrCategory->category_meta_description;
+			}
+
+			$arrCat = array($cat_id);	
+			DataCommon::makeArrCatID($cat_id, 0, $arrCat, 100);
+			
+			$result = Site::getListVideoInArrCategory($arrCat, 30, array());
+			
+			SeoMeta::SEO($category_title.' - '.WEB_SITE, '', $category_meta_title.' - '.WEB_SITE, $category_meta_keywords.' - '.WEB_SITE, $category_meta_description.' - '.WEB_SITE);
+			return theme('pageVideo', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory));
+			
+		}else{
+			drupal_goto($base_url.'/page-404');
+		}
+		
 	}
 	//View post
 	public static function get_item_view_news($id, $cat_id){
@@ -193,6 +218,42 @@ class SiteController{
 		}
 
 		return theme('pageNewsDetail', array(
+					'result'=>$result,
+					'arrCat'=>$arrCat,
+					'arrSame'=>$arrSame,
+					));
+	}
+	public static function get_item_view_video($id, $cat_id){
+		global $base_url;
+
+		$arrCat = array();
+		$result = array();
+		$arrSame = array();
+
+		if($id > 0){
+			$files = array(
+	            'css/font-awesome.css',
+	        );
+        	Loader::load('Core', $files);
+        	
+			$arrCat = DataCommon::getCategoryById($cat_id);
+			if(empty($arrCat)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+			$result = DataCommon::getVideoById($id);
+
+			if(empty($result)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+			$arrSame = Site::getListPostSameVideoInCategory($cat_id, $id, 20, array());
+
+		}else{
+			drupal_goto($base_url);
+		}
+
+		return theme('pageVideoDetail', array(
 					'result'=>$result,
 					'arrCat'=>$arrCat,
 					'arrSame'=>$arrSame,

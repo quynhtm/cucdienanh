@@ -780,6 +780,7 @@ body{
     float: left;
     margin-right: 15px;
     width: 175px;
+    position: relative;
 }
 .post-img img{
     border: 2px solid #ddd;
@@ -789,14 +790,128 @@ body{
     font-size: 14px;
     line-height: 20px;
 }
+/*
 .item-news .post-title a {
     color: #333;
-}
+}*/
 .item-news .post-title a:hover{
     color:#cc0000;
 }
+.item-news .post-content {
+    color: #333;
+    font-size: 13px;
+}
 .item-news.not-border {
     border-bottom: none;
+}
+.post-format {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: background 0.5s ease 0s;
+    width: 100%;
+    z-index: 2;
+}
+.post-format:hover {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+}
+.post-format .icon-play {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    height: 40px;
+    left: 50%;
+    line-height: 40px;
+    margin: -20px 0 0 -20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: scale(0, 0);
+    transition: all 0.2s ease 0s;
+    width: 40px;
+}
+.post-format:hover .icon-play{
+    transform: scale(1, 1);
+}
+.list-news-post.video .item-news.item-1{
+    float: left!important;
+    height: auto;
+}
+.list-news-post.video .item-news.item-1 .post-img{
+    height: auto;
+    overflow: none;
+}
+.video .item-news.not-border {
+    clear: none;
+    display: inline-block;
+    float: left;
+    height: 250px;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 48% !important;
+}
+.item-news.right.not-border {
+    float: right;
+    margin-right: 0;
+}
+.video .post-img {
+    height: 158px;
+    margin-right: 0;
+    overflow: hidden;
+    width: 100%;
+}
+.video .post-img img{
+    border: none;
+}
+.video .post-content {
+    margin-top: 5px;
+}
+.content-same-post .same-vieo-list {
+    margin-right: -100px;
+    width: 100%;
+}
+.content-same-post .same-vieo-list li {
+    clear: none;
+    display: inline-block;
+    float: left;
+    height: 250px;
+    margin: 0 13px 15px;
+    overflow: hidden;
+    width: 30%;
+}
+.content-same-post .same-vieo-list li a{
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+.content-same-post .same-vieo-list li .item-news{
+    border-bottom: medium none;
+    clear: both;
+}
+.content-same-post .same-vieo-list li .post-title a {
+    color: #337ab7;
+    text-transform: none;
+}
+.content-same-post .same-vieo-list li .post-title a:hover {
+    color: #cc0000;
+}
+.content-same-post .same-vieo-list li .post-title{
+    clear: both;
+}
+.content-same-post .same-vieo-list li .post-img{
+    width: 100%;
+}
+.content-same-post .same-vieo-list li .post-img img{
+    width: 100%;
+    border: none;
+}
+.line-video-view {
+    margin: 10px auto;
+    width: 560px;
 }
 /*Ext theme*/
 /*Left center right*/

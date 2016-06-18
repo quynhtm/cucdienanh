@@ -50,6 +50,7 @@
 						<th width="2%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="70%">Tiêu đề</th>
+						<th width="10%">Từ khóa</th>
 						<th width="10%">Ngày tạo</th>
 						<th width="5%">Status</th>
 						<th width="5%">Action</th>
@@ -61,6 +62,7 @@
 						<td><?php echo $key+1 ?></td>
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->id ?>" /></td>
 						<td><?php echo $item->title; ?></td>
+						<td><?php echo $item->keyword; ?></td>
 						<td><?php echo date('d/m/Y h:i', $item->created); ?></td>
 						<td>
 							<?php

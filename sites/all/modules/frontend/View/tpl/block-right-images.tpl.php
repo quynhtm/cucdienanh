@@ -2,7 +2,7 @@
 	global $base_url;
 ?>
 <div class="item-box images">
-	<div class="title-box"><a href="<?php echo $base_url.'/thu-vien-anh.html' ?>" title="Thư viện ảnh">Thư viện ảnh</a></div>
+	<div class="title-box"><a href="<?php echo strip_tags(Utility::keyword('SITE_LINK_IMAGES')) ?>" title="Thư viện ảnh">Thư viện ảnh</a></div>
 	<div class="item-img">
 		<?php 
 			foreach($listImageHot as $k=>$v){
