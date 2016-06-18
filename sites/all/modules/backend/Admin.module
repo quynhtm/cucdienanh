@@ -261,7 +261,7 @@ function Admin_init(){
             'Controller/ConfigInfoController.php',
     		//SupportOnline
     		'Model/SupportOnline.php',
-    		'Controller/SupportOnlineController.php',
+    		'Controller/SupportonlineController.php',
             //Banner
             'Model/Banner.php',
             'Controller/BannerController.php',
