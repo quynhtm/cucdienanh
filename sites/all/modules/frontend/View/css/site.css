@@ -968,6 +968,9 @@ body{
     width: 100%;
     height: 100px;
 }
+#gallery img {
+    cursor: pointer;
+}
 .bxSliderViewImage {
     clear: both;
     margin-top: 10px;
