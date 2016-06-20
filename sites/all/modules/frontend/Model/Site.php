@@ -14,6 +14,7 @@ class Site{
 	static $primary_key_news = 'news_id';
 	static $primary_key_video = 'video_id';
     static $primary_key_image = 'image_id';
+    static $primary_key_comment = 'comment_id';
 
 	static $arrFields = array('news_id', 'news_title', 'news_title_alias', 'news_desc_sort', 'news_content', 'news_image', 'news_image_other', 'news_hot',
 		'news_type', 'news_create', 'news_category', 'news_status', 'news_meta_title', 'news_meta_keyword', 'news_meta_description');
@@ -23,6 +24,8 @@ class Site{
     static $arrFieldsImages = array('image_id', 'image_title', 'image_title_alias', 'image_desc_sort', 'image_content', 'image_image', 'image_image_other', 'image_hot', 'image_category',
         'image_create','image_meta_title','image_meta_keyword','image_meta_description', 'image_status');
 
+    static $arrFieldsComment = array('comment_id','comment_parent_id', 'comment_object_id', 'comment_object_name','comment_type',
+        'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status', 'comment_link', 'comment_mail');
 
 	public static function getListPostInCategory($arrCatId=array(), $limit=5, $arrFields){
 		if(empty($arrFields)){
@@ -246,5 +249,30 @@ class Site{
             return DB::insertOneItem(self::$table_action_comment, $dataInsert);
         }
         return false;
+    }
+
+    public static function getComment($id=0, $type=0, $arrFields = array(), $limit = 30){
+        
+        if(empty($arrFields))
+            $arrFields = self::$arrFieldsComment;
+
+        if(!empty($arrFields)){
+            $sql = db_select(self::$table_action_comment, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+
+            $sql->condition('i.comment_object_id', $id, '=');
+            $sql->condition('i.comment_type', $type, '=');
+
+            $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key_comment, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            return $data;
+        }
+        return array('data' => array(),'total' => 0,'pager' => array(),);
     }
 }

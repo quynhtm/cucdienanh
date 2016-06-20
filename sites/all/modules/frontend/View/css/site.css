@@ -1065,6 +1065,7 @@ body{
 }
 .box-comment-post .item-comment{
     display: none;
+    width: 100%;
 }
 .box-comment-post .item-comment.act,
 .box-comment-post .form-comment-post.act {
@@ -1080,6 +1081,7 @@ body{
 }
 .form-comment-post .control-group {
     display: inline-block;
+    vertical-align: top;
     width: 32%;
 }
 .line-form {
@@ -1167,4 +1169,7 @@ body{
 .item-rep {
     clear: both;
     margin-bottom: 10px;
+}
+label > span {
+    color: #ff0000;
 }

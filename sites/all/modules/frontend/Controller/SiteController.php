@@ -225,6 +225,7 @@ class SiteController{
 		$arrCat = array();
 		$result = array();
 		$arrSame = array();
+		$arrComment = array();
 
 		if($id > 0){
 			$arrCat = DataCommon::getCategoryById($cat_id);
@@ -238,6 +239,7 @@ class SiteController{
 			}
 
 			$arrSame = Site::getListPostSameNewsInCategory($cat_id, $id, 10, array());
+			$arrComment = SiteController::getComment($id, 1);
 
 			//Comment
 			if(!empty($_POST)){
@@ -246,11 +248,12 @@ class SiteController{
 		}else{
 			drupal_goto($base_url);
 		}
-
+		
 		return theme('pageNewsDetail', array(
 					'result'=>$result,
 					'arrCat'=>$arrCat,
 					'arrSame'=>$arrSame,
+					'arrComment'=>$arrComment,
 					));
 	}
 	public static function get_item_view_video($id, $cat_id){
@@ -415,12 +418,18 @@ class SiteController{
 			}
 		}
 
+		$security_code = $_SESSION['security_code'];
 		if($captcha != ''){
-
+			if($captcha != $security_code){
+				 $errors .= 'Mã an toàn không đúng<br/>';
+			}
+		}else{
+			$errors .= 'Mã an toàn không đúng<br/>';
 		}
 
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
+			drupal_goto($link);
 		}
 
 		if($name != '' && $title != '' && $content != ''){
@@ -434,5 +443,12 @@ class SiteController{
 				drupal_set_message('Gửi nhận xét thành công!');
 			}
 		}
+	}
+	public static function getComment($id=0,  $type=0){
+		if($id>0 && $type>0){
+			$result = Site::getComment($id,  $type, array(), 30);
+			return $result;
+		}
+		return array();
 	}
 }
