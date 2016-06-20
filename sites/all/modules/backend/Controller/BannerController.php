@@ -12,6 +12,8 @@ class BannerController{
 		BANNER_TYPE_CONTENT_HOME => 'Banner giữa trang chủ',
 		BANNER_TYPE_LEFT => 'Banner trái',
 		BANNER_TYPE_RIGHT => 'Banner phải',
+		BANNER_TYPE_WEB_LEFT => 'Banner bên cạnh trái màn hình',
+		BANNER_TYPE_WEB_RIGHT => 'Banner bên cạnh phải màn hình',
 	);
 
 	public function __construct(){

@@ -1067,6 +1067,9 @@ body{
     display: inline-block;
     float: right;
 }
+#wrapper-r .bx-wrapper{
+    max-width: 818px!important;
+}
 /*Center*/
 #wrapper-cc .site-center{
     float: none;
@@ -1139,8 +1142,6 @@ body{
 .form-comment-post button:hover{
     background: #0062db;
 }
-
-
 .item-comment {
     clear: both;
     margin-bottom: 5px;

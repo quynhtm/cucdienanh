@@ -72,16 +72,14 @@ define('COMMENT_NOT_REPLY', 1);
 define('BANNER_TYPE_CONTENT_HOME', 1);
 define('BANNER_TYPE_LEFT', 2);
 define('BANNER_TYPE_RIGHT', 3);
+define('BANNER_TYPE_WEB_LEFT', 4);//canh trai man hinh
+define('BANNER_TYPE_WEB_RIGHT', 5);//canh phai man hinh
 
 define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
 
 define('BANNER_NOT_TARGET_BLANK', 0);
 define('BANNER_TARGET_BLANK', 1);
-
-define('BANNER_PAGE_HOME', 1);
-define('BANNER_PAGE_CATEGORY', 2);
-define('BANNER_PAGE_DETAIL', 3);
 
 //Link nofolow
 define('LINK_NOFOLLOW', 0);
