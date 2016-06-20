@@ -72,7 +72,7 @@
 								<?php if( isset($item->url_image)) {?>
 								<div style="position: relative;">
 									<div style="position: relative; z-index: 10">
-										<img src="<?php echo $item->url_image ?>" class='imge_hover' id='<?php echo $item->banner_id ?>' height="80" width="80" style="margin: 10px 0;"/>
+										<img src="<?php echo $item->url_image ?>" class='imge_hover' id='<?php echo $item->banner_id ?>' width="80" style="margin: 10px 0;"/>
 									</div>
 									<div id='div_hover_<?php echo $item->banner_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
 										<img src="<?php echo $item->url_image_hover ?>"/>

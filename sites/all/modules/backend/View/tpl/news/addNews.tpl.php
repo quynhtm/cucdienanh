@@ -81,7 +81,7 @@
             <div class="control-group">
                  <label class="control-label">Nổi bật</label>
                  <div class="controls">
-                     <select class="form-control input-sm" name="video_hot">
+                     <select class="form-control input-sm" name="news_hot">
                          <?php echo $optionHot;?>
                      </select>
                 </div>

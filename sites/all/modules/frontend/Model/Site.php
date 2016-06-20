@@ -59,7 +59,7 @@ class Site{
             $sql->condition('i.news_status', STASTUS_SHOW, '=');
             $sql->condition('i.news_hot', STASTUS_SHOW, '=');
 
-            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
+            $result = $sql->range(0, $limit)->orderBy('i.news_hot', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
 		}
 		return $arrItem;

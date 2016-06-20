@@ -103,5 +103,5 @@ SITE={
 			
 			jQuery("form.frmComment").submit();
 		});
-	}
+	},
 }

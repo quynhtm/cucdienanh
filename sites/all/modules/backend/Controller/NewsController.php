@@ -122,7 +122,7 @@ class NewsController{
 				'news_category'=>array('value'=> $news_category, 'require'=>1, 'messages'=>'Danh mục tin tức không được bỏ trống!'),
 				'news_create'=>array('value'=>time()),
 				'news_type'=>array('value'=>$news_type),
-				'news_hot'=>array('value'=>FunctionLib::getIntParam('video_hot',STASTUS_HIDE)),
+				'news_hot'=>array('value'=>FunctionLib::getIntParam('news_hot',STASTUS_HIDE)),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'uid'=>array('value'=>$user->uid, 'require'=>0),

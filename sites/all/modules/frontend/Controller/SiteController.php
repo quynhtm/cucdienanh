@@ -20,6 +20,17 @@ class SiteController{
 		$result = DataCommon::getBannerAds(BANNER_TYPE_RIGHT, 100);
 		return $result;
 	}
+
+	public static function blockLeftWebBanner(){
+		$result = DataCommon::getBannerAds(BANNER_TYPE_WEB_LEFT, 10);
+		return $result;
+	}
+
+	public static function blockRightWebBanner(){
+		$result = DataCommon::getBannerAds(BANNER_TYPE_WEB_RIGHT, 10);
+		return $result;
+	}
+
 	public static function blockRightVideo(){
 		$files = array(
             '/bootstrap/lib/flvplayer/swfobject.js',
@@ -73,7 +84,7 @@ class SiteController{
 		);
 		Loader::load('Core', $files);
 
-		$result = Site::getListPostSlider(10, array());
+		$result = Site::getListPostSlider(15, array());
 		return $result;
 	}
 	public static function getMenuLoad(){

@@ -46,8 +46,8 @@ class BannerController{
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->banner_image) && trim($value->banner_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,450,200);
+					$value->url_image = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,80,0);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,450,0);
 				}
 			}
 		}

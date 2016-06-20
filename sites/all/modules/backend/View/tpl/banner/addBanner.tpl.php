@@ -36,7 +36,7 @@
                          <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced(3);">Upload ảnh quảng cáo</a>
                          <div id="sys_show_image_banner">
                              <?php if(isset($arrItem->banner_image) && $arrItem->banner_image !=''){?>
-                                 <img width='300' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,300,0)?>'/>
+                                 <img src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,300,0)?>'/>
                              <?php }?>
                          </div>
                          <input name="img" type="hidden" id="img" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">

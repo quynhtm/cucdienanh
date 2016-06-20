@@ -159,6 +159,14 @@ function Site_block_info() {
 		'weight'	=> 0,
 		'visibility' => 1,
 	);
+	$blocks['block-fixed-banner-screen'] = array(
+		'info' => t('Block fixed banner screen'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+
    return $blocks;
 }
 function Site_theme() {
@@ -198,6 +206,10 @@ function Site_theme() {
 	    ),
 	    'block-right-banner' => array(
 	      'template' => 'View/tpl/block-right-banner'
+	    ),
+	    //fix banner screen
+	    'block-fixed-banner-screen' => array(
+	      'template' => 'View/tpl/block-fixed-banner-screen'
 	    ),
 
 	    
@@ -250,7 +262,10 @@ function Site_block_view($delta='') {
 		  $block['subject'] = t('Block footer');
 		  $block['content'] = block_footer();
 		  break;
-
+		case 'block-fixed-banner-screen':
+		  $block['subject'] = t('Block fixed banner screen');
+		  $block['content'] = block_fixed_banner_screen();
+		  break;
 		//Left
 		case 'block-left-category':
 		  $block['subject'] = t('Block left category');
@@ -360,7 +375,18 @@ function block_footer(){
 	
 	return theme('block-footer');
 }
+function block_fixed_banner_screen(){
+	
+	$leftBanner = SiteController::blockLeftWebBanner();
+	$rightBanner = SiteController::blockRightWebBanner();
 
+	$data = array(
+			'leftBanner'=>$leftBanner,
+			'rightBanner'=>$rightBanner,
+			);
+
+	return theme('block-fixed-banner-screen', $data);
+}
 //Left
 function block_left_category(){
 	$listCategory = DataCommon::getListCategoryFull('sort');

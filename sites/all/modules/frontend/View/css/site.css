@@ -12,6 +12,7 @@
 body{
     background: #fff url(../img/bg.png) repeat 0 0;
     font-size: 14px;
+    font-family: Arial,Helvetica,sans-serif;
 }
 .header-top{
     background: #008fe6 url(../img/bg-firm-header.png) no-repeat top right;
@@ -25,7 +26,7 @@ body{
     overflow: hidden;
 }
 .wrapp{
-    width: 1070px;
+    width: 1000px;
     margin: 0 auto;
 }
 .logo {
@@ -34,14 +35,14 @@ body{
     margin-right: 10px;
     margin-top: 28px;
     overflow: hidden;
-    width: 255px;
+    width: 280px;
 }
-.logo a{
-    background: url(../img/logo.png) no-repeat 0 0;
+.logo a {
+    background: rgba(0, 0, 0, 0) url("../img/logo.png") no-repeat scroll 0 0;
     display: inline-block;
-    height: 51px;
-    width: 255px;
+    height: 52px;
     text-indent: -9999em;
+    width: 280px;
 }
 .right-header {
     display: inline-block;
@@ -151,7 +152,7 @@ body{
     border-bottom: 1px solid #ff6600;
 }
 .bg-content {
-    background: #fefeed;
+    #background: #fefeed;
     display: inline-block;
     padding-top: 10px;
     width: 100%;
@@ -247,7 +248,7 @@ body{
 .list-item-slider {
     clear: both;
     display: inline-block;
-    height: 166px;
+    height: 154px;
     margin-top: 10px;
     overflow: hidden;
     width: 100%;
@@ -262,11 +263,9 @@ body{
     width: 188px;
 }
 .list-item-slider ul li img{
-    border:2px solid #e2e2e2;
-    border-radius: 2px;
-    width: 188px;
+    width: 100%;
     overflow: hidden;
-    height: 120px;
+    height: 110px;
 }
 .list-item-slider ul li .title{
     clear: both;
@@ -276,7 +275,7 @@ body{
     width: 100%;
 }
 .list-item-slider ul li .title a{
-    color: #333333;
+    color: #555;
 }
 .list-item-slider ul li .title a:hover{
     text-decoration: underline;
@@ -376,14 +375,14 @@ body{
 }
 .content-post-cat .list-content-cat li a {
     background: rgba(0, 0, 0, 0) url("../img/dot-red.png") no-repeat scroll 0px 10px;
-    color: #333333;
+    color: #555;
     display: block;
     font-weight: bold;
     margin: 0 5px;
     padding: 5px 15px;
 }
 .content-post-cat .list-content-cat li a:hover{
-    text-decoration: underline;
+    color: #337ab7;
 }
 .box-right{
     width: 230px;
@@ -410,7 +409,7 @@ body{
 .bg-footer{
     background: #0168bf url(../img/bg-firm-footer.png) no-repeat top right;
     width:100%;
-    padding: 20px 0;
+    padding: 15px 0 10px 0px;
     display: inline-table;
 }
 .address {
@@ -700,7 +699,7 @@ body{
     display: block;
 }
 .bx-wrapper .bx-controls-direction a{
-    background: #d1d1d1 none repeat scroll 0 0;
+    background: #222 none repeat scroll 0 0;
     border-radius: 100%;
     color: #fff;
     display: inline-block;
@@ -718,27 +717,38 @@ body{
 }
 .slide.item-slider {
     position: relative;
-    height: 300px;
+    height: 380px;
     width: 100% !important;
     overflow: hidden;
 }
 .bx-wrapper .title-slider {
-    background: rgba(0, 0, 0, 0) url("../img/bg-cat-title.png") repeat scroll 0 0;
     bottom: 0;
     height: auto;
     overflow: hidden;
-    position: absolute;
     width: 100%;
 }
 .bx-wrapper .title-slider a {
-    color: #fff;
+    color: #222;
     display: inline-block;
-    font-size: 17px;
-    padding: 5px 10px;
+    font-size: 18px;
+    padding: 5px 0px;
     width: 100%;
+    font-weight: bold;
 }
 .bx-wrapper .title-slider a:hover{
-    text-decoration: underline;
+    color: #337ab7;
+}
+.left-slider .bx-wrapper .bx-controls-direction a{
+    top: 38%;
+}
+.bx-wrapper .img {
+    height: 300px;
+    overflow: hidden;
+}
+.intro-slider {
+    font-size: 13px;
+    height: 38px;
+    overflow: hidden;
 }
 .not-front .bg-content {
     min-height: 350px;
@@ -771,11 +781,11 @@ body{
     border-bottom: 1px solid #ddd;
     clear: both;
 }
-.item-news.item-1 .post-img{
-    width: 100%;
+.item-news.item-1 .post-img {
     clear: both;
-    float: none;
-    margin-right: 0;
+    float: left;
+    margin-right: 12px;
+    width: 50%;
 }
 .item-news.item-1 .post-img img{
     border: none;
@@ -820,6 +830,7 @@ body{
 .item-news .post-content {
     color: #333;
     font-size: 13px;
+    text-align: justify;
 }
 .item-news.not-border {
     border-bottom: none;
@@ -1010,7 +1021,7 @@ body{
     display: inline-block;
     float: left;
     margin: 0 10px;
-    width: 590px;
+    width: 520px;
 }
 #wrapper-c .site-right{
     width: 230px;
@@ -1047,17 +1058,17 @@ body{
     display: inline-block;
     float: left;
     margin: 0 0 0 10px;
-    width: 820px;
+    width: 750px;
 }
 #wrapper-r .site-center .content-post-cat ul {
     margin-right: -50px;
 }
 #wrapper-r .site-center .content-post-cat ul li{
-    width: 400px;
+    width: 365px;
 }
 #wrapper-r .site-center .list-item-slider ul li{
     margin-right: 10px;
-    width: 200px;
+    width: 168px;
 }
 #wrapper-r .site-center .box-slider .img img {
     width: 100%;
@@ -1067,8 +1078,12 @@ body{
     display: inline-block;
     float: right;
 }
-#wrapper-r .bx-wrapper{
-    max-width: 818px!important;
+.left-slider {
+    border-right: 1px solid #ddd;
+    display: inline-block;
+    float: left;
+    padding-right: 7px;
+    width: 525px;
 }
 /*Center*/
 #wrapper-cc .site-center{
@@ -1193,4 +1208,56 @@ body{
 }
 label > span {
     color: #ff0000;
+}
+#floating_banner_left{
+    float: left;
+    width: 105px;
+    z-index: 9;
+}
+#floating_banner_right{
+    float: right;
+    width: 105px;
+    z-index: 9;
+}
+.fixed{
+    top:0!important;
+}
+
+#floating_banner_left img,
+#floating_banner_right img{
+    width: 100%;
+}
+.right-slider {
+    display: inline-block;
+    float: right;
+    height: 547px;
+    overflow: hidden;
+    width: 208px;
+}
+.list-hot-slider-right li {
+    margin: 0 0 5px;
+    border-bottom: 1px dotted #e2e2e3;
+    width: 100%;
+}
+.list-hot-slider-right .title-post-hot {
+    padding: 0 0 5px;
+}
+.list-hot-slider-right li .title-post-hot a {
+    font: 400 13px arial;
+    color: #333;
+}
+.list-hot-slider-right li .title-post-hot a:hover{
+    color: #337ab7;
+}
+.list-hot-slider-right li.first-3{
+    border-bottom: 1px solid #e2e2e3;
+}
+.list-hot-slider-right li.first-3 .title-post-hot a{
+    font-weight: bold;
+}
+.list-hot-slider-right li:last-child{
+    border-bottom: none;
+}
+.list-hot-slider-right li.first-3 .img-post-hot > img {
+    max-width: 208px;
 }

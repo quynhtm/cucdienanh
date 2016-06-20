@@ -1,42 +1,86 @@
 <?php global $base_url; ?>
 <div class="box-slider">
-	<div class="sliderPostHot">
-		<?php foreach($arrSliderPost as $key => $item){?>
-		<div class="slide item-slider">
-			<div class="img">
-				<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>">
-					<?php if($item->news_image != ''){?>
-					<img alt="<?php echo $item->news_title ?>"
-					src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,600,300) ?>">
-					<?php }else{ ?>
-					<img src="<?php echo IMAGE_DEFAULT ?>"/>
-					<?php } ?>
-				</a>
-			</div>
-			<div class="title-slider">
-				<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a>
-			</div>
-		</div>
-		<?php } ?>
-	</div>
-	<div class="list-item-slider">
-		<ul>
-			<?php foreach($arrSliderPost as $key => $item){?>
-			<li>
-				<div class="thumb">
+	<div class="left-slider">
+		<div class="sliderPostHot">
+			<?php foreach($arrSliderPost as $key => $item){
+				if($key <= 2){
+			?>
+			<div class="slide item-slider">
+				<div class="img">
 					<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>">
 						<?php if($item->news_image != ''){?>
 						<img alt="<?php echo $item->news_title ?>"
-						src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,300,300) ?>">
+						src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,600,300) ?>">
 						<?php }else{ ?>
 						<img src="<?php echo IMAGE_DEFAULT ?>"/>
 						<?php } ?>
 					</a>
 				</div>
-				<div class="title">
+				<div class="title-slider">
 					<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a>
 				</div>
-			</li>
+				<div class="intro-slider">
+					<?php
+						if($item->news_desc_sort != ''){
+							echo Utility::substring($item->news_desc_sort, 200, '...');
+						}else{
+							echo Utility::substring(strip_tags($item->news_content), 200, '...');
+						}
+					?>
+				</div>
+			</div>
+			<?php } ?>
+			<?php } ?>
+		</div>
+		<div class="list-item-slider">
+			<ul>
+				<?php foreach($arrSliderPost as $key => $item){?>
+				<li>
+					<div class="thumb">
+						<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>">
+							<?php if($item->news_image != ''){?>
+							<img alt="<?php echo $item->news_title ?>"
+							src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,300,300) ?>">
+							<?php }else{ ?>
+							<img src="<?php echo IMAGE_DEFAULT ?>"/>
+							<?php } ?>
+						</a>
+					</div>
+					<div class="title">
+						<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a>
+					</div>
+				</li>
+				<?php } ?>
+			</ul>
+		</div>
+	</div>
+	<div class="right-slider">
+		<ul class="list-hot-slider-right">
+			<?php foreach($arrSliderPost as $key => $item){
+				if($key >= 3){
+				if($key==3){
+			?>
+			<li class="first-3">
+                <div class="img-post-hot">
+                	<?php if($item->news_image != ''){?>
+					<img alt="<?php echo $item->news_title ?>"
+					src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,208,0) ?>">
+					<?php }else{ ?>
+					<img src="<?php echo IMAGE_DEFAULT ?>" width="208"/>
+					<?php } ?>
+                </div>
+                <div class="title-post-hot">
+                	<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a>
+            	</div>
+            </li>
+			<?php }else{ ?>
+			<li>
+                <div class="title-post-hot">
+                	<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a>
+            	</div>
+            </li>
+            <?php } ?>
+            <?php } ?>
 			<?php } ?>
 		</ul>
 	</div>
@@ -77,12 +121,10 @@
 		</div>
 		<?php } ?>
 <?php } ?>
-
-
 <script>
 	jQuery(document).ready(function(){
 		var bxSider = jQuery('.sliderPostHot').bxSlider({
-			slideWidth: 750,
+			slideWidth: 525,
 			minSlides: 1,
 			maxSlides: 2,
 			slideMargin: 10,

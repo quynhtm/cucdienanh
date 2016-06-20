@@ -29,9 +29,9 @@
 				<div class="post-content">
 					<?php
 						if($item->news_desc_sort != ''){
-							echo Utility::substring($item->news_desc_sort, 300, '...');
+							echo Utility::substring($item->news_desc_sort, 400, '...');
 						}else{
-							echo Utility::substring(strip_tags($item->news_content), 300, '...');
+							echo Utility::substring(strip_tags($item->news_content), 400, '...');
 						}
 					?>
 				</div>

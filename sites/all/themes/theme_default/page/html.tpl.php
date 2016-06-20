@@ -8,7 +8,7 @@
   <?php 
     if(IS_DEV){
   ?>
-  
+
   <?php } ?>
 </head>
 <body id="<?php print strtolower($body_id); ?>" class="<?php print $classes; ?> body" <?php print $attributes;?>>
