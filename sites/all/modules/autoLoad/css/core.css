@@ -9,6 +9,8 @@ ul, ol, li {
 img, a img {
     border: none;
     outline: medium none;
+    max-width: 100%!important;
+    width: auto;
 }
 .clear{
     clear: both;
