@@ -262,6 +262,7 @@ class Site{
                 $sql->addField('i', $field, $field);
             }
 
+            $sql->condition('i.comment_status', STASTUS_SHOW, '=');
             $sql->condition('i.comment_object_id', $id, '=');
             $sql->condition('i.comment_type', $type, '=');
 

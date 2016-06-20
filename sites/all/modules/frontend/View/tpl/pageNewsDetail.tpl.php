@@ -43,6 +43,7 @@
 		<div class="commment">Gửi phản hồi</div>
 		<div class="back">Trở về</div>
 	</div>
+
 	<div class="box-comment-post">
 		<div class="form-comment-post">
 			<div class="col-sm-8">
@@ -116,10 +117,7 @@
 		</div>
 	</div>
 
-
-
-
-	<div class="title-same">Tin khác<span></span></div>
+	<div class="title-same">Bài viết khác<span></span></div>
 	<div class="content-same-post">
 		<ul>
 			<?php foreach($arrSame as $k=>$item){

@@ -63,6 +63,80 @@
 		<div class="commment">Gửi phản hồi</div>
 		<div class="back">Trở về</div>
 	</div>
+	
+	<div class="box-comment-post">
+		<div class="form-comment-post">
+			<div class="col-sm-8">
+				<div class="row">
+					<form name="form-comment" class="frmComment" method="POST" action="">
+						<div class="form-comment-post">
+							<div class="line-form">
+								<div class="control-group">
+									<label class="control-label">Họ tên <span>(*)</span></label>
+									<div class="controls">
+										<input type="text" class="form-control input-sm frmName" placeholder="Họ tên" name="name" maxlength="255">
+									</div>
+								</div>
+					
+								<div class="control-group">
+									<label class="control-label">Email</label>
+									<div class="controls">
+										<input type="text" class="form-control input-sm frmMail" placeholder="Email" name="email" maxlength="255">
+									</div>
+								</div>
+							</div>
+
+							<div class="line-form">
+								<div class="control-group">
+									<label class="control-label">Tiêu đề <span>(*)</span></label>
+									<div class="controls">
+										<input type="text" class="form-control input-sm frmTitle" placeholder="Tiêu đề" name="title" maxlength="255">
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="item-post-frm showCaptcha">
+										<label class="control-label" for='message'>Mã an toàn: <span>(*)</span></label>
+										<input id="security_code" name="captcha" type="text" maxlength="255" placeholder="Mã an toàn" class="form-control input-sm frmCaptcha"/>
+										<img id="img_code" src="<?php echo $base_url?>/captcha?rand=<?php echo rand();?>" />
+										<span id="refresh_code" onclick="refreshCaptcha();" title="Mã an toàn mới">Mã an toàn mới</span>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="control-group textarea">
+								<label class="control-label">Bình luận <span>(*)</span></label>
+								<div class="controls">
+									<textarea name="content" class="form-control input-sm frmContent" cols="30" rows="5" maxlength="2000"></textarea>
+								</div>
+							</div>
+							<input type="hidden" name="itemid" value="<?php echo $video_id ?>"/>
+							<input type="hidden" name="catid" value="<?php echo $video_category ?>"/>
+							<button type="submit" name="submit" id="buttonFormCommentSubmit" class="btn btn-primary" value="1">Gửi nhận xét</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="item-comment">
+			<div class="list-comment">
+				<?php 
+				if(isset($arrComment['data']) && !empty($arrComment['data'])){
+				foreach($arrComment['data'] as $comment){ ?>
+				<div class="item-rep">
+					<div class="c-title">
+						<span class="c-name"><?php echo $comment->comment_customer_name ?></span>
+						<span class="c-time"> - <?php echo date('d/m/Y h:i', $comment->comment_create) ?></span>
+					</div>
+					<div class="c-comment"><?php echo $comment->comment_content ?></div>
+				</div>
+				<?php } } ?>
+				
+
+			</div>
+		</div>
+	</div>
+
 	<div class="title-same">Video khác<span></span></div>
 	<div class="content-same-post">
 		<ul class="same-vieo-list">

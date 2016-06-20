@@ -1,12 +1,27 @@
 /*site*/
+@font-face {
+  font-family: 'Noto Serif';
+  src: url('../fonts/NotoSerif.eot?#iefix') format('embedded-opentype'),  
+  url('../fonts/NotoSerif.woff') format('woff'), 
+  url('../fonts/NotoSerif.ttf')  format('truetype'), 
+  url('../fonts/NotoSerif.svg#Impact') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
     background: #fff url(../img/bg.png) repeat 0 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 .header-top{
-    height: 128px;
     background: #008fe6 url(../img/bg-firm-header.png) no-repeat top right;
+    background: url(../img/bg-firm-header.png) no-repeat top right, linear-gradient(to bottom, #008fe6, #1449a0);
+    background: url(../img/bg-firm-header.png) no-repeat top right, -webkit-linear-gradient(to bottom, #008fe6, #1449a0);
+    background: url(../img/bg-firm-header.png) no-repeat top right, -moz-linear-gradient(to bottom, #008fe6, #1449a0);
+
+    position: relative;
     width:100%;
+    height: 100px;
     overflow: hidden;
 }
 .wrapp{
@@ -17,7 +32,7 @@ body{
     border-radius: 5px;
     float: left;
     margin-right: 10px;
-    margin-top: 40px;
+    margin-top: 28px;
     overflow: hidden;
     width: 255px;
 }
@@ -31,7 +46,7 @@ body{
 .right-header {
     display: inline-block;
     float: right;
-    height: 140px;
+    height: 100px;
     position: relative;
     width: 50%;
 }
@@ -58,13 +73,13 @@ body{
 .right-header .search {
     background: #fff none repeat scroll 0 0;
     border-radius: 15px;
-    bottom: 20px;
+    bottom: 8px;
     display: inline-block;
-    height: 30px;
+    height: 25px;
     padding-left: 10px;
     position: absolute;
     right: 0;
-    width: 205px;
+    width: 185px;
 }
 .right-header .search input.keyword {
     border: medium none;
@@ -72,12 +87,12 @@ body{
     border-top-left-radius: 15px;
     color: #222;
     font-style: italic;
-    height: 30px;
-    width: 165px;
+    height: 25px;
+    width: 145px;
 }
 .right-header .search .btnSearch{
     background: url(../img/icon-search.png) no-repeat center center;
-    height: 30px;
+    height: 25px;
     width: 30px;
     display: inline-block;
     text-indent: -9999em;
@@ -85,20 +100,27 @@ body{
     cursor: pointer;
 }
 .bg-menu{
-    background: #0f428d;
+    background-color: #12428a;
+    background-image: linear-gradient(to bottom, #114189, #021e66);
+    background-image: -webkit-linear-gradient(to bottom, #114189, #021e66);
+    background-image: -moz-linear-gradient(to bottom, #114189, #021e66);
+    box-shadow: 0 2px 3px #1b4b93 inset;
+
+    border-top: 1px solid #0c3c84;
     display: inline-block;
+    height: 32px;
     width: 100%;
-    height: 40px;
 }
 .bg-menu li {
     display: inline-block;
-    line-height: 39px;
-    padding-right: 38px;
+    line-height: 31px;
+    padding-right: 55px;
     position: relative;
 }
-.bg-menu li a{
+.bg-menu li a {
     color: #fff;
-    font-size: 15px;
+    font-family: tahoma;
+    font-size: 13px;
     font-weight: bold;
 }
 .bg-menu li a:hover{
@@ -225,7 +247,7 @@ body{
 .list-item-slider {
     clear: both;
     display: inline-block;
-    height: 170px;
+    height: 166px;
     margin-top: 10px;
     overflow: hidden;
     width: 100%;
@@ -248,7 +270,7 @@ body{
 }
 .list-item-slider ul li .title{
     clear: both;
-    margin-top: 10px;
+    margin-top: 5px;
     height: 35px;
     overflow: hidden;
     width: 100%;
@@ -386,7 +408,7 @@ body{
     width: 100%;
 }
 .bg-footer{
-    background: #077cf5 url(../img/bg-firm-footer.png) no-repeat top right;
+    background: #0168bf url(../img/bg-firm-footer.png) no-repeat top right;
     width:100%;
     padding: 20px 0;
     display: inline-table;
@@ -529,7 +551,6 @@ body{
     font-weight: bold;
     cursor: pointer;
 }
-
 .line-intro-view{
     margin-top: 10px;
     display: inline-block;
@@ -538,7 +559,6 @@ body{
     text-align: justify;
     font-weight: bold;
 }
-
 .line-content-view{
     margin-top: 10px;
     display: inline-block;
@@ -549,7 +569,7 @@ body{
 }
 .line-content-view p{
     margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 14px;
     color: #222;
 }
 .line-save.ext{
@@ -604,7 +624,7 @@ body{
     padding: 5px 15px;
 }
 .item-box.video{
-    background: #fafafa;
+    background: #ececec;
 }
 .list-video-other {
     padding: 0 5px;

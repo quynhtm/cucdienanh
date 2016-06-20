@@ -33,7 +33,7 @@ body{
     overflow-x: hidden;
     background: #fff;
     position: relative;
-    font-family: Arial,sans-serif;
+    font-family: Helvetica,Arial,sans-serif;
     line-height: 1.42857;
 }
 input[type="text"], input[type="password"],select option, textarea{

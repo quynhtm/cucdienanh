@@ -2,6 +2,7 @@
 	global $base_url;
 ?>
 <div class="item-box video">
+	<div class="title-box"><a href="<?php echo strip_tags(Utility::keyword('SITE_LINK_VIDEO')) ?>" title="Video">Video</a></div>
 	<?php 
 	$i=0;
 	foreach($listVideoHot as $k => $v){

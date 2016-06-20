@@ -239,8 +239,8 @@ class SiteController{
 			}
 
 			$arrSame = Site::getListPostSameNewsInCategory($cat_id, $id, 10, array());
+			
 			$arrComment = SiteController::getComment($id, 1);
-
 			//Comment
 			if(!empty($_POST)){
 				SiteController::sendComment(FunctionLib::buildLinkDetail($result->news_id, $result->news_category, $result->news_title_alias), 1);
@@ -262,6 +262,7 @@ class SiteController{
 		$arrCat = array();
 		$result = array();
 		$arrSame = array();
+		$arrComment = array();
 
 		if($id > 0){
 			$files = array(
@@ -281,6 +282,11 @@ class SiteController{
 			}
 
 			$arrSame = Site::getListPostSameVideoInCategory($cat_id, $id, 20, array());
+			$arrComment = SiteController::getComment($id, 2);
+			//Comment
+			if(!empty($_POST)){
+				SiteController::sendComment(FunctionLib::buildLinkDetail($result->video_id, $result->video_category, $result->video_name_alias), 2);
+			}
 
 		}else{
 			drupal_goto($base_url);
@@ -290,6 +296,7 @@ class SiteController{
 					'result'=>$result,
 					'arrCat'=>$arrCat,
 					'arrSame'=>$arrSame,
+					'arrComment'=>$arrComment,
 					));
 	}
 	public static function get_item_view_images($id, $cat_id){
@@ -298,6 +305,7 @@ class SiteController{
 		$arrCat = array();
 		$result = array();
 		$arrSame = array();
+		$arrComment = array();
 
 		if($id > 0){
 
@@ -323,6 +331,11 @@ class SiteController{
 			}
 
 			$arrSame = Site::getListPostSameImageInCategory($cat_id, $id, 30, array());
+			$arrComment = SiteController::getComment($id, 3);
+			//Comment
+			if(!empty($_POST)){
+				SiteController::sendComment(FunctionLib::buildLinkDetail($result->image_id, $result->image_category, $result->image_title_alias), 3);
+			}
 		}else{
 			drupal_goto($base_url);
 		}
@@ -331,6 +344,7 @@ class SiteController{
 					'result'=>$result,
 					'arrCat'=>$arrCat,
 					'arrSame'=>$arrSame,
+					'arrComment'=>$arrComment,
 					));
 	}
 	//Print post
@@ -383,65 +397,63 @@ class SiteController{
 
 	//Comment
 	public static function sendComment($link = '', $type=''){
-		
-		$itemid = FunctionLib::getParam('itemid', 0);
-		$catid = FunctionLib::getParam('catid', 0);
+		if(!empty($_POST)){
+			$itemid = FunctionLib::getParam('itemid', 0);
+			$catid = FunctionLib::getParam('catid', 0);
 
-		$name = FunctionLib::getParam('name','');
-		$email = FunctionLib::getParam('email','');
-		$title = FunctionLib::getParam('title','');
-		$content = FunctionLib::getParam('content','');
-		$captcha = FunctionLib::getParam('captcha','');
+			$name = FunctionLib::getParam('name','');
+			$email = FunctionLib::getParam('email','');
+			$title = FunctionLib::getParam('title','');
+			$content = FunctionLib::getParam('content','');
+			$captcha = FunctionLib::getParam('captcha','');
 
-		$dataInput = array(
-						'comment_object_id'=>array('value'=>trim($itemid), 'require'=>0),
-						'comment_category'=>array('value'=>trim($catid), 'require'=>0),
-						'comment_link'=>array('value'=>trim($link), 'require'=>0),
-						'comment_type'=>array('value'=>trim($type), 'require'=>0),
+			$dataInput = array(
+							'comment_object_id'=>array('value'=>trim($itemid), 'require'=>0),
+							'comment_category'=>array('value'=>trim($catid), 'require'=>0),
+							'comment_link'=>array('value'=>trim($link), 'require'=>0),
+							'comment_type'=>array('value'=>trim($type), 'require'=>0),
 
-						'comment_customer_name'=>array('value'=>trim($name), 'require'=>1, 'messages'=>'Họ tên không được trống!'),
-						'comment_mail'=>array('value'=>trim($email), 'require'=>0),
-						
-						'comment_object_name'=>array('value'=>trim($title), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
-						'comment_content'=>array('value'=>trim($content), 'require'=>1, 'messages'=>'Nội dung không được trống!'),
-						
-						'captcha'=>array('value'=>trim($captcha), 'require'=>1, 'messages'=>'Mã an toàn không được trống!'),
-						'comment_create'=>array('value'=>time(), 'require'=>0),
-					);
+							'comment_customer_name'=>array('value'=>trim($name), 'require'=>1, 'messages'=>'Họ tên không được trống!'),
+							'comment_mail'=>array('value'=>trim($email), 'require'=>0),
+							
+							'comment_object_name'=>array('value'=>trim($title), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+							'comment_content'=>array('value'=>trim($content), 'require'=>1, 'messages'=>'Nội dung không được trống!'),
+							
+							'captcha'=>array('value'=>trim($captcha), 'require'=>1, 'messages'=>'Mã an toàn không được trống!'),
+							'comment_create'=>array('value'=>time(), 'require'=>0),
+						);
 
-		$errors = ValidForm::validInputData($dataInput);
+			$errors = ValidForm::validInputData($dataInput);
 
-		if($email != ''){
-			$check_valid_mail = ValidForm::checkRegexEmail($email);
-			if(!$check_valid_mail){
-				$errors .= 'Email không đúng định dạng<br/>';
-			}
-		}
-
-		$security_code = $_SESSION['security_code'];
-		if($captcha != ''){
-			if($captcha != $security_code){
-				 $errors .= 'Mã an toàn không đúng<br/>';
-			}
-		}else{
-			$errors .= 'Mã an toàn không đúng<br/>';
-		}
-
-		if($errors != ''){
-			drupal_set_message($errors, 'error');
-			drupal_goto($link);
-		}
-
-		if($name != '' && $title != '' && $content != ''){
-			$data_post = array();
-			unset($dataInput['captcha']);
-			if(!empty($dataInput)){
-				foreach($dataInput as $key=>$val){
-					$data_post[$key] = $val['value'];
+			if($email != ''){
+				$check_valid_mail = ValidForm::checkRegexEmail($email);
+				if(!$check_valid_mail){
+					$errors .= 'Email không đúng định dạng<br/>';
 				}
-				Site::insertComment($data_post);
-				drupal_set_message('Gửi nhận xét thành công!');
 			}
+
+			$security_code = $_SESSION['security_code'];
+			if($captcha != $security_code){
+				$errors .= 'Mã an toàn không đúng<br/>';
+			}
+
+			if($errors != ''){
+				drupal_set_message($errors, 'error');
+				drupal_goto($link);
+			}
+
+			if($name != '' && $title != '' && $content != ''){
+				$data_post = array();
+				unset($dataInput['captcha']);
+				if(!empty($dataInput)){
+					foreach($dataInput as $key=>$val){
+						$data_post[$key] = $val['value'];
+					}
+					Site::insertComment($data_post);
+					drupal_set_message('Gửi nhận xét thành công!');
+				}
+			}
+			unset($_POST);
 		}
 	}
 	public static function getComment($id=0,  $type=0){
