@@ -22,7 +22,7 @@ SITE={
 	},
 	bookmark:function(){
 		jQuery(".line-save .bookmark").click(function(e){
-			jAlert( 'Nhấn CTRL+D và click link để bookmark!', 'Cảnh báo');
+			jAlert( 'Nhấn CTRL+D và click link để bookmark!', 'Hướng dẫn');
 		});
 	},
 	history_back:function(){

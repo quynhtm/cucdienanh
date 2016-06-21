@@ -8,12 +8,21 @@
   font-weight: normal;
   font-style: normal;
 }
-
 body{
     background: #fff url(../img/bg.png) repeat 0 0;
     font-size: 14px;
     font-family: Arial,Helvetica,sans-serif;
 }
+/*Absolute*/
+#wrapper {
+    padding-bottom: 145px;
+    position: relative;
+}
+#footer {
+    bottom: 0;
+    position: absolute !important;
+}
+/*Absolute*/
 .header-top{
     background: #008fe6 url(../img/bg-firm-header.png) no-repeat top right;
     background: url(../img/bg-firm-header.png) no-repeat top right, linear-gradient(to bottom, #008fe6, #1449a0);
@@ -225,7 +234,6 @@ body{
 .item-box .box-link a{
     text-transform: uppercase;
     color: #fff;
-    font-weight: bold;
     font-size: 20px;
     display: block;
 }
@@ -438,6 +446,7 @@ body{
     text-transform: none;
     color: #333;
     font-size: 14px;
+    margin-bottom: 10px;
 }
 .link-breadcrumb a {
     display: inline-block;
@@ -699,7 +708,7 @@ body{
     display: block;
 }
 .bx-wrapper .bx-controls-direction a{
-    background: #222 none repeat scroll 0 0;
+    background: #337ab7;
     border-radius: 100%;
     color: #fff;
     display: inline-block;
@@ -765,6 +774,7 @@ body{
     margin-bottom: 10px;
     margin-top: 8px;
     padding-left: 5px;
+    display: none;
 }
 .item-news.item-1 .post-img img {
     width: 100%;
@@ -885,7 +895,7 @@ body{
     height: 250px;
     margin-right: 10px;
     overflow: hidden;
-    width: 48% !important;
+    width: 32% !important;
 }
 .item-news.right.not-border {
     float: right;
@@ -911,7 +921,7 @@ body{
     clear: none;
     display: inline-block;
     float: left;
-    height: 255px;
+    height: 222px;
     margin: 0 12px 15px;
     overflow: hidden;
     width: 30%;
@@ -936,7 +946,7 @@ body{
     clear: both;
 }
 .content-same-post .same-vieo-list li .post-img {
-    height: 160px;
+    height: 125px;
     overflow: hidden;
     width: 100%;
 }
@@ -1057,8 +1067,8 @@ body{
 #wrapper-r .site-center{
     display: inline-block;
     float: left;
-    margin: 0 0 0 10px;
-    width: 750px;
+    margin: 0px;
+    width: 755px;
 }
 #wrapper-r .site-center .content-post-cat ul {
     margin-right: -50px;
@@ -1082,7 +1092,7 @@ body{
     border-right: 1px solid #ddd;
     display: inline-block;
     float: left;
-    padding-right: 7px;
+    padding-right: 10px;
     width: 525px;
 }
 /*Center*/
@@ -1264,4 +1274,7 @@ label > span {
 #gallery .bx-wrapper .img {
     height: 370px;
     overflow: hidden;
+}
+.note-empty{
+    font-style: italic;
 }

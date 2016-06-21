@@ -28,6 +28,7 @@ define('WEB_SITE', 'Cucdienanh.vn');//suffix link and alt
 
 define('IS_DEV', 1);// 0:local, 1:web
 define('NOT_POST', 'Chưa có bài viết nào...');
+define('NOT_COMMENT', 'Chưa có nhận xét nào...');
 
 //Tables for website
 define('TABLE_TYPE', 			'web_type');

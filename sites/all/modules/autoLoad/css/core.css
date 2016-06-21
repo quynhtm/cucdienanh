@@ -109,7 +109,6 @@ input[type="text"], input[type="password"],select option, textarea{
     color: #222;
     display: inline-block;
     font-size: 20px;
-    font-weight: bold;
     height: 40px;
     margin: 0 auto;
     padding: 12px 0 0 8px;
@@ -390,6 +389,15 @@ input[type="text"], input[type="password"],select option, textarea{
     font-style:italic;
     font-weight:normal;
 }
+#pid-user-password #user-pass h3 {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
 /*jAlert*/
 #popup_overlay {
     background: #000!important;
@@ -418,6 +426,7 @@ input[type="text"], input[type="password"],select option, textarea{
     cursor: default;
     padding: 0;
     margin: 0;
+    font-weight: normal;
 }
 #popup_content {
     padding: 1em 1.75em;

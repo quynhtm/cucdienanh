@@ -130,9 +130,12 @@
 					</div>
 					<div class="c-comment"><?php echo $comment->comment_content ?></div>
 				</div>
-				<?php } } ?>
-				
-
+				<?php 
+					} 
+				}else{ 
+				?>
+				<div class="note-empty"><?php echo NOT_COMMENT ?></div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>

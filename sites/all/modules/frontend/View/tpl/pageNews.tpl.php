@@ -13,17 +13,14 @@
 		foreach($result as $k => $item) {
 		?>
 		<div class="item-news item-<?php echo $k+1 ?> <?php if($total == $k+1){ echo 'not-border'; } ?>">
+			<?php if($item->news_image != ''){?>
 			<div class="post-img">
 				<a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>">
-					<?php if($item->news_image != ''){?>
 					<img alt="<?php echo $item->news_title ?>"
 					src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,400,400) ?>">
-					<?php }else{ ?>
-					<img src="<?php echo IMAGE_DEFAULT ?>"/>
-					<?php } ?>
 				</a>
-				
 			</div>
+			<?php } ?>
 			<div class="post-data">
 				<h2 class="post-title"><a href="<?php echo FunctionLib::buildLinkDetail($item->news_id, $item->news_category, $item->news_title_alias); ?>" title="<?php echo $item->news_title ?>"><?php echo $item->news_title ?></a></h2>
 				<div class="post-content">

@@ -102,7 +102,8 @@
 			<div class="list-comment">
 				<?php 
 				if(isset($arrComment['data']) && !empty($arrComment['data'])){
-				foreach($arrComment['data'] as $comment){ ?>
+				foreach($arrComment['data'] as $comment){ 
+				?>
 				<div class="item-rep">
 					<div class="c-title">
 						<span class="c-name"><?php echo $comment->comment_customer_name ?></span>
@@ -110,9 +111,12 @@
 					</div>
 					<div class="c-comment"><?php echo $comment->comment_content ?></div>
 				</div>
-				<?php } } ?>
-				
-
+				<?php 
+					} 
+				}else{ 
+				?>
+				<div class="note-empty"><?php echo NOT_COMMENT ?></div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
