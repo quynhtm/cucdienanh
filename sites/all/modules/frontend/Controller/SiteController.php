@@ -204,6 +204,8 @@ class SiteController{
 					}
 				}
 				$listCategory = $tmpCategory;
+			}else{
+				$listCategory  = array();
 			}
 		}
 
@@ -401,7 +403,6 @@ class SiteController{
 		$result = array();
 
 		if($id > 0){
-
 			$arrCat = DataCommon::getCategoryById($cat_id);
 			if(empty($arrCat)){
 				drupal_goto($base_url.'/page-404');
