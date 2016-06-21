@@ -912,7 +912,7 @@ body{
     display: inline-block;
     float: left;
     height: 255px;
-    margin: 0 13px 15px;
+    margin: 0 12px 15px;
     overflow: hidden;
     width: 30%;
 }
@@ -1260,4 +1260,8 @@ label > span {
 }
 .list-hot-slider-right li.first-3 .img-post-hot > img {
     max-width: 208px;
+}
+#gallery .bx-wrapper .img {
+    height: 370px;
+    overflow: hidden;
 }
