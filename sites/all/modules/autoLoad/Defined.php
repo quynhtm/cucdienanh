@@ -23,8 +23,8 @@ define('SITE_SAME_RECORD', 		5);
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
-define('AJAX_DOMAIN', '/cucdienanh.vn/');//check preg_match ajax
-define('WEB_SITE', 'Cucdienanh.vn');//suffix link and alt
+define('AJAX_DOMAIN', '/cucdienanh.quanly.org/');//check preg_match ajax
+define('WEB_SITE', 'Cucdienanh.quanly.org');//suffix link and alt
 
 define('IS_DEV', 1);// 0:local, 1:web
 define('NOT_POST', 'Chưa có bài viết nào...');

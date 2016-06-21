@@ -124,7 +124,7 @@ class DocumentController{
 			}
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->document_status) ? $arrItem->document_status: STASTUS_SHOW);
-		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, isset($arrItem->document_type) ? $arrItem->document_type: -1);
+		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, isset($arrItem->document_category) ? $arrItem->document_category: -1);
 		return $view = theme('addDocument',
 			array('arrItem'=>$arrItem,
 				'errors'=>$errors,
