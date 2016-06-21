@@ -20,17 +20,14 @@ class SiteController{
 		$result = DataCommon::getBannerAds(BANNER_TYPE_RIGHT, 100);
 		return $result;
 	}
-
 	public static function blockLeftWebBanner(){
 		$result = DataCommon::getBannerAds(BANNER_TYPE_WEB_LEFT, 10);
 		return $result;
 	}
-
 	public static function blockRightWebBanner(){
 		$result = DataCommon::getBannerAds(BANNER_TYPE_WEB_RIGHT, 10);
 		return $result;
 	}
-
 	public static function blockRightVideo(){
 		$files = array(
             '/bootstrap/lib/flvplayer/swfobject.js',
@@ -51,7 +48,7 @@ class SiteController{
 		$result = DataCommon::getListImageHot(10);
 		return $result;
 	}
-
+	
 	public static function getListPostInCategory($category_id=0){
 		$arrCatId = array();
 		$arrPost = array();
@@ -171,7 +168,48 @@ class SiteController{
 		return theme('pageNews', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory));
 	}
 	public static function get_list_item_document($cat_id){
-		echo "Document";die;
+		global $base_url;
+
+		$result['data'] = array();
+		$result['pager'] = array();
+		$arrCategory = array();
+		$listCategory = DataCommon::getListCategoryFull('notsort');
+
+		$category_title = '';
+		$category_meta_title = '';
+		$category_meta_keywords = '';
+		$category_meta_description = '';
+
+		if($cat_id > 0){
+		
+			$arrCategory = DataCommon::getCategoryById($cat_id);
+			if(!empty($arrCategory)){
+				$category_title = $arrCategory->category_name;
+				$category_meta_title = $arrCategory->category_meta_title;
+				$category_meta_keywords = $arrCategory->category_meta_keywords;
+				$category_meta_description = $arrCategory->category_meta_description;
+			}
+
+			$arrCat = array();	
+			DataCommon::makeArrCatID($cat_id, 0, $arrCat, 100);
+			if(!empty($arrCat)){
+				$result = Site::getListPostDocumentInCategory($arrCat, 100, array());
+				$tmpCategory = array();
+				foreach($arrCat as $key=>$cat){
+					foreach($listCategory as $k=>$c){
+						if($cat == $c['category_id']){
+							array_push($tmpCategory, $listCategory[$k]);
+							unset($listCategory[$k]);
+						}
+					}
+				}
+				$listCategory = $tmpCategory;
+			}
+		}
+
+	    SeoMeta::SEO($category_title.' - '.WEB_SITE, '', $category_meta_title.' - '.WEB_SITE, $category_meta_keywords.' - '.WEB_SITE, $category_meta_description.' - '.WEB_SITE);
+
+		return theme('pageServicesFocus', array('result'=>$result['data'], 'pager' =>$result['pager'], 'arrCategory' =>$arrCategory, 'listCategory'=>$listCategory));
 	}
 	public static function get_list_item_video($cat_id){
 		if($cat_id > 0){
@@ -199,7 +237,6 @@ class SiteController{
 		}else{
 			drupal_goto($base_url.'/page-404');
 		}
-		
 	}
 	public static function get_list_item_images($cat_id){
 		if($cat_id > 0){
@@ -227,7 +264,6 @@ class SiteController{
 		}else{
 			drupal_goto($base_url.'/page-404');
 		}
-		
 	}
 	//View post
 	public static function get_item_view_news($id, $cat_id){
@@ -358,6 +394,34 @@ class SiteController{
 					'arrComment'=>$arrComment,
 					));
 	}
+	public static function get_item_view_document($id, $cat_id){
+		global $base_url;
+
+		$arrCat = array();
+		$result = array();
+
+		if($id > 0){
+
+			$arrCat = DataCommon::getCategoryById($cat_id);
+			if(empty($arrCat)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+			$result = DataCommon::getDocumentById($id);
+
+			if(empty($result)){
+				drupal_goto($base_url.'/page-404');
+			}
+
+		}else{
+			drupal_goto($base_url);
+		}
+
+		return theme('pageServicesFocusDetail', array(
+					'result'=>$result,
+					'arrCat'=>$arrCat,
+					));
+	}
 	//Print post
 	public static function getItemPrint(){
 		global $base_url;
@@ -405,7 +469,6 @@ class SiteController{
 
 		return theme('pageNewsSearch', array('result'=>$result['data'], 'pager' =>$result['pager']));
 	}
-
 	//Comment
 	public static function sendComment($link = '', $type=''){
 		if(!empty($_POST)){

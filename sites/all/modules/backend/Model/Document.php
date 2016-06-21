@@ -7,7 +7,7 @@ class Document{
 	static $primary_key = 'document_id';
 
 	static $arrFields = array('document_id', 'document_name', 'document_name_alias', 'document_status',
-		'document_order', 'uid','document_created','language','document_type','document_file', 'document_desc_sort', 'document_content',
+		'document_order', 'uid','document_created','language','document_type', 'document_category', 'document_file', 'document_desc_sort', 'document_content',
 		'document_meta_title','document_meta_keywords','document_meta_description',
 	);
 

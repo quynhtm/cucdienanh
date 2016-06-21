@@ -12,6 +12,7 @@ class DataCommon{
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
 	public static $table_image = TABLE_IMAGE;
+	public static $table_document = TABLE_DOCUMENT;
 
 	public static $table_users = TABLE_ROLE;
 	public static $table_users_role = TABLE_USERS_ROLES;
@@ -91,9 +92,6 @@ class DataCommon{
 		return $listCategory;
 	}
 
-	/*
-	 * Build tree chuyen muc
-	 * */
 	public static function getListCategoryNews($type_keyword=''){
 		if($type_keyword != ''){
 			$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_NEWS.$type_keyword;
@@ -344,6 +342,31 @@ class DataCommon{
 		}
 		return $image;
 	}
+	public static function getDocumentById($document_id = 0){
+		$document = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_DOCUMENT_ID.$document_id;
+		if($document_id <= 0) return $document;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$document = $cache->do_get($key_cache);
+		}
+		if( $document == null || empty($document)){
+			$query = db_select(self::$table_document, 'n')
+				->condition('n.document_id', $document_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$document = $new;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $document, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $document;
+	}
+
 	/**
 	 * @param int $banner_type: 1:giua trang chu, 2:trai, 3:phai
 	 * @return array

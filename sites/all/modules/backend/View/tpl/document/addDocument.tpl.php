@@ -10,7 +10,7 @@
             <div class="control-group">
                  <label class="control-label">Danh mục</label>
                  <div class="controls">
-                     <select class="form-control input-sm" name="document_type">
+                     <select class="form-control input-sm" name="document_category">
                          <?php echo $optionCategory;?>
                      </select>
                  </div>

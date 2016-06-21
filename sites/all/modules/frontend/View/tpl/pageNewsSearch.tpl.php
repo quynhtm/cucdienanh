@@ -19,8 +19,6 @@
 					<?php if($item->news_image != ''){?>
 					<img alt="<?php echo $item->news_title ?>"
 					src="<?php echo FunctionLib::getThumbImage($item->news_image,$item->news_id,FOLDER_NEWS,400,400) ?>">
-					<?php }else{ ?>
-					<img src="<?php echo IMAGE_DEFAULT ?>"/>
 					<?php } ?>
 				</a>
 				

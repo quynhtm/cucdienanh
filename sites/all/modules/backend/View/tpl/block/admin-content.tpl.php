@@ -45,7 +45,7 @@ global $base_url;
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Quản lý văn bản" href="<?php echo $base_url ?>/admincp/document">
 					<div class="boder_admin padding10">
-						<i class="icon-file-text icon-4x"></i> <br/>Quản lý văn bản
+						<i class="icon-file-text icon-4x"></i> <br/>Quản lý dịch vụ công
 					</div>
 				</a>
 			</div>

@@ -8,7 +8,7 @@
 			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Danh mục</label>
-				<div><select class="form-control input-sm" name="document_type"><?php echo $optionCategory;?></select></div>
+				<div><select class="form-control input-sm" name="document_category"><?php echo $optionCategory;?></select></div>
 			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
@@ -65,7 +65,7 @@
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->document_id ?>" /></td>
 							<td><?php echo $item->document_name ?></td>
-							<td><?php echo isset($aryCatergoryDocument[$item->document_type])?$aryCatergoryDocument[$item->document_type]:'Chưa rõ'; ?></td>
+							<td><?php echo isset($aryCatergoryDocument[$item->document_category])?$aryCatergoryDocument[$item->document_category]:'Chưa rõ'; ?></td>
 							<td class="align_center"><?php echo $item->document_order; ?></td>
 							<td>
 								<?php

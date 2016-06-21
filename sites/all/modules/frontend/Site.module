@@ -212,7 +212,6 @@ function Site_theme() {
 	      'template' => 'View/tpl/block-fixed-banner-screen'
 	    ),
 
-	    
 	    'pageNews' => array(
 	      'template' => 'View/tpl/pageNews'
 	    ),
@@ -222,7 +221,6 @@ function Site_theme() {
 	    'pageNewsSearch' => array(
 	      'template' => 'View/tpl/pageNewsSearch'
 	    ),
-
 
 	    'pageVideo' => array(
 	      'template' => 'View/tpl/pageVideo'
@@ -234,12 +232,18 @@ function Site_theme() {
 	      'template' => 'View/tpl/pageVideoSearch'
 	    ),
 
-
 	    'pageImage' => array(
 	      'template' => 'View/tpl/pageImage'
 	    ),
 	    'pageImageDetail' => array(
 	      'template' => 'View/tpl/pageImageDetail'
+	    ),
+	    
+	    'pageServicesFocus' => array(
+	      'template' => 'View/tpl/pageServicesFocus'
+	    ),
+	    'pageServicesFocusDetail' => array(
+	      'template' => 'View/tpl/pageServicesFocusDetail'
 	    ),
 	);
 }

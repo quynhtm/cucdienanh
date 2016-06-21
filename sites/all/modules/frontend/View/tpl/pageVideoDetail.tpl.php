@@ -37,9 +37,9 @@
 	<div class="line-intro-view"><?php echo $video_sort_desc ?></div>
 	<div class="line-video-view">
 		<?php
-		$path_vieo = PATH_UPLOAD.'/'.FOLDER_VIDEO.'/'.$video_id.'/'.$video_file;
+		$path_video = PATH_UPLOAD.'/'.FOLDER_VIDEO.'/'.$video_id.'/'.$video_file;
 		$path_img = PATH_UPLOAD.'/'.FOLDER_VIDEO.'/'.$video_id.'/'.$video_img;
-		if(is_file($path_vieo)){
+		if(is_file($path_video)){
 			$url_video = $base_url.'/uploads/'.FOLDER_VIDEO.'/'.$video_id.'/'.$video_file;
 
 			if(is_file($path_img)){

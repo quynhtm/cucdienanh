@@ -23,7 +23,7 @@ class DocumentController{
         Loader::load('Admin', $files);
 
         $aryCatergoryDocument = DataCommon::getListCategoryNews('group_document');
-		$this->aryCatergoryDocument = array(-1 => '--- Chọn danh mục văn bản ---') + $aryCatergoryDocument;
+		$this->aryCatergoryDocument = array(-1 => '--- Chọn danh mục dịch vụ công ---') + $aryCatergoryDocument;
 	}
 	function indexDocument(){
 		global $base_url;
@@ -33,17 +33,17 @@ class DocumentController{
 		//Search
 		$dataSearch['document_name'] = FunctionLib::getParam('document_name','');
 		$dataSearch['document_status'] = FunctionLib::getParam('document_status', -1);
-		$dataSearch['document_type'] = FunctionLib::getParam('document_type', -1);
+		$dataSearch['document_category'] = FunctionLib::getParam('document_category', -1);
 
 		$result = Document::getSearchListItems($dataSearch,$limit,array());
 		$data = $result['data'];
 
 		//Build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['document_status']);
-		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, $dataSearch['document_type']);
+		$optionCategory = FunctionLib::getOption($this->aryCatergoryDocument, $dataSearch['document_category']);
 
 		return $view = theme('indexDocument',array(
-									'title'=>'Quản lý văn bản',
+									'title'=>'Quản lý dịch vụ công',
 									'result' => $data,
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
@@ -72,7 +72,6 @@ class DocumentController{
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = Document::getItemById(array(), $item_id);
-			//FunctionLib::Debug($arrItem);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
@@ -85,7 +84,7 @@ class DocumentController{
 				'document_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($document_name)),'require'=>0),
 				'document_status'=>array('value'=>FunctionLib::getIntParam('document_status',0)),
 				'document_order'=>array('value'=>FunctionLib::getIntParam('document_order',0)),
-				'document_type'=>array('value'=>FunctionLib::getIntParam('document_type',0)),
+				'document_category'=>array('value'=>FunctionLib::getIntParam('document_category',0)),
 				'document_desc_sort'=>array('value'=>FunctionLib::getParam('document_desc_sort',0)),
 				'document_content'=>array('value'=>FunctionLib::getParam('document_content',0)),
 				'document_file'=>array('value'=>$document_file, 'require'=>0),

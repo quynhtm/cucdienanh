@@ -46,7 +46,6 @@ class Cache {
     //cache user id
     const CACHE_UID = 'cache_uid_';
     
-
     public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
         $cache = phpFastCache();

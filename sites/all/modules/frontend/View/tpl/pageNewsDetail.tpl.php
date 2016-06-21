@@ -80,7 +80,6 @@
 										<img id="img_code" src="<?php echo $base_url?>/captcha?rand=<?php echo rand();?>" />
 										<span id="refresh_code" onclick="refreshCaptcha();" title="Mã an toàn mới">Mã an toàn mới</span>
 									</div>
-
 								</div>
 							</div>
 

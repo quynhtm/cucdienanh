@@ -1278,3 +1278,196 @@ label > span {
 .note-empty{
     font-style: italic;
 }
+.box-content-list-view h1.title-news.show {
+    display: block;
+}
+.list-news-post-services table{
+    border:0px;
+    width:100%;
+    text-align: left;
+}
+.list-news-post-services table tbody {
+    border-top: medium none;
+}
+.cat-name{
+    color: #000;
+    font-size: 11pt;
+    font-weight: bold;
+    position: relative;
+    text-align: justify;
+    text-transform: uppercase;
+}
+.cat-name span {
+    background: #ec3d23 none repeat scroll 0 0;
+    border-radius: 100%;
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-size: 8pt;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 10px;
+    text-align: center;
+    width: 20px;
+}
+.tbldocument {
+    margin-left: 35px;
+    width: 95% !important;
+}
+.list-news-post-services table tbody td {
+    vertical-align: top;
+    padding: 5px 0;
+}
+.list-news-post-services table tbody td .lnkdocument{
+    background: rgba(0, 0, 0, 0) url("../img/check.png") no-repeat scroll left top;
+    color: #3d3d3d;
+    display: inline-block;
+    min-height: 15px;
+    padding-left: 20px;
+    text-align: justify;
+    width: 90%;
+}
+.list-news-post-services table tbody td a:hover {
+    color: #cc0000;
+}
+.list-news-post-services table tbody td .lnkdocument span{
+    color: #12428a;
+}
+.list-news-post-services table tbody td .reg-button{
+    background-color: #ec3d23;
+    background-image: linear-gradient(to bottom, #ec3d23, #d44141);
+    background-image: -webkit-linear-gradient(to bottom, #ec3d23, #d44141);
+    background-image: -moz-linear-gradient(to bottom, #ec3d23, #d44141);
+    box-shadow: 0 2px 3px #9d1616 inset;
+    border-top: 1px solid #d44141;
+
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+.list-news-post-services table tbody td .reg-button:hover{
+    color: #fff;
+    background-color: #dc2d13;
+    background-image: linear-gradient(to bottom, #dc2d13, #9d1616);
+    background-image: -webkit-linear-gradient(to bottom, #dc2d13, #9d1616);
+    background-image: -moz-linear-gradient(to bottom, #dc2d13, #9d1616);
+    box-shadow: 0 2px 3px #9d1616 inset;
+}
+.list-news-post-services hr{
+    border:none;
+    border-top:solid 1px #e3e3e3;
+    border-bottom:solid 1px #fff;
+    margin-top:15px;
+    margin-bottom:15px;
+    width: 70%;
+}
+.title-news.show span{
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: 10px;
+    display: inline-block;
+    width: 100%;
+    font-style: normal;
+}
+.box-content-list-view.focus h1.title-news{
+    display: inline-block;
+    height: auto;
+    width: 100%;
+}
+.list-news-post-services-view {
+    border-top: 1px solid #f2f2f2;
+    padding-top: 20px;
+}
+.list-news-post-services-view .line-focus{
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.list-news-post-services-view .line-focus .title-focus {
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+.left-info-focus{
+    display: inline-block;
+    width: 50%;
+    float: left;
+}
+.link-dowload-file {
+    background: rgba(0, 0, 0, 0) url("../img/download.png") no-repeat scroll 0 center;
+    display: inline-block;
+    float: right;
+    height: 50px;
+    padding-left: 55px;
+    width: 40%;
+}
+.line-focus .link-dowload-file a{
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
+}
+.line-focus .link-dowload-file a:hover{
+    color: #cc0000;
+}
+.link-dowload-file > span {
+    white-space: normal;
+}
+.line-focus input {
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #cccccc;
+    height: 22px;
+    padding: 2px;
+    width: 50%;
+    border-radius: 5px;
+}
+.line-focus textarea{
+    background: #ffffff none repeat scroll 0 0;
+    border: 1px solid #cccccc;
+    height: 22px;
+    padding: 2px;
+    width: 50%;
+    max-width: 80%;
+    min-width: 80%;
+    border-radius: 5px;
+    min-height: 100px;
+}
+.line-item-focus {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    width: 200px;
+}
+.line-item-focus input{
+    width: 80%;
+}
+.line-focus label{
+    color: #333;
+}
+.line-focus label span{
+    color: #ff0000;
+}
+.line-item-focus.email input{
+    width: 100%;
+}
+.reg-button-submit {
+    background-color: #ec3d23;
+    background-image: linear-gradient(to bottom, #ec3d23, #d44141);
+    border-radius: 5px;
+    border-top: 1px solid #d44141;
+    box-shadow: 0 2px 3px #9d1616 inset;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.reg-button-submit:hover{
+    color: #fff;
+    background-color: #dc2d13;
+    background-image: linear-gradient(to bottom, #dc2d13, #9d1616);
+    background-image: -webkit-linear-gradient(to bottom, #dc2d13, #9d1616);
+    background-image: -moz-linear-gradient(to bottom, #dc2d13, #9d1616);
+    box-shadow: 0 2px 3px #9d1616 inset;
+}

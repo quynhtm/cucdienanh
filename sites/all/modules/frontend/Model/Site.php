@@ -10,11 +10,13 @@ class Site{
 	static $table_action_video = TABLE_VIDEO;
     static $table_action_images = TABLE_IMAGE;
     static $table_action_comment = TABLE_COMMENT;
+    static $table_action_document = TABLE_DOCUMENT;
     
 	static $primary_key_news = 'news_id';
 	static $primary_key_video = 'video_id';
     static $primary_key_image = 'image_id';
     static $primary_key_comment = 'comment_id';
+    static $primary_key_document = 'document_id';
 
 	static $arrFields = array('news_id', 'news_title', 'news_title_alias', 'news_desc_sort', 'news_content', 'news_image', 'news_image_other', 'news_hot',
 		'news_type', 'news_create', 'news_category', 'news_status', 'news_meta_title', 'news_meta_keyword', 'news_meta_description');
@@ -26,6 +28,10 @@ class Site{
 
     static $arrFieldsComment = array('comment_id','comment_parent_id', 'comment_object_id', 'comment_object_name','comment_type',
         'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status', 'comment_link', 'comment_mail');
+
+    static $arrFieldsDocument = array('document_id', 'document_name', 'document_name_alias', 'document_status',
+        'document_order', 'uid','document_created','language','document_type', 'document_category', 'document_file', 'document_desc_sort', 'document_content',
+        'document_meta_title','document_meta_keywords','document_meta_description');
 
 	public static function getListPostInCategory($arrCatId=array(), $limit=5, $arrFields){
 		if(empty($arrFields)){
@@ -275,5 +281,33 @@ class Site{
             return $data;
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
+    }
+
+    public static function getListPostDocumentInCategory($arrCat= array(), $limit=10, $arrFields){
+        
+        $data['data'] = array();
+        $data['pager'] = array();
+        
+        if(empty($arrFields)){
+            $arrFields = self::$arrFieldsDocument;
+        }
+
+        if(!empty($arrCat) && !empty($arrFields) && $limit>0){
+
+            $sql = db_select(self::$table_action_document, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.document_status', STASTUS_SHOW, '=');
+            $sql->condition('i.document_category', $arrCat, 'IN');
+            
+            $result = $sql->limit($limit)->orderBy('i.document_created', 'ASC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+        }
+        return $data;
     }
 }
