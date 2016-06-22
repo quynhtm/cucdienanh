@@ -1475,6 +1475,7 @@ label > span {
 .line-focus.table th{
     padding: 5px;
     font-size: 13px;
+    border-bottom: 1px solid #fff;
 }
 .line-focus.table td{
     padding: 10px 0;
