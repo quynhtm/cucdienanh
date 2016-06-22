@@ -49,8 +49,8 @@
 					<tr>
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
-						<th width="20%" class="td_list">Tên người gửi</th>
-						<th width="30%" class="td_list">Tên dịch vụ công</th>
+						<th width="20%" class="td_list">Thông tin người gửi</th>
+						<th width="20%" class="td_list">Tên dịch vụ công</th>
 						<th width="20%" class="td_list">Thuộc danh mục</th>
 						<th width="20%" class="td_list">Ngày tạo</th>
 						<th width="10%" class="td_list align_center">Trạng thái</th>
@@ -63,7 +63,12 @@
 						<tr>
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->service_id ?>" /></td>
-							<td><?php echo $item->service_name ?></td>
+							<td>
+								Ông/bà: <b><?php echo $item->service_name ?></b><br/>
+								Địa chỉ: <b><?php echo $item->service_address ?></b><br/>
+								Số ĐT: <b><?php echo $item->service_phone ?></b><br/>
+								Mail: <b><?php echo $item->service_mail ?></b><br/>
+							</td>
 							<td><?php echo $item->service_title ?></td>
 							<td><?php echo isset($aryCatergoryDocument[$item->service_category])?$aryCatergoryDocument[$item->service_category]:'Chưa rõ'; ?></td>
 							<td>
