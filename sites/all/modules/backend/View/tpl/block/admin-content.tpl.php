@@ -43,9 +43,16 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý văn bản" href="<?php echo $base_url ?>/admincp/document">
+				<a class="a_control" title="Quản lý tệp dịch vụ công" href="<?php echo $base_url ?>/admincp/document">
 					<div class="boder_admin padding10">
-						<i class="icon-file-text icon-4x"></i> <br/>Quản lý dịch vụ công
+						<i class="icon-file-text icon-4x"></i> <br/>Quản lý tệp dịch vụ công
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Quản lý gửi dịch vụ công" href="<?php echo $base_url ?>/admincp/sendservicefocus">
+					<div class="boder_admin padding10">
+						<i class="icon-file-text icon-4x"></i> <br/>Quản lý gửi dịch vụ công
 					</div>
 				</a>
 			</div>

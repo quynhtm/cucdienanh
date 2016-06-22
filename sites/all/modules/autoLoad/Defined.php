@@ -40,6 +40,7 @@ define('TABLE_CONTACT',        	'web_contact');
 define('TABLE_BANNER',         	'web_banner');
 define('TABLE_VIDEO',			'web_video');
 define('TABLE_DOCUMENT',		'web_document');
+define('TABLE_SEND_SERVICE_FOCUS',	'web_send_service_focus');
 define('TABLE_IMAGE',		    'web_images');
 
 define('TABLE_USERS',		    'users');

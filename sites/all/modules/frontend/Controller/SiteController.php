@@ -414,6 +414,10 @@ class SiteController{
 				drupal_goto($base_url.'/page-404');
 			}
 
+			if(!empty($_POST)){
+				SiteController::sendServiceFocus(FunctionLib::buildLinkDetail($result->document_id, $result->document_category, $result->document_name_alias));
+			}
+
 		}else{
 			drupal_goto($base_url);
 		}
@@ -537,5 +541,78 @@ class SiteController{
 			return $result;
 		}
 		return array();
+	}
+	//Send service focus
+	public static function sendServiceFocus($link=''){
+		if(!empty($_POST)){
+			
+			$txtid = FunctionLib::getParam('txtid', 0);
+			$txtcatid = FunctionLib::getParam('txtcatid', 0);
+			$service_title = FunctionLib::getParam('txttitle','');
+
+			$service_name = FunctionLib::getParam('txtname', '');
+			$service_address = FunctionLib::getParam('txtaddress', '');
+			$service_cmnd = FunctionLib::getParam('txtcmtnd','');
+			$service_phone = FunctionLib::getParam('txtphone','');
+			$service_mail = FunctionLib::getParam('txtmail','');
+			
+			$service_content_work = FunctionLib::getParam('txtcontent','');
+			$service_content_other = FunctionLib::getParam('txtcontentother','');
+			
+			$txtcaptcha = FunctionLib::getParam('txtcaptcha','');
+
+			$dataInput = array(
+							'service_object_id'=>array('value'=>trim($txtid), 'require'=>0),
+							'service_category'=>array('value'=>trim($txtcatid), 'require'=>0),
+							
+							'service_name'=>array('value'=>$service_name, 'require'=>1, 'messages'=>'Tên người gửi không được trống!'),
+							'service_address'=>array('value'=>$service_address, 'require'=>1, 'messages'=>'Địa chỉ không được trống!'),
+							'service_cmnd'=>array('value'=>$service_cmnd, 'require'=>0),
+							'service_phone'=>array('value'=>$service_phone, 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
+							'service_mail'=>array('value'=>$service_mail, 'require'=>1, 'messages'=>'Email không được trống!'),
+							'service_title'=>array('value'=>$service_title, 'require'=>1, 'messages'=>'Tên dịch vụ công không được trống!'),
+
+							'service_content_work'=>array('value'=>$service_content_work),
+							'service_content_other'=>array('value'=>$service_content_other),
+
+							'service_status'=>array('value'=>1),
+							'service_create'=>array('value'=>time(), 'require'=>0),
+
+							'service_captcha'=>array('value'=>$txtcaptcha, 'require'=>1, 'messages'=>'Mã an toàn không được trống!'),
+
+						);
+
+			$errors = ValidForm::validInputData($dataInput);
+
+			if($service_mail != ''){
+				$check_valid_mail = ValidForm::checkRegexEmail($service_mail);
+				if(!$check_valid_mail){
+					$errors .= 'Email không đúng định dạng<br/>';
+				}
+			}
+
+			$security_code = $_SESSION['security_code'];
+			if($txtcaptcha != $security_code){
+				$errors .= 'Mã an toàn không đúng<br/>';
+			}
+
+			if($errors != ''){
+				drupal_set_message($errors, 'error');
+				drupal_goto($link);
+			}
+
+			if($service_name != '' && $service_address != '' && $service_phone != '' && $service_mail != '' && $service_title != ''){
+				$data_post = array();
+				unset($dataInput['service_captcha']);
+				if(!empty($dataInput)){
+					foreach($dataInput as $key=>$val){
+						$data_post[$key] = $val['value'];
+					}
+					Site::insertServiceFocus($data_post);
+					drupal_set_message('Gửi thông tin dịch vụ công thành công!');
+				}
+			}
+			unset($_POST);
+		}
 	}
 }

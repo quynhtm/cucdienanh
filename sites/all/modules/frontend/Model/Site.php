@@ -11,7 +11,8 @@ class Site{
     static $table_action_images = TABLE_IMAGE;
     static $table_action_comment = TABLE_COMMENT;
     static $table_action_document = TABLE_DOCUMENT;
-    
+    static $table_action_send_service_focus = TABLE_SEND_SERVICE_FOCUS;
+
 	static $primary_key_news = 'news_id';
 	static $primary_key_video = 'video_id';
     static $primary_key_image = 'image_id';
@@ -309,5 +310,12 @@ class Site{
             $data['pager'] = $pager;
         }
         return $data;
+    }
+
+    public static function insertServiceFocus($dataInsert){
+        if(!empty($dataInsert)){
+            return DB::insertOneItem(self::$table_action_send_service_focus, $dataInsert);
+        }
+        return false;
     }
 }

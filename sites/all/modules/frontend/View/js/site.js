@@ -5,6 +5,7 @@ jQuery(document).ready(function($){
 	SITE.print();
 	SITE.search();
 	SITE.comment();
+	SITE.send_service_focus();
 });
 SITE={
 	back_top:function(){
@@ -104,4 +105,57 @@ SITE={
 			jQuery("form.frmComment").submit();
 		});
 	},
+	send_service_focus:function(){
+		jQuery("#btn-send-service-focus").click(function(){
+			
+			var txtname = jQuery("#send-service-focus input.txtname");
+			var txtaddress = jQuery("#send-service-focus input.txtaddress");
+			var txtphone = jQuery("#send-service-focus input.txtphone");
+			var txtmail = jQuery("#send-service-focus input.txtmail");
+			var txtcaptcha = jQuery("#send-service-focus input.txtcaptcha");
+
+			if(txtname.val() == ''){
+				jAlert('Theo yêu cầu của ông/bà không được trống!', 'Cảnh báo');
+				txtname.addClass('error').focus();
+				return false;
+			}else{
+				txtname.removeClass('error');
+			}
+
+			if(txtaddress.val() == ''){
+				jAlert('Địa chỉ không được trống!', 'Cảnh báo');
+				txtaddress.addClass('error').focus();
+				return false;
+			}else{
+				txtaddress.removeClass('error');
+			}
+
+			if(txtphone.val() == ''){
+				jAlert('Số điện thoại không được trống!', 'Cảnh báo');
+				txtphone.addClass('error').focus();
+				return false;
+			}else{
+				txtphone.removeClass('error');
+			}
+
+			if(txtmail.val() == ''){
+				jAlert('Email không được trống!', 'Cảnh báo');
+				txtmail.addClass('error').focus();
+				return false;
+			}else{
+				txtmail.removeClass('error');
+			}
+			
+			if(txtcaptcha.val() == ''){
+				jAlert('Mã an toàn không được trống!', 'Cảnh báo');
+				txtcaptcha.addClass('error').focus();
+				return false;
+			}else{
+				txtcaptcha.removeClass('error');
+			}
+			
+			jQuery("form#send-service-focus").submit();
+
+		});
+	}
 }

@@ -85,10 +85,9 @@ class DocumentController{
 				'document_status'=>array('value'=>FunctionLib::getIntParam('document_status',0)),
 				'document_order'=>array('value'=>FunctionLib::getIntParam('document_order',0)),
 				'document_category'=>array('value'=>FunctionLib::getIntParam('document_category',0)),
-				'document_desc_sort'=>array('value'=>FunctionLib::getParam('document_desc_sort',0)),
-				'document_content'=>array('value'=>FunctionLib::getParam('document_content',0)),
+				'document_desc_sort'=>array('value'=>FunctionLib::getParam('document_desc_sort','')),
+				'document_content'=>array('value'=>FunctionLib::getParam('document_content','')),
 				'document_file'=>array('value'=>$document_file, 'require'=>0),
-				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),
 				'document_created'=>array('value'=>time(), 'require'=>0),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),

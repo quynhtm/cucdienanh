@@ -43,6 +43,13 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/sendservicefocus"] = array(
+        "title" => t('Send Service Focus'),
+        "description" => "Send Service Focus",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
 
     $items["admincp/news"] = array(
         "title" => t('News'),
@@ -190,6 +197,10 @@ function Admin_theme() {
         'indexDocument'         => array('template' => 'View/tpl/document/indexDocument'),
         'addDocument'           => array('template' => 'View/tpl/document/addDocument'),
 
+        //sendservicefocus
+        'indexSendservicefocus'         => array('template' => 'View/tpl/sendservicefocus/indexSendservicefocus'),
+        'addSendservicefocus'           => array('template' => 'View/tpl/sendservicefocus/addSendservicefocus'),
+
         //Comments
         'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
         'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
@@ -247,6 +258,9 @@ function Admin_init(){
             //Document
             'Model/Document.php',
             'Controller/DocumentController.php',
+            //Send Service Focus
+            'Model/SendServiceFocus.php',
+            'Controller/SendServiceFocusController.php',
             //Comments
             'Model/Comments.php',
             'Controller/CommentsController.php',
