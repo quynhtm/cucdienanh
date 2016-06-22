@@ -929,7 +929,10 @@ form#formListItem {
 .paddingTop20{padding-top: 20px}
 .paddingTop30{padding-top: 30px}
 
-.boder_admin{border: 1px solid}
+.boder_admin {
+    border: 1px solid;
+    margin-bottom: 10px;
+}
 
 .align_center{text-align: center!important;}
 .align_left{text-align: left!important;}
