@@ -36,7 +36,7 @@
             <div class="control-group">
                 <label class="control-label"></label>
                 <div class="controls">
-                    <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadDocumentAdvanced(5);">Upload file</a>
+                    <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadDocumentAdvanced(5);">Mẫu phiếu điền thông tin</a>
                     <div id="sys_show_document">
                          <?php 
                             if(isset($arrItem->document_file) && $arrItem->document_file !=''){
@@ -49,8 +49,28 @@
                     </div>
                 </div>
             </div>
+        
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <a href="javascript:;"class="btn btn-primary" id="add_document_other">Click thêm tên các loại văn bản kèm theo</a>
+                    <div id="sys_show_document_other">
+                        <?php
+                        $document_text_file_other = array();
+                        if($arrItem->document_text_file_other != ''){
+                            $document_text_file_other = unserialize($arrItem->document_text_file_other);
+                            if(is_array($document_text_file_other)){
+                            foreach($document_text_file_other as $v){
+                        ?>
+                        <div class="item-document-other">
+                            <textarea name="document_text_file_other[]" cols="30" rows="3"><?php echo $v ?></textarea><span class="remove-document-other">X</span>
+                        </div>
+                        <?php }}}?>
+                    </div>
+                </div>
+            </div>
 
-             <div class="control-group">
+            <div class="control-group">
                  <label class="control-label">Thứ tự</label>
                  <div class="controls">
                      <input type="text"class="form-control input-sm" name="document_order" value="<?php if(isset($arrItem->document_order)){ echo $arrItem->document_order; } ?>">
@@ -101,13 +121,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabelDocument">Upload Document</h4>
+                <h4 class="modal-title" id="myModalLabelDocument">Upload mẫu phiếu điền thông tin</h4>
             </div>
             <div class="modal-body">
                 <form name="uploadDocument" method="post" action="#" enctype="multipart/form-data">
                     <div class="form_group">
                         <div id="sys_show_button_upload_document">
-                            <div id="sys_mulitplefileuploaderDocument" class="btn btn-primary">Upload Document</div>
+                            <div id="sys_mulitplefileuploaderDocument" class="btn btn-primary">Upload mẫu phiếu điền thông tin</div>
                         </div>
                         <div id="statusDocument"></div>
 
@@ -124,5 +144,5 @@
 <!--Popup upload file-->
 
 <script>
-    CKEDITOR.replace('document_content', {height:500});
+    CKEDITOR.replace('document_content', {height:200});
 </script>

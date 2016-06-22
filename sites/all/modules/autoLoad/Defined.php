@@ -57,6 +57,7 @@ define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
 define('FOLDER_IMAGE', 'slide_image');
 define('FOLDER_DOCUMENT', 'document');
+define('FOLDER_DOCUMENT_SERVICE_FOCUS', 'document_service_focus');
 
 //Common
 define('STASTUS_MENU_LEFT', 1);

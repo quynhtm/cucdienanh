@@ -8,6 +8,7 @@
 	$document_desc_sort = $result->document_desc_sort;
 	$document_content = $result->document_content;
 	$document_created = $result->document_created;
+	$document_text_file_other = $result->document_text_file_other;
 
 	$document_meta_title = $result->document_meta_title;
 	$document_meta_keywords = $result->document_meta_keywords;
@@ -51,7 +52,7 @@
 				<span><?php echo $result->document_file ?></span>
 			</div>
 		</div>
-		<form action="" method="POST" id="send-service-focus" name="send-service-focus">
+		<form action="" method="POST" id="send-service-focus" name="send-service-focus" enctype="multipart/form-data">
 			<div class="line-focus">
 	            <label class="control-label">Theo yêu cầu của ông/bà (<span>*</span>):</label>
 	            <div class="controls">
@@ -91,6 +92,33 @@
 		                <input type="text" class="form-control input-sm txtmail" name="txtmail" maxlength="255">
 		            </div>
 	            </div>
+			</div>
+			<div class="line-focus table">
+				<table width="100%" cellspacing="1" cellpadding="5" border="0">
+					<tr class="first">
+                        <th style="width: 3%;">TT</th>
+                        <th align="center" style="border-left:1px solid #fff;border-right:1px solid #fff">Tên văn bản</th>
+                        <th style="width: 10%;">Văn bản</th>
+                    </tr>
+					<?php
+                    if($document_text_file_other != ''){
+                        $document_text_file_other = unserialize($document_text_file_other);
+                        if(is_array($document_text_file_other)){
+                        foreach($document_text_file_other as $k=>$v){
+                    ?>
+					<tr class="borderbottom">
+						<td><?php echo $k+1 ?></td>
+						<td>
+							<?php echo $v  ?><br/><br/>
+							<b>Đính kèm file (<span class="required">Nếu có</span>):</b>
+							<input type="hidden" name="txtkey[]" value="<?php echo $k ?>">
+							<input type="file" class="inputfile" style="width:70%;" size="38" name="txtFileUpload[]">
+							<br/>
+						</td>
+						<td></td>
+					</tr>
+					<?php } } } ?>
+				</table>
 			</div>
 			<div class="line-focus">
 				<div class="item-post-frm showCaptcha">

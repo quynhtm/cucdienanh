@@ -1471,3 +1471,31 @@ label > span {
     background-image: -moz-linear-gradient(to bottom, #dc2d13, #9d1616);
     box-shadow: 0 2px 3px #9d1616 inset;
 }
+
+.line-focus.table th{
+    padding: 5px;
+    font-size: 13px;
+}
+.line-focus.table td{
+    padding: 10px 0;
+    font-size: 13px;
+}
+.line-focus.table tr.first{
+    background: #0f58a4;
+    color: #fff;
+}
+.line-focus.table tbody{
+    border-top: none;
+}
+.line-focus.table .borderbottom{
+    border-bottom: 1px solid #222;
+}
+.required{
+    color: #ff0000;
+}
+.borderbottom input {
+    border: medium none;
+}
+.inputfile {
+    height: 28px !important;
+}

@@ -963,3 +963,13 @@ form#formListItem {
     font-size: 15px;
     cursor: pointer;
 }
+.item-document-other{
+    margin-bottom: 5px;
+    clear: both;
+}
+.item-document-other span{
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+}

@@ -78,7 +78,8 @@ class DocumentController{
 			$item_id = FunctionLib::getParam('id', 0);
 			$document_name = FunctionLib::getParam('document_name','');
 			$document_file = trim(FunctionLib::getParam('document_file', ''));
-
+			$document_text_file_other = FunctionLib::getParam('document_text_file_other', array());
+			
 			$dataInput = array(
 				'document_name'=>array('value'=>$document_name, 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
 				'document_name_alias'=>array('value'=>mb_strtolower(FunctionLib::safe_title($document_name)),'require'=>0),
@@ -88,6 +89,7 @@ class DocumentController{
 				'document_desc_sort'=>array('value'=>FunctionLib::getParam('document_desc_sort','')),
 				'document_content'=>array('value'=>FunctionLib::getParam('document_content','')),
 				'document_file'=>array('value'=>$document_file, 'require'=>0),
+				'document_text_file_other'=>array('value'=>serialize($document_text_file_other), 'require'=>0),
 				'document_created'=>array('value'=>time(), 'require'=>0),
 
 				'language'=>array('value'=>FunctionLib::getParam('language',''),'require'=>0),

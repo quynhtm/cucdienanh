@@ -30,7 +30,7 @@ class Site{
     static $arrFieldsComment = array('comment_id','comment_parent_id', 'comment_object_id', 'comment_object_name','comment_type',
         'comment_customer_name','comment_content','comment_is_reply', 'comment_create','comment_reply', 'comment_status', 'comment_link', 'comment_mail');
 
-    static $arrFieldsDocument = array('document_id', 'document_name', 'document_name_alias', 'document_status',
+    static $arrFieldsDocument = array('document_id', 'document_name', 'document_name_alias', 'document_status', 'document_text_file_other', 
         'document_order', 'uid','document_created','language','document_type', 'document_category', 'document_file', 'document_desc_sort', 'document_content',
         'document_meta_title','document_meta_keywords','document_meta_description');
 

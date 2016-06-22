@@ -560,7 +560,8 @@ class SiteController{
 			$service_content_other = FunctionLib::getParam('txtcontentother','');
 			
 			$txtcaptcha = FunctionLib::getParam('txtcaptcha','');
-
+			$txtFileUpload = isset($_FILES['txtFileUpload']) ? $_FILES['txtFileUpload'] : array();
+			
 			$dataInput = array(
 							'service_object_id'=>array('value'=>trim($txtid), 'require'=>0),
 							'service_category'=>array('value'=>trim($txtcatid), 'require'=>0),
@@ -604,10 +605,20 @@ class SiteController{
 			if($service_name != '' && $service_address != '' && $service_phone != '' && $service_mail != '' && $service_title != ''){
 				$data_post = array();
 				unset($dataInput['service_captcha']);
+				$arrFileName = array();
+				if(!empty($txtFileUpload)){
+					if(isset($txtFileUpload['name'])){
+						foreach($txtFileUpload['name'] as $k=>$v){
+							$arrFileName[] = Upload::uploadMutiFile($k, 'txtFileUpload', 'xls,xlsx,doc,docx,pdf,rar,zip,tar', 50*1024*1024, FOLDER_DOCUMENT_SERVICE_FOCUS, 0);
+						}
+					}
+				}
+				
 				if(!empty($dataInput)){
 					foreach($dataInput as $key=>$val){
 						$data_post[$key] = $val['value'];
 					}
+					$data_post['service_list_file_upload'] = serialize($arrFileName);
 					Site::insertServiceFocus($data_post);
 					drupal_set_message('Gửi thông tin dịch vụ công thành công!');
 				}
