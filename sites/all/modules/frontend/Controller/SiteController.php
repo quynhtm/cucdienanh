@@ -413,9 +413,18 @@ class SiteController{
 			if(empty($result)){
 				drupal_goto($base_url.'/page-404');
 			}
+			
+			if($result->document_text_file_other !=''){
+				$data_text_file = unserialize($result->document_text_file_other);
+				if(!is_array($data_text_file)){
+					$data_text_file = array();
+				}
+			}else{
+				$data_text_file = array();
+			}
 
 			if(!empty($_POST)){
-				SiteController::sendServiceFocus(FunctionLib::buildLinkDetail($result->document_id, $result->document_category, $result->document_name_alias));
+				SiteController::sendServiceFocus(FunctionLib::buildLinkDetail($result->document_id, $result->document_category, $result->document_name_alias), $data_text_file);
 			}
 
 		}else{
@@ -543,9 +552,9 @@ class SiteController{
 		return array();
 	}
 	//Send service focus
-	public static function sendServiceFocus($link=''){
+	public static function sendServiceFocus($link='', $data_text_file=array()){
 		if(!empty($_POST)){
-			
+
 			$txtid = FunctionLib::getParam('txtid', 0);
 			$txtcatid = FunctionLib::getParam('txtcatid', 0);
 			$service_title = FunctionLib::getParam('txttitle','');
@@ -609,7 +618,11 @@ class SiteController{
 				if(!empty($txtFileUpload)){
 					if(isset($txtFileUpload['name'])){
 						foreach($txtFileUpload['name'] as $k=>$v){
-							$arrFileName[] = Upload::uploadMutiFile($k, 'txtFileUpload', 'xls,xlsx,doc,docx,pdf,rar,zip,tar', 50*1024*1024, FOLDER_DOCUMENT_SERVICE_FOCUS, 0);
+							$name_file = Upload::uploadMutiFile($k, 'txtFileUpload', 'xls,xlsx,doc,docx,pdf,rar,zip,tar', 50*1024*1024, FOLDER_DOCUMENT_SERVICE_FOCUS, 0);
+							if($name_file != ''){
+								$arrFileName[$k]['text'] = $data_text_file[$k];
+								$arrFileName[$k]['file'] = $name_file;
+							}
 						}
 					}
 				}

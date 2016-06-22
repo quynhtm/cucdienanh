@@ -151,14 +151,18 @@ class Upload{
 			    }
 
 				if(drupal_move_uploaded_file($file_tmp, $folder_upload.'/'.$name)){
-					$data = array('status' => t('Ok'), 'src' => $link);
+					$data = array('status' => 'Ok', 'src' => $link);
 				}else{
-					$data = array('status' => t('Fail'), 'src' => '');
+					$data = array('status' => 'Fail', 'src' => '');
 				}
 				if($type_json){
 					echo json_encode($data);exit;
 				}else{
-					return $link;
+					if($data['status'] == 'Ok'){
+						return $link;
+					}else{
+						return '';
+					}
 				}
 			}
 		}

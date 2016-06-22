@@ -64,6 +64,38 @@
                     <textarea name="service_content_other"><?php if(isset($arrItem->service_content_other)){ echo $arrItem->service_content_other; } ?></textarea>
                 </div>
             </div>
+  
+            <div class="control-group">
+                <label class="control-label">Danh sách tệp kèm theo</label>
+                <div class="controls">
+            <?php 
+                if(isset($arrItem->service_list_file_upload)){
+                    if($arrItem->service_list_file_upload != '' ){
+                        $service_list_file_upload = unserialize($arrItem->service_list_file_upload);
+                        if(is_array($service_list_file_upload)){
+                            foreach ($service_list_file_upload as $k => $v) {
+            ?>
+            <div class="item-file-other">
+                <div class="title-file"><b><?php echo $k+1 ?> / </b><?php echo $v['text']?></div>
+                 <div class="link-file"><?php 
+                    $path = PATH_UPLOAD.'/'.FOLDER_DOCUMENT_SERVICE_FOCUS.'/'.$v['file'];
+                    if(is_file($path)){
+                    ?>
+                    <a target="_blank" href="<?php echo $base_url.'/uploads/'.FOLDER_DOCUMENT_SERVICE_FOCUS.'/'.$v['file'] ?>"><?php echo $v['file'] ?></a>
+                    <?php
+                    }
+                    
+                 ?></div>
+            </div>
+            <?php                   
+                            }
+                        }
+                    }
+                }
+                
+            ?>
+                </div>
+            </div>
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
