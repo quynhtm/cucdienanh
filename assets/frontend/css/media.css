@@ -29,7 +29,7 @@
     .navbar-toggle {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        margin-top: -62px;
+        margin-top: -56px;
     }
     .navbar-default .navbar-toggle {
         border-color: #ad8d3d;
@@ -109,7 +109,7 @@
         width: 100%;
     }
     .category .title-category {
-        background: #956a29 url("../img/bg-cate-mobile.png") no-repeat scroll center top;
+        background: #99e021 url("../img/bg-cate-mobile.png") no-repeat scroll center top;
     }
     .section.corner-post{
         display: none;
