@@ -166,12 +166,14 @@ class NewsController extends BaseAdminController
         if($this->valid($dataSave) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
             $dataSave['news_category_name'] = Category::getNameCategory($dataSave['news_category']);
+
             if($id > 0) {
                 //cap nhat
                 if(News::updateData($id, $dataSave)) {
                     return Redirect::route('admin.newsView');
                 }
             } else {
+                $dataSave['news_create'] = time();
                 //them moi
                 if(News::addData($dataSave)) {
                     return Redirect::route('admin.newsView');

@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.bannerView')}}"> Banner quảng cáo</a></li>
+            <li><a href="{{URL::route('admin.bannerView')}}"> Banner </a></li>
             <li class="active">@if($id > 0)Cập nhật banner @else Tạo mới banner @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
@@ -23,18 +23,21 @@
                     </div>
                 @endif
                 <div style="float: left;width: 60%">
-                <div class="col-sm-9">
+                <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Tên banner <span class="red"> (*) </span></label>
-                        <input type="text" placeholder="Tên banner" id="banner_name" name="banner_name"  class="form-control input-sm" value="@if(isset($data['banner_name'])){{$data['banner_name']}}@endif">
+                        <label for="name" class="control-label">Name banner <span class="red"> (*) </span></label>
+                        <input type="text" placeholder="Name banner" id="banner_name" name="banner_name"  class="form-control input-sm" value="@if(isset($data['banner_name'])){{$data['banner_name']}}@endif">
                     </div>
                 </div>
-                <div class="col-sm-3">
+
+                <div class="clearfix"></div>
+                <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">BannerId show ảnh</label>
-                        <input type="text" placeholder="Banner parent show ảnh" id="banner_parent_id" name="banner_parent_id"  class="form-control input-sm" value="@if(isset($data['banner_parent_id'])){{$data['banner_parent_id']}}@endif">
+                        <label for="name" class="control-label">Infor banner</label>
+                        <input type="text" placeholder="Name banner" id="banner_intro" name="banner_intro"  class="form-control input-sm" value="@if(isset($data['banner_intro'])){{$data['banner_intro']}}@endif">
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <div class="form-group">
@@ -46,7 +49,7 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Loại quảng cáo</label>
+                        <label for="name" class="control-label">Type banner</label>
                         <div class="form-group">
                             <select name="banner_type" id="banner_type" class="form-control input-sm">
                                 {{$optionTypeBanner}}
@@ -56,20 +59,20 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Vị trí hiển thị</label>
+                        <label for="name" class="control-label">Language</label>
                         <div class="form-group">
-                            <select name="banner_position" id="banner_position" class="form-control input-sm">
-                                {{$optionPosition}}
+                            <select name="type_language" id="type_language" class="form-control input-sm">
+                                {{$optionLanguage}}
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Page quảng cáo</label>
+                        <label for="name" class="control-label">Status</label>
                         <div class="form-group">
-                            <select name="banner_page" id="banner_page" class="form-control input-sm">
-                                {{$optionPage}}
+                            <select name="banner_status" id="banner_status" class="form-control input-sm">
+                                {{$optionStatus}}
                             </select>
                         </div>
                     </div>
@@ -77,15 +80,6 @@
 
                 <div class="clearfix"></div>
                 <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Danh mục quảng cáo</label>
-                        <div class="form-group">
-                            <select name="banner_category_id" id="banner_category_id" class="form-control input-sm">
-                                {{$optionCategory}}
-                            </select>
-                        </div>
-                    </div>
-                </div><div class="col-sm-4">
                         <div class="form-group">
                             <label for="name" class="control-label">Taget bank</label>
                             <div class="form-group">
@@ -105,39 +99,18 @@
                             </div>
                         </div>
                     </div>
-
-                <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Thứ tự hiển thị</label>
+                        <label for="name" class="control-label">Order</label>
                         <input type="text" placeholder="Thứ tự hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Tỉnh thành</label>
-                        <div class="form-group">
-                            <select name="banner_province_id" id="banner_province_id" class="form-control input-sm">
-                                {{$optionProvince}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Trạng thái</label>
-                        <div class="form-group">
-                            <select name="banner_status" id="banner_status" class="form-control input-sm">
-                                {{$optionStatus}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
 
+
+                <div class="clearfix"></div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Thời gian chạy QC </label>
+                        <label for="name" class="control-label">Type run time</label>
                         <div class="form-group">
                             <select name="banner_is_run_time" id="banner_is_run_time" class="form-control input-sm">
                                 {{$optionRunTime}}
@@ -147,7 +120,7 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Ngày bắt đầu</label>
+                        <label for="name" class="control-label">Start time banner</label>
                         <div class="form-group">
                             <input type="text" class="form-control" id="banner_start_time" name="banner_start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_start_time']) && $data['banner_start_time'] > 0){{date('d-m-Y',$data['banner_start_time'])}}@endif">
                         </div>
@@ -155,22 +128,19 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="name" class="control-label">Ngày kết thúc</label>
+                        <label for="name" class="control-label">End time banner</label>
                         <div class="form-group">
                             <input type="text" class="form-control" id="banner_end_time" name="banner_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_end_time']) && $data['banner_end_time'] > 0){{date('d-m-Y',$data['banner_end_time'])}}@endif">
                         </div>
                     </div>
                 </div>
-
-
-
                 <div class="clearfix"></div>
                 </div>
 
                 <div style="float: left;width: 40%">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload ảnh </a>
+                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload Image </a>
                             <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['banner_image'])){{$data['banner_image']}}@endif">
                         </div>
                     </div>
@@ -181,7 +151,7 @@
                             @if(isset($data['banner_image']) && $data['banner_image']!= '')
                                 <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $data['banner_id'], $data['banner_image'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
                                 <div class="clearfix"></div>
-                                <a href="javascript: void(0);" onclick="Common.removeImageItem({{$data['banner_id']}},'{{$data['banner_image']}}',3);">Xóa ảnh</a>
+                                <a href="javascript: void(0);"  style="display: none" onclick="Common.removeImageItem({{$data['banner_id']}},'{{$data['banner_image']}}',3);">Xóa ảnh</a>
                             @endif
                         </div>
                     </div>
@@ -190,7 +160,8 @@
 
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-12 text-left">
-                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                    <a class="btn btn-warning" href="{{URL::route('admin.bannerView')}}"><i class="fa fa-reply"></i> Back</a>
+                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 {{ Form::close() }}
