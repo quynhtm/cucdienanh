@@ -24,6 +24,34 @@ class Category extends Eloquent
         }
         return $category;
     }
+    public static function getNameCategory($id) {
+        $category_name = '';
+        if($id > 0){
+            $category = Category::getByID($id);
+            if (sizeof($category) != 0) {
+                $category_name = $category->category_name;
+            }
+        }
+        return $category_name;
+    }
+
+    public static function getCateWithLanguage($type_language) {
+        $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_LANGUAGE.$type_language) : array();
+        if (sizeof($category) == 0) {
+            $arrCate = Category::where('type_language','=', $type_language)
+                ->where('category_status','=', CGlobal::status_show)
+                ->orderBy('category_order','asc')->get();
+            if(!empty($arrCate)){
+                foreach($arrCate as $itm) {
+                    $category[$itm['category_id']] = $itm['category_name'];
+                }
+            }
+            if($category && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_CATEGORY_LANGUAGE.$type_language, $category, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+            }
+        }
+        return $category;
+    }
 
     public static function getCategoryByArrayId($arrCate = array()) {
         $data = array();
@@ -144,7 +172,7 @@ class Category extends Eloquent
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if(isset($data->category_id) && $data->category_id > 0){
-                    self::removeCache($data->category_id);
+                    self::removeCache($data->category_id,$data);
                 }
                 return $data->category_id;
             }
@@ -171,7 +199,7 @@ class Category extends Eloquent
             if (!empty($dataInput)){
                 $dataSave->update($dataInput);
                 if(isset($dataSave->category_id) && $dataSave->category_id > 0){
-                    self::removeCache($dataSave->category_id);
+                    self::removeCache($dataSave->category_id,$dataSave);
                 }
             }
             DB::connection()->getPdo()->commit();
@@ -195,7 +223,7 @@ class Category extends Eloquent
             $dataSave = Category::find($id);
             $dataSave->delete();
             if(isset($dataSave->category_id) && $dataSave->category_id > 0){
-                self::removeCache($dataSave->category_id);
+                self::removeCache($dataSave->category_id,$dataSave);
             }
             DB::connection()->getPdo()->commit();
             return true;
@@ -205,10 +233,14 @@ class Category extends Eloquent
         }
     }
 
-    public static function removeCache($id = 0){
+    public static function removeCache($id = 0,$category = array()){
         if($id > 0){
             Cache::forget(Memcache::CACHE_CATEGORY_ID.$id);
             Cache::forget(Memcache::CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID.$id);
+
+        }
+        if(!empty($category)){
+            Cache::forget(Memcache::CACHE_CATEGORY_LANGUAGE.$category->type_language);
         }
         Cache::forget(Memcache::CACHE_ALL_CATEGORY);
         Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY);

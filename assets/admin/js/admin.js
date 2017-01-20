@@ -86,6 +86,23 @@ var Admin = {
             }
         }
     },
+    getCategoryWithTypeLanguage:function(){
+        var type_language = $('#type_language').val();
+        if(parseInt(type_language) > 0){
+            var url_ajax = 'getCategoryNewsLanguage';
+            jQuery.ajax({
+                type: "post",
+                url: WEB_ROOT + '/admin/news/getCategoryNewsLanguage',
+                data: {type_language : type_language},
+                dataType: 'json',
+                success: function(res) {
+                    if(res.isIntOk === 1){
+                        $('#news_category').html(res.html_option);
+                    }
+                }
+            });
+        }
+    },
     setStastusBlockItems: function(){
         var dataId = [];
         var i = 0;

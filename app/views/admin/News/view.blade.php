@@ -17,11 +17,11 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
-                            <label for="news_title">Tên danh mục</label>
+                            <label for="news_title">Name News</label>
                             <input type="text" class="form-control input-sm" id="news_title" name="news_title" placeholder="Tiêu đề tin tức" @if(isset($search['news_title']) && $search['news_title'] != '')value="{{$search['news_title']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="category_status">Trạng thái</label>
+                            <label for="category_status">Status</label>
                             <select name="news_status" id="news_status" class="form-control input-sm">
                                 {{$optionStatus}}
                             </select>
@@ -32,27 +32,29 @@
                         <span class="">
                             <a class="btn btn-danger btn-sm" href="{{URL::route('admin.newsEdit')}}">
                                 <i class="ace-icon fa fa-plus-circle"></i>
-                                Thêm mới
+                                Add new
                             </a>
                         </span>
                         @endif
                         <span class="">
-                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
+                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Search</button>
                         </span>
                     </div>
                     {{ Form::close() }}
                 </div>
                 @if(sizeof($data) > 0)
-                    <div class="span clearfix"> @if($total >0) Có tổng số <b>{{$total}}</b> item @endif </div>
+                    <div class="span clearfix"> @if($total >0) Total <b>{{$total}}</b> new @endif </div>
                     <br>
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="5%" class="text-center">Ảnh</th>
-                            <th width="60%">Tên bài viết</th>
-                            <th width="15%" class="text-center">Trạng thái</th>
-                            <th width="15%" class="text-center">Thao tác</th>
+                            <th width="5%" class="text-center">Image</th>
+                            <th width="40%">Title new</th>
+                            <th width="8%">Language</th>
+                            <th width="20%">Category</th>
+                            <th width="8%" class="text-center">Status</th>
+                            <th width="10%" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,6 +65,8 @@
                                 <td>
                                     [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{ $item['news_title'] }}</a>
                                 </td>
+                                <td class="text-center">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
+                                <td class="text-center">{{$item['news_category_name']}}</td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)
                                         <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>

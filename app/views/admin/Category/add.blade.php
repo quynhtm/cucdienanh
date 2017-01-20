@@ -69,8 +69,8 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-12 text-left">
-                        <a class="btn btn-warning" href="{{URL::route('admin.category_list')}}"><i class="fa fa-reply"></i> Trở lại</a>
-                        <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                        <a class="btn btn-warning" href="{{URL::route('admin.category_list')}}"><i class="fa fa-reply"></i> Back</a>
+                        <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
                     </div>
                     <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 </div>

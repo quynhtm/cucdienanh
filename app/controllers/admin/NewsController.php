@@ -11,7 +11,7 @@ class NewsController extends BaseAdminController
     private $permission_delete = 'news_delete';
     private $permission_create = 'news_create';
     private $permission_edit = 'news_edit';
-    private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
+    private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Hidden', CGlobal::status_show => 'Show');
     private $error = array();
     private $arrCategoryNew = array();
     private $arrTypeNew = array();
@@ -62,6 +62,8 @@ class NewsController extends BaseAdminController
                 $data[] = array('news_id'=>$val->news_id,
                     'news_title'=>$val->news_title,
                     'news_status'=>$val->news_status,
+                    'news_category_name'=>$val->news_category_name,
+                    'type_language'=>$val->type_language,
                     'url_image'=>$url_image,
                 );
             }
@@ -75,6 +77,7 @@ class NewsController extends BaseAdminController
             ->with('sizeShow', count($data))
             ->with('data', $data)
             ->with('search', $search)
+            ->with('arrLanguage', CGlobal::$arrLanguage)
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
 
@@ -91,7 +94,7 @@ class NewsController extends BaseAdminController
         }
         $data = array();
         $arrViewImgOther = array();
-        $imageOrigin = $urlImageOrigin = '';
+        $imagePrimary = $urlImageOrigin = '';
         if($id > 0) {
             $data = News::getNewByID($id);
             if(sizeof($data) > 0){
@@ -107,22 +110,26 @@ class NewsController extends BaseAdminController
                     }
                 }
                 //ảnh sản phẩm chính
-               $imageOrigin = $data->news_image;
+                $imagePrimary = $data->news_image;
             }
         }
+        //lay danh muc theo ngôn ngữ
+        $type_language = isset($data->news_type_language)?$data->news_type_language: CGlobal::TYPE_LANGUAGE_VIET;
+        $this->arrCategoryNew = Category::getCateWithLanguage($type_language);
+
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['news_status'])? $data['news_status'] : CGlobal::status_show);
-        $optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
-        $optionType = FunctionLib::getOption($this->arrTypeNew, isset($data['news_type'])? $data['news_type'] : CGlobal::NEW_TYPE_TIN_TUC);
+        $optionCategory = FunctionLib::getOption(array(0=>'---Chose category news---')+$this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
 
         $this->layout->content = View::make('admin.News.add')
             ->with('id', $id)
             ->with('data', $data)
-            ->with('imageOrigin', $imageOrigin)
+            ->with('imagePrimary', $imagePrimary)
             ->with('urlImageOrigin', $urlImageOrigin)
             ->with('arrViewImgOther', $arrViewImgOther)
             ->with('optionStatus', $optionStatus)
             ->with('optionCategory', $optionCategory)
-            ->with('optionType', $optionType)
+            ->with('optionLanguage', $optionLanguage)
             ->with('arrStatus', $this->arrStatus);
     }
     public function postNews($id=0) {
@@ -133,8 +140,9 @@ class NewsController extends BaseAdminController
         $dataSave['news_desc_sort'] = addslashes(Request::get('news_desc_sort'));
         $dataSave['news_content'] = FunctionLib::strReplace(Request::get('news_content'), '\r\n', '');
         $dataSave['news_type'] = addslashes(Request::get('news_type'));
-        $dataSave['news_category'] = addslashes(Request::get('news_category'));
+        $dataSave['news_category'] = (int)Request::get('news_category',0);
         $dataSave['news_status'] = (int)Request::get('news_status', 0);
+        $dataSave['type_language'] = (int)Request::get('type_language', CGlobal::TYPE_LANGUAGE_VIET);
         $id_hiden = (int)Request::get('id_hiden', 0);
 		
         //ảnh chính
@@ -157,6 +165,7 @@ class NewsController extends BaseAdminController
         //FunctionLib::debug($dataSave);
         if($this->valid($dataSave) && empty($this->error)) {
             $id = ($id == 0)?$id_hiden: $id;
+            $dataSave['news_category_name'] = Category::getNameCategory($dataSave['news_category']);
             if($id > 0) {
                 //cap nhat
                 if(News::updateData($id, $dataSave)) {
@@ -170,13 +179,39 @@ class NewsController extends BaseAdminController
             }
         }
         
-        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_status'])? $dataSave['category_status'] : -1);
+        //lay danh muc theo ngôn ngữ
+        $type_language = isset($dataSave['type_language']) ?$dataSave['type_language']: CGlobal::TYPE_LANGUAGE_VIET;
+        $this->arrCategoryNew = Category::getCateWithLanguage($type_language);
+
+        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['news_status'])? $dataSave['news_status'] : CGlobal::status_show);
+        $optionCategory = FunctionLib::getOption(array(0=>'---Chose category news---')+$this->arrCategoryNew, isset($dataSave['news_category'])? $dataSave['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
+
         $this->layout->content =  View::make('admin.News.add')
             ->with('id', $id)
             ->with('data', $dataSave)
             ->with('optionStatus', $optionStatus)
+            ->with('optionCategory', $optionCategory)
+            ->with('optionLanguage', $optionLanguage)
             ->with('error', $this->error)
             ->with('arrStatus', $this->arrStatus);
+    }
+
+    public function getCategoryNewsLanguage(){
+        $data = array('isIntOk' => 0,'msg' => 'Không lấy được danh mục');
+        $type_language = (int)Request::get('type_language', 0);
+        if ($type_language > 0) {
+            $arrCategoryNew = Category::getCateWithLanguage($type_language);
+            if(!empty($arrCategoryNew)){
+                $str_option = '<option value="0">---Chose category news---</option>';
+                foreach($arrCategoryNew as $dis_id =>$dis_name){
+                    $str_option .='<option value="'.$dis_id.'">'.$dis_name.'</option>';
+                }
+                $data['html_option'] = $str_option;
+                $data['isIntOk'] = 1;
+            }
+        }
+        return Response::json($data);
     }
 
     public function deleteNews(){

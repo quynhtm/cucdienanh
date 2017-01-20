@@ -96,17 +96,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('category/deleteCategory', array('as' => 'admin.deltete_category_post','uses' => 'CategoryController@deleteCategory'));//ajax
     Route::post('category/updateStatusCategory', array('as' => 'admin.status_category_post','uses' => 'CategoryController@updateStatusCategory'));//ajax
 
-
-
-
-
-
-
     /*Quản lý tin tức*/
     Route::get('news/view',array('as' => 'admin.newsView','uses' => 'NewsController@view'));
     Route::get('news/edit/{id?}', array('as' => 'admin.newsEdit','uses' => 'NewsController@getNews'))->where('id', '[0-9]+');
     Route::post('news/edit/{id?}', array('as' => 'admin.newsEdit','uses' => 'NewsController@postNews'))->where('id', '[0-9]+');
     Route::post('news/deleteNews', array('as' => 'admin.delteteNews','uses' => 'NewsController@deleteNews'));//ajax
+    Route::post('news/getCategoryNewsLanguage', array('as' => 'admin.getCategoryNewsLanguage','uses' => 'NewsController@getCategoryNewsLanguage'));//ajax
 
     /*Quản lý banner*/
     Route::any('banner/view',array('as' => 'admin.bannerView','uses' => 'BannerController@view'));

@@ -5,14 +5,14 @@
  */
 class News extends Eloquent
 {
-    protected $table = 'web_news';
+    protected $table = 'w_news';
     protected $primaryKey = 'news_id';
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('news_id','news_title', 'news_desc_sort',
-        'news_content', 'news_image', 'news_image_other','news_create',
-        'news_type', 'news_category', 'news_status');
+    protected $fillable = array('news_id','news_title','news_title_alias', 'news_desc_sort',
+        'news_content', 'news_image', 'news_image_other','news_create','news_order','type_language',
+        'news_type', 'news_category','news_category_name', 'news_status','news_meta_title', 'news_meta_keyword', 'news_meta_description');
 
     public static function getNewByID($id) {
         $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_NEW_ID.$id) : array();

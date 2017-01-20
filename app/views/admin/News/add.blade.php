@@ -24,7 +24,7 @@
                 @endif
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Tên bài viết</i>
+                        <i>Name news</i>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -36,12 +36,26 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Danh mục tin</i>
+                        <i>Language</i>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <select class="form-control input-sm" name="news_category">
+                        <select class="form-control input-sm" id="type_language" name="type_language" onchange="Admin.getCategoryWithTypeLanguage()">
+                            <?php echo $optionLanguage;?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Category news</i>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <select class="form-control input-sm" id="news_category"name="news_category">
                             <?php echo $optionCategory;?>
                         </select>
                     </div>
@@ -50,21 +64,7 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Loại tin</i>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <select class="form-control input-sm" name="news_type" >
-                            <?php echo $optionType;?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Trạng thái</i>
+                        <i>Status</i>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -78,12 +78,12 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Upload ảnh</i>
+                        <i>Upload Image news</i>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                    	 <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadMultipleImages(1);">Upload ảnh</a>
+                    	 <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadMultipleImages(1);">Upload Image</a>
                          <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['news_image'])){{$data['news_image']}}@endif">
                          <input name="news_image_hover" type="hidden" id="image_primary_hover" value="@if(isset($data['news_image_hover'])){{$data['news_image_hover']}}@endif">
                     </div>
@@ -130,7 +130,7 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Mô tả ngắn</i>
+                        <i>Short Description</i>
                     </div>
                 </div>
                 <div class="col-sm-10">
@@ -142,7 +142,7 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Nội dung chi tiết</i>
+                        <i>Details</i>
                     </div>
                 </div>
                 <div class="col-sm-10">
@@ -155,7 +155,8 @@
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-2 text-left"></div>
                 <div class="form-group col-sm-10 text-left">
-                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                    <a class="btn btn-warning" href="{{URL::route('admin.newsView')}}"><i class="fa fa-reply"></i> Back</a>
+                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 {{ Form::close() }}
