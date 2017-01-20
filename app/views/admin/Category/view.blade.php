@@ -54,6 +54,7 @@
                             <th width="8%" class="text-center">Language</th>
                             <th width="10%" class="text-center">Type</th>
                             <th width="5%" class="text-center">Order</th>
+                            <th width="5%" class="text-center">Show Content</th>
                             <th width="5%" class="text-center">Status</th>
                             <th width="10%" class="text-center">Action</th>
                         </tr>
@@ -68,6 +69,13 @@
                                 <td class="text-center">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
                                 <td class="text-center">@if(isset($arrCategoryType[$item['category_type']])){{$arrCategoryType[$item['category_type']]}}@else -- @endif</td>
                                 <td class="text-center">{{$item['category_order']}}</td>
+                                <td class="text-center">
+                                    @if($item['category_show_content'] == 1)
+                                        <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+                                    @else
+                                        <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if($item['category_status'] == 1)
                                         <a href="javascript:void(0);" onclick="Admin.updateStatusItem({{$item['category_id']}},{{$item['category_status']}},1)"title="Hiện"><i class="fa fa-check fa-2x"></i></a>

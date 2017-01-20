@@ -130,6 +130,7 @@ class CategoryController extends BaseAdminController
         }
 
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : -1);
+        $optionShowContent = FunctionLib::getOption($this->arrStatus, isset($data['category_show_content'])? $data['category_show_content'] : 0);
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
         $optionCategoryType = FunctionLib::getOption(CGlobal::$arrCategoryType, isset($data['category_type'])? $data['category_type'] : CGlobal::CATEGORY_TYPE_NEW);
 
@@ -139,6 +140,7 @@ class CategoryController extends BaseAdminController
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
             ->with('optionLanguage', $optionLanguage)
+            ->with('optionShowContent', $optionShowContent)
             ->with('optionCategoryType', $optionCategoryType);
     }
 
@@ -151,6 +153,7 @@ class CategoryController extends BaseAdminController
         $dataSave['category_status'] = (int)Request::get('category_status', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
         $dataSave['category_order'] = (int)Request::get('category_order', 0);
+        $dataSave['category_show_content'] = (int)Request::get('category_show_content', 0);
         $dataSave['type_language'] = (int)Request::get('type_language',CGlobal::TYPE_LANGUAGE_VIET);
         $dataSave['category_type'] = (int)Request::get('category_type', CGlobal::CATEGORY_TYPE_NEW);
 
@@ -169,6 +172,7 @@ class CategoryController extends BaseAdminController
         }
 
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_status'])? $dataSave['category_status'] : -1);
+        $optionShowContent = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_show_content'])? $dataSave['category_show_content'] : 0);
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
         $optionCategoryType = FunctionLib::getOption(CGlobal::$arrCategoryType, isset($dataSave['category_type'])? $dataSave['category_type'] : CGlobal::CATEGORY_TYPE_NEW);
 
@@ -177,6 +181,7 @@ class CategoryController extends BaseAdminController
             ->with('data', $dataSave)
             ->with('error', $this->error)
             ->with('optionStatus', $optionStatus)
+            ->with('optionShowContent', $optionShowContent)
             ->with('arrStatus', $this->arrStatus)
             ->with('optionLanguage', $optionLanguage)
             ->with('optionCategoryType', $optionCategoryType);

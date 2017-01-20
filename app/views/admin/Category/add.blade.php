@@ -53,6 +53,16 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
+                            <label for="name" class="control-label">Show Conntent</label>
+                            <select name="category_show_content" id="category_show_content" class="form-control input-sm">
+                                {{$optionShowContent}}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
                             <label for="name" class="control-label">Status</label>
                             <select name="category_status" id="category_status" class="form-control input-sm">
                                 {{$optionStatus}}
