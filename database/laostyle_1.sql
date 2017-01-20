@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-20 12:17:25
+Date: 2017-01-20 17:04:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -135,7 +135,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1484878423', '::1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1484903406', '::1', null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('19', 'tech_code', '7eb3b9aba1960c22aa9bc8d1f27ebfb9', 'Tech code 3555', '', '', '1', '2', '1481772767', '::1', null, null, '2', 'admin', null, '1481772561');
 INSERT INTO `user` VALUES ('20', 'svquynhtm', 'a1f54bbcea29cf49935e0a5ead5a3dfa', 'Trương Mạnh Quỳnh', 'manhquynh1984@gmail.com', '0938413368', '1', '2', '1482826054', '::1', '2', 'admin', '2', 'admin', '1482823830', '1482824272');
 
@@ -145,14 +145,12 @@ INSERT INTO `user` VALUES ('20', 'svquynhtm', 'a1f54bbcea29cf49935e0a5ead5a3dfa'
 DROP TABLE IF EXISTS `w_banner`;
 CREATE TABLE `w_banner` (
   `banner_id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(12) DEFAULT NULL,
   `banner_name` varchar(255) DEFAULT NULL,
   `banner_intro` text,
+  `type_language` tinyint(5) DEFAULT '1',
   `banner_image` varchar(255) DEFAULT NULL,
   `banner_link` varchar(255) DEFAULT NULL,
   `banner_order` tinyint(5) DEFAULT '1' COMMENT 'thứ tự hiển thị',
-  `banner_total_click` int(11) DEFAULT '0' COMMENT 'lượt click banner theo id',
-  `banner_time_click` int(11) DEFAULT '0' COMMENT 'Time click gần nhất',
   `banner_is_target` tinyint(5) DEFAULT '0' COMMENT '0: Không mở tab mới, 1: mở tab mới',
   `banner_is_rel` tinyint(5) DEFAULT '0' COMMENT '0:nofollow, 1:follow',
   `banner_type` tinyint(5) DEFAULT '0' COMMENT '1:banner home to, 2: banner home nhỏ,3: banner trái, 4 banner phải',
@@ -162,28 +160,24 @@ CREATE TABLE `w_banner` (
   `banner_is_run_time` tinyint(5) DEFAULT '0' COMMENT '0: không có time chay,1: có thời gian chạy quảng cáo',
   `banner_start_time` int(11) DEFAULT '0',
   `banner_end_time` int(11) DEFAULT '0',
-  `banner_is_shop` tinyint(5) DEFAULT '0' COMMENT '0: Không phải banner shop,1: quảng cáo banner của shop',
-  `banner_shop_id` int(11) DEFAULT '0',
   `banner_create_time` int(11) DEFAULT '0',
   `banner_update_time` int(11) DEFAULT '0',
-  `banner_name_en` varchar(255) DEFAULT NULL,
-  `banner_intro_en` text,
   PRIMARY KEY (`banner_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of w_banner
 -- ----------------------------
-INSERT INTO `w_banner` VALUES ('6', '1', 'Một góc phố Viêng Chăn', '<p>Từ trên đỉnh tòa tháp cao 7 tầng, chúng tôi phóng tầm mắt ngắm nhìn một góc thủ đô Viêng Chăn thanh bình. Phía xa xa, cổng chiến thắng Patuxay hiên ngang\r\n', '01-09-15-16-08-2016-b2.jpg', 'http://baritevietlao.com.vn', '1', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1471284555', '1471382658', 'A street corner Vientiane', 'From atop the tower 7 floor, our panoramic view angle peaceful Vientiane. In the distance, winning port stalked Patuxay\r\n');
-INSERT INTO `w_banner` VALUES ('7', '1', 'Một góc phố Viêng Chăn', 'Từ trên đỉnh tòa tháp cao 7 tầng, chúng tôi phóng tầm mắt ngắm nhìn một góc thủ đô Viêng Chăn thanh bình. Phía xa xa, cổng chiến thắng Patuxay hiên ngang', '01-12-26-16-08-2016-b3.jpg', 'http://baritevietlao.com.vn', '2', '0', '0', '1', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '1471284746', '1471382663', 'A street corner Vientiane', 'From atop the tower 7 floor, our panoramic view angle peaceful Vientiane. In the distance, winning port stalked Patuxay');
-INSERT INTO `w_banner` VALUES ('8', '1', 'Banner tuyển dụng bên phải', '', '01-37-59-16-08-2016-tuyendung.jpg', 'http://baritevietlao.com.vn/tuyen-dung-28.html', '1', '0', '0', '1', '1', '3', '0', '0', '1', '0', '0', '0', '0', '0', '1471286279', '1471460705', 'Banner recruitment right', '');
-INSERT INTO `w_banner` VALUES ('9', '1', 'Lễ ký kết hợp đồng giữa công ty và chính phủ nước CHDCND Lào', 'Hợp đồng cho ra đời một nhà máy chế biến bột Barite và khu mỏ khai thác quặng Barite đầy tiềm năng và giàu triển vọng để khẳng định thương hiệu bột Barite Lào trên thị trường thế giới.', '04-25-43-17-08-2016-1kyhd.png', 'http://baritevietlao.com.vn', '1', '0', '0', '1', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471382743', '1471489718', 'Contract signing ceremony between the company and the government of Lao PDR', 'Contracts give birth to a powder processing plant and mine Barite Barite ore rich potential and prospects for rebranding Laos Barite powder on the world market.');
-INSERT INTO `w_banner` VALUES ('10', '1', 'Quá trình tìm kiếm và thăm dò', 'Sẵn sàng vượt qua mọi khó khăn và vất vả để có cơ sở đem lại sự thành công của dự án.', '04-32-25-17-08-2016-2.jpg', 'http://baritevietlao.com.vn', '2', '0', '0', '0', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471383145', '1471489738', 'The process of search and exploration', 'We are ready to overcome all difficulties and hardship to satisfy grassroots success of the project.');
-INSERT INTO `w_banner` VALUES ('11', '1', 'Báo cáo dự án', 'Hãy tranh luận trên cơ sở trân trọng tính khoa học để cùng tìm được mục đích chung.', '04-38-37-17-08-2016-3.jpg', 'http://baritevietlao.com.vn', '3', '0', '0', '0', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471383517', '1471489758', 'Project Report', 'Let\'s debate on the basis of scientific honor to work together to find common purpose.');
-INSERT INTO `w_banner` VALUES ('12', '1', 'Quá trình xây dựng nhà máy', 'Hiện đại nhưng xanh - sạch - đẹp để đảm bảo sự bền vững cho tương lai', '04-43-07-17-08-2016-4.jpg', 'http://baritevietlao.com.vn', '4', '0', '0', '0', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471383787', '1471489781', 'The process plant building', 'Modern - green - clean - beautiful to ensure sustainability for the future');
-INSERT INTO `w_banner` VALUES ('13', '1', 'Gặp gỡ đối tác', 'Tôn trọng quyền lợi nhưng phải biết đặt niềm tin vào nhau để  thành công là của tất cả chúng ta.', '04-47-21-17-08-2016-5.jpg', 'http://baritevietlao.com.vn', '5', '0', '0', '0', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471384041', '1471489803', 'Meet partners', 'We respect the rights of the parties, but we always want to cooperate for the success');
-INSERT INTO `w_banner` VALUES ('14', '1', 'Tham quan và hoạt động cộng đồng', 'Hãy luôn nhớ rằng trong cộng đồng bao giờ cũng có chính chúng ta', '04-50-24-17-08-2016-6.jpg', 'http://baritevietlao.com.vn', '6', '0', '0', '0', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '1471384224', '1471489821', 'Visiting and community activities', 'Always remember that in the community there is always ourselves');
-INSERT INTO `w_banner` VALUES ('15', '1', 'Liên hệ quảng cáo bên phải', '', '09-04-08-18-08-2016-lienhequangcao.png', 'http://baritevietlao.com.vn', '2', '0', '0', '0', '0', '3', '0', '0', '1', '0', '0', '0', '0', '0', '1471460652', '1471485852', 'Liên hệ quảng cáo bên phải', '');
+INSERT INTO `w_banner` VALUES ('6', 'Một góc phố Viêng Chăn', '<p>Từ trên đỉnh tòa tháp cao 7 tầng, chúng tôi phóng tầm mắt ngắm nhìn một góc thủ đô Viêng Chăn thanh bình. Phía xa xa, cổng chiến thắng Patuxay hiên ngang\r\n', '1', '01-09-15-16-08-2016-b2.jpg', 'http://baritevietlao.com.vn', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '1471284555', '1471382658');
+INSERT INTO `w_banner` VALUES ('7', 'Một góc phố Viêng Chăn', 'Từ trên đỉnh tòa tháp cao 7 tầng, chúng tôi phóng tầm mắt ngắm nhìn một góc thủ đô Viêng Chăn thanh bình. Phía xa xa, cổng chiến thắng Patuxay hiên ngang', '1', '01-12-26-16-08-2016-b3.jpg', 'http://baritevietlao.com.vn', '2', '1', '0', '1', '0', '0', '0', '0', '0', '0', '1471284746', '1471382663');
+INSERT INTO `w_banner` VALUES ('8', 'Banner tuyển dụng bên phải', '', '1', '01-37-59-16-08-2016-tuyendung.jpg', 'http://baritevietlao.com.vn/tuyen-dung-28.html', '1', '1', '1', '3', '0', '0', '1', '0', '0', '0', '1471286279', '1471460705');
+INSERT INTO `w_banner` VALUES ('9', 'Lễ ký kết hợp đồng giữa công ty và chính phủ nước CHDCND Lào', 'Hợp đồng cho ra đời một nhà máy chế biến bột Barite và khu mỏ khai thác quặng Barite đầy tiềm năng và giàu triển vọng để khẳng định thương hiệu bột Barite Lào trên thị trường thế giới.', '1', '04-25-43-17-08-2016-1kyhd.png', 'http://baritevietlao.com.vn', '1', '1', '0', '1', '0', '0', '1', '0', '0', '0', '1471382743', '1471489718');
+INSERT INTO `w_banner` VALUES ('10', 'Quá trình tìm kiếm và thăm dò', 'Sẵn sàng vượt qua mọi khó khăn và vất vả để có cơ sở đem lại sự thành công của dự án.', '1', '04-32-25-17-08-2016-2.jpg', 'http://baritevietlao.com.vn', '2', '0', '1', '1', '0', '0', '1', '0', '0', '0', '1471383145', '1471489738');
+INSERT INTO `w_banner` VALUES ('11', 'Báo cáo dự án', 'Hãy tranh luận trên cơ sở trân trọng tính khoa học để cùng tìm được mục đích chung.', '1', '04-38-37-17-08-2016-3.jpg', 'http://baritevietlao.com.vn', '3', '0', '1', '1', '0', '0', '1', '0', '0', '0', '1471383517', '1471489758');
+INSERT INTO `w_banner` VALUES ('12', 'Quá trình xây dựng nhà máy', 'Hiện đại nhưng xanh - sạch - đẹp để đảm bảo sự bền vững cho tương lai', '1', '04-43-07-17-08-2016-4.jpg', 'http://baritevietlao.com.vn', '4', '0', '1', '1', '0', '0', '1', '0', '0', '0', '1471383787', '1471489781');
+INSERT INTO `w_banner` VALUES ('13', 'Gặp gỡ đối tác', 'Tôn trọng quyền lợi nhưng phải biết đặt niềm tin vào nhau để  thành công là của tất cả chúng ta.', '1', '04-47-21-17-08-2016-5.jpg', 'http://baritevietlao.com.vn', '5', '0', '1', '1', '0', '0', '1', '0', '0', '0', '1471384041', '1471489803');
+INSERT INTO `w_banner` VALUES ('14', 'Tham quan và hoạt động cộng đồng', 'Hãy luôn nhớ rằng trong cộng đồng bao giờ cũng có chính chúng ta', '1', '04-50-24-17-08-2016-6.jpg', 'http://baritevietlao.com.vn', '6', '0', '1', '1', '0', '0', '1', '0', '0', '0', '1471384224', '1471489821');
+INSERT INTO `w_banner` VALUES ('15', 'Liên hệ quảng cáo bên phải 3333', 'Thông tin giới thiệu về banner', '1', '1484905968-57355c1302b01f7898000001.jpg', 'http://baritevietlao.com.vn', '2', '0', '0', '3', '0', '0', '1', '1', '1484845200', '1485795600', '1471460652', '1484906026');
 
 -- ----------------------------
 -- Table structure for w_category
@@ -195,6 +189,7 @@ CREATE TABLE `w_category` (
   `category_name_alias` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type_language` int(5) DEFAULT '1' COMMENT '1:viet',
   `category_type` int(5) DEFAULT '1' COMMENT '1: danh mục của tin tức, 2: danh mục của menu ',
+  `category_show_content` tinyint(5) DEFAULT '0' COMMENT '0: không hiển thị, 1 hiển thị',
   `category_parent_id` smallint(5) unsigned DEFAULT NULL,
   `category_order` int(12) DEFAULT '0',
   `category_status` tinyint(1) DEFAULT '0',
@@ -210,31 +205,31 @@ CREATE TABLE `w_category` (
 -- ----------------------------
 -- Records of w_category
 -- ----------------------------
-INSERT INTO `w_category` VALUES ('1', 'Giới thiệu', 'gioi-thieu', '17', '1', '0', '1', '1', '1470461855', 'Giới thiệu', 'Giới thiệu', 'Giới thiệu');
-INSERT INTO `w_category` VALUES ('2', 'Cơ cấu sở hữu', 'co-cau-so-huu', '17', '1', '0', '2', '1', '1470461960', 'Cơ cấu sở hữu', 'Cơ cấu sở hữu', 'Cơ cấu sở hữu');
-INSERT INTO `w_category` VALUES ('3', 'Hình ảnh hoạt động', 'hinh-anh-hoat-dong', '17', '1', '0', '3', '1', '1470462010', 'Hình ảnh hoạt động', 'Hình ảnh hoạt động', 'Hình ảnh hoạt động');
-INSERT INTO `w_category` VALUES ('4', 'Sản phẩm', 'san-pham', '22', '1', '0', '4', '1', '1470462062', 'Sản phẩm', 'Sản phẩm', 'Sản phẩm');
-INSERT INTO `w_category` VALUES ('5', 'Thư viện ảnh', 'thu-vien-anh', '19', '1', '0', '5', '1', '1470462105', 'Thư viện ảnh', 'Thư viện ảnh', 'Thư viện ảnh');
-INSERT INTO `w_category` VALUES ('10', 'Một số văn bản liên quan tới dự án', 'mot-so-van-ban-lien-quan-toi-du-an', '18', '1', '0', '6', '1', '1470762372', 'Một số văn bản liên quan tới dự án', 'Một số văn bản liên quan tới dự án', 'Một số văn bản liên quan tới dự án');
-INSERT INTO `w_category` VALUES ('11', 'Nghiên cứu dự án', 'nghien-cuu-du-an', '17', '1', '3', '1', '1', '1471151569', 'Nghiên cứu dự án', 'Nghiên cứu dự án', 'Nghiên cứu dự án');
-INSERT INTO `w_category` VALUES ('12', 'Tìm kiếm thăm dò', 'tim-kiem-tham-do', '17', '1', '3', '2', '1', '1471151654', 'Tìm kiếm thăm dò', 'Tìm kiếm thăm dò', 'Tìm kiếm thăm dò');
-INSERT INTO `w_category` VALUES ('13', 'Báo cáo dự án và kiểm tra thực địa', 'bao-cao-du-an-va-kiem-tra-thuc-dia', '17', '1', '3', '3', '1', '1471151820', 'Báo cáo dự án và kiểm tra thực địa', 'Báo cáo dự án và kiểm tra thực địa', 'Báo cáo dự án và kiểm tra thực địa');
-INSERT INTO `w_category` VALUES ('14', 'Xây dựng mỏ và nhà máy', 'xay-dung-mo-va-nha-may', '17', '1', '3', '4', '1', '1471152076', 'Xây dựng mỏ và nhà máy', 'Xây dựng mỏ và nhà máy', 'Xây dựng mỏ và nhà máy');
-INSERT INTO `w_category` VALUES ('15', 'Ký kết hợp đồng và gặp gỡ đối tác', 'ky-ket-hop-dong-va-gap-go-doi-tac', '17', '1', '3', '5', '1', '1471152213', 'Ký kết hợp đồng và gặp gỡ đối tác', 'Ký kết hợp đồng và gặp gỡ đối tác', 'Ký kết hợp đồng và gặp gỡ đối tác');
-INSERT INTO `w_category` VALUES ('16', 'Các hoạt động khác', 'cac-hoat-dong-khac', '17', '1', '3', '7', '1', '1471152303', 'Các hoạt động khác', 'Các hoạt động khác', 'Các hoạt động khác');
-INSERT INTO `w_category` VALUES ('17', 'Giới thiệu chung', 'gioi-thieu-chung', '22', '1', '4', '1', '1', '1471152514', 'Giới thiệu chung', 'Giới thiệu chung', 'Giới thiệu chung');
-INSERT INTO `w_category` VALUES ('18', 'Các sản phẩm chính', 'cac-san-pham-chinh', '22', '1', '4', '2', '1', '1471152551', 'Các sản phẩm chính', 'Các sản phẩm chính', 'Các sản phẩm chính');
-INSERT INTO `w_category` VALUES ('19', 'Video clips', 'video-clips', '20', '1', '0', '5', '1', '1471152670', 'Video clips', 'Video clips', 'Video clips');
-INSERT INTO `w_category` VALUES ('21', 'Nét đẹp trong văn hóa kinh doanh', 'net-dep-trong-van-hoa-kinh-doanh', '17', '1', '0', '7', '1', '1471152835', 'Nét đẹp trong văn hóa kinh doanh', 'Nét đẹp trong văn hóa kinh doanh', 'Nét đẹp trong văn hóa kinh doanh');
-INSERT INTO `w_category` VALUES ('22', 'Tuyển dụng', 'tuyen-dung', '23', '1', '0', '8', '1', '1471153005', 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng');
-INSERT INTO `w_category` VALUES ('23', 'Quan hệ với chính quyền và nhân dân địa phương', 'quan-he-voi-chinh-quyen-va-nhan-dan-dia-phuong', '17', '1', '0', '9', '1', '1471153115', 'Quan hệ với chính quyền và nhân dân địa phương', 'Quan hệ với chính quyền và nhân dân địa phương', 'Quan hệ với chính quyền và nhân dân địa phương');
-INSERT INTO `w_category` VALUES ('24', 'Bản tin chào hàng', 'ban-tin-chao-hang', '17', '1', '0', '10', '1', '1471153181', 'Bản tin chào hàng', 'Bản tin chào hàng', 'Bản tin chào hàng');
-INSERT INTO `w_category` VALUES ('25', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'don-vi-truc-thuoc-va-linh-vuc-hoat-dong', '2', '1', '0', '11', '1', '1471153265', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'Đơn vị trực thuộc và lĩnh vực hoạt động');
-INSERT INTO `w_category` VALUES ('26', 'Hình ảnh hoạt động tiêu biểu', 'hinh-anh-hoat-dong-tieu-bieu', '2', '1', '0', '12', '1', '1471153340', 'Hình ảnh hoạt động tiêu biểu', 'Hình ảnh hoạt động tiêu biểu', 'Hình ảnh hoạt động tiêu biểu');
-INSERT INTO `w_category` VALUES ('28', 'Tuyển dụng', 'tuyen-dung', '1', '1', '0', '13', '1', '1471378841', 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng');
-INSERT INTO `w_category` VALUES ('29', 'Bản tin chào hàng', 'ban-tin-chao-hang', '1', '1', '0', '14', '1', '1471388334', '', 'Bản tin chào hàng', 'Bản tin chào hàng');
-INSERT INTO `w_category` VALUES ('30', 'Công ty chào bán', 'cong-ty-chao-ban', '1', '1', '0', '1', '1', '1471388416', 'Công ty chào bán', 'Công ty chào bán', 'Công ty chào bán');
-INSERT INTO `w_category` VALUES ('31', 'Công ty chào mua 33', 'cong-ty-chao-mua', '1', '1', '0', '2', '1', '1471388488', 'Công ty chào mua', 'Công ty chào mua', 'Công ty chào mua');
+INSERT INTO `w_category` VALUES ('1', 'Giới thiệu', 'gioi-thieu', '17', '1', '0', '0', '1', '1', '1470461855', 'Giới thiệu', 'Giới thiệu', 'Giới thiệu');
+INSERT INTO `w_category` VALUES ('2', 'Cơ cấu sở hữu', 'co-cau-so-huu', '17', '1', '0', '0', '2', '1', '1470461960', 'Cơ cấu sở hữu', 'Cơ cấu sở hữu', 'Cơ cấu sở hữu');
+INSERT INTO `w_category` VALUES ('3', 'Hình ảnh hoạt động', 'hinh-anh-hoat-dong', '17', '1', '0', '0', '3', '1', '1470462010', 'Hình ảnh hoạt động', 'Hình ảnh hoạt động', 'Hình ảnh hoạt động');
+INSERT INTO `w_category` VALUES ('4', 'Sản phẩm', 'san-pham', '22', '1', '0', '0', '4', '1', '1470462062', 'Sản phẩm', 'Sản phẩm', 'Sản phẩm');
+INSERT INTO `w_category` VALUES ('5', 'Thư viện ảnh', 'thu-vien-anh', '19', '1', '0', '0', '5', '1', '1470462105', 'Thư viện ảnh', 'Thư viện ảnh', 'Thư viện ảnh');
+INSERT INTO `w_category` VALUES ('10', 'Một số văn bản liên quan tới dự án', 'mot-so-van-ban-lien-quan-toi-du-an', '18', '1', '0', '0', '6', '1', '1470762372', 'Một số văn bản liên quan tới dự án', 'Một số văn bản liên quan tới dự án', 'Một số văn bản liên quan tới dự án');
+INSERT INTO `w_category` VALUES ('11', 'Nghiên cứu dự án', 'nghien-cuu-du-an', '17', '1', '0', '3', '1', '1', '1471151569', 'Nghiên cứu dự án', 'Nghiên cứu dự án', 'Nghiên cứu dự án');
+INSERT INTO `w_category` VALUES ('12', 'Tìm kiếm thăm dò', 'tim-kiem-tham-do', '17', '1', '0', '3', '2', '1', '1471151654', 'Tìm kiếm thăm dò', 'Tìm kiếm thăm dò', 'Tìm kiếm thăm dò');
+INSERT INTO `w_category` VALUES ('13', 'Báo cáo dự án và kiểm tra thực địa', 'bao-cao-du-an-va-kiem-tra-thuc-dia', '17', '1', '0', '3', '3', '1', '1471151820', 'Báo cáo dự án và kiểm tra thực địa', 'Báo cáo dự án và kiểm tra thực địa', 'Báo cáo dự án và kiểm tra thực địa');
+INSERT INTO `w_category` VALUES ('14', 'Xây dựng mỏ và nhà máy', 'xay-dung-mo-va-nha-may', '17', '1', '0', '3', '4', '1', '1471152076', 'Xây dựng mỏ và nhà máy', 'Xây dựng mỏ và nhà máy', 'Xây dựng mỏ và nhà máy');
+INSERT INTO `w_category` VALUES ('15', 'Ký kết hợp đồng và gặp gỡ đối tác', 'ky-ket-hop-dong-va-gap-go-doi-tac', '17', '1', '0', '3', '5', '1', '1471152213', 'Ký kết hợp đồng và gặp gỡ đối tác', 'Ký kết hợp đồng và gặp gỡ đối tác', 'Ký kết hợp đồng và gặp gỡ đối tác');
+INSERT INTO `w_category` VALUES ('16', 'Các hoạt động khác', 'cac-hoat-dong-khac', '17', '1', '0', '3', '7', '1', '1471152303', 'Các hoạt động khác', 'Các hoạt động khác', 'Các hoạt động khác');
+INSERT INTO `w_category` VALUES ('17', 'Giới thiệu chung', 'gioi-thieu-chung', '22', '1', '0', '4', '1', '1', '1471152514', 'Giới thiệu chung', 'Giới thiệu chung', 'Giới thiệu chung');
+INSERT INTO `w_category` VALUES ('18', 'Các sản phẩm chính', 'cac-san-pham-chinh', '22', '1', '0', '4', '2', '1', '1471152551', 'Các sản phẩm chính', 'Các sản phẩm chính', 'Các sản phẩm chính');
+INSERT INTO `w_category` VALUES ('19', 'Video clips', 'video-clips', '20', '1', '0', '0', '5', '1', '1471152670', 'Video clips', 'Video clips', 'Video clips');
+INSERT INTO `w_category` VALUES ('21', 'Nét đẹp trong văn hóa kinh doanh', 'net-dep-trong-van-hoa-kinh-doanh', '17', '1', '0', '0', '7', '1', '1471152835', 'Nét đẹp trong văn hóa kinh doanh', 'Nét đẹp trong văn hóa kinh doanh', 'Nét đẹp trong văn hóa kinh doanh');
+INSERT INTO `w_category` VALUES ('22', 'Tuyển dụng', 'tuyen-dung', '23', '1', '0', '0', '8', '1', '1471153005', 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng');
+INSERT INTO `w_category` VALUES ('23', 'Quan hệ với chính quyền và nhân dân địa phương', 'quan-he-voi-chinh-quyen-va-nhan-dan-dia-phuong', '17', '1', '0', '0', '9', '1', '1471153115', 'Quan hệ với chính quyền và nhân dân địa phương', 'Quan hệ với chính quyền và nhân dân địa phương', 'Quan hệ với chính quyền và nhân dân địa phương');
+INSERT INTO `w_category` VALUES ('24', 'Bản tin chào hàng', 'ban-tin-chao-hang', '17', '1', '0', '0', '10', '1', '1471153181', 'Bản tin chào hàng', 'Bản tin chào hàng', 'Bản tin chào hàng');
+INSERT INTO `w_category` VALUES ('25', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'don-vi-truc-thuoc-va-linh-vuc-hoat-dong', '2', '1', '0', '0', '11', '1', '1471153265', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'Đơn vị trực thuộc và lĩnh vực hoạt động', 'Đơn vị trực thuộc và lĩnh vực hoạt động');
+INSERT INTO `w_category` VALUES ('26', 'Hình ảnh hoạt động tiêu biểu', 'hinh-anh-hoat-dong-tieu-bieu', '2', '1', '0', '0', '12', '1', '1471153340', 'Hình ảnh hoạt động tiêu biểu', 'Hình ảnh hoạt động tiêu biểu', 'Hình ảnh hoạt động tiêu biểu');
+INSERT INTO `w_category` VALUES ('28', 'Tuyển dụng', 'tuyen-dung', '1', '1', '0', '0', '13', '1', '1471378841', 'Tuyển dụng', 'Tuyển dụng', 'Tuyển dụng');
+INSERT INTO `w_category` VALUES ('29', 'Bản tin chào hàng', 'ban-tin-chao-hang', '1', '1', '0', '0', '14', '1', '1471388334', '', 'Bản tin chào hàng', 'Bản tin chào hàng');
+INSERT INTO `w_category` VALUES ('30', 'Công ty chào bán', 'cong-ty-chao-ban', '1', '1', '0', '0', '1', '1', '1471388416', 'Công ty chào bán', 'Công ty chào bán', 'Công ty chào bán');
+INSERT INTO `w_category` VALUES ('31', 'Công ty chào mua 33', 'cong-ty-chao-mua', '1', '1', '0', '0', '2', '1', '1471388488', 'Công ty chào mua', 'Công ty chào mua', 'Công ty chào mua');
 
 -- ----------------------------
 -- Table structure for w_config_info

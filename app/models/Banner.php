@@ -5,17 +5,18 @@
  */
 class Banner extends Eloquent
 {
-    protected $table = 'web_banner';
+    protected $table = 'w_banner';
     protected $primaryKey = 'banner_id';
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('banner_id','banner_name', 'banner_link',
-        'banner_image', 'banner_image_temp', 'banner_total_click',
-        'banner_is_target', 'banner_is_rel', 'banner_type','banner_position','banner_parent_id',
+    protected $fillable = array('banner_id','banner_name','banner_intro', 'banner_link',
+        'banner_image', 'banner_image_temp', 'type_language',
+        'banner_is_target', 'banner_is_rel', 'banner_type',
+        //'banner_position','banner_parent_id',
         'banner_order',//thứ tụ hiển thị
         'banner_page',// thuoc page nao
-        'banner_province_id',//tỉnh thành
+        //'banner_province_id',//tỉnh thành
         'banner_category_id', //danh mục
         'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
         'banner_time_click', 'banner_update_time', 'banner_create_time');
@@ -27,9 +28,9 @@ class Banner extends Eloquent
             $banner = Banner::where('banner_id' ,'>', 0)
                 ->where('banner_status',CGlobal::status_show)
                 ->where('banner_type',$banner_type)
-                ->whereIn('banner_page',array(0,$banner_page))
+                /*->whereIn('banner_page',array(0,$banner_page))
                 ->whereIn('banner_category_id',array(0,$banner_category_id))
-                ->whereIn('banner_province_id',array(0,$banner_province_id))
+                ->whereIn('banner_province_id',array(0,$banner_province_id))*/
                 ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->get();
             if($banner){
                 foreach($banner as $itm) {

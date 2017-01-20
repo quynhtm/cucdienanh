@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li class="active">Quản lý banner quảng cáo</li>
+            <li class="active">Manage Banner</li>
         </ul><!-- /.breadcrumb -->
     </div>
 
@@ -17,20 +17,13 @@
                     {{ Form::open(array('method' => 'GET', 'role'=>'form')) }}
                     <div class="panel-body">
                         <div class="form-group col-lg-3">
-                            <label for="banner_name">Tên banner</label>
-                            <input type="text" class="form-control input-sm" id="banner_name" name="banner_name" placeholder="Tiêu đề banner" @if(isset($search['banner_name']) && $search['banner_name'] != '')value="{{$search['banner_name']}}"@endif>
+                            <label for="banner_name">Name banner</label>
+                            <input type="text" class="form-control input-sm" id="banner_name" name="banner_name" placeholder="Name banner" @if(isset($search['banner_name']) && $search['banner_name'] != '')value="{{$search['banner_name']}}"@endif>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="banner_province_id">Tỉnh thành</label>
-                            <select name="banner_province_id" id="banner_province_id" class="form-control input-sm">
-                                {{$optionProvince}}
-                            </select>
-                        </div>
-
-                        <div class="form-group col-lg-3">
-                            <label for="banner_page">Thuộc page</label>
-                            <select name="banner_page" id="banner_page" class="form-control input-sm">
-                                {{$optionPage}}
+                            <label for="banner_page">Language</label>
+                            <select name="type_language" id="type_language" class="form-control input-sm">
+                                {{$optionLanguage}}
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
@@ -45,38 +38,32 @@
                                 {{$optionType}}
                             </select>
                         </div>
-                        <div class="form-group col-lg-3">
-                            <label for="category_status">Vị trí hiển thị</label>
-                            <select name="banner_position" id="banner_position" class="form-control input-sm">
-                                {{$optionPosition}}
-                            </select>
-                        </div>
                         <div class="form-group col-lg-9 text-right">
                             @if($is_root || $permission_full ==1 || $permission_create == 1)
                                 <a class="btn btn-danger btn-sm" href="{{URL::route('admin.bannerEdit')}}">
                                     <i class="ace-icon fa fa-plus-circle"></i>
-                                    Thêm mới
+                                    Add banner
                                 </a>
                             @endif
-                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
+                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Search</button>
                         </div>
                     </div>
                     {{ Form::close() }}
                 </div>
                 @if($data && sizeof($data) > 0)
-                    <div class="span clearfix"> @if($total >0) Có tổng số <b>{{$total}}</b> item @endif </div>
+                    <div class="span clearfix"> @if($total >0) Total  <b>{{$total}}</b> item @endif </div>
                     <br>
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="2%" class="text-center">TT</th>
-                            <th width="10%" class="text-center">Ảnh</th>
-                            <th width="20%">Tên banner</th>
-                            <th width="15%">Thông tin banner</th>
-                            <th width="13%">Loại banner</th>
-                            <th width="10%" class="text-center">Thuộc page</th>
-                            <th width="10%" class="text-center">Ngày chạy</th>
-                            <th width="10%" class="text-center">Thao tác</th>
+                            <th width="10%" class="text-center">Image</th>
+                            <th width="20%">Name banner</th>
+                            <th width="15%">Infor banner</th>
+                            <th width="13%">Type banner</th>
+                            <th width="13%" class="text-center">Language</th>
+                            <th width="10%" class="text-center">Date time</th>
+                            <th width="10%" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -97,22 +84,21 @@
                                    @if($item->banner_update_time > 0)<br/>U: {{date('d-m-Y h:i',$item->banner_update_time)}}@endif
                                 </td>
                                 <td>
+                                    {{$item->banner_intro}}
+                                </td>
+                                <td>
                                     @if($item->banner_position > 0){{$arrPosition[$item->banner_position]}} <br/>@endif
                                     @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}} <br/> @endif
                                     @if($item->banner_order > 0)Thứ tự: {{$item->banner_order}} <br/>@endif
                                 </td>
-                                <td>
-                                    <b>Danh mục: </b>@if(isset($arrCategory[$item->banner_category_id])){{$arrCategory[$item->banner_category_id]}}@else ----- @endif
-                                    <br/><b>Tỉnh: </b>@if(isset($arrProvince[$item->banner_province_id])){{$arrProvince[$item->banner_province_id]}}@else Toàn quốc @endif
-                                    <br/>@if($item->banner_is_rel == 1)Follow @else Nofollow @endif
-                                </td>
+
                                 <td class="text-center text-middle">
-                                    @if(isset($arrPage[$item->banner_page])){{$arrPage[$item->banner_page]}}@else ---- @endif
+                                    @if(isset($arrLanguage[$item->type_language])){{$arrLanguage[$item->type_language]}}@else ---- @endif
                                 </td>
                                 <td class="text-center text-middle">
                                     @if($item->banner_is_run_time == CGlobal::BANNER_IS_RUN_TIME)
-                                        S:{{date('d-m-Y h:i',$item->banner_start_time)}}
-                                        <br/>E:{{date('d-m-Y h:i',$item->banner_end_time)}}
+                                        <b style="color: green">{{date('d-m-Y',$item->banner_start_time)}}</b>
+                                        <br/><b style="color:red;">{{date('d-m-Y',$item->banner_end_time)}}</b>
                                     @else
                                         Không giới hạn
                                     @endif

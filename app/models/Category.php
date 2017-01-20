@@ -11,7 +11,7 @@ class Category extends Eloquent
 
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_parent_id',
-        'category_name_alias', 'type_language','category_type', 'category_status',
+        'category_name_alias', 'type_language','category_type', 'category_show_content','category_status',
         'category_created', 'category_meta_title', 'category_order', 'category_meta_keywords', 'category_meta_description');
 
     public static function getByID($id) {
