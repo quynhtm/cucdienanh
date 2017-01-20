@@ -5,14 +5,14 @@
  */
 class Category extends Eloquent
 {
-    protected $table = 'web_category';
+    protected $table = 'w_category';
     protected $primaryKey = 'category_id';
     public $timestamps = false;
 
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_parent_id',
-        'category_content_front', 'category_content_front_order', 'category_status',
-        'category_image_background', 'category_icons', 'category_order');
+        'category_name_alias', 'type_language','category_type', 'category_status',
+        'category_created', 'category_meta_title', 'category_order', 'category_meta_keywords', 'category_meta_description');
 
     public static function getByID($id) {
         $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_ID.$id) : array();
@@ -62,13 +62,11 @@ class Category extends Eloquent
             $category = Category::where('category_id', '>', 0)
                 ->where('category_parent_id',0)
                 ->where('category_status',CGlobal::status_show)
-                ->where('category_content_front',CGlobal::status_show)
-                ->orderBy('category_content_front_order','asc')->get();
+                ->get();
             if($category){
                 foreach($category as $itm) {
                     $data[$itm['category_id']] = array(
-                        'category_name'=>$itm['category_name'],
-                        'category_icons'=>$itm['category_icons']);
+                        'category_name'=>$itm['category_name']);
                 }
             }
             if($data && Memcache::CACHE_ON){
@@ -106,9 +104,10 @@ class Category extends Eloquent
             if (isset($dataSearch['category_status']) && $dataSearch['category_status'] != -1) {
                 $query->where('category_status', $dataSearch['category_status']);
             }
-            if (isset($dataSearch['category_content_front']) && $dataSearch['category_content_front'] != -1) {
-            	$query->where('category_content_front', $dataSearch['category_content_front']);
+            if (isset($dataSearch['type_language']) && $dataSearch['type_language'] != -1) {
+                $query->where('type_language', $dataSearch['type_language']);
             }
+
             $total = $query->count();
             $query->orderBy('category_id', 'desc');
 
@@ -219,16 +218,14 @@ class Category extends Eloquent
     public static function getCategoriessAll(){
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CATEGORY) : array();
         if (sizeof($data) == 0) {
-            $categories = Category::where('category_id', '>', 0)->where('category_status', '=', CGlobal::status_show)->orderBy('category_content_front_order', 'asc')->get();
+            $categories = Category::where('category_id', '>', 0)->where('category_status', '=', CGlobal::status_show)->orderBy('category_order', 'asc')->get();
             if($categories){
                 foreach($categories as $itm) {
                     $data[$itm->category_id] = array('category_id'=>$itm->category_id,
                         'category_name'=>$itm->category_name,
                         'category_parent_id'=>$itm->category_parent_id,
-                        'category_content_front'=>$itm->category_content_front,
-                        'category_content_front_order'=>$itm->category_content_front_order,
+                        'type_language'=>$itm->type_language,
                         'category_status'=>$itm->category_status,
-                        'category_image_background'=>$itm->category_image_background,
                         'category_icons'=>$itm->category_icons,
                         'category_order'=>$itm->category_order);
                 }
@@ -258,8 +255,7 @@ class Category extends Eloquent
                 $arrCategory[$value->category_id] = array(
                     'category_id'=>$value->category_id,
                     'category_parent_id'=>$value->category_parent_id,
-                    'category_content_front'=>$value->category_content_front,
-                    'category_content_front_order'=>$value->category_content_front_order,
+                    'type_language'=>$value->type_language,
                     'category_order'=>$value->category_order,
                     'category_status'=>$value->category_status,
                     'category_name'=>$value->category_name);

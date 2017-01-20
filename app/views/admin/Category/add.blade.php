@@ -22,111 +22,56 @@
                         @endforeach
                     </div>
                 @endif
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Danh mục cha</i>
+                <div style="float: left; width: 50%">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Name Category<span class="red"> (*) </span></label>
+                            <input type="text" placeholder="Name Category" id="category_name" name="category_name"  class="form-control input-sm" value="@if(isset($data['category_name'])){{$data['category_name']}}@endif">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <select name="category_parent_id" id="category_parent_id" class="form-control input-sm">
-                            {{$optionCategoryParent}}
-                        </select>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Tên danh mục</i>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input type="text" placeholder="Tên danh mục" id="category_name" name="category_name" class="form-control input-sm" value="@if(isset($data['category_name'])){{$data['category_name']}}@endif">
-                    </div>
-                </div>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Upload Icon</i>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Language</label>
+                            <select name="type_language" id="type_language" class="form-control input-sm">
+                                {{$optionLanguage}}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input type="text" placeholder="Icons font" id="category_icons" name="category_icons" class="form-control input-sm" value="@if(isset($data['category_icons'])){{$data['category_icons']}}@endif">
-                    </div>
-                </div>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Ảnh NoImage tin danh mục</i>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Type Category</label>
+                            <select name="category_type" id="category_type" class="form-control input-sm">
+                                {{$optionCategoryType}}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                      <input name="image" type="file"/>
-                      <input name="category_image_background" type="hidden" id="category_image_background" @if(isset($data['category_image_background']))value="{{$data['category_image_background']}}"@else value="" @endif>
-                    </div>
-                    @if(isset($data['category_image_background']) && $data['category_image_background'] !='')
-                    <div class="form-group">
-                       <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $data['category_id'], $data['category_image_background'], CGlobal::sizeImage_100, '', true, CGlobal::type_thumb_image_banner, false)}}">
-                    </div>
-                    @endif
-                </div>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Vị trí trang chủ</i>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Status</label>
+                            <select name="category_status" id="category_status" class="form-control input-sm">
+                                {{$optionStatus}}
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input type="text" placeholder="Vị trí trang chủ" id="category_content_front_order" name="category_content_front_order" class="form-control input-sm" value="@if(isset($data['category_content_front_order'])){{$data['category_content_front_order']}}@endif">
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Order</label>
+                            <input type="text" placeholder="Order" id="category_order" name="category_order"  class="form-control input-sm" value="@if(isset($data['category_order'])){{$data['category_order']}}@endif">
+                        </div>
                     </div>
-                </div>
-                 <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Vị trí</i>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-sm-12 text-left">
+                        <a class="btn btn-warning" href="{{URL::route('admin.category_list')}}"><i class="fa fa-reply"></i> Trở lại</a>
+                        <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <input type="text" placeholder="Vị trí" id="category_order" name="category_order" class="form-control input-sm" value="@if(isset($data['category_order'])){{$data['category_order']}}@endif">
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Hiển thị trang chủ</i>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <select name="category_content_front" id="category_content_front" class="form-control input-sm">
-                            {{$optionShowHome}}
-                        </select>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Trạng thái</i>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <select name="category_status" id="category_status" class="form-control input-sm">
-                            {{$optionStatus}}
-                        </select>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group col-sm-12 text-right">
-                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
                     <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 </div>
                 {{ Form::close() }}
@@ -137,30 +82,3 @@
         <!-- /.row -->
     </div><!-- /.page-content -->
 </div>
-
-
-<!--Popup upload ảnh-->
-<div class="modal fade" id="sys_PopupUploadImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Upload ảnh</h4>
-            </div>
-            <div class="modal-body">
-                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
-                <div class="form_group">
-                    <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
-                    <div id="status"></div>
-
-                    <div class="clearfix"></div>
-                    <div class="clearfix" style='margin: 5px 10px; width:100%;'>
-                        <div id="div_image"></div>
-                    </div>
-                </div>
-               </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Popup upload ảnh-->

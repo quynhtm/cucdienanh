@@ -16,13 +16,35 @@ class CGlobal{
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'Shop Admin';
 
-    const code_shop_share = 'Raovat30s.vn';
-    const web_name = 'Raovat30s.vn';
-    const web_keywords= 'Raovat30s.vn: Rao vặt, mua bán nhà đất, máy tính, máy tính xách tay, laptop, điện tử, kỹ thuật số, sim, xe máy, xe đạp, ôtô, điện lạnh, điện máy, mua sắm, nội thất, thuê, cho thuê, thời trang, mỹ phẩm, dịch vụ, dịch vụ tận nhà, dịch vụ doanh nghiệp, dịch vụ cá nhân, lao động, lao động phổ thông, lao động trí óc, du lịch, cơ hội giao thương, giao thương, tổng hợp';
-    const web_description= 'Raovat30s.vn: Rao vặt toàn quốc miễn phí đăng tin, lượt up top tin';
-    public static $pageTitle = 'Raovat30s.vn';
+    const code_shop_share = 'laostyleadv.com';
+    const web_name = 'laostyleadv.com';
+    const web_keywords= 'laostyleadv.com';
+    const web_description= 'laostyleadv.com';
+    public static $pageTitle = 'laostyleadv.com';
 
-    const phoneSupport = '0985.10.10.26 - 0913.922.986';
+    const TYPE_LANGUAGE_VIET = 1;
+    const TYPE_LANGUAGE_LAO = 2;
+    const TYPE_LANGUAGE_ENG = 3;
+
+    public static $arrLanguage= array(
+        self::TYPE_LANGUAGE_VIET => 'Viet Nam',
+        self::TYPE_LANGUAGE_LAO => 'Lao',
+        self::TYPE_LANGUAGE_ENG => 'English',
+    );
+
+    const CATEGORY_TYPE_NEW = 1;
+    const CATEGORY_TYPE_MENU = 2;
+
+    public static $arrCategoryType= array(
+        self::CATEGORY_TYPE_NEW => 'Category News',
+        self::CATEGORY_TYPE_MENU => 'Category Menu',
+    );
+
+
+
+
+
+    const phoneSupport = '';
 
     const num_scroll_page = 2;
     const number_limit_show = 30;

@@ -11,7 +11,7 @@ class CategoryController extends BaseAdminController
     private $permission_delete = 'category_delete';
     private $permission_create = 'category_create';
     private $permission_edit = 'category_edit';
-    private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
+    private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Hidden', CGlobal::status_show => 'Show');
     private $arrShowHome = array(-1 => 'Chọn hiển thị', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     
     private $arrCategoryParent = array(-1 => 'Danh mục cha');
@@ -47,18 +47,11 @@ class CategoryController extends BaseAdminController
         $search['category_id'] = addslashes(Request::get('category_id',''));
         $search['category_name'] = addslashes(Request::get('category_name',''));
         $search['category_status'] = (int)Request::get('category_status',-1);
-        $search['category_content_front'] = (int)Request::get('category_content_front',-1);
-        
+
         $dataSearch = Category::searchByCondition($search, 500, $offset,$total);
         $paging = '';
-		/*
-        if(!empty($dataSearch)){
-            $treeCategroy = self::getTreeCategory($dataSearch);
-        }
-        */
-        //FunctionLib::debug($treeCategroy);
+
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['category_status']);
-        $optionShowHome = FunctionLib::getOption($this->arrShowHome, $search['category_content_front']);
         $this->layout->content = View::make('admin.Category.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -67,10 +60,9 @@ class CategoryController extends BaseAdminController
             ->with('search', $search)
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
-            ->with('optionShowHome', $optionShowHome)
-            ->with('arrShowHome', $this->arrShowHome)
-            
-            
+            ->with('arrCategoryType', CGlobal::$arrCategoryType)
+            ->with('arrLanguage', CGlobal::$arrLanguage)
+
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
             ->with('permission_delete', in_array($this->permission_delete, $this->permission) ? 1 : 0)//dùng common
@@ -135,24 +127,19 @@ class CategoryController extends BaseAdminController
         $data = array();
         if($id > 0) {
             $data = Category::find($id);
-            if(isset($data['category_image_background']) && $data['category_image_background'] != ''){
-                $url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_CATEGORY, $id, $data['category_image_background'], CGlobal::sizeImage_80, '', true, CGlobal::type_thumb_image_banner, false);
-                $data['url_src_icon'] = $url_thumb;
-            }
         }
 
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : -1);
-        $optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : -1);
-        $optionShowHome = FunctionLib::getOption($this->arrShowHome, isset($data['category_content_front'])? $data['category_content_front'] : -1);
-        
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
+        $optionCategoryType = FunctionLib::getOption(CGlobal::$arrCategoryType, isset($data['category_type'])? $data['category_type'] : CGlobal::CATEGORY_TYPE_NEW);
+
         $this->layout->content = View::make('admin.Category.add')
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
-            ->with('optionShowHome', $optionShowHome)
-            ->with('arrShowHome', $this->arrShowHome)
-        	->with('optionCategoryParent', $optionCategoryParent);
+            ->with('optionLanguage', $optionLanguage)
+            ->with('optionCategoryType', $optionCategoryType);
     }
 
     public function postCategory($id=0) {
@@ -161,23 +148,11 @@ class CategoryController extends BaseAdminController
         }
 
         $dataSave['category_name'] = addslashes(Request::get('category_name'));
-        $dataSave['category_icons'] = addslashes(Request::get('category_icons'));
         $dataSave['category_status'] = (int)Request::get('category_status', 0);
         $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
-        $dataSave['category_content_front'] = (int)Request::get('category_content_front', 0);
-        $dataSave['category_content_front_order'] = (int)Request::get('category_content_front_order', 0);
         $dataSave['category_order'] = (int)Request::get('category_order', 0);
-        $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
-
-        $file = Input::file('image');
-        if($file){
-            $filename = $file->getClientOriginalName();
-            $destinationPath = Config::get('config.DIR_ROOT').'/uploads/'.CGlobal::FOLDER_CATEGORY.'/'. $id;
-            $upload  = Input::file('image')->move($destinationPath, $filename);
-            $dataSave['category_image_background'] = $filename;
-        }else{
-            $dataSave['category_image_background'] = Request::get('category_image_background', '');
-        }
+        $dataSave['type_language'] = (int)Request::get('type_language',CGlobal::TYPE_LANGUAGE_VIET);
+        $dataSave['category_type'] = (int)Request::get('category_type', CGlobal::CATEGORY_TYPE_NEW);
 
         if($this->valid($dataSave) && empty($this->error)) {
             if($id > 0) {
@@ -192,28 +167,28 @@ class CategoryController extends BaseAdminController
                 }
             }
         }
+
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_status'])? $dataSave['category_status'] : -1);
-        $optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($dataSave['category_parent_id'])? $dataSave['category_parent_id'] : -1);
-        $optionShowHome = FunctionLib::getOption($this->arrShowHome, isset($dataSave['category_content_front'])? $dataSave['category_content_front'] : -1);
-        
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
+        $optionCategoryType = FunctionLib::getOption(CGlobal::$arrCategoryType, isset($dataSave['category_type'])? $dataSave['category_type'] : CGlobal::CATEGORY_TYPE_NEW);
+
         $this->layout->content =  View::make('admin.Category.add')
             ->with('id', $id)
             ->with('data', $dataSave)
-            ->with('optionStatus', $optionStatus)
             ->with('error', $this->error)
+            ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
-            ->with('optionShowHome', $optionShowHome)
-            ->with('arrShowHome', $this->arrShowHome)
-        	->with('optionCategoryParent', $optionCategoryParent);
+            ->with('optionLanguage', $optionLanguage)
+            ->with('optionCategoryType', $optionCategoryType);
     }
 
     private function valid($data=array()) {
         if(!empty($data)) {
             if(isset($data['category_name']) && $data['category_name'] == '') {
-                $this->error[] = 'Tên danh mục không được trống';
+                $this->error[] = 'Name Category not null';
             }
             if(isset($data['category_status']) && $data['category_status'] == -1) {
-                $this->error[] = 'Bạn chưa chọn trạng thái cho danh mục';
+                $this->error[] = 'Status not check';
             }
             return true;
         }
