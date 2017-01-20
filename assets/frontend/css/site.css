@@ -19,7 +19,7 @@ a, a:link, a:active, a:visited, a:focus,a:hover{
     outline: none;
     text-decoration: none;
     outline: medium none;
-    color: #c3a137;
+    color: #3fbd1f;
 }
 html{
     min-height:100%;
@@ -37,23 +37,25 @@ input[type="text"], input[type="password"],select option, textarea{
 }
 /*Font*/
 @font-face {
-  font-family: 'Futura Black Bold';
-  src: url('font/futurabb.eot?#iefix') format('embedded-opentype'),  
-  url('font/futurabb.woff') format('woff'), 
-  url('font/futurabb.ttf')  format('truetype'), 
-  url('font/futurabb.svg#Impact') format('svg');
+  font-family: 'Saysettha OT';
+  src: url('font/Saysettha-OT.eot?#iefix') format('embedded-opentype'),  
+  url('font/Saysettha-OT.woff') format('woff'), 
+  url('font/Saysettha-OT.ttf')  format('truetype'), 
+  url('font/Saysettha-OT.svg#Impact') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Futura Bold';
-  src: url('font/Futura-Bold.eot?#iefix') format('embedded-opentype'),  
-  url('font/Futura-Bold.woff') format('woff'), 
-  url('font/Futura-Bold.ttf')  format('truetype'), 
-  url('font/Futura-Bold.svg#Impact') format('svg');
+  font-family: 'saysettha unicode';
+  src: url('font/saysettha-unicode.eot?#iefix') format('embedded-opentype'),  
+  url('font/saysettha-unicode.woff') format('woff'), 
+  url('font/saysettha-unicode.ttf')  format('truetype'), 
+  url('font/saysettha-unicode.svg#Impact') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
+
 /*Site*/
 body{
     overflow-x: hidden;
@@ -71,7 +73,7 @@ body{
 }
 .bg-top {
     background: #f2f2f2;
-    border-bottom: 1px solid #c0c0c0;
+    border-bottom: 1px solid #3fbd1f;
     font-size: 12px !important;
     height: 30px;
     line-height: 30px;
@@ -99,7 +101,7 @@ body{
     font-weight: bold;
 }
 .header-midd{
-    background: #b48311 url("../img/bg-header.png") no-repeat scroll 50% 50%;
+    background: #3fbd1f url("../img/bg-header.png") no-repeat scroll 50% 50%;
     width: 100%;
     min-height: 100px;
 }
@@ -122,10 +124,11 @@ body{
 .slogan h1 {
     color: #29166f;
     display: inline;
-    font-family: "Futura Black Bold";
-    font-size: 20px;
+    font-family: "Saysettha OT";
+    font-size: 25px;
     margin: 0;
     padding: 0;
+	font-weight: bold;
 }
 .slogan span {
     color: #29166f;
@@ -169,7 +172,7 @@ body{
     font-style: italic;
 }
 .search .search {
-    background: #c3a137;
+    background: #99e021;
     border: medium none;
     border-radius: 0 3px 3px 0;
     color: #fff;
@@ -181,11 +184,11 @@ body{
     width: auto;
 }
 .menu{
-    #border-top: 5px solid #e3bc4a;
-    border-top: 5px solid #29166f;
+    border-top: 1px solid #00a650;
+    border-top: 1px solid #00a650;
 }
 .menu .navbar-default{
-    background: #a96d10;
+    background: #266C26;
     border: none;
     border-radius: 0px;
 }
@@ -198,11 +201,11 @@ body{
 }
 .menu .navbar-default .navbar-nav > li > a:hover, 
 .menu .navbar-default .navbar-nav > li > a.active{
-    background-color: #a96d10;
+    background-color: #c9bf00;
     color: #fff;
 }
 .navbar-nav ul {
-    background: #c3a137;
+    background: #c9bf00;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     left: 0;
     list-style: outside none none;
@@ -218,13 +221,14 @@ body{
     line-height: 35px;
     padding: 0 18px;
     white-space: nowrap;
+	border-bottom: 1px dotted #99e021;
 }
 .navbar-nav ul li a {
     color: #fff;
     font-size: 14px;
 }
 .navbar-nav ul li:hover {
-    background-color: #a96d10;
+    background-color: #99e021;
     border: medium none;
     color: #fff;
 }
@@ -236,11 +240,10 @@ body{
     text-align: right;
 }
 .sub-menu .left-column li {
-    border-bottom: 1px dotted #a96d10;
+    border-bottom: 1px dotted #99e021;
 }
 #myCarousel.carousel.slide {
-    #border-bottom: 5px solid #d3b6a3;
-    border-bottom: 5px solid #29166f;
+    border-bottom: 5px solid #3fbd1f;
 }
 #main {
     min-height: 100px;
@@ -268,9 +271,10 @@ body{
     width: 50px;
 }
 .title-section a {
-    border-bottom: 2px solid #c3a137;
+    border-bottom: 2px solid #3fbd1f;
     margin-left: 15px;
     padding: 5px 0 15px;
+	color: #555;
 }
 .hot-post .icon-title {
     background-position: 0 -144px;
@@ -430,6 +434,7 @@ body{
     padding: 5px 0;
     border-bottom: none;
     margin-left: 0;
+	color:#fff;
 }
 span.block {
     background: #c3a137;
@@ -571,8 +576,8 @@ span.block {
     padding-bottom: 10px;
 }
 #footer {
-    background: #e3bc4a;
-    border-top: 5px solid #29166f;
+    background: #c3b900;
+    border-top: 5px solid #3fbd1f;
 }
 #footer .logo {
     margin: 2px;
@@ -951,6 +956,9 @@ br{
 }
 .list-post-main-product .line-content-view{
     padding-bottom: 10px;
+}
+.post-title {
+    color: #555!important;
 }
 /*pagging*/
 .show-box-paging {
