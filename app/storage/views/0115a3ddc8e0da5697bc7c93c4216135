@@ -295,8 +295,7 @@
          <div class="section image-post">
             <div class="title-section">
                <i class="icon-title"></i>
-               <a href="/thu-vien-anh-5.html" class="pull-left" title="<p>Thư viện ảnh</p>
-                  ">
+               <a href="/thu-vien-anh-5.html" class="pull-left" title="Thư viện ảnh">
                   <p>Thư viện ảnh</p>
                </a>
             </div>
@@ -322,8 +321,7 @@
          <div class="section business-post">
             <div class="title-section">
                <i class="icon-title"></i>
-               <a href="/net-dep-trong-van-hoa-kinh-doanh-21.html" class="pull-left" title="<p>Nét đẹp văn hóa kinh doanh</p>
-                  ">
+               <a href="/net-dep-trong-van-hoa-kinh-doanh-21.html" class="pull-left" title="Nét đẹp văn hóa kinh doanh">
                   <p>Nét đẹp văn hóa kinh doanh</p>
                </a>
             </div>

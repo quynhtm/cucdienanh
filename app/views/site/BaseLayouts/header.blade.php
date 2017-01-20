@@ -2,24 +2,24 @@
    <div class="container">
       <div class="col-lg-5 col-sm-5">
          <div class="address">
-            <p>Địa chỉ: Số 11/670/32 đường Hà Huy Tập - TT.Yên Viên - Gia Lâm - Hà Nội</p>
+            <p>Add: Bane Dong palane thong - Sisattanak District - Vientiane - Lao P.D.R</p>
          </div>
       </div>
-      <div class="col-lg-4 col-sm-4">
-         <div class="email">Email: quangtrung.investment@gmail.com</div>
+      <div class="col-lg-3 col-sm-3">
+         <div class="email">E-mail: laostyle.adv@gmail.com</div>
       </div>
-      <div class="col-lg-3 col-sm-3 hotline">
-         <div class="mobile">Holine: +84-988.554.301</div>
+      <div class="col-lg-4 col-sm-4 hotline">
+         <div class="mobile">Call: (+856) 20 9938 9889 / (+856) 20 9997 1102</div>
       </div>
    </div>
 </div>
 <div class="header-midd">
    <div class="container">
-      <a href="" class="logo">http://baritevietlao.com.vn</a>
+      <a href="" class="logo"></a>
       <div class="slogan">
-         <h1>Công ty trách nhiệm hữu hạn Đầu tư Quang Trung</h1>
+         <h1>ບໍລິສັດ ລາວສະໄຕ໋ ໂຄສະນາ ຈໍາກັດຜູ້ດຽວ</h1>
          <br>
-         <span>Quang Trung investment company limited</span>		
+         <span>LAO STYLE ADVERTISING SOLE CO., LTD</span>		
       </div>
       <div class="pull-right">
          <div class="language">
