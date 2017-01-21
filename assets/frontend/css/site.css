@@ -129,6 +129,7 @@ body{
     margin: 0;
     padding: 0;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 .slogan span {
     color: #29166f;
@@ -154,6 +155,15 @@ body{
 .language a.vi {
     background: rgba(0, 0, 0, 0) url("../img/vi.png") no-repeat scroll 0 3px;
     padding-left: 20px;
+}
+.language a.lao {
+    background: rgba(0, 0, 0, 0) url("../img/lao.png") no-repeat scroll 0 7px;
+	padding-left: 20px;
+	text-transform: uppercase;
+	font-size: 17px;
+	vertical-align: top;
+	position: relative;
+	top: -1px;
 }
 .language a.en {
     background: rgba(0, 0, 0, 0) url("../img/en.png") no-repeat scroll 0 3px;
