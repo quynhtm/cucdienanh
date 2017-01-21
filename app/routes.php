@@ -103,7 +103,26 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('news/deleteNews', array('as' => 'admin.delteteNews','uses' => 'NewsController@deleteNews'));//ajax
     Route::post('news/getCategoryNewsLanguage', array('as' => 'admin.getCategoryNewsLanguage','uses' => 'NewsController@getCategoryNewsLanguage'));//ajax
 
-    /*Quản lý banner*/
+    /*Quản lý product*/
+    Route::get('product/view',array('as' => 'admin.productView','uses' => 'ProductController@view'));
+    Route::get('product/edit/{id?}', array('as' => 'admin.productEdit','uses' => 'ProductController@getNews'))->where('id', '[0-9]+');
+    Route::post('product/edit/{id?}', array('as' => 'admin.productEdit','uses' => 'ProductController@postNews'))->where('id', '[0-9]+');
+    Route::post('product/deleteProduct', array('as' => 'admin.deleteProduct','uses' => 'ProductController@deleteProduct'));//ajax
+    Route::post('product/getCategoryProductLanguage', array('as' => 'admin.getCategoryProductLanguage','uses' => 'ProductController@getCategoryProductLanguage'));//ajax
+
+    /*Quản lý Video*/
+    Route::any('video/view',array('as' => 'admin.videoView','uses' => 'VideoController@view'));
+    Route::get('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@getVideo'))->where('id', '[0-9]+');
+    Route::post('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@postVideo'))->where('id', '[0-9]+');
+    Route::post('video/deleteVideo', array('as' => 'admin.deleteVideo','uses' => 'VideoController@deleteVideo'));//ajax
+
+    ///*Quản lý Thư viện ảnh*/
+    Route::any('libraryImage/view',array('as' => 'admin.libraryImageView','uses' => 'LibraryImageController@view'));
+    Route::get('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@getLibraryImage'))->where('id', '[0-9]+');
+    Route::post('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@postLibraryImage'))->where('id', '[0-9]+');
+    Route::post('libraryImage/deleteLibraryImage', array('as' => 'admin.deleteLibraryImage','uses' => 'LibraryImageController@deleteLibraryImage'));//ajax
+
+    ///*Quản lý banner*/
     Route::any('banner/view',array('as' => 'admin.bannerView','uses' => 'BannerController@view'));
     Route::get('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
     Route::post('banner/edit/{id?}', array('as' => 'admin.bannerEdit','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
