@@ -36,13 +36,14 @@
 	<div id="content">
 		<div id="main">
 			<div class="container">
-				@if(isset($menuLeft))
-					{{$menuLeft}}
-				@endif
-				
-				@if(isset($content))
-					{{$content}}
-				@endif
+				<div class="row">
+					@if(isset($content))
+						{{$content}}
+					@endif
+					@if(isset($right))
+						{{$right}}
+					@endif
+				</div>
 			</div>
 		</div>
 	</div>

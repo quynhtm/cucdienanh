@@ -9,7 +9,10 @@ class BaseAdminController extends BaseController
 
     public function __construct()
     {
-        if (!User::isLogin()) {
+    	FunctionLib::link_css('lib/jAlert/jquery.alerts.css', CGlobal::$POS_HEAD);
+    	FunctionLib::link_js('lib/jAlert/jquery.alerts.js', CGlobal::$POS_END);
+    	
+    	if (!User::isLogin()) {
             Redirect::route('admin.login',array('url'=>self::buildUrlEncode(URL::current())))->send();
         }
 
@@ -50,22 +53,13 @@ class BaseAdminController extends BaseController
             'icon'=>'fa fa-cogs',
             'arr_link_sub'=>array('admin.info','admin.contract','admin.category_list'),
             'sub'=>array(
-                //array('name'=>'Contract', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1, 'permission'=>'contract_view'),
-                array('name'=>'Category New', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
+                array('name'=>'Danh mục', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
                 array('name'=>'Infor site', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             	array('name'=>'Language static', 'RouteName'=>'admin.lang', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
+                array('name'=>'Thông tin chung', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             ),
         );
 
-        /*$menu[] = array(
-            'name'=>'Manage Category',
-            'link'=>'javascript:void(0)',
-            'icon'=>'fa fa-gift',
-            'arr_link_sub'=>array('admin.category_list',),
-            'sub'=>array(
-                array('name'=>'Category New', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
-            ),
-        );*/
 
         $menu[] = array(
             'name'=>'Manage Content',
@@ -73,10 +67,10 @@ class BaseAdminController extends BaseController
             'icon'=>'fa fa-book',
             'arr_link_sub'=>array('admin.newsView','admin.bannerView','admin.videoView','admin.libraryImageView',),
             'sub'=>array(
-                array('name'=>'News', 'RouteName'=>'admin.newsView', 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1, 'permission'=>'news_full'),
-                array('name'=>'Banner', 'RouteName'=>'admin.bannerView', 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1, 'permission'=>'banner_full'),
+                array('name'=>'Bài viết chung', 'RouteName'=>'admin.newsView', 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1, 'permission'=>'news_full'),
+                array('name'=>'Quảng cáo', 'RouteName'=>'admin.bannerView', 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1, 'permission'=>'banner_full'),
                 array('name'=>'Video', 'RouteName'=>'admin.videoView', 'icon'=>'fa fa-video-camera icon-4x', 'showcontent'=>1, 'permission'=>'video_full'),
-                array('name'=>'Library Image', 'RouteName'=>'admin.libraryImageView', 'icon'=>'fa fa-picture-o icon-4x', 'showcontent'=>1, 'permission'=>'libraryImage_full'),
+                array('name'=>'Thư viện ảnh', 'RouteName'=>'admin.libraryImageView', 'icon'=>'fa fa-picture-o icon-4x', 'showcontent'=>1, 'permission'=>'libraryImage_full'),
             ),
         );
         return $menu;

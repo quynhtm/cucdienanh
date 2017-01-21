@@ -1,48 +1,53 @@
-<div class="col-left-92">
-	<div class="head-info">
-		<h2><a href=""><i class="fa fa-newspaper-o"></i>Tin tức</a></h2>
-	</div>
-	<div class="content-boxcat">
-		<div class="col-653 pull-left">
-			<div class="list-item-filter news">
-				@if(!empty($arrListNew))
-					@foreach ($arrListNew as $keyNew => $itemNew)
-						<div class="item-post">
-							<a title="{{$itemNew['news_title']}}" href="{{FunctionLib::buildLinkDetailNews($itemNew['news_id'],$itemNew['news_title'])}}">
-								<h2 class="post-title">{{$itemNew['news_title']}}</h2>
-								<div class="col-lg-4 col-md-4 col-sm-4">
-									<div class="row">
-										<div class="post-img">
-											<img alt="{{$itemNew['news_title']}}" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $itemNew['news_id'],$itemNew['news_image'], CGlobal::sizeImage_300,  '', true, CGlobal::type_thumb_image_banner, false)}}">
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-8 col-md-8 col-sm-8 line-post-data">
-									<div class="post-data">
-										<div class="post-content">{{$itemNew['news_desc_sort']}} </div>
-									</div>
-								</div>
-							</a>
-						</div>
-					@endforeach
-				@endif
-			</div>
-		</div>
-		<div class="col-327 pull-right">
-			<div class="event-box">
-				<div class="event-box-title">Đối tác</div>
-				<div class="even-box-content">
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
+<div class="site-left col-lg-8 col-sm-8">
+	<div class="main-view">
+	   <div class="main-content-view">
+	      <div class="link-breadcrumb">
+	        <a href="{{URL::route('site.home')}}" title="{{Langs::getItemByKeywordLang('text_home', $lang)}}">{{Langs::getItemByKeywordLang('text_home', $lang)}}</a> › 
+	         <a href="{{FunctionLib::buildLinkCategory($arrCat->category_id, $arrCat->category_name)}}" title="{{$arrCat->category_name}}">{{$arrCat->category_name}}</a>
+	      </div>
+	      @if(count($arrItem) > 1)
+	      	<?php $total = count($arrItem); ?>
+	      	<div class="list-post">
+		      	@foreach($arrItem as $i=>$item)
+		      	<div class="item-post @if($total == $i+1) last @endif">
+					@if($item['news_image'] != '')
+						<img alt="{{$item['news_title']}}"
+							src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item['news_id'], $item['news_image'], CGlobal::sizeImage_500)}}">
+					@endif
+					
+					<div class="title-list-item">
+						<a class="post-title" title="{{$item['news_title']}}" href="{{FunctionLib::buildLinkDetailNews($item['news_id'], $item['news_category'] , $item['news_title'])}}">
+							{{$item['news_title']}}
+						</a>
 					</div>
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
-					</div>
-					<div class="main-img">
-						<img src="http://img.f1.raovat.vnecdn.net/images/2016/11/30/583e3ac6909fb-Image-307354715-ExtractWord-0-8075-5937-1480404429_300x180.png" alt="event_img">
+					<div class="date"><i class="icon-other icon-date"></i>{{date('h:i', $item['news_create'])}} {{Langs::getItemByKeywordLang('text_date', $lang)}} {{date('d/m/Y', $item['news_create'])}}</div>
+					<div class="post-intro">
+						@if($item['news_intro'] != '')
+							{{FunctionLib::substring($item['news_intro'], 500, '...') }}
+						@else
+							{{FunctionLib::substring($item['news_content'], 500, '...') }}
+						@endif
 					</div>
 				</div>
+		      	@endforeach
+		    </div>
+	      	<div class="show-box-paging" style="margin-top:20px; ">
+				<div class="showListPage">
+					{{$paging}}
+				</div>
 			</div>
-		</div>
+	      @else
+	      @foreach($arrItem as $item)
+	      <h1 class="title-news">{{$item['news_title']}}</h1>
+	      <div class="date"><i class="icon-other icon-date"></i>{{date('h:i', $item['news_create'])}} {{Langs::getItemByKeywordLang('text_date', $lang)}} {{date('d/m/Y', $item['news_create'])}}</div>
+	      <div class="line-content-view view-one-cat">
+	         @if($item['news_intro'] != '')
+	         <b>{{stripslashes($item['news_intro'])}}</b><br><br>
+	         @endif
+	         {{stripslashes($item['news_content'])}}
+	      </div>
+	      @endforeach
+	      @endif
+	   </div>
 	</div>
 </div>
