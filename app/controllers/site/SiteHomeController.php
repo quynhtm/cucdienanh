@@ -134,6 +134,7 @@ class SiteHomeController extends BaseSiteController{
 						    	->with('item', $item)
 						    	->with('arrCat', $arrCat)
 						    	->with('lang', $this->lang);
+    	$this->right();
     	$this->footer();
     }
 	public function pageContact(){

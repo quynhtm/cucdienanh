@@ -60,11 +60,23 @@
                         </select>
                     </div>
                 </div>
-
+				 <div class="clearfix"></div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Nổi bật</i>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <select name="news_hot" id="news_hot" class="form-control input-sm">
+                            {{$optionHot}}
+                        </select>
+                    </div>
+                </div>
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Status</i>
+                        <i>Trạng thái</i>
                     </div>
                 </div>
                 <div class="col-sm-3">

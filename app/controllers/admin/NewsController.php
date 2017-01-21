@@ -12,6 +12,7 @@ class NewsController extends BaseAdminController
     private $permission_create = 'news_create';
     private $permission_edit = 'news_edit';
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Hidden', CGlobal::status_show => 'Show');
+    private $arrHot = array(-1 => 'Chọn nổi bật', CGlobal::status_hide => 'Không', CGlobal::status_show => 'Có');
     private $error = array();
     private $arrCategoryNew = array();
     private $arrTypeNew = array();
@@ -114,13 +115,13 @@ class NewsController extends BaseAdminController
             }
         }
         //lay danh muc theo ngôn ngữ
-        $type_language = isset($data->news_type_language)?$data->news_type_language: CGlobal::TYPE_LANGUAGE_VIET;
+        $type_language = isset($data->type_language)?$data->type_language: CGlobal::TYPE_LANGUAGE_VIET;
         $this->arrCategoryNew = Category::getCateWithLanguage($type_language);
-
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['news_status'])? $data['news_status'] : CGlobal::status_show);
-        $optionCategory = FunctionLib::getOption(array(0=>'---Chose category news---')+$this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
-        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
-
+        $optionCategory = FunctionLib::getOption(array(0=>'---Chọn danh mục---')+$this->arrCategoryNew, isset($data['news_category'])? $data['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
+        $optionHot = FunctionLib::getOption($this->arrHot, isset($data['news_hot'])? $data['news_hot'] : CGlobal::status_hide);
+        
         $this->layout->content = View::make('admin.News.add')
             ->with('id', $id)
             ->with('data', $data)
@@ -128,6 +129,7 @@ class NewsController extends BaseAdminController
             ->with('urlImageOrigin', $urlImageOrigin)
             ->with('arrViewImgOther', $arrViewImgOther)
             ->with('optionStatus', $optionStatus)
+            ->with('optionHot', $optionHot)
             ->with('optionCategory', $optionCategory)
             ->with('optionLanguage', $optionLanguage)
             ->with('arrStatus', $this->arrStatus);
@@ -143,6 +145,13 @@ class NewsController extends BaseAdminController
         $dataSave['news_category'] = (int)Request::get('news_category',0);
         $dataSave['news_status'] = (int)Request::get('news_status', 0);
         $dataSave['type_language'] = (int)Request::get('type_language', CGlobal::TYPE_LANGUAGE_VIET);
+        
+        $dataSave['news_hot'] = (int)Request::get('news_hot', 0);
+        $dataSave['news_meta_title'] = addslashes(Request::get('news_meta_title'));
+        $dataSave['news_meta_keyword'] = addslashes(Request::get('news_meta_keyword'));
+        $dataSave['news_meta_description'] = addslashes(Request::get('news_meta_description'));
+        
+        
         $id_hiden = (int)Request::get('id_hiden', 0);
 		
         //ảnh chính
@@ -188,11 +197,12 @@ class NewsController extends BaseAdminController
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['news_status'])? $dataSave['news_status'] : CGlobal::status_show);
         $optionCategory = FunctionLib::getOption(array(0=>'---Chose category news---')+$this->arrCategoryNew, isset($dataSave['news_category'])? $dataSave['news_category'] : CGlobal::NEW_CATEGORY_TIN_TUC_CHUNG);
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
-
+        $optionHot = FunctionLib::getOption($this->arrHot, isset($data['news_hot'])? $data['news_hot'] : CGlobal::status_hide);
         $this->layout->content =  View::make('admin.News.add')
             ->with('id', $id)
             ->with('data', $dataSave)
             ->with('optionStatus', $optionStatus)
+            ->with('optionHot', $optionHot)
             ->with('optionCategory', $optionCategory)
             ->with('optionLanguage', $optionLanguage)
             ->with('error', $this->error)

@@ -172,7 +172,7 @@ class Category extends Eloquent
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if(isset($data->category_id) && $data->category_id > 0){
-                    self::removeCache($data->category_id,$data);
+                    self::removeCache($data->category_id, $data);
                 }
                 return $data->category_id;
             }
