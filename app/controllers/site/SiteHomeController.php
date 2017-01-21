@@ -78,6 +78,64 @@ class SiteHomeController extends BaseSiteController{
     	$this->right();
     	$this->footer();
     }
+    public function pageSearch($catname='', $caid=0){
+    	
+    	$keyword = addslashes(Request::get('keyword',''));
+    	
+    	$arrItem = array();
+    	$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm';
+    	$meta_img = '';
+    	if($keyword != ''){
+    
+    		$pageNo = (int) Request::get('page_no',1);
+    		$limit = CGlobal::number_show_15;
+    		$offset = ($pageNo - 1) * $limit;
+    		$search = $data = array();
+    		$total = 0;
+    
+    		$search['news_title'] = stripslashes($keyword);
+    		$search['type_language'] = $this->lang;
+    		$search['news_status'] = CGlobal::status_show;
+    		$search['field_get'] = '';
+    
+    		$arrItem = News::searchByCondition($search, $limit, $offset,$total);
+    		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+    	}
+    	 
+    	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+    	 
+    	$this->header();
+    	$this->layout->content = View::make('site.SiteLayouts.pageSearchNews')
+						    	->with('arrItem', $arrItem)
+						    	->with('paging', $paging)
+						    	->with('lang', $this->lang);
+    	$this->right();
+    	$this->footer();
+    }
+    public function pageDetailNew($catname='', $title='', $id=0){
+    	$item = array();
+    	$arrCat = array();
+    	$meta_title = $meta_keywords = $meta_description = 'Tin tức';
+    	$meta_img = '';
+    	if($id > 0){
+    		$item = News::getNewByID($id);
+    		if(sizeof($item) > 0){
+    			$arrCat = Category::getByID($item->news_category);
+    			
+    			$meta_title = stripslashes($item->news_title);
+    			$meta_keywords = stripslashes($item->news_meta_keyword);
+    			$meta_description = stripslashes($item->news_meta_description);
+    		}
+    	}
+    	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+    	
+    	$this->header();
+    	$this->layout->content = View::make('site.SiteLayouts.pageNewsDetail')
+						    	->with('item', $item)
+						    	->with('arrCat', $arrCat)
+						    	->with('lang', $this->lang);
+    	$this->footer();
+    }
 	public function pageContact(){
 		$str = Langs::getItemByKeywordLang('text_meta_contact', $this->lang);
 		$meta_title = $meta_keywords = $meta_description = $str;

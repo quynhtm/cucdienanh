@@ -14,5 +14,5 @@ Route::match(['GET','POST'],'lien-he.html',array('as' => 'site.pageContact','use
 
 //list tin theo danh muc Category
 Route::get('{name}-{id}.html',array('as' => 'Site.pageCategory','uses' =>'SiteHomeController@pageCategory'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
-Route::get('chi-tiet/tin-tuc-{new_id}/{news_title}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('new_id', '[0-9]+')->where('news_title', '[A-Z0-9a-z_\-]+');
-
+Route::get('{catname}/{news_title}-{new_id}.html',array('as' => 'Site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('catname', '[A-Z0-9a-z_\-]+')->where('news_title', '[A-Z0-9a-z_\-]+')->where('new_id', '[0-9]+');
+Route::match(['GET','POST'],'tim-kiem.html',array('as' => 'site.pageSearch','uses' =>'SiteHomeController@pageSearch'));
