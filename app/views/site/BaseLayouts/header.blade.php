@@ -23,8 +23,9 @@
       </div>
       <div class="pull-right">
          <div class="language">
-            <a class="vi class=" act""="" href="?lang=vi">Tiếng việt</a>
-            <a class="en class=" act""="" href="?lang=en">English</a>
+            <a class="vi" href="?lang=vi">Tiếng Việt</a>
+            <a class="lao" href="?lang=lao">ລາວ</a>
+            <a class="en" href="?lang=en">English</a>
          </div>
          <div class="search">
             <form action="http://baritevietlao.com.vn/tim-kiem.html" method="GET">
@@ -92,112 +93,33 @@
       </div>
    </div>
 </div>
+@if(isset($arrBannerHead) && sizeof($arrBannerHead) > 0)
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-      <li data-target="#myCarousel" data-slide-to="4" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="5" class=""></li>
+      @foreach($arrBannerHead as $key_posi_header =>$bannerShowHeader)
+	      @foreach($bannerShowHeader as $k=>$sliderHeader)
+	      <li data-target="#myCarousel" data-slide-to="{{$k}}" class="@if($k==0) active @endif"></li>
+	      @endforeach
+	  @endforeach
    </ol>
    <div class="carousel-inner" role="listbox">
-      <div class="item">
-         <a href="javascript:void(0)">
-         </a><a rel="nofollow" target="_blank" href="" title="Lễ ký kết hợp đồng giữa công ty và chính phủ nước CHDCND Lào">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/9/1700x372/04-25-43-17-08-2016-1kyhd.png" alt="Lễ ký kết hợp đồng giữa công ty và chính phủ nước CHDCND Lào">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Lễ ký kết hợp đồng giữa công ty và chính phủ nước CHDCND Lào</a>
-               </div>
-               <div class="desc-post">
-                  Hợp đồng cho ra đời một nhà máy chế biến bột Barite và khu mỏ khai thác quặng Barite đầy tiềm năng và giàu triển vọng để khẳng định thương hiệu bột Barite Lào trên thị trường thế giới.					
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="item">
-         <a href="javascript:void(0)">
-         </a><a href="" title="Quá trình tìm kiếm và thăm dò">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/10/1700x372/04-32-25-17-08-2016-2.jpg" alt="Quá trình tìm kiếm và thăm dò">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Quá trình tìm kiếm và thăm dò</a>
-               </div>
-               <div class="desc-post">
-                  Sẵn sàng vượt qua mọi khó khăn và vất vả để có cơ sở đem lại sự thành công của dự án.					
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="item">
-         <a href="javascript:void(0)">
-         </a><a href="" title="Báo cáo dự án">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/11/1700x372/04-38-37-17-08-2016-3.jpg" alt="Báo cáo dự án">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Báo cáo dự án</a>
-               </div>
-               <div class="desc-post">
-                  Hãy tranh luận trên cơ sở trân trọng tính khoa học để cùng tìm được mục đích chung.					
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="item">
-         <a href="javascript:void(0)">
-         </a><a href="" title="Quá trình xây dựng nhà máy">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/12/1700x372/04-43-07-17-08-2016-4.jpg" alt="Quá trình xây dựng nhà máy">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Quá trình xây dựng nhà máy</a>
-               </div>
-               <div class="desc-post">
-                  Hiện đại nhưng xanh - sạch - đẹp để đảm bảo sự bền vững cho tương lai					
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="item active">
-         <a href="javascript:void(0)">
-         </a><a href="" title="Gặp gỡ đối tác">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/13/1700x372/04-47-21-17-08-2016-5.jpg" alt="Gặp gỡ đối tác">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Gặp gỡ đối tác</a>
-               </div>
-               <div class="desc-post">
-                  Tôn trọng quyền lợi nhưng phải biết đặt niềm tin vào nhau để  thành công là của tất cả chúng ta.					
-               </div>
-            </div>
-         </div>
-      </div>
-      <div class="item">
-         <a href="javascript:void(0)">
-         </a><a href="" title="Tham quan và hoạt động cộng đồng">
-         <img src="http://baritevietlao.com.vn/uploads/thumbs/banner/14/1700x372/04-50-24-17-08-2016-6.jpg" alt="Tham quan và hoạt động cộng đồng">
-         </a>
-         <div class="carousel-caption">
-            <div class="section corner-post">
-               <div class="title-section">
-                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>Tham quan và hoạt động cộng đồng</a>
-               </div>
-               <div class="desc-post">
-                  Hãy luôn nhớ rằng trong cộng đồng bao giờ cũng có chính chúng ta					
-               </div>
-            </div>
-         </div>
-      </div>
+      @foreach($arrBannerHead as $key_posi_header =>$bannerShowHeader)
+	      @foreach($bannerShowHeader as $k=>$sliderHeader)
+	      <div class="item @if($k==0) active @endif">
+	         <a @if($sliderHeader->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($sliderHeader->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($sliderHeader->banner_link != '') {{$sliderHeader->banner_link}} @else javascript:void(0) @endif" title="{{$sliderHeader->banner_name}}">
+				<img src="{{ThumbImg::thumbImageBannerNormal($sliderHeader->banner_id,$sliderHeader->banner_parent_id, $sliderHeader->banner_image, CGlobal::sizeImage_1700,CGlobal::sizeImage_372, $sliderHeader->banner_name,true,true)}}" alt="{{$sliderHeader->banner_name}}" />
+			</a>
+	         <div class="carousel-caption">
+	            <div class="section corner-post">
+	               <div class="title-section">
+	                  <a href="javascript:void(0)" class="pull-left"><span class="block"></span>{{$sliderHeader->banner_name}}</a>
+	               </div>
+	               <div class="desc-post">{{$sliderHeader->banner_intro}}</div>
+	            </div>
+	         </div>
+	      </div>
+	       @endforeach
+      @endforeach
    </div>
    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -215,3 +137,4 @@
    	});
    });
 </script>
+@endif

@@ -21,19 +21,19 @@ class Banner extends Eloquent
         'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
         'banner_time_click', 'banner_update_time', 'banner_create_time');
 
-    public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_province_id = 0){
-        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_province_id;
+    public static function getBannerAdvanced($banner_type = 0, $lang = 0){
+        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$lang;
         $bannerAdvanced = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
         if (sizeof($bannerAdvanced) == 0) {
-            $banner = Banner::where('banner_id' ,'>', 0)
-                ->where('banner_status',CGlobal::status_show)
-                ->where('banner_type',$banner_type)
-                /*->whereIn('banner_page',array(0,$banner_page))
-                ->whereIn('banner_category_id',array(0,$banner_category_id))
-                ->whereIn('banner_province_id',array(0,$banner_province_id))*/
-                ->orderBy('banner_position','asc')->orderBy('banner_order','asc')->get();
-            if($banner){
-                foreach($banner as $itm) {
+            $banner = Banner::where('banner_id' ,'>', 0);
+            $banner->where('banner_status',CGlobal::status_show);
+            $banner->where('banner_type',$banner_type);
+            if($lang > 0){
+               $banner->where('type_language', $lang);
+            }
+           $result = $banner->orderBy('banner_order','asc')->orderBy('banner_order','asc')->get();
+            if($result){
+                foreach($result as $itm) {
                     $bannerAdvanced[$itm['banner_id']] = $itm;
                 }
             }
@@ -43,7 +43,7 @@ class Banner extends Eloquent
         }
         return $bannerAdvanced;
     }
-
+	
     public static function getBannerByID($id) {
         $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_BANNER_ID.$id) : array();
         if (sizeof($new) == 0) {
