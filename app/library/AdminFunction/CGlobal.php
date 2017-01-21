@@ -86,7 +86,10 @@ class CGlobal{
 
     const sizeImage_1010 = 1010;//banner header
     const sizeImage_90 = 90;//banner header
-
+	
+    const sizeImage_1700 = 1700;//banner header
+    const sizeImage_372 = 372;//banner header
+    
     const freeSizeImage_300 = 301;
 
     //size anh cho tin rao

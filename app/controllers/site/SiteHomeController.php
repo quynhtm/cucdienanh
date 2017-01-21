@@ -18,7 +18,7 @@ class SiteHomeController extends BaseSiteController{
     	$meta_keywords='';
     	$meta_description='';
     	$meta_img='';
-    	$arrMeta = Info::getItemByKeyword('SITE_SEO_HOME');
+    	//$arrMeta = Info::getItemByKeyword('SITE_SEO_HOME');
     	if(!empty($arrMeta)){
     		$meta_title = $arrMeta->meta_title;
     		$meta_keywords = $arrMeta->meta_keywords;
