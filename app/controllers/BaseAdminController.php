@@ -48,15 +48,16 @@ class BaseAdminController extends BaseController
             'name'=>'Manage System',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-cogs',
-            'arr_link_sub'=>array('admin.info','admin.contract'),
+            'arr_link_sub'=>array('admin.info','admin.contract','admin.category_list'),
             'sub'=>array(
                 //array('name'=>'Contract', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1, 'permission'=>'contract_view'),
+                array('name'=>'Category New', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
                 array('name'=>'Infor site', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             	array('name'=>'Language static', 'RouteName'=>'admin.lang', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             ),
         );
 
-        $menu[] = array(
+        /*$menu[] = array(
             'name'=>'Manage Category',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-gift',
@@ -64,7 +65,7 @@ class BaseAdminController extends BaseController
             'sub'=>array(
                 array('name'=>'Category New', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1, 'permission'=>'category_full'),
             ),
-        );
+        );*/
 
         $menu[] = array(
             'name'=>'Manage Content',

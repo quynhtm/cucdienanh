@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e39b3b09-ec89-4dad-a639-d5850a76b6a2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Banner.php" afterPath="$PROJECT_DIR$/app/models/Banner.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" afterPath="$PROJECT_DIR$/app/controllers/admin/BannerController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseAdminController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" afterPath="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Video.php" afterPath="$PROJECT_DIR$/app/models/Video.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/admin/VideoController.php" afterPath="$PROJECT_DIR$/app/controllers/admin/VideoController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Video/add.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Video/add.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/admin/js/admin.js" afterPath="$PROJECT_DIR$/assets/admin/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/admin/Video/view.blade.php" afterPath="$PROJECT_DIR$/app/views/admin/Video/view.blade.php" />
     </list>
     <ignored path="cucdienanh.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,56 +35,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VideoController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/VideoController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.7685353">
-              <caret line="186" column="47" selection-start-line="186" selection-start-column="47" selection-end-line="186" selection-end-column="47" />
+            <state vertical-scroll-proportion="-1.8545455">
+              <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Video.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/Video.php">
+      <file leaf-file-name="BaseAdminController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/BaseAdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.7777777">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.029209621">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/Video/view.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846">
-              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/admin/js/admin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="317" column="4" selection-start-line="317" selection-start-column="4" selection-end-line="317" selection-end-column="4" />
-              <folding>
-                <marker date="1485009132196" expanded="true" signature="14534:14545" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/admin/Video/add.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.461538">
-              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#div#3;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -131,7 +89,6 @@
         <option value="$PROJECT_DIR$/app/controllers/admin/LibraryImageController.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/ToolsCommonController.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/ArrayPermission.php" />
-        <option value="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
         <option value="$PROJECT_DIR$/app/library/AdminFunction/Memcache.php" />
         <option value="$PROJECT_DIR$/app/models/Video.php" />
         <option value="$PROJECT_DIR$/assets/admin/js/admin.js" />
@@ -141,6 +98,7 @@
         <option value="$PROJECT_DIR$/app/models/Banner.php" />
         <option value="$PROJECT_DIR$/app/views/admin/Video/add.blade.php" />
         <option value="$PROJECT_DIR$/app/controllers/admin/VideoController.php" />
+        <option value="$PROJECT_DIR$/app/controllers/BaseAdminController.php" />
       </list>
     </option>
   </component>
@@ -729,14 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/BaseAdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.307692">
-          <caret line="52" column="18" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/library/AdminFunction/Memcache.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.423077">
@@ -750,7 +700,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="317" column="4" selection-start-line="317" selection-start-column="4" selection-end-line="317" selection-end-column="4" />
           <folding>
-            <marker date="1485009132196" expanded="true" signature="14534:14545" placeholder="..." />
+            <marker date="1485009132196" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -826,8 +776,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/VideoController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7685353">
-          <caret line="186" column="47" selection-start-line="186" selection-start-column="47" selection-end-line="186" selection-end-column="47" />
+        <state vertical-scroll-proportion="-1.8545455">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/BaseAdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029209621">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
           <folding />
         </state>
       </provider>
