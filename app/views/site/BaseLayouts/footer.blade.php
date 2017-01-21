@@ -1,5 +1,5 @@
 <div class="bottom-page container">
-   <a href="" class="logo"></a>
+   <span class="logo"></span>
    <div class="pull-left">
      {{$address}}
    </div>

@@ -5,46 +5,48 @@ $(document).ready(function() {
 });
 var Admin = {
     deleteItem: function(id,type) {
-        if(confirm('Bạn có muốn xóa Item này không?')) {
-            $('#img_loading_'+id).show();
-            var url_ajax = '';
-            if(type == 1){ //xoa tin tức
-                url_ajax = 'deleteNews';
-            }else if(type == 2){
-                url_ajax = 'deleteCustomer';
-            }else if(type == 3){
-                url_ajax = 'deleteBanner';
-            }else if(type == 4){
-                url_ajax = 'deleteLibraryImage';
-            }else if(type == 9){
-                url_ajax = 'deletePermission';
-            }else if(type == 10){
-            	url_ajax = 'deleteCategory';
-            }else if(type == 11){
-            	url_ajax = 'deleteInfor';
-            }else if(type == 12){
-            	url_ajax = 'deleteContract';
-            }else if(type == 13){
-            	url_ajax = 'deleteLang';
-            }
-            if(url_ajax != ''){
-                $.ajax({
-                    type: "post",
-                    url: url_ajax,
-                    data: {id : id},
-                    dataType: 'json',
-                    success: function(res) {
-                        $('#img_loading_'+id).hide();
-                        if(res.isIntOk == 1){
-                            alert('Bạn đã thực hiện thành công');
-                            window.location.reload();
-                        }else{
-                            alert('Không thể thực hiện được thao tác.');
-                        }
-                    }
-                });
-            }
-        }
+    	jConfirm('Bạn muốn xóa Item này không [OK]:Đồng ý [Cancel]:Bỏ qua?)', 'Xác nhận', function(r) {
+			if(r){
+	            $('#img_loading_'+id).show();
+	            var url_ajax = '';
+	            if(type == 1){ //xoa tin tức
+	                url_ajax = 'deleteNews';
+	            }else if(type == 2){
+	                url_ajax = 'deleteCustomer';
+	            }else if(type == 3){
+	                url_ajax = 'deleteBanner';
+	            }else if(type == 4){
+	                url_ajax = 'deleteLibraryImage';
+	            }else if(type == 9){
+	                url_ajax = 'deletePermission';
+	            }else if(type == 10){
+	            	url_ajax = 'deleteCategory';
+	            }else if(type == 11){
+	            	url_ajax = 'deleteInfor';
+	            }else if(type == 12){
+	            	url_ajax = 'deleteContract';
+	            }else if(type == 13){
+	            	url_ajax = 'deleteLang';
+	            }
+	            if(url_ajax != ''){
+	                $.ajax({
+	                    type: "post",
+	                    url: url_ajax,
+	                    data: {id : id},
+	                    dataType: 'json',
+	                    success: function(res) {
+	                        $('#img_loading_'+id).hide();
+	                        if(res.isIntOk == 1){
+	                            jAlert('Bạn đã thực hiện thành công!', 'Thông báo');
+	                            window.location.reload();
+	                        }else{
+	                            jAlert('Không thể thực hiện được thao tác.', 'Thông báo');
+	                        }
+	                    }
+	                });
+	            }
+	        }
+    	});
     },
     removeAllItems: function(type){
         var dataId = [];
@@ -56,7 +58,7 @@ var Admin = {
             }
         });
         if(dataId.length == 0) {
-            alert('Bạn chưa chọn items để thao tác.');
+            jAlert('Bạn chưa chọn items để thao tác!', 'Thông báo');
             return false;
         }
         var url_ajax = '';

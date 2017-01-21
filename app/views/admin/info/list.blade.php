@@ -53,7 +53,7 @@
 							<th width="1%" class="text-center"><input id="checkAll" type="checkbox"></th>
 							<th width="20%">Tiêu đề</th>
 							<th width="10%">Loại thông tin</th>
-							<th width="5%" class="text-center">Ngôn ngữ</th>
+							<th width="5%" class="text-left">Ngôn ngữ</th>
 							<th width="5%" class="text-center">Ngày tạo</th>
 							<th width="5%" class="text-center">Trạng thái</th>
 							<th width="5%">Action</th>
@@ -66,7 +66,7 @@
 								<td class="text-center"><input class="checkItem" name="checkItem[]" value="{{$item['info_id']}}" type="checkbox"></td>
 								<td>{{$item['info_title']}}</td>
 								<td>@if(isset($arrInforSite[$item['info_type']])){{$arrInforSite[$item['info_type']]}}@else -- @endif</td>
-								<td class="text-center">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
+								<td class="text-left">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
 								<td class="text-center">{{date('d/m/Y', $item['info_created'])}}</td>
 								<td class="text-center">
 									@if($item['info_status'] == '1')

@@ -53,9 +53,9 @@
 							<th width="1%" class="text-center"><input id="checkAll" type="checkbox"></th>
 							<th width="20%">Từ khóa</th>
 							<th width="20%">Nội dung</th>
-							<th width="5%" class="text-center">Ngôn ngữ</th>
+							<th width="5%" class="text-left">Ngôn ngữ</th>
 							<th width="5%" class="text-center">Trạng thái</th>
-							<th width="5%">Action</th>
+							<th width="2%">Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -65,7 +65,7 @@
 								<td class="text-center"><input class="checkItem" name="checkItem[]" value="{{$item['language_id']}}" type="checkbox"></td>
 								<td>{{$item['language_keyword']}}</td>
 								<td>{{$item['language_content']}}</td>
-								<td class="text-center">@if(isset($arrLanguage[$item['language_lang']])){{$arrLanguage[$item['language_lang']]}}@else -- @endif</td>
+								<td class="text-left">@if(isset($arrLanguage[$item['language_lang']])){{$arrLanguage[$item['language_lang']]}}@else -- @endif</td>
 								<td class="text-center">
 									@if($item['language_status'] == '1')
 										<i class="fa fa-check fa-admin fa-2x green"></i>
@@ -75,10 +75,12 @@
 								</td>
 								<td>
 									<a href="{{URL::route('admin.langEdit',array('id' => $item['language_id']))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
+									<!--
 									@if($is_root || $permission_full ==1 || $permission_delete == 1)
 										&nbsp;&nbsp;&nbsp;
 										<a href="javascript:void(0);" onclick="Admin.deleteItem({{$item['language_id']}},13)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
 									@endif
+									-->
 									<span class="img_loading" id="img_loading_{{$item['language_id']}}"></span>
 								</td>
 							</tr>

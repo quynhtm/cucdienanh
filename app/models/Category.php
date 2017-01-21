@@ -257,6 +257,8 @@ class Category extends Eloquent
                         'category_name'=>$itm->category_name,
                         'category_parent_id'=>$itm->category_parent_id,
                         'type_language'=>$itm->type_language,
+                    	'category_type'=>$itm->category_type,
+                    	'category_show_content'=>$itm->category_show_content,
                         'category_status'=>$itm->category_status,
                         'category_icons'=>$itm->category_icons,
                         'category_order'=>$itm->category_order);
@@ -288,6 +290,8 @@ class Category extends Eloquent
                     'category_id'=>$value->category_id,
                     'category_parent_id'=>$value->category_parent_id,
                     'type_language'=>$value->type_language,
+                	'category_type'=>$itm->category_type,
+                	'category_show_content'=>$itm->category_show_content,
                     'category_order'=>$value->category_order,
                     'category_status'=>$value->category_status,
                     'category_name'=>$value->category_name);

@@ -52,7 +52,7 @@
                             <th width="2%"class="text-center">STT</th>
                             <th width="25%" class="td_list">Name category</th>
                             <th width="8%" class="text-center">Language</th>
-                            <th width="10%" class="text-center">Type</th>
+                            <th width="10%" class="text-center">Type Category</th>
                             <th width="5%" class="text-center">Order</th>
                             <th width="5%" class="text-center">Show Content</th>
                             <th width="5%" class="text-center">Status</th>

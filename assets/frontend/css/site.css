@@ -102,7 +102,7 @@ body{
     background: url(../img/mobile.png) no-repeat 0 center;
     display: inline-block;
     padding-left: 25px;
-    text-align: right;
+    text-align: left;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -983,6 +983,53 @@ br{
 }
 .post-title {
     color: #555!important;
+}
+.contact input[type="text"] {
+    border: 1px solid #ccc;
+    font-size: 14px;
+    height: 30px;
+	border-radius: 0;
+	box-shadow: none;
+	padding-left: 5px;
+}
+.contact textarea{
+	border-radius: 0;
+	box-shadow: none;
+}
+.contact label span{
+	color:#ff0000;
+}
+.contact .form-group{
+	clear: both;
+}
+.labelInputCaptchar{
+	clear:both;
+	width:100%;
+}
+.txtInputCaptchar{
+	float: left;
+	display: inline-block;
+	padding-left: 5px;
+}
+.imageCaptchar{
+	display: inline-block;
+    float: left;
+    height: 30px;
+    margin-left: 10px;
+    width: 50px;
+}
+.iconRefreh {
+    background: rgba(0, 0, 0, 0) url("../img/refreh.png") no-repeat scroll 0 0;
+    display: inline-block;
+    float: left;
+    height: 35px;
+    margin-left: 10px;
+    width: 35px;
+}
+.mgt10 {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100%;
 }
 /*pagging*/
 .show-box-paging {

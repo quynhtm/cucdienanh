@@ -58,3 +58,6 @@
     display: inline-block;
     width: 100%;
 }
+small {
+    font-style: italic;
+}

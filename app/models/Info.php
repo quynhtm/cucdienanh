@@ -73,6 +73,9 @@ class Info extends Eloquent {
     			if(isset($data->info_keyword) && $data->info_keyword != ''){
     				self::removeCacheKeyword($data->info_keyword);
     			}
+    			if(isset($data->info_type) && isset($data->type_language)){
+    				self::removeCacheByTypeInfoAndTypeLanguage($data->info_type, $data->type_language);
+    			}
     		}
     		DB::connection()->getPdo()->commit();
     		return true;
@@ -96,6 +99,10 @@ class Info extends Eloquent {
     			if($data->info_id && Memcache::CACHE_ON){
     				Info::removeCacheId($data->info_id);
     			}
+    			if(isset($data->info_type) && isset($data->type_language)){
+    				self::removeCacheByTypeInfoAndTypeLanguage($data->info_type, $data->type_language);
+    			}
+    			
     			return $data->info_id;
     		}
     		DB::connection()->getPdo()->commit();
@@ -139,13 +146,15 @@ class Info extends Eloquent {
 					}
     			}
     			//End Remove Img
-    			
     			$data->delete();
     			if(isset($data->info_id) && $data->info_id > 0){
     				self::removeCacheId($data->info_id);
     			}
     			if(isset($data->info_keyword) && $data->info_keyword != ''){
     				self::removeCacheKeyword($data->info_keyword);
+    			}
+    			if(isset($data->info_type) && isset($data->type_language)){
+    				self::removeCacheByTypeInfoAndTypeLanguage($data->info_type, $data->type_language);
     			}
     			DB::connection()->getPdo()->commit();
     		}
@@ -180,6 +189,12 @@ class Info extends Eloquent {
     public static function removeCacheKeyword($keyword=''){
     	if($keyword != ''){
     		Cache::forget(Memcache::CACHE_INFO_KEYWORD.$keyword);
+    	}
+    }
+    
+    public static function removeCacheByTypeInfoAndTypeLanguage($typeInfo='', $lang=0){
+    	if($typeInfo > 0 && $lang > 0){
+    		Cache::forget(Memcache::CACHE_INFO_TYPEINFO_TYPELANGUAGE.$typeInfo.'_'.$lang);
     	}
     }
     
