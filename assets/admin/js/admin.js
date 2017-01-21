@@ -15,7 +15,7 @@ var Admin = {
             }else if(type == 3){
                 url_ajax = 'deleteBanner';
             }else if(type == 4){
-                url_ajax = 'deleteProvince';
+                url_ajax = 'deleteLibraryImage';
             }else if(type == 9){
                 url_ajax = 'deletePermission';
             }else if(type == 10){

@@ -37,6 +37,9 @@ class Memcache{
     const CACHE_BANNER_ID    = 'cache_banner_id_';
     const CACHE_BANNER_ADVANCED    = 'cache_banner_advanced';
 
+    //thu vien anh
+    const CACHE_IMAGE_ID    = 'cache_image_id_';
+
     //Tinh thanh
     const CACHE_ALL_PROVICE = 'cache_all_provice';
     const CACHE_PROVICE_ID = 'cache_provice_id_';

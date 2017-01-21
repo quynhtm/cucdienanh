@@ -18,6 +18,9 @@ class AjaxCommonController extends BaseSiteController
             case 1://img news
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_NEWS, $type);
                 break;
+            case 5://thu vien ảnh
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_LIBRARY_IMAGE, $type);
+                break;
             case 2://img Item
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, CGlobal::FOLDER_PRODUCT, $type);
                 break;
@@ -48,6 +51,11 @@ class AjaxCommonController extends BaseSiteController
                         $new_row['news_create'] = time();
                         $new_row['news_status'] = CGlobal::IMAGE_ERROR;
                         $item_id = News::addData($new_row);
+                        break;
+                    case 5://img news
+                        $new_row['image_create'] = time();
+                        $new_row['image_status'] = CGlobal::IMAGE_ERROR;
+                        $item_id = LibraryImage::addData($new_row);
                         break;
                     case 2://img Item
                         $customerLogin = UserCustomer::user_login();
@@ -104,6 +112,18 @@ class AjaxCommonController extends BaseSiteController
                     		$arrImagOther[] = $file_name;//gan anh vua upload
                     		$proUpdate['news_image_other'] = serialize($arrImagOther);
                     		News::updateData($item_id,$proUpdate);
+                    	}
+                    }
+
+                    //Cap nhat DB de quan ly file anh new
+                    if($type == 5 ){
+                    	//img thu vien anh
+                   		$inforLibraryImage = LibraryImage::getById($item_id);
+                    	if($inforLibraryImage){
+                    		$arrImagOther = unserialize($inforLibraryImage->image_image_other);
+                    		$arrImagOther[] = $file_name;//gan anh vua upload
+                    		$proUpdate['image_image_other'] = serialize($arrImagOther);
+                            LibraryImage::updateData($item_id,$proUpdate);
                     	}
                     }
                     //cap nhat DB de quan ly cac file anh tin đăng
@@ -184,11 +204,46 @@ class AjaxCommonController extends BaseSiteController
                 			foreach($arrImagOther as $k=>$v){
                 				if($v == $nameImage){
                 					unset($arrImagOther[$k]);
+                                    //xoa anh upload
+                                    FunctionLib::deleteFileUpload($nameImage,$item_id,CGlobal::FOLDER_NEWS);
+
+                                    //xóa anh thumb
+                                    $arrSizeThumb = CGlobal::$arrSizeImage;
+                                    foreach($arrSizeThumb as $k=>$size){
+                                        $sizeThumb = $size['w'].'x'.$size['h'];
+                                        FunctionLib::deleteFileThumb($nameImage,$item_id,CGlobal::FOLDER_NEWS,$sizeThumb);
+                                    }
                 				}
                 			}
                 		}
                 		$proUpdate['news_image_other'] = serialize($arrImagOther);
                 		News::updateData($item_id,$proUpdate);
+                	}
+                	$aryData['intIsOK'] = 1;
+                	break;
+                case 5:
+                	//img thu vien anh
+                	$inforNews = LibraryImage::getById($item_id);
+                	if(sizeof($inforNews) >0){
+                		$arrImagOther = unserialize($inforNews->image_image_other);
+                		if(!empty($arrImagOther)){
+                			foreach($arrImagOther as $k=>$v){
+                				if($v == $nameImage){
+                					unset($arrImagOther[$k]);
+                                    //xoa anh upload
+                                    FunctionLib::deleteFileUpload($nameImage,$item_id,CGlobal::FOLDER_LIBRARY_IMAGE);
+
+                                    //xóa anh thumb
+                                    $arrSizeThumb = CGlobal::$arrSizeImage;
+                                    foreach($arrSizeThumb as $k=>$size){
+                                        $sizeThumb = $size['w'].'x'.$size['h'];
+                                        FunctionLib::deleteFileThumb($nameImage,$item_id,CGlobal::FOLDER_LIBRARY_IMAGE,$sizeThumb);
+                                    }
+                				}
+                			}
+                		}
+                		$proUpdate['image_image_other'] = serialize($arrImagOther);
+                        LibraryImage::updateData($item_id,$proUpdate);
                 	}
                 	$aryData['intIsOK'] = 1;
                 	break;
@@ -254,6 +309,24 @@ class AjaxCommonController extends BaseSiteController
             					'src_thumb_content'=>$url_thumb_content);
             		}
             		
+            	}
+            	$data['dataImage'] = $arrViewImgOther;
+            	$data['isIntOk'] = 1;
+            	return Response::json($data);
+            	break;
+             case 5:// thu vien anh
+            	$inforNews = LibraryImage::getById($id_hiden);
+            	if(sizeof($inforNews) >0){
+            		$arrImg = unserialize($inforNews->image_image_other);
+            		foreach($arrImg as $k=>$val){
+            			$url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_LIBRARY_IMAGE, $id_hiden, $val, CGlobal::sizeImage_100);
+            			$url_thumb_content = ThumbImg::getImageThumb(CGlobal::FOLDER_LIBRARY_IMAGE, $id_hiden, $val, CGlobal::sizeImage_600);
+            			$arrViewImgOther[] = array(
+            					'post_title'=>$inforNews->image_title,
+            					'src_img_other'=>$url_thumb,
+            					'src_thumb_content'=>$url_thumb_content);
+            		}
+
             	}
             	$data['dataImage'] = $arrViewImgOther;
             	$data['isIntOk'] = 1;

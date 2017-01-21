@@ -118,8 +118,8 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
 
     ///*Quản lý Thư viện ảnh*/
     Route::any('libraryImage/view',array('as' => 'admin.libraryImageView','uses' => 'LibraryImageController@view'));
-    Route::get('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@getLibraryImage'))->where('id', '[0-9]+');
-    Route::post('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@postLibraryImage'))->where('id', '[0-9]+');
+    Route::get('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@getItem'))->where('id', '[0-9]+');
+    Route::post('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@postItem'))->where('id', '[0-9]+');
     Route::post('libraryImage/deleteLibraryImage', array('as' => 'admin.deleteLibraryImage','uses' => 'LibraryImageController@deleteLibraryImage'));//ajax
 
     ///*Quản lý banner*/

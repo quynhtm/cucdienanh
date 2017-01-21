@@ -5,8 +5,8 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.bannerView')}}"> Banner </a></li>
-            <li class="active">@if($id > 0)Cập nhật banner @else Tạo mới banner @endif</li>
+            <li><a href="{{URL::route('admin.libraryImageView')}}"> Danh sách thư viện ảnh</a></li>
+            <li class="active">@if($id > 0)Cập nhật thư viện ảnh @else Tạo mới thư viện ảnh @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
 
@@ -22,150 +22,118 @@
                         @endforeach
                     </div>
                 @endif
-                <div style="float: left;width: 60%">
-                <div class="col-sm-12">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="name" class="control-label">Name banner <span class="red"> (*) </span></label>
-                        <input type="text" placeholder="Name banner" id="banner_name" name="banner_name"  class="form-control input-sm" value="@if(isset($data['banner_name'])){{$data['banner_name']}}@endif">
+                        <i>Name ảnh</i>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <input type="text" placeholder="Tên bài viết" id="image_title" name="image_title" class="form-control input-sm" value="@if(isset($data['image_title'])){{$data['image_title']}}@endif">
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-12">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="name" class="control-label">Infor banner</label>
-                        <input type="text" placeholder="Name banner" id="banner_intro" name="banner_intro"  class="form-control input-sm" value="@if(isset($data['banner_intro'])){{$data['banner_intro']}}@endif">
+                        <i>Language</i>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <select class="form-control input-sm" id="type_language" name="type_language" onchange="Admin.getCategoryWithTypeLanguage()">
+                            <?php echo $optionLanguage;?>
+                        </select>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-12">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="name" class="control-label">Link URL <span class="red"> (*) </span></label>
-                        <input type="text" placeholder="url banner" id="banner_link" name="banner_link"  class="form-control input-sm" value="@if(isset($data['banner_link'])){{$data['banner_link']}}@endif">
+                        <i>Status</i>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <select name="image_status" id="image_status" class="form-control input-sm">
+                            {{$optionStatus}}
+                        </select>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="name" class="control-label">Type banner</label>
-                        <div class="form-group">
-                            <select name="banner_type" id="banner_type" class="form-control input-sm">
-                                {{$optionTypeBanner}}
-                            </select>
-                        </div>
+                        <i>Upload Image news</i>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="name" class="control-label">Language</label>
-                        <div class="form-group">
-                            <select name="type_language" id="type_language" class="form-control input-sm">
-                                {{$optionLanguage}}
-                            </select>
-                        </div>
+                        <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadMultipleImages(5);">Upload Image</a>
+                        <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['image_image'])){{$data['image_image']}}@endif">
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="clearfix"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <!--hien thi anh-->
+                    <ul id="sys_drag_sort" class="ul_drag_sort">
+                        @if(isset($arrViewImgOther))
+                            @foreach ($arrViewImgOther as $key => $imgNew)
+                                <li id="sys_div_img_other_{{$key}}" style="margin: 1px!important;">
+                                    <div class='block_img_upload'>
+                                        <img src="{{$imgNew['src_img_other']}}" height='100' width='100'>
+                                        <input type="hidden" id="img_other_{{$key}}" name="img_other[]" value="{{$imgNew['img_other']}}" class="sys_img_other">
+                                        <div class='clear'></div>
+                                        <input type="radio" id="checked_image_{{$key}}" name="checked_image" value="{{$key}}" @if(isset($imagePrimary) && $imagePrimary == $imgNew['img_other'] ) checked="checked" @endif onclick="Admin.checkedImage('{{$imgNew['img_other']}}','{{$key}}');">
+                                        <label for="checked_image_{{$key}}" style='font-weight:normal'>Ảnh đại diện</label>
+                                        <div class="clearfix"></div>
+                                        <a href="javascript:void(0);" onclick="Admin.removeImage({{$key}},{{$id}},'{{$imgNew['img_other']}}', 5);">Xóa ảnh</a>
+                                        <span style="display: none"><b>{{$key}}</b></span>
+                                    </div>
+                                </li>
+                                @if(isset($imageOrigin) && $imageOrigin == $imgNew['img_other'] )
+                                    <input type="hidden" id="news_images_key_upload" name="news_images_key_upload" value="{{$key}}">
+                                @endif
+                            @endforeach
+                        @else
+                            <input type="hidden" id="news_images_key_upload" name="news_images_key_upload" value="-1">
+                        @endif
+                    </ul>
+
+                    <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
+                    <script type="text/javascript">
+                        $("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+                        function saveOrder() {
+                            var data = $("#sys_drag_sort li div span").map(function() { return $(this).children().html(); }).get();
+                            $("input[name=list1SortOrder]").val(data.join(","));
+                        };
+                    </script>
+                    <!--ket thuc hien thi anh-->
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="name" class="control-label">Status</label>
-                        <div class="form-group">
-                            <select name="banner_status" id="banner_status" class="form-control input-sm">
-                                {{$optionStatus}}
-                            </select>
-                        </div>
+                        <i>Details</i>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <div class="controls"><button type="button" onclick="Admin.insertImageContent(5)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
+                        <textarea class="form-control input-sm"  name="image_content">@if(isset($data['image_content'])){{$data['image_content']}}@endif</textarea>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Taget bank</label>
-                            <div class="form-group">
-                                <select name="banner_is_target" id="banner_is_target" class="form-control input-sm">
-                                    {{$optionTarget}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Nofollow</label>
-                            <div class="form-group">
-                                <select name="banner_is_rel" id="banner_is_rel" class="form-control input-sm">
-                                    {{$optionRel}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Order</label>
-                        <input type="text" placeholder="Thứ tự hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
-                    </div>
-                </div>
-
-
-                <div class="clearfix"></div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Type run time</label>
-                        <div class="form-group">
-                            <select name="banner_is_run_time" id="banner_is_run_time" class="form-control input-sm">
-                                {{$optionRunTime}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Start time banner</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="banner_start_time" name="banner_start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_start_time']) && $data['banner_start_time'] > 0){{date('d-m-Y',$data['banner_start_time'])}}@endif">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">End time banner</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="banner_end_time" name="banner_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_end_time']) && $data['banner_end_time'] > 0){{date('d-m-Y',$data['banner_end_time'])}}@endif">
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                </div>
-
-                <div style="float: left;width: 40%">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload Image </a>
-                            <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['banner_image'])){{$data['banner_image']}}@endif">
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        <!--hien thi anh-->
-                        <div id="block_img_upload">
-                            @if(isset($data['banner_image']) && $data['banner_image']!= '')
-                                <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $data['banner_id'], $data['banner_image'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
-                                <div class="clearfix"></div>
-                                <a href="javascript: void(0);"  style="display: none" onclick="Common.removeImageItem({{$data['banner_id']}},'{{$data['banner_image']}}',3);">Xóa ảnh</a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="clearfix"></div>
-                <div class="form-group col-sm-12 text-left">
-                    <a class="btn btn-warning" href="{{URL::route('admin.bannerView')}}"><i class="fa fa-reply"></i> Back</a>
+                <div class="form-group col-sm-2 text-left"></div>
+                <div class="form-group col-sm-10 text-left">
+                    <a class="btn btn-warning" href="{{URL::route('admin.libraryImageView')}}"><i class="fa fa-reply"></i> Back</a>
                     <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 {{ Form::close() }}
-                <!-- PAGE CONTENT ENDS -->
+                        <!-- PAGE CONTENT ENDS -->
             </div>
             <!-- /.col -->
         </div>
@@ -184,25 +152,66 @@
             </div>
             <div class="modal-body">
                 <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
-                <div class="form_group">
-                    <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
-                    <div id="status"></div>
+                    <div class="form_group">
+                        <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        <div id="status"></div>
 
-                    <div class="clearfix"></div>
-                    <div class="clearfix" style='margin: 5px 10px; width:100%;'>
-                        <div id="div_image"></div>
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image"></div>
+                        </div>
                     </div>
-                </div>
-               </form>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <!--Popup upload ảnh-->
-
+<!--Popup anh khac de chen vao noi dung bai viet-->
+<div class="modal fade" id="sys_PopupImgOtherInsertContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Click ảnh để chèn vào nội dung</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image_insert_content" class="float_left"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- chen anh vào noi dung-->
 <script>
-    $(document).ready(function(){
-        var checkin = $('#banner_start_time').datepicker({ });
-        var checkout = $('#banner_end_time').datepicker({ });
-    });
+    CKEDITOR.replace('image_content', {height:800});
+    /*CKEDITOR.replace(
+     'news_content',
+     {
+     toolbar: [
+     { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+     { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+     { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+     ],
+     },
+     {height:600}
+     );*/
+</script>
+
+<script type="text/javascript">
+    //kéo thả ảnh
+    jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+    function saveOrder() {
+        var data = jQuery("#sys_drag_sort li div span").map(function() { return jQuery(this).children().html(); }).get();
+        jQuery("input[name=list1SortOrder]").val(data.join(","));
+    };
+    function insertImgContent(src, name_news){
+        CKEDITOR.instances.image_content.insertHtml('<img src="'+src+'" alt="'+name_news+'"/>');
+    }
 </script>

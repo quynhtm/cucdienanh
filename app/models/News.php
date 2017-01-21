@@ -127,6 +127,33 @@ class News extends Eloquent
             $dataSave = News::find($id);
             $dataSave->delete();
             if(isset($dataSave->news_id) && $dataSave->news_id > 0){
+                if($dataSave->news_image != ''){//xoa anh c?
+                    //xoa anh upload
+                    FunctionLib::deleteFileUpload($dataSave->news_image,$dataSave->news_id,CGlobal::FOLDER_BANNER);
+                    //x?a anh thumb
+                    $arrSizeThumb = CGlobal::$arrSizeImage;
+                    foreach($arrSizeThumb as $k=>$size){
+                        $sizeThumb = $size['w'].'x'.$size['h'];
+                        FunctionLib::deleteFileThumb($dataSave->news_image,$dataSave->news_id,CGlobal::FOLDER_BANNER,$sizeThumb);
+                    }
+                }
+                //xóa ?nh khác
+                if(!empty($dataSave->news_image_other)){
+                    $arrImagOther = unserialize($dataSave->news_image_other);
+                    if(sizeof($arrImagOther) > 0){
+                        foreach($arrImagOther as $k=>$val){
+                            //xoa anh upload
+                            FunctionLib::deleteFileUpload($val,$id,CGlobal::FOLDER_BANNER);
+                            //x?a anh thumb
+                            $arrSizeThumb = CGlobal::$arrSizeImage;
+                            foreach($arrSizeThumb as $k=>$size){
+                                $sizeThumb = $size['w'].'x'.$size['h'];
+                                FunctionLib::deleteFileThumb($val,$id,CGlobal::FOLDER_BANNER,$sizeThumb);
+                            }
+
+                        }
+                    }
+                }
                 self::removeCache($dataSave->news_id);
             }
             DB::connection()->getPdo()->commit();

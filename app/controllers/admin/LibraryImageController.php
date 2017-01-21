@@ -81,38 +81,25 @@ class LibraryImageController extends BaseAdminController
         $search = $data = array();
         $total = 0;
 
-        $search['banner_name'] = addslashes(Request::get('banner_name',''));
-        $search['banner_status'] = (int)Request::get('banner_status',-1);
-        $search['type_language'] = (int)Request::get('type_language',1);
-        $search['banner_type'] = (int)Request::get('banner_type',-1);
-        $search['banner_position'] = (int)Request::get('banner_position',0);
-        $search['banner_parent_id'] = (int)Request::get('banner_parent_id',0);
-        $search['banner_province_id'] = (int)Request::get('banner_province_id',-1);
+        $search['image_title'] = addslashes(Request::get('image_title',''));
+        $search['image_status'] = (int)Request::get('image_status',-1);
+        $search['type_language'] = (int)Request::get('type_language',0);
 
-        $dataSearch = Banner::searchByCondition($search, $limit, $offset,$total);
+        $data = LibraryImage::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
-        //FunctionLib::debug($dataSearch);
-        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['banner_status']);
-        $optionType = FunctionLib::getOption($this->arrTypeBanner, $search['banner_type']);
-        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, $search['type_language']);
+        //FunctionLib::debug($search);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, $search['image_status']);
         $this->layout->content = View::make('admin.LibraryImage.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
             ->with('sizeShow', count($data))
-            ->with('data', $dataSearch)
+            ->with('data', $data)
             ->with('search', $search)
-            ->with('optionStatus', $optionStatus)
-            ->with('optionType', $optionType)
-            ->with('optionLanguage', $optionLanguage)
             ->with('arrLanguage', CGlobal::$arrLanguage)
-            ->with('arrPosition', $this->arrPosition)
+            ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
-            ->with('arrTypeBanner', $this->arrTypeBanner)
-            ->with('arrPage', $this->arrPage)
-            ->with('arrCategory', $this->arrCategoryParent)
-            ->with('arrProvince', $this->arrProvince)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -121,171 +108,120 @@ class LibraryImageController extends BaseAdminController
             ->with('permission_edit', in_array($this->permission_edit, $this->permission) ? 1 : 0);//dùng common
     }
 
-    public function getBanner($id=0) {
+    public function getItem($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
-        }
-        $action = $this->getControllerAction();
-        if(strcmp($action,'admin.bannerCopy') == 0 && $id <= 0){
-            return Redirect::route('admin.bannerView');
         }
         $data = array();
+        $arrViewImgOther = array();
+        $imagePrimary = $urlImageOrigin = '';
         if($id > 0) {
-            $banner = Banner::getBannerByID($id);
-            $data = array('banner_id'=>$banner->banner_id,
-                'banner_name'=>$banner->banner_name,
-                'banner_image'=>(strcmp($action,'admin.bannerCopy') == 0)? '' : $banner->banner_image,
-                'banner_link'=>$banner->banner_link,
-                'banner_position'=>$banner->banner_position,
-                //'banner_parent_id'=>$banner->banner_parent_id,
-                'banner_order'=>$banner->banner_order,
-                'banner_is_target'=>$banner->banner_is_target,
-                'banner_is_rel'=>$banner->banner_is_rel,
-                'banner_type'=>$banner->banner_type,
-                'type_language'=>$banner->type_language,
-                'banner_intro'=>$banner->banner_intro,
-                //'banner_page'=>$banner->banner_page,
-                //'banner_category_id'=>$banner->banner_category_id,
-                'banner_is_run_time'=>$banner->banner_is_run_time,
-                'banner_start_time'=>$banner->banner_start_time,
-                'banner_end_time'=>$banner->banner_end_time,
-                //'banner_province_id'=>$banner->banner_province_id,
-                'banner_status'=>$banner->banner_status);
+            $data = LibraryImage::getById($id);
+            if(sizeof($data) > 0){
+                //lay ảnh khác của san phẩm
+                $arrViewImgOther = array();
+                if(!empty($data->image_image_other)){
+                    $arrImagOther = unserialize($data->image_image_other);
+                    if(sizeof($arrImagOther) > 0){
+                        foreach($arrImagOther as $k=>$val){
+                            $url_thumb = ThumbImg::getImageThumb(CGlobal::FOLDER_LIBRARY_IMAGE, $id, $val, CGlobal::sizeImage_100,  '', true, CGlobal::type_thumb_image_banner, false);
+                            $arrViewImgOther[] = array('img_other'=>$val,'src_img_other'=>$url_thumb);
+                        }
+                    }
+                }
+                //ảnh sản phẩm chính
+                $imagePrimary = $data->image_image;
+            }
         }
-        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['banner_status'])? $data['banner_status']: CGlobal::status_show);
-        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
-        $optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($data['banner_is_run_time'])? $data['banner_is_run_time']: CGlobal::BANNER_NOT_RUN_TIME);
 
-        $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: -1);
-        $optionTarget = FunctionLib::getOption($this->arrTarget, isset($data['banner_is_target'])? $data['banner_is_target']: CGlobal::BANNER_TARGET_BLANK);
-        $optionCategory = FunctionLib::getOption(array(0=>'--- Chọn danh mục quảng cáo ---')+$this->arrCategoryParent, isset($data['banner_category_id'])? $data['banner_category_id']: 0);
-        $optionRel = FunctionLib::getOption($this->arrRel, isset($data['banner_is_rel'])? $data['banner_is_rel']: CGlobal::LINK_NOFOLLOW);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['news_status'])? $data['news_status'] : CGlobal::status_show);
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
 
         $this->layout->content = View::make('admin.LibraryImage.add')
-            ->with('id', (strcmp($action,'admin.bannerCopy') == 0)? 0:$id)
+            ->with('id', $id)
             ->with('data', $data)
+            ->with('imagePrimary', $imagePrimary)
+            ->with('urlImageOrigin', $urlImageOrigin)
+            ->with('arrViewImgOther', $arrViewImgOther)
             ->with('optionStatus', $optionStatus)
             ->with('optionLanguage', $optionLanguage)
-            ->with('optionCategory', $optionCategory)
-            ->with('optionRunTime', $optionRunTime)
-            ->with('optionTypeBanner', $optionTypeBanner)
-            ->with('optionTarget', $optionTarget)
-            ->with('optionRel', $optionRel)
             ->with('arrStatus', $this->arrStatus);
     }
-
-    public function postBanner($id=0) {
+    public function postItem($id=0) {
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_edit,$this->permission) && !in_array($this->permission_create,$this->permission)){
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-
-        $data['banner_name'] = addslashes(Request::get('banner_name'));
-        $data['banner_link'] = addslashes(Request::get('banner_link'));
-        $data['banner_image'] = addslashes(Request::get('image_primary'));//ảnh chính
-        $data['banner_order'] = addslashes(Request::get('banner_order'));
-        $data['banner_intro'] = addslashes(Request::get('banner_intro'));
-
-        $data['type_language'] = (int)Request::get('type_language', 1);
-        $data['banner_is_target'] = (int)Request::get('banner_is_target', 0);
-        $data['banner_is_rel'] = (int)Request::get('banner_is_rel', 0);
-        $data['banner_type'] = (int)Request::get('banner_type',0);
-        $data['banner_is_run_time'] = (int)Request::get('banner_is_run_time');
-        $data['banner_start_time'] = Request::get('banner_start_time');
-        $data['banner_end_time'] = Request::get('banner_end_time');
-        $data['banner_status'] = (int)Request::get('banner_status', 0);
-
-        //$data['banner_position'] = (int)Request::get('banner_position', 1);
-        //$data['banner_parent_id'] = (int)Request::get('banner_parent_id', 0);
-        //$data['banner_page'] = (int)Request::get('banner_page',0);
-        //$data['banner_category_id'] = (int)Request::get('banner_category_id',0);
-        //$data['banner_province_id'] = (int)Request::get('banner_province_id',0);
-
+        $dataSave['image_title'] = addslashes(Request::get('image_title'));
+        $dataSave['image_content'] = FunctionLib::strReplace(Request::get('image_content'), '\r\n', '');
+        $dataSave['image_status'] = (int)Request::get('image_status', 0);
+        $dataSave['type_language'] = (int)Request::get('type_language', CGlobal::TYPE_LANGUAGE_VIET);
         $id_hiden = (int)Request::get('id_hiden', 0);
 
-        $action = $this->getControllerAction();
-        if(strcmp($action,'admin.bannerCopy') == 0){
-            $id = 0;
-        }
-
-        //FunctionLib::debug($data);
-        if($this->valid($data) && empty($this->error)) {
-            $id = ($id == 0)?$id_hiden: $id;
-            $data['banner_start_time'] = strtotime($data['banner_start_time']);
-            $data['banner_end_time'] = strtotime($data['banner_end_time']);
-            if($id > 0) {
-                //cap nhat
-                $data['banner_update_time'] = time();
-                if(Banner::updateData($id, $data)) {
-                    return Redirect::route('admin.bannerView');
-                }
-            }else{
-                //thêm mới
-                $data['banner_create_time'] = time();
-                if(Banner::addData($data)) {
-                    return Redirect::route('admin.bannerView');
+        //ảnh chính
+        $image_primary = addslashes(Request::get('image_primary'));
+        //ảnh khác
+        $getImgOther = Request::get('img_other',array());
+        if(!empty($getImgOther)){
+            foreach($getImgOther as $k=>$val){
+                if($val !=''){
+                    $arrInputImgOther[] = $val;
                 }
             }
         }
-        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['banner_status'])? $data['banner_status']: CGlobal::STASTUS_HIDE);
-        $optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($data['banner_is_run_time'])? $data['banner_is_run_time']: CGlobal::BANNER_NOT_RUN_TIME);
-        $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: -1);
-        $optionTarget = FunctionLib::getOption($this->arrTarget, isset($data['banner_is_target'])? $data['banner_is_target']: CGlobal::BANNER_TARGET_BLANK);
-        $optionCategory = FunctionLib::getOption(array(0=>'--- Chọn danh mục quảng cáo ---')+$this->arrCategoryParent, isset($data['banner_category_id'])? $data['banner_category_id']: 0);
-        $optionRel = FunctionLib::getOption($this->arrRel, isset($data['banner_is_rel'])? $data['banner_is_rel']: CGlobal::LINK_NOFOLLOW);
+        if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
+            //nếu không chọn ảnh chính, lấy ảnh chính là cái đầu tiên
+            $dataSave['image_image'] = ($image_primary != '')? $image_primary: $arrInputImgOther[0];
+            $dataSave['image_image_other'] = serialize($arrInputImgOther);
+        }
 
-        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
-        $data['banner_start_time'] = strtotime($data['banner_start_time']);
-        $data['banner_end_time'] = strtotime($data['banner_end_time']);
+        //FunctionLib::debug($dataSave);
+        if($this->valid($dataSave) && empty($this->error)) {
+            $id = ($id == 0)?$id_hiden: $id;
+            if($id > 0) {
+                //cap nhat
+                if(LibraryImage::updateData($id, $dataSave)) {
+                    return Redirect::route('admin.libraryImageView');
+                }
+            } else {
+                $dataSave['image_create'] = time();
+                //them moi
+                if(LibraryImage::addData($dataSave)) {
+                    return Redirect::route('admin.libraryImageView');
+                }
+            }
+        }
+
+        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['news_status'])? $dataSave['news_status'] : CGlobal::status_show);
+        $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($dataSave['type_language'])? $dataSave['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
+
         $this->layout->content =  View::make('admin.LibraryImage.add')
             ->with('id', $id)
-            ->with('error', $this->error)
-            ->with('data', $data)
+            ->with('data', $dataSave)
             ->with('optionStatus', $optionStatus)
-            ->with('optionCategory', $optionCategory)
-            ->with('optionRunTime', $optionRunTime)
-            ->with('optionTypeBanner', $optionTypeBanner)
-            ->with('optionTarget', $optionTarget)
-            ->with('optionRel', $optionRel)
             ->with('optionLanguage', $optionLanguage)
+            ->with('error', $this->error)
             ->with('arrStatus', $this->arrStatus);
     }
 
-    public function deleteBanner()
+    public function deleteLibraryImage()
     {
         $data = array('isIntOk' => 0);
         if(!$this->is_root && !in_array($this->permission_full,$this->permission) && !in_array($this->permission_delete,$this->permission)){
             return Response::json($data);
         }
         $id = (int)Request::get('id', 0);
-        if ($id > 0 && Banner::deleteData($id)) {
+        if ($id > 0 && LibraryImage::deleteData($id)) {
             $data['isIntOk'] = 1;
         }
         return Response::json($data);
     }
     private function valid($data=array()) {
         if(!empty($data)) {
-            if(isset($data['banner_name']) && trim($data['banner_name']) == '') {
-                $this->error[] = 'Tên banner không được bỏ trống';
+            if(isset($data['image_title']) && trim($data['image_title']) == '') {
+                $this->error[] = 'Tên ảnh không được bỏ trống';
             }
-            if(isset($data['banner_type']) && trim($data['banner_type']) == 0) {
-                $this->error[] = 'Chưa chọn loại Banner';
-            }
-            if(isset($data['banner_link']) && trim($data['banner_link']) == '') {
-                $this->error[] = 'Chưa có link view cho banner';
-            }
-            if(isset($data['banner_image']) && trim($data['banner_image']) == '' && isset($data['banner_parent_id']) && (int)trim($data['banner_parent_id']) == 0) {
-                $this->error[] = 'Chưa up ảnh banner quảng cáo';
-            }
-            if(isset($data['banner_is_run_time']) && $data['banner_is_run_time'] == 1) {
-                if(isset($data['banner_start_time']) && $data['banner_start_time'] == '' ) {
-                    $this->error[] = 'Chưa chọn thời gian bắt đầu chạy cho banner';
-                }
-                if(isset($data['banner_end_time']) && $data['banner_end_time'] == '') {
-                    $this->error[] = 'Chưa chọn thời gian kết thúc cho banner';
-                }
-                if(isset($data['banner_end_time']) && isset($data['banner_start_time'])  && (strtotime($data['banner_start_time']) > strtotime($data['banner_end_time']))) {
-                    $this->error[] = 'Thời gian bắt đầu lớn hơn thời gian kết thúc';
-                }
+            if(isset($data['image_image']) && trim($data['image_image']) == '') {
+                $this->error[] = 'Chưa up ảnh ';
             }
         }
         return true;
