@@ -111,6 +111,7 @@ class Banner extends Eloquent
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_'.$data->banner_page.'_'.$data->banner_category_id.'_'.$data->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($data->banner_id);
+                    self::removeCacheLang($data->banner_type, $data->type_language);
                 }
                 return $data->banner_id;
             }
@@ -141,6 +142,7 @@ class Banner extends Eloquent
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($dataSave->banner_id);
+                    self::removeCacheLang($dataSave->banner_type, $dataSave->type_language);
                 }
             }
             DB::connection()->getPdo()->commit();
@@ -167,7 +169,7 @@ class Banner extends Eloquent
                 if($dataSave->banner_image != ''){//xoa anh c?
                     //xoa anh upload
                     FunctionLib::deleteFileUpload($dataSave->banner_image,$dataSave->banner_id,CGlobal::FOLDER_BANNER);
-                    //x�a anh thumb
+                    //xoa anh thumb
                     $arrSizeThumb = CGlobal::$arrBannerSizeImage;
                     foreach($arrSizeThumb as $k=>$size){
                         $sizeThumb = $size['w'].'x'.$size['h'];
@@ -178,6 +180,7 @@ class Banner extends Eloquent
                 $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                 Cache::forget($key_cache);
                 self::removeCache($dataSave->banner_id);
+                self::removeCacheLang($dataSave->banner_type, $dataSave->type_language);
             }
             DB::connection()->getPdo()->commit();
             return true;
@@ -191,5 +194,10 @@ class Banner extends Eloquent
         if($id > 0){
             Cache::forget(Memcache::CACHE_BANNER_ID.$id);
         }
+    }
+    public static function removeCacheLang($banner_type=0, $banner_lang=0){
+    	if($banner_type > 0 && $banner_lang > 0){
+    		Cache::forget(Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_lang);
+    	}
     }
 }

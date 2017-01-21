@@ -58,7 +58,13 @@ class BaseSiteController extends BaseController{
 								->with('lang', $this->lang);
     }
     public function right(){
-    	$this->layout->right = View::make("site.BaseLayouts.right");
+    	//Banner
+    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $this->lang);
+    	$arrBannerRight = $this->getBannerWithPosition($arrBanner);
+    	
+    	$this->layout->right = View::make("site.BaseLayouts.right")
+    							->with('arrBannerRight', $arrBannerRight)
+								->with('lang', $this->lang);
     }
 	public function footer(){
 		$arrAddress = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_FOOTER, $this->lang);
