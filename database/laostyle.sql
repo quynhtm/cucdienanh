@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-21 11:27:20
+Date: 2017-01-21 12:06:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -269,6 +269,7 @@ CREATE TABLE `w_info` (
   `info_id` int(11) NOT NULL AUTO_INCREMENT,
   `info_title` varchar(255) DEFAULT NULL,
   `info_type` tinyint(5) DEFAULT NULL COMMENT 'Kiểu nội dung thông tin cua site',
+  `type_language` tinyint(5) DEFAULT '1',
   `info_keyword` varchar(255) DEFAULT NULL COMMENT 'keyword',
   `info_intro` longtext,
   `info_content` longtext,
@@ -285,8 +286,8 @@ CREATE TABLE `w_info` (
 -- ----------------------------
 -- Records of w_info
 -- ----------------------------
-INSERT INTO `w_info` VALUES ('1', 'Thông tin chân trang bên trái 2', '1', 'SITE_FOOTER_LEFT', '', '<p><strong>T&ecirc;n đăng k&yacute;: </strong>C&ocirc;ng ty Cổ truyền th&ocirc;ng raovat30s</p>\r\n\r\n<p><strong>T&ecirc;n giao dịch: </strong>Raovat30s Online JSC</p>\r\n\r\n<p><strong>Địa chỉ trụ sở: </strong>Tầng 2, T&ograve;a nh&agrave; CT2A - KĐT Nghĩa Đ&ocirc;, Ho&agrave;ng Quốc Việt, Cầu Giấy, H&agrave; Nội.</p>\r\n\r\n<p><strong>Điện thoại: </strong>0913.922.986</p>\r\n\r\n<p><strong>Email: </strong>raovat@raovat30s.vn</p>\r\n\r\n<p><strong>Giấy chứng nhận đăng k&yacute; kinh doanh số 0305056245 do Sở Kế hoạch v&agrave; Đầu tư Th&agrave;nh phố H&agrave; Nội cấp ng&agrave;y 22/12/2016</strong></p>\r\n', '1484969868-57355c1302b01f7898000001.jpg', '1447794727', '0', '1', '', '', '');
-INSERT INTO `w_info` VALUES ('3', 'ảnh logo 222', '4', null, '', '', '1484972336-573cb4258e810763aa000001.jpg', '1484972320', '0', '1', '', '', '');
+INSERT INTO `w_info` VALUES ('1', 'Thông tin chân trang bên trái 2', '1', '1', 'SITE_FOOTER_LEFT', '', '<p><strong>T&ecirc;n đăng k&yacute;: </strong>C&ocirc;ng ty Cổ truyền th&ocirc;ng raovat30s</p>\r\n\r\n<p><strong>T&ecirc;n giao dịch: </strong>Raovat30s Online JSC</p>\r\n\r\n<p><strong>Địa chỉ trụ sở: </strong>Tầng 2, T&ograve;a nh&agrave; CT2A - KĐT Nghĩa Đ&ocirc;, Ho&agrave;ng Quốc Việt, Cầu Giấy, H&agrave; Nội.</p>\r\n\r\n<p><strong>Điện thoại: </strong>0913.922.986</p>\r\n\r\n<p><strong>Email: </strong>raovat@raovat30s.vn</p>\r\n\r\n<p><strong>Giấy chứng nhận đăng k&yacute; kinh doanh số 0305056245 do Sở Kế hoạch v&agrave; Đầu tư Th&agrave;nh phố H&agrave; Nội cấp ng&agrave;y 22/12/2016</strong></p>\r\n', '1484969868-57355c1302b01f7898000001.jpg', '1447794727', '0', '1', '', '', '');
+INSERT INTO `w_info` VALUES ('3', 'ảnh logo 222', '4', '2', null, '', '', '1484972336-573cb4258e810763aa000001.jpg', '1484972320', '0', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for w_language
