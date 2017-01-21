@@ -47,9 +47,21 @@
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="name" class="control-label">Type banner</label>
+                        <div class="form-group">
+                            <select name="banner_category_id" id="banner_category_id" class="form-control input-sm">
+                                {{$optionCategoryBanner}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Position banner</label>
                         <div class="form-group">
                             <select name="banner_type" id="banner_type" class="form-control input-sm">
                                 {{$optionTypeBanner}}

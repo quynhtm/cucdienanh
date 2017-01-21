@@ -33,9 +33,15 @@
                             </select>
                         </div>
                         <div class="form-group col-lg-3">
-                            <label for="banner_type">Loại</label>
+                            <label for="banner_type">Vị trí</label>
                             <select name="banner_type" id="banner_type" class="form-control input-sm">
                                 {{$optionType}}
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <label for="banner_category_id">Loại</label>
+                            <select name="banner_category_id" id="banner_category_id" class="form-control input-sm">
+                                {{$optionCategoryBanner}}
                             </select>
                         </div>
                         <div class="form-group col-lg-9 text-right">
@@ -72,16 +78,15 @@
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
                                 <td class="text-center text-middle">
                                     <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_100)}}">
-                                    @if($item->banner_parent_id > 0)<br/>
-                                        <a href="{{URL::route('admin.bannerEdit',array('id' => $item->banner_id))}}" title="Xem banner gốc" target="_blank">
-                                            <b>Banner cha: {{$item->banner_parent_id}} </b>
-                                        </a>
-                                    @endif
                                 </td>
                                 <td>
-                                    [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
-                                    <br/>C: {{date('d-m-Y h:i',$item->banner_create_time)}}
-                                   @if($item->banner_update_time > 0)<br/>U: {{date('d-m-Y h:i',$item->banner_update_time)}}@endif
+                                   [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
+                                   @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_QC)
+                                       Banner quảng cáo
+                                   @endif
+                                   @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_DOITAC)
+                                       Banner đối tác
+                                   @endif
                                 </td>
                                 <td>
                                     {{$item->banner_intro}}

@@ -206,6 +206,9 @@ class CGlobal{
     const BANNER_TYPE_BOTTOM = 4;
     const BANNER_TYPE_CENTER = 5;
 
+    const BANNER_CATEGORY_QC = 1;
+    const BANNER_CATEGORY_DOITAC = 2;
+
     //page gắn link quảng cáo
     const BANNER_PAGE_HOME = 1;
     const BANNER_PAGE_DETAIL = 2;

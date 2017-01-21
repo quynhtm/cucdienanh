@@ -22,12 +22,17 @@ class BannerController extends BaseAdminController
         3=> 'Vị trí Bottom',
         );
 
-    private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',
+    private $arrTypeBanner = array(-1 => '--- Chọn vị trí Banner --',
         CGlobal::BANNER_TYPE_TOP => 'Banner Top Header',
         CGlobal::BANNER_TYPE_LEFT => 'Banner Trái - Phải',
         /*CGlobal::BANNER_TYPE_LEFT => 'Banner Trái',
         CGlobal::BANNER_TYPE_BOTTOM => 'Banner Dưới Footer',
         CGlobal::BANNER_TYPE_CENTER => 'Banner Giữa nội dung'*/
+    );
+
+    private $arrCategoryBanner = array(
+        CGlobal::BANNER_CATEGORY_QC => 'Banner quảng cáo',
+        CGlobal::BANNER_CATEGORY_DOITAC => 'Banner Đối tác',
     );
 
     const BANNER_PAGE_HOME = 1;
@@ -85,9 +90,7 @@ class BannerController extends BaseAdminController
         $search['banner_status'] = (int)Request::get('banner_status',-1);
         $search['type_language'] = (int)Request::get('type_language',0);
         $search['banner_type'] = (int)Request::get('banner_type',-1);
-        $search['banner_position'] = (int)Request::get('banner_position',0);
-        $search['banner_parent_id'] = (int)Request::get('banner_parent_id',0);
-        $search['banner_province_id'] = (int)Request::get('banner_province_id',-1);
+        $search['banner_category_id'] = (int)Request::get('banner_category_id',0);
 
         $dataSearch = Banner::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
@@ -96,6 +99,7 @@ class BannerController extends BaseAdminController
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['banner_status']);
         $optionType = FunctionLib::getOption($this->arrTypeBanner, $search['banner_type']);
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, $search['type_language']);
+        $optionCategoryBanner = FunctionLib::getOption(array(0=>'---Chọn kiểu banner---')+$this->arrCategoryBanner, $search['banner_category_id']);
         $this->layout->content = View::make('admin.Banner.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -106,13 +110,11 @@ class BannerController extends BaseAdminController
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
             ->with('optionLanguage', $optionLanguage)
+            ->with('optionCategoryBanner', $optionCategoryBanner)
             ->with('arrLanguage', CGlobal::$arrLanguage)
             ->with('arrPosition', $this->arrPosition)
             ->with('arrStatus', $this->arrStatus)
             ->with('arrTypeBanner', $this->arrTypeBanner)
-            ->with('arrPage', $this->arrPage)
-            ->with('arrCategory', $this->arrCategoryParent)
-            ->with('arrProvince', $this->arrProvince)
 
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -145,7 +147,7 @@ class BannerController extends BaseAdminController
                 'type_language'=>$banner->type_language,
                 'banner_intro'=>$banner->banner_intro,
                 //'banner_page'=>$banner->banner_page,
-                //'banner_category_id'=>$banner->banner_category_id,
+                'banner_category_id'=>$banner->banner_category_id,
                 'banner_is_run_time'=>$banner->banner_is_run_time,
                 'banner_start_time'=>$banner->banner_start_time,
                 'banner_end_time'=>$banner->banner_end_time,
@@ -156,9 +158,9 @@ class BannerController extends BaseAdminController
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
         $optionRunTime = FunctionLib::getOption($this->arrRunTime, isset($data['banner_is_run_time'])? $data['banner_is_run_time']: CGlobal::BANNER_NOT_RUN_TIME);
 
-        $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: -1);
+        $optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, isset($data['banner_type'])? $data['banner_type']: 1);
+        $optionCategoryBanner = FunctionLib::getOption($this->arrCategoryBanner, isset($data['banner_category_id'])? $data['banner_category_id']: CGlobal::BANNER_CATEGORY_QC);
         $optionTarget = FunctionLib::getOption($this->arrTarget, isset($data['banner_is_target'])? $data['banner_is_target']: CGlobal::BANNER_TARGET_BLANK);
-        $optionCategory = FunctionLib::getOption(array(0=>'--- Chọn danh mục quảng cáo ---')+$this->arrCategoryParent, isset($data['banner_category_id'])? $data['banner_category_id']: 0);
         $optionRel = FunctionLib::getOption($this->arrRel, isset($data['banner_is_rel'])? $data['banner_is_rel']: CGlobal::LINK_NOFOLLOW);
 
         $this->layout->content = View::make('admin.Banner.add')
@@ -166,9 +168,9 @@ class BannerController extends BaseAdminController
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
             ->with('optionLanguage', $optionLanguage)
-            ->with('optionCategory', $optionCategory)
             ->with('optionRunTime', $optionRunTime)
             ->with('optionTypeBanner', $optionTypeBanner)
+            ->with('optionCategoryBanner', $optionCategoryBanner)
             ->with('optionTarget', $optionTarget)
             ->with('optionRel', $optionRel)
             ->with('arrStatus', $this->arrStatus);
@@ -185,6 +187,7 @@ class BannerController extends BaseAdminController
         $data['banner_order'] = addslashes(Request::get('banner_order'));
         $data['banner_intro'] = addslashes(Request::get('banner_intro'));
 
+        $data['banner_category_id'] = (int)Request::get('banner_category_id', 1);
         $data['type_language'] = (int)Request::get('type_language', 1);
         $data['banner_is_target'] = (int)Request::get('banner_is_target', 0);
         $data['banner_is_rel'] = (int)Request::get('banner_is_rel', 0);
@@ -232,7 +235,7 @@ class BannerController extends BaseAdminController
         $optionTarget = FunctionLib::getOption($this->arrTarget, isset($data['banner_is_target'])? $data['banner_is_target']: CGlobal::BANNER_TARGET_BLANK);
         $optionCategory = FunctionLib::getOption(array(0=>'--- Chọn danh mục quảng cáo ---')+$this->arrCategoryParent, isset($data['banner_category_id'])? $data['banner_category_id']: 0);
         $optionRel = FunctionLib::getOption($this->arrRel, isset($data['banner_is_rel'])? $data['banner_is_rel']: CGlobal::LINK_NOFOLLOW);
-
+        $optionCategoryBanner = FunctionLib::getOption($this->arrCategoryBanner, isset($data['banner_category_id'])? $data['banner_category_id']: CGlobal::BANNER_CATEGORY_QC);
         $optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
         $data['banner_start_time'] = strtotime($data['banner_start_time']);
         $data['banner_end_time'] = strtotime($data['banner_end_time']);
@@ -246,6 +249,7 @@ class BannerController extends BaseAdminController
             ->with('optionTypeBanner', $optionTypeBanner)
             ->with('optionTarget', $optionTarget)
             ->with('optionRel', $optionRel)
+            ->with('optionCategoryBanner', $optionCategoryBanner)
             ->with('optionLanguage', $optionLanguage)
             ->with('arrStatus', $this->arrStatus);
     }

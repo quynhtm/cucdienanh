@@ -67,21 +67,10 @@ class Banner extends Eloquent
             if (isset($dataSearch['type_language']) && $dataSearch['type_language'] > 0) {
                 $query->where('type_language', $dataSearch['type_language']);
             }
-            if (isset($dataSearch['banner_province_id']) && $dataSearch['banner_province_id'] > -1) {
-                $query->where('banner_province_id', $dataSearch['banner_province_id']);
+            if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > 0) {
+                $query->where('banner_category_id', $dataSearch['banner_category_id']);
             }
-            if (isset($dataSearch['banner_type']) && $dataSearch['banner_type'] > -1) {
-                $query->where('banner_type', $dataSearch['banner_type']);
-            }
-            if (isset($dataSearch['banner_page']) && $dataSearch['banner_page'] > 0) {
-                $query->where('banner_page', $dataSearch['banner_page']);
-            }
-            if (isset($dataSearch['banner_parent_id']) && $dataSearch['banner_parent_id'] > 0) {
-                $query->where('banner_parent_id', $dataSearch['banner_parent_id']);
-            }
-            if (isset($dataSearch['banner_position']) && $dataSearch['banner_position'] > 0) {
-                $query->where('banner_position', $dataSearch['banner_position']);
-            }
+
             $total = $query->count();
             $query->orderBy('banner_id', 'desc');
 
