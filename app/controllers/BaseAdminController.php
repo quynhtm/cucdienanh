@@ -64,10 +64,12 @@ class BaseAdminController extends BaseController
             'name'=>'Manage Content',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-book',
-            'arr_link_sub'=>array('admin.newsView','admin.bannerView',),
+            'arr_link_sub'=>array('admin.newsView','admin.bannerView','admin.videoView','admin.libraryImageView',),
             'sub'=>array(
                 array('name'=>'News', 'RouteName'=>'admin.newsView', 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1, 'permission'=>'news_full'),
                 array('name'=>'Banner', 'RouteName'=>'admin.bannerView', 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1, 'permission'=>'banner_full'),
+                array('name'=>'Video', 'RouteName'=>'admin.videoView', 'icon'=>'fa fa-video-camera icon-4x', 'showcontent'=>1, 'permission'=>'video_full'),
+                array('name'=>'Library Image', 'RouteName'=>'admin.libraryImageView', 'icon'=>'fa fa-picture-o icon-4x', 'showcontent'=>1, 'permission'=>'libraryImage_full'),
             ),
         );
         return $menu;

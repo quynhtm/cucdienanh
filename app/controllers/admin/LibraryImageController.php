@@ -6,11 +6,11 @@
  */
 class LibraryImageController extends BaseAdminController
 {
-    private $permission_view = 'banner_view';
-    private $permission_full = 'banner_full';
-    private $permission_delete = 'banner_delete';
-    private $permission_create = 'banner_create';
-    private $permission_edit = 'banner_edit';
+    private $permission_view = 'libraryImage_view';
+    private $permission_full = 'libraryImage_full';
+    private $permission_delete = 'libraryImage_delete';
+    private $permission_create = 'libraryImage_create';
+    private $permission_edit = 'libraryImage_edit';
     private $arrStatus = array(-1 => '--Chọn trạng thái--', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrTarget = array(-1 => '--Chọn target link--', CGlobal::BANNER_NOT_TARGET_BLANK => 'Link trên site', CGlobal::BANNER_TARGET_BLANK => 'Mở tab mới');
     private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', CGlobal::BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', CGlobal::BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
