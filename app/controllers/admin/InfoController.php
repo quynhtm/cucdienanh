@@ -57,6 +57,8 @@ class InfoController extends BaseAdminController{
 								->with('paging', $paging)
 								->with('arrStatus', $this->arrStatus)
 								->with('optionStatus', $optionStatus)
+								->with('arrLanguage', CGlobal::$arrLanguage)
+								->with('arrInforSite', CGlobal::$arrInforSite)
 								->with('search', $search)
 								->with('is_root', $this->is_root)
 								->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)
@@ -76,11 +78,13 @@ class InfoController extends BaseAdminController{
 
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : CGlobal::status_show);
 		$optionInforSite = FunctionLib::getOption(array(''=>'---Chọn kiểu thông tin----')+CGlobal::$arrInforSite, isset($data['info_type'])? $data['info_type'] : '');
+		$optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
 		$this->layout->content = View::make('admin.info.add')
 		->with('id', $id)
 		->with('data', $data)
 		->with('optionStatus', $optionStatus)
 		->with('optionInforSite', $optionInforSite)
+		->with('optionLanguage', $optionLanguage)
 		->with('is_root', $this->is_root)
 		->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)
 		->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
@@ -99,6 +103,7 @@ class InfoController extends BaseAdminController{
 		$dataSave = array(
 				'info_title'=>array('value'=>addslashes(Request::get('info_title')), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 				'info_type'=>array('value'=>addslashes(Request::get('info_type')),'require'=>1, 'messages'=>'Chưa chọn kiểu thông tin!'),
+				'type_language'=>array('value'=>addslashes(Request::get('type_language')),'require'=>0),
 				'info_intro'=>array('value'=>addslashes(Request::get('info_intro')),'require'=>0),
 				'info_content'=>array('value'=>addslashes(FunctionLib::strReplace(Request::get('info_content'), '\r\n', '')),'require'=>0),
 				'info_order_no'=>array('value'=>(int)addslashes(Request::get('info_order_no')),'require'=>0),
@@ -129,11 +134,13 @@ class InfoController extends BaseAdminController{
 		
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['info_status'])? $data['info_status'] : -1);
 		$optionInforSite = FunctionLib::getOption(array(''=>'---Chọn kiểu thông tin----')+CGlobal::$arrInforSite, isset($data['info_type'])? $data['info_type'] : '');
+		$optionLanguage = FunctionLib::getOption(CGlobal::$arrLanguage, isset($data['type_language'])? $data['type_language'] : CGlobal::TYPE_LANGUAGE_VIET);
 		$this->layout->content = View::make('admin.info.add')
 		->with('id', $id)
 		->with('data', $data)
 		->with('optionStatus', $optionStatus)
 		->with('optionInforSite', $optionInforSite)
+		->with('optionLanguage', $optionLanguage)
 		->with('is_root', $this->is_root)
 		->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)
 		->with('permission_create', in_array($this->permission_create, $this->permission) ? 1 : 0)
