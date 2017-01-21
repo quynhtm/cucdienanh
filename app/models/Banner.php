@@ -64,8 +64,8 @@ class Banner extends Eloquent
             if (isset($dataSearch['banner_status']) && $dataSearch['banner_status'] != -1) {
                 $query->where('banner_status', $dataSearch['banner_status']);
             }
-            if (isset($dataSearch['banner_category_id']) && $dataSearch['banner_category_id'] > -1) {
-                $query->where('banner_category_id', $dataSearch['banner_category_id']);
+            if (isset($dataSearch['type_language']) && $dataSearch['type_language'] > 0) {
+                $query->where('type_language', $dataSearch['type_language']);
             }
             if (isset($dataSearch['banner_province_id']) && $dataSearch['banner_province_id'] > -1) {
                 $query->where('banner_province_id', $dataSearch['banner_province_id']);

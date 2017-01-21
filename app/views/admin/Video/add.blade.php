@@ -5,8 +5,8 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.bannerView')}}"> Banner </a></li>
-            <li class="active">@if($id > 0)Cập nhật banner @else Tạo mới banner @endif</li>
+            <li><a href="{{URL::route('admin.videoView')}}"> Video </a></li>
+            <li class="active">@if($id > 0)Cập nhật Video @else Tạo mới Video @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
 
@@ -25,38 +25,26 @@
                 <div style="float: left;width: 60%">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Name banner <span class="red"> (*) </span></label>
-                        <input type="text" placeholder="Name banner" id="banner_name" name="banner_name"  class="form-control input-sm" value="@if(isset($data['banner_name'])){{$data['banner_name']}}@endif">
+                        <label for="name" class="control-label">Name Video <span class="red"> (*) </span></label>
+                        <input type="text" placeholder="Name Video" id="video_name" name="video_name"  class="form-control input-sm" value="@if(isset($data['video_name'])){{$data['video_name']}}@endif">
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Infor banner</label>
-                        <input type="text" placeholder="Name banner" id="banner_intro" name="banner_intro"  class="form-control input-sm" value="@if(isset($data['banner_intro'])){{$data['banner_intro']}}@endif">
+                        <label for="name" class="control-label">Link nguồn Video</label>
+                        <input type="text" placeholder="Link nguồn Video" id="video_link" name="video_link"  class="form-control input-sm" value="@if(isset($data['video_link'])){{$data['video_link']}}@endif">
+                    </div>
+                </div>
+                <div class="col-sm-12" style="display: none">
+                    <div class="form-group">
+                        <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload Video </a>
+                        <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['banner_image'])){{$data['banner_image']}}@endif">
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Link URL <span class="red"> (*) </span></label>
-                        <input type="text" placeholder="url banner" id="banner_link" name="banner_link"  class="form-control input-sm" value="@if(isset($data['banner_link'])){{$data['banner_link']}}@endif">
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Type banner</label>
-                        <div class="form-group">
-                            <select name="banner_type" id="banner_type" class="form-control input-sm">
-                                {{$optionTypeBanner}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="name" class="control-label">Language</label>
@@ -71,7 +59,7 @@
                     <div class="form-group">
                         <label for="name" class="control-label">Status</label>
                         <div class="form-group">
-                            <select name="banner_status" id="banner_status" class="form-control input-sm">
+                            <select name="video_status" id="video_status" class="form-control input-sm">
                                 {{$optionStatus}}
                             </select>
                         </div>
@@ -79,88 +67,16 @@
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Taget bank</label>
-                            <div class="form-group">
-                                <select name="banner_is_target" id="banner_is_target" class="form-control input-sm">
-                                    {{$optionTarget}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Nofollow</label>
-                            <div class="form-group">
-                                <select name="banner_is_rel" id="banner_is_rel" class="form-control input-sm">
-                                    {{$optionRel}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Order</label>
-                        <input type="text" placeholder="Thứ tự hiển thị" id="banner_order" name="banner_order"  class="form-control input-sm" value="@if(isset($data['banner_order'])){{$data['banner_order']}}@endif">
+                        <label for="name" class="control-label">Detai video</label>
+                        <textarea class="form-control input-sm"  name="video_content">@if(isset($data['video_content'])){{$data['video_content']}}@endif</textarea>
                     </div>
                 </div>
-
-
-                <div class="clearfix"></div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Type run time</label>
-                        <div class="form-group">
-                            <select name="banner_is_run_time" id="banner_is_run_time" class="form-control input-sm">
-                                {{$optionRunTime}}
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">Start time banner</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="banner_start_time" name="banner_start_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_start_time']) && $data['banner_start_time'] > 0){{date('d-m-Y',$data['banner_start_time'])}}@endif">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="name" class="control-label">End time banner</label>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="banner_end_time" name="banner_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['banner_end_time']) && $data['banner_end_time'] > 0){{date('d-m-Y',$data['banner_end_time'])}}@endif">
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                </div>
-
-                <div style="float: left;width: 40%">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(3);">Upload Image </a>
-                            <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['banner_image'])){{$data['banner_image']}}@endif">
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        <!--hien thi anh-->
-                        <div id="block_img_upload">
-                            @if(isset($data['banner_image']) && $data['banner_image']!= '')
-                                <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $data['banner_id'], $data['banner_image'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
-                                <div class="clearfix"></div>
-                                <a href="javascript: void(0);"  style="display: none" onclick="Common.removeImageItem({{$data['banner_id']}},'{{$data['banner_image']}}',3);">Xóa ảnh</a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
 
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-12 text-left">
-                    <a class="btn btn-warning" href="{{URL::route('admin.bannerView')}}"><i class="fa fa-reply"></i> Back</a>
+                    <a class="btn btn-warning" href="{{URL::route('admin.videoView')}}"><i class="fa fa-reply"></i> Back</a>
                     <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Save</button>
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
@@ -201,6 +117,7 @@
 <!--Popup upload ảnh-->
 
 <script>
+    CKEDITOR.replace('video_content', {height:400});
     $(document).ready(function(){
         var checkin = $('#banner_start_time').datepicker({ });
         var checkout = $('#banner_end_time').datepicker({ });

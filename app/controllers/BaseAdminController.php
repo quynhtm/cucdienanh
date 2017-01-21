@@ -50,7 +50,7 @@ class BaseAdminController extends BaseController
             'icon'=>'fa fa-cogs',
             'arr_link_sub'=>array('admin.info','admin.contract'),
             'sub'=>array(
-                array('name'=>'Contract', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1, 'permission'=>'contract_view'),
+                //array('name'=>'Contract', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1, 'permission'=>'contract_view'),
                 array('name'=>'Infor site', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             	array('name'=>'Language static', 'RouteName'=>'admin.lang', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1, 'permission'=>'infor_full'),
             ),

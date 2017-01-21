@@ -83,7 +83,7 @@ class BannerController extends BaseAdminController
 
         $search['banner_name'] = addslashes(Request::get('banner_name',''));
         $search['banner_status'] = (int)Request::get('banner_status',-1);
-        $search['type_language'] = (int)Request::get('type_language',1);
+        $search['type_language'] = (int)Request::get('type_language',0);
         $search['banner_type'] = (int)Request::get('banner_type',-1);
         $search['banner_position'] = (int)Request::get('banner_position',0);
         $search['banner_parent_id'] = (int)Request::get('banner_parent_id',0);

@@ -11,7 +11,7 @@ var Admin = {
             if(type == 1){ //xoa tin tức
                 url_ajax = 'deleteNews';
             }else if(type == 2){
-                url_ajax = 'deleteCustomer';
+                url_ajax = 'deleteVideo';
             }else if(type == 3){
                 url_ajax = 'deleteBanner';
             }else if(type == 4){

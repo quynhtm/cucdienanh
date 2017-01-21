@@ -112,8 +112,8 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
 
     /*Quản lý Video*/
     Route::any('video/view',array('as' => 'admin.videoView','uses' => 'VideoController@view'));
-    Route::get('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@getVideo'))->where('id', '[0-9]+');
-    Route::post('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@postVideo'))->where('id', '[0-9]+');
+    Route::get('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@getItem'))->where('id', '[0-9]+');
+    Route::post('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@postItem'))->where('id', '[0-9]+');
     Route::post('video/deleteVideo', array('as' => 'admin.deleteVideo','uses' => 'VideoController@deleteVideo'));//ajax
 
     ///*Quản lý Thư viện ảnh*/
