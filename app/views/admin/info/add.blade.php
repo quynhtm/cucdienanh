@@ -86,7 +86,14 @@
                     </div>
                 </div>
 
-                <div id="block_show_{{CGlobal::INFOR_FOOTER}}" class="block_show" @if(isset($data['info_type']) && ($data['info_type'] == CGlobal::INFOR_FOOTER || $data['info_type'] == CGlobal::INFOR_CONTACT)) style="display: block"@else style="display: none" @endif>
+                <div id="block_show_{{CGlobal::INFOR_FOOTER}}" class="block_show" 
+                @if(isset($data['info_type']) && ($data['info_type'] == CGlobal::INFOR_FOOTER 
+                || $data['info_type'] == CGlobal::INFOR_CONTACT 
+                || $data['info_type'] == CGlobal::INFOR_ADDRESS_HEADER
+                || $data['info_type'] == CGlobal::INFOR_MAIL_HEADER
+                || $data['info_type'] == CGlobal::INFOR_PHONE_HEADER
+                || $data['info_type'] == CGlobal::INFOR_SOLOGAN_HEADER
+                )) style="display: block"@else style="display: none" @endif>
                     <div class="clearfix"></div>
                     <div class="col-sm-2">
                         <div class="form-group">

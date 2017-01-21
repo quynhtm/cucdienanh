@@ -135,7 +135,14 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@getItem'))->where('id', '[0-9]+');
     Route::post('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
     Route::post('info/deleteInfor', array('as' => 'admin.infoDelete','uses' => 'InfoController@deleteInfor'));
-
+	
+    //Thông tin các từ khóa tĩnh cho ngôn ngữ
+    Route::get('lang/view', array('as' => 'admin.lang','uses' => 'LangsController@listView'));
+    Route::get('lang/edit/{id?}', array('as' => 'admin.langEdit','uses' => 'LangsController@getItem'))->where('id', '[0-9]+');
+    Route::post('lang/edit/{id?}', array('as' => 'admin.langEdit','uses' => 'LangsController@postItem'))->where('id', '[0-9]+');
+    Route::post('lang/deleteLang', array('as' => 'admin.langDelete','uses' => 'LangsController@deleteLang'));
+    
+    
     //Thung rac
     Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
     Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');

@@ -83,17 +83,30 @@ body{
     background: url(../img/address.png) no-repeat 0 5px;
     display: inline-block;
     padding-left: 22px;
+	padding-left: 22px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 .bg-top .email{
     background: url(../img/email.png) no-repeat 0 center;
     display: inline-block;
     padding-left: 25px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 .bg-top .mobile{
     background: url(../img/mobile.png) no-repeat 0 center;
     display: inline-block;
     padding-left: 25px;
     text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 .bg-top .mobile span {
     color: #ff0000;
@@ -149,7 +162,8 @@ body{
     text-transform: uppercase;
     margin-left: 5px;
 }
-.header-midd .language a:hover{
+.header-midd .language a:hover,
+.header-midd .language a.act{
     color: #ff0000;
 }
 .language a.vi {

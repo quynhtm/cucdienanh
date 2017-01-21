@@ -43,9 +43,14 @@ class Memcache{
     //Tinh thanh
     const CACHE_ALL_PROVICE = 'cache_all_provice';
     const CACHE_PROVICE_ID = 'cache_provice_id_';
-    //Thong tin co ban: hotline, dia chi chan trang...
+    //Info
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
+    const CACHE_INFO_TYPEINFO_TYPELANGUAGE    = 'cache_info_typeinfo_typelanguage_';
+    //Lang
+    const CACHE_LANG_ID    = 'cache_lang_id_';
+    const CACHE_LANG_KEYWORD_LANGUAGE    = 'cache_info_keyword_language_';
+    
     //Thung rac
     const CACHE_TRASH_ID    = 'cache_trash_id_';
 

@@ -2,14 +2,14 @@
    <div class="container">
       <div class="col-lg-5 col-sm-5">
          <div class="address">
-            <p>Add: Bane Dong palane thong - Sisattanak District - Vientiane - Lao P.D.R</p>
+            {{$headAddress}}
          </div>
       </div>
       <div class="col-lg-3 col-sm-3">
-         <div class="email">E-mail: laostyle.adv@gmail.com</div>
+         <div class="email">{{$headMail}}</div>
       </div>
       <div class="col-lg-4 col-sm-4 hotline">
-         <div class="mobile">Call: (+856) 20 9938 9889 / (+856) 20 9997 1102</div>
+         <div class="mobile">{{$headPhone}}</div>
       </div>
    </div>
 </div>
@@ -17,21 +17,18 @@
    <div class="container">
       <a href="" class="logo"></a>
       <div class="slogan">
-         <h1>ບໍລິສັດ ລາວສະໄຕ໋ ໂຄສະນາ ຈໍາກັດຜູ້ດຽວ</h1>
-         <br>
-         <span>LAO STYLE ADVERTISING SOLE CO., LTD</span>		
+         {{$headSologan}}		
       </div>
       <div class="pull-right">
          <div class="language">
-            <a class="vi" href="?lang=vi">Tiếng Việt</a>
-            <a class="lao" href="?lang=lao">ລາວ</a>
-            <a class="en" href="?lang=en">English</a>
+            <a class="vi @if($lang == CGlobal::TYPE_LANGUAGE_VIET) act @endif" href="?lang=vi">Tiếng Việt</a>
+            <a class="lao @if($lang == CGlobal::TYPE_LANGUAGE_LAO) act @endif" href="?lang=lao">ລາວ</a>
+            <a class="en @if($lang == CGlobal::TYPE_LANGUAGE_ENG) act @endif" href="?lang=en">English</a>
          </div>
          <div class="search">
-            <form action="http://baritevietlao.com.vn/tim-kiem.html" method="GET">
+            <form action="/tim-kiem.html" method="GET">
                <input class="txtSearch" name="keyword" placeholder="..." type="text">
-               <input name="s" value="Tìm kiếm
-                  " class="search" type="submit">
+               <input name="s" value="{{Langs::getItemByKeywordLang('text_search', $lang)}}" class="search" type="submit">
             </form>
          </div>
       </div>
@@ -40,21 +37,17 @@
 <div id="nav-header" class="menu">
    <div class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
       <div class="navbar-header">
-         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-         <span class="sr-only">Toggle navigation</span>
-         <a id="link-lange" href="?lang=vi">Tiếng việt</a>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="navbar-collapse">
+	         <span class="sr-only">Toggle navigation</span>
+	         <span class="icon-bar"></span>
+	         <span class="icon-bar"></span>
+	         <span class="icon-bar"></span>
          </button>
       </div>
       <div class="collapse navbar-collapse">
          <div class="container wrapper">
             <ul class="nav navbar-nav">
-               <li><a class="active" href="" title="Trang chủ
-                  ">Trang chủ
-                  </a>
-               </li>
+               <li><a href="{{URL::route('site.home')}}" title="{{Langs::getItemByKeywordLang('text_home', $lang)}}">{{Langs::getItemByKeywordLang('text_home', $lang)}}</a></li>
                <li>
                   <a href="/gioi-thieu-1.html" title="Giới thiệu">Giới thiệu</a>
                </li>
@@ -87,7 +80,7 @@
                      </div>
                   </div>
                </li>
-               <li><a href="/lien-he.html"> Liên hệ</a></li>
+               <li><a href="{{URL::route('site.pageContact')}}" title="{{Langs::getItemByKeywordLang('text_contact', $lang)}}">{{Langs::getItemByKeywordLang('text_contact', $lang)}}</a></li>
             </ul>
          </div>
       </div>

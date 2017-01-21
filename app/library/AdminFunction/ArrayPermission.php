@@ -75,6 +75,12 @@ class ArrayPermission{
         'infor_delete' => array('name_permit'=>'Xóa thông tin site','group_permit'=>'Quyền thông tin site'),
         'infor_create' => array('name_permit'=>'Tạo thông tin site','group_permit'=>'Quyền thông tin site'),
         'infor_edit' => array('name_permit'=>'Sửa thông tin site','group_permit'=>'Quyền thông tin site'),
+    		
+    	'lang_full' => array('name_permit'=>'Full thông tin lang','group_permit'=>'Quyền thông tin lang'),
+    	'lang_view' => array('name_permit'=>'Xem thông tin lang','group_permit'=>'Quyền thông tin lang'),
+    	'lang_delete' => array('name_permit'=>'Xóa thông tin lang','group_permit'=>'Quyền thông tin lang'),
+    	'lang_create' => array('name_permit'=>'Tạo thông tin lang','group_permit'=>'Quyền thông tin lang'),
+    	'lang_edit' => array('name_permit'=>'Sửa thông tin lang','group_permit'=>'Quyền thông tin lang'),
 
     );
 

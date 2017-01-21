@@ -23,6 +23,11 @@
         height: 42px;
         width: 50px;
     }
+	.language {
+	    position: relative;
+	    left: -125px;
+	    top: 8px;
+	}
     #nav-header .navbar{
         min-height: 0;
     }
@@ -38,9 +43,6 @@
         background: none;
     }
     .search {
-        display: none;
-    }
-    .language{
         display: none;
     }
     .header-midd{
@@ -162,4 +164,7 @@
     .main-view.contact{
         padding: 0 10px;
     }
+	.bg-top .mobile {
+	    text-align: left;
+	}
 }

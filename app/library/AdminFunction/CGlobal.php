@@ -42,12 +42,20 @@ class CGlobal{
     const INFOR_CONTACT = 2;
     const INFOR_SEO = 3;
     const INFOR_IMAGE_LOGO = 4;
-
+    const INFOR_ADDRESS_HEADER = 5;
+    const INFOR_MAIL_HEADER = 6;
+    const INFOR_PHONE_HEADER = 7;
+    const INFOR_SOLOGAN_HEADER = 8;
+    
     public static $arrInforSite= array(
-        self::INFOR_FOOTER => 'Thông tin chân trang',
+    	self::INFOR_FOOTER => 'Thông tin chân trang',
         self::INFOR_CONTACT => 'Thông tin liên hệ',
-        self::INFOR_SEO => 'Keyword seo',
-        self::INFOR_IMAGE_LOGO => 'Ảnh Logo site',
+        self::INFOR_SEO => 'Keyword SEO',
+        self::INFOR_IMAGE_LOGO => 'Ảnh Logo',
+    	self::INFOR_ADDRESS_HEADER => 'Địa chỉ đầu trang',
+    	self::INFOR_MAIL_HEADER => 'Email đầu trang',
+    	self::INFOR_PHONE_HEADER => 'Hotline đầu trang',
+    	self::INFOR_SOLOGAN_HEADER => 'Sologan đầu trang',
     );
 
 

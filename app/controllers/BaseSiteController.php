@@ -19,21 +19,48 @@ class BaseSiteController extends BaseController{
     	$this->getLanguage();
     }
     public function header(){
+    	$arrAddress = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_ADDRESS_HEADER, $this->lang);
+    	$headAddress='';
+    	if(!empty($arrAddress)){
+    		$headAddress = strip_tags(stripslashes($arrAddress->info_content));
+    	}
+		
+    	$arrEmail = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_MAIL_HEADER, $this->lang);
+    	$headMail='';
+    	if(!empty($arrEmail)){
+    		$headMail = strip_tags(stripslashes($arrEmail->info_content));
+    	}
+    	
+    	$arrPhone = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_PHONE_HEADER, $this->lang);
+    	$headPhone='';
+    	if(!empty($arrPhone)){
+    		$headPhone = strip_tags(stripslashes($arrPhone->info_content));
+    	}
+    	$arrSologan = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_SOLOGAN_HEADER, $this->lang);
+    	$headSologan='';
+    	if(!empty($arrSologan)){
+    		$headSologan = stripslashes($arrSologan->info_content);
+    	}
 		//Banner
     	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $this->lang);
     	$arrBannerHead = $this->getBannerWithPosition($arrBanner);
 		
 		$this->layout->header = View::make("site.BaseLayouts.header")
-								->with('arrBannerHead', $arrBannerHead);
+								->with('arrBannerHead', $arrBannerHead)
+								->with('headAddress', $headAddress)
+								->with('headMail', $headMail)
+								->with('headPhone', $headPhone)
+								->with('headSologan', $headSologan)
+								->with('lang', $this->lang);
     }
 	public function footer(){
+		$arrAddress = Info::getItemByTypeInfoAndTypeLanguage(CGlobal::INFOR_FOOTER, $this->lang);
 		$address='';
-		$arrAddress = Info::getItemByKeyword('SITE_FOOTER_LEFT');
 		if(!empty($arrAddress)){
 			$address = $arrAddress->info_content;
 		}
 		$this->layout->footer = View::make("site.BaseLayouts.footer")
-			->with('address', $address);
+								->with('address', $address);
 	}
 	public function getBannerWithPosition($arrBanner = array()){
 		$arrBannerShow = array();

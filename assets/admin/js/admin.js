@@ -24,6 +24,8 @@ var Admin = {
             	url_ajax = 'deleteInfor';
             }else if(type == 12){
             	url_ajax = 'deleteContract';
+            }else if(type == 13){
+            	url_ajax = 'deleteLang';
             }
             if(url_ajax != ''){
                 $.ajax({
@@ -107,7 +109,7 @@ var Admin = {
     changeTypeInfor:function(){
         var info_type = $('#info_type').val();
         if(parseInt(info_type) > 0){
-            if(info_type == 1 || info_type == 2){
+            if(info_type == 1 || info_type == 2 || info_type == 5 || info_type == 6 || info_type == 7 || info_type == 8){
                 $('.block_show').hide();
                 $('#block_show_1').show();
             }else{

@@ -184,4 +184,22 @@ class Info extends Eloquent {
     }
     
     //SITE
+    public static function getItemByTypeInfoAndTypeLanguage($typeInfo=0, $typeLanguage=0){
+    	$key_cache = Memcache::CACHE_INFO_TYPEINFO_TYPELANGUAGE.$typeInfo.'_'.$typeLanguage;
+    	$result = (Memcache::CACHE_ON) ? Cache::get($key_cache) : array();
+    	try {
+    		if(empty($result)){
+    			if($typeInfo != 0 && $typeLanguage != 0){
+    				$result = Info::where('info_type', $typeInfo)->where('type_language', $typeLanguage)->where('info_status', CGlobal::status_show)->first();
+    			}
+    			if($result && Memcache::CACHE_ON){
+    				Cache::put($key_cache, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+    			}
+    		}
+    	} catch (PDOException $e) {
+    		throw new PDOException();
+    	}
+    	return $result;
+    	
+    }
 }
