@@ -22,12 +22,12 @@
       </div>
       <div class="pull-right">
          <div class="language">
-            <a class="vi <?php if($lang == CGlobal::TYPE_LANGUAGE_VIET): ?> act <?php endif; ?>" href="?lang=vi">Tiếng Việt</a>
-            <a class="lao <?php if($lang == CGlobal::TYPE_LANGUAGE_LAO): ?> act <?php endif; ?>" href="?lang=lao">ລາວ</a>
-            <a class="en <?php if($lang == CGlobal::TYPE_LANGUAGE_ENG): ?> act <?php endif; ?>" href="?lang=en">English</a>
+            <a class="vi <?php if($lang == CGlobal::TYPE_LANGUAGE_VIET): ?> act <?php endif; ?>" href="<?php echo URL::route('site.home'); ?>?lang=vi">Tiếng Việt</a>
+            <a class="lao <?php if($lang == CGlobal::TYPE_LANGUAGE_LAO): ?> act <?php endif; ?>" href="<?php echo URL::route('site.home'); ?>?lang=lao">ລາວ</a>
+            <a class="en <?php if($lang == CGlobal::TYPE_LANGUAGE_ENG): ?> act <?php endif; ?>" href="<?php echo URL::route('site.home'); ?>?lang=en">English</a>
          </div>
          <div class="search">
-            <form action="/tim-kiem.html" method="GET">
+            <form action="<?php echo URL::route('site.home'); ?>/tim-kiem.html" method="GET">
                <input class="txtSearch" name="keyword" placeholder="..." type="text">
                <input name="s" value="<?php echo Langs::getItemByKeywordLang('text_search', $lang); ?>" class="search" type="submit">
             </form>

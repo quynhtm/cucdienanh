@@ -21,12 +21,12 @@
       </div>
       <div class="pull-right">
          <div class="language">
-            <a class="vi @if($lang == CGlobal::TYPE_LANGUAGE_VIET) act @endif" href="?lang=vi">Tiếng Việt</a>
-            <a class="lao @if($lang == CGlobal::TYPE_LANGUAGE_LAO) act @endif" href="?lang=lao">ລາວ</a>
-            <a class="en @if($lang == CGlobal::TYPE_LANGUAGE_ENG) act @endif" href="?lang=en">English</a>
+            <a class="vi @if($lang == CGlobal::TYPE_LANGUAGE_VIET) act @endif" href="{{URL::route('site.home')}}?lang=vi">Tiếng Việt</a>
+            <a class="lao @if($lang == CGlobal::TYPE_LANGUAGE_LAO) act @endif" href="{{URL::route('site.home')}}?lang=lao">ລາວ</a>
+            <a class="en @if($lang == CGlobal::TYPE_LANGUAGE_ENG) act @endif" href="{{URL::route('site.home')}}?lang=en">English</a>
          </div>
          <div class="search">
-            <form action="/tim-kiem.html" method="GET">
+            <form action="{{URL::route('site.home')}}/tim-kiem.html" method="GET">
                <input class="txtSearch" name="keyword" placeholder="..." type="text">
                <input name="s" value="{{Langs::getItemByKeywordLang('text_search', $lang)}}" class="search" type="submit">
             </form>
