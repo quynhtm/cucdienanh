@@ -81,20 +81,19 @@
                                 </td>
                                 <td>
                                    [<b>{{ $item->banner_id }}</b>] {{ $item->banner_name }}
-                                   @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_QC)
-                                       Banner quảng cáo
-                                   @endif
-                                   @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_DOITAC)
-                                       Banner đối tác
-                                   @endif
                                 </td>
                                 <td>
                                     {{$item->banner_intro}}
                                 </td>
                                 <td>
-                                    @if($item->banner_position > 0){{$arrPosition[$item->banner_position]}} <br/>@endif
                                     @if(isset($arrTypeBanner[$item->banner_type])){{$arrTypeBanner[$item->banner_type]}} <br/> @endif
                                     @if($item->banner_order > 0)Thứ tự: {{$item->banner_order}} <br/>@endif
+                                    @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_QC)
+                                        <b>Banner quảng cáo</b>
+                                    @endif
+                                    @if($item->banner_category_id == CGlobal::BANNER_CATEGORY_DOITAC)
+                                        <b>Banner đối tác</b>
+                                    @endif
                                 </td>
 
                                 <td class="text-center text-middle">
