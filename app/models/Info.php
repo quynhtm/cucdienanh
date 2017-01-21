@@ -9,12 +9,12 @@ use Illuminate\Cache\MemcachedStore;
 
 class Info extends Eloquent {
     
-    protected $table = 'web_info';
+    protected $table = 'w_info';
     protected $primaryKey = 'info_id';
     public  $timestamps = false;
 
     protected $fillable = array(
-	    		'info_id', 'info_title', 'info_keyword', 'info_intro', 'info_content',
+	    		'info_id', 'info_title', 'info_type', 'info_keyword', 'info_intro', 'info_content',
 	    		'info_img', 'info_created', 'info_order_no', 'info_status', 'meta_title', 'meta_keywords', 'meta_description');
 	//ADMIN
     public static function searchByCondition($dataSearch=array(), $limit=0, $offset=0, &$total){

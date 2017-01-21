@@ -103,6 +103,19 @@ var Admin = {
             });
         }
     },
+
+    changeTypeInfor:function(){
+        var info_type = $('#info_type').val();
+        if(parseInt(info_type) > 0){
+            if(info_type == 1 || info_type == 2){
+                $('.block_show').hide();
+                $('#block_show_1').show();
+            }else{
+                $('.block_show').hide();
+                $('#block_show_'+info_type).show();
+            }
+        }
+    },
     setStastusBlockItems: function(){
         var dataId = [];
         var i = 0;

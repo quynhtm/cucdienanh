@@ -40,83 +40,21 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Từ khóa</i>
+                        <i>Loại thông tin</i>
                     </div>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <div class="form-group">
-                        <input type="text" class="form-control input-sm" name="info_keyword" @if(isset($data['info_keyword']))value="{{$data['info_keyword']}}" @if($id > 0) readonly="readonly" @endif @endif>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Mô tả</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <textarea class="form-control input-sm" name="info_intro">@if(isset($data['info_intro'])){{stripslashes($data['info_intro'])}}@endif</textarea>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Nội dung</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <textarea class="form-control input-sm" name="info_content">@if(isset($data['info_content'])){{stripslashes($data['info_content'])}}@endif</textarea>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Thứ tự</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-sm" name="info_order_no" value="@if(isset($data['info_order_no'])){{$data['info_order_no']}}@endif">
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Meta title</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-sm" name="meta_title" value="@if(isset($data['meta_title'])){{$data['meta_title']}}@endif">
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Meta keyword</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <textarea class="form-control input-sm" name="meta_keywords">@if(isset($data['meta_keywords'])){{$data['meta_keywords']}}@endif</textarea>
-                    </div>
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <i>Meta description</i>
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <textarea class="form-control input-sm" name="meta_description">@if(isset($data['meta_description'])){{$data['meta_description']}}@endif</textarea>
+                        @if(isset($id) && $id > 0)
+                            <select class="form-control input-sm" name="sye_info_type" id="sye_info_type" @if(isset($id) && $id > 0) disabled @endif>
+                                {{$optionInforSite}}
+                            </select>
+                            <input type="hidden" id="info_type" name="info_type" value="{{$data['info_type']}}"/>
+                        @else
+                            <select class="form-control input-sm" name="info_type" id="info_type" onchange="Admin.changeTypeInfor()">
+                                {{$optionInforSite}}
+                            </select>
+                        @endif
                     </div>
                 </div>
 
@@ -134,29 +72,107 @@
                     </div>
                 </div>
 
+                <div id="block_show_{{CGlobal::INFOR_FOOTER}}" class="block_show" @if(isset($data['info_type']) && ($data['info_type'] == CGlobal::INFOR_FOOTER || $data['info_type'] == CGlobal::INFOR_CONTACT)) style="display: block"@else style="display: none" @endif>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <i>Nội dung</i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <textarea class="form-control input-sm" name="info_content">@if(isset($data['info_content'])){{stripslashes($data['info_content'])}}@endif</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!--
                 <div class="clearfix"></div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <i>Upload ảnh</i>
+                        <i>Mô tả</i>
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(4);">Upload ảnh </a>
-                        <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['info_img'])){{$data['info_img']}}@endif">
+                        <textarea class="form-control input-sm" name="info_intro">@if(isset($data['info_intro'])){{stripslashes($data['info_intro'])}}@endif</textarea>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-sm-12">
-                    <!--hien thi anh-->
-                    <div id="block_img_upload">
-                        @if(isset($data['info_img']) && $data['info_img']!= '')
-                            <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_INFORSEO, $data['info_id'], $data['info_img'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
-                            <div class="clearfix"></div>
-                            <a href="javascript: void(0);" onclick="Common.removeImageItem({{$data['info_id']}},'{{$data['info_img']}}',4);">Xóa ảnh</a>
-                        @endif
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <i>Thứ tự</i>
                     </div>
                 </div>
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-sm" name="info_order_no" value="@if(isset($data['info_order_no'])){{$data['info_order_no']}}@endif">
+                    </div>
+                </div>
+                -->
+                <div id="block_show_{{CGlobal::INFOR_SEO}}" class="block_show" @if(isset($data['info_type']) && $data['info_type'] == CGlobal::INFOR_SEO) style="display: block"@else style="display: none" @endif>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <i>Meta title</i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-sm" name="meta_title" value="@if(isset($data['meta_title'])){{$data['meta_title']}}@endif">
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <i>Meta keyword</i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <textarea class="form-control input-sm" name="meta_keywords">@if(isset($data['meta_keywords'])){{$data['meta_keywords']}}@endif</textarea>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <i>Meta description</i>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <textarea class="form-control input-sm" name="meta_description">@if(isset($data['meta_description'])){{$data['meta_description']}}@endif</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="block_show_{{CGlobal::INFOR_IMAGE_LOGO}}" class="block_show" @if(isset($data['info_type']) && $data['info_type'] == CGlobal::INFOR_IMAGE_LOGO) style="display: block"@else style="display: none" @endif>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <i>Upload ảnh</i>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadOneImages(4);">Upload ảnh </a>
+                            <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['info_img'])){{$data['info_img']}}@endif">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <!--hien thi anh-->
+                        <div id="block_img_upload">
+                            @if(isset($data['info_img']) && $data['info_img']!= '')
+                                <img src="{{ ThumbImg::getImageThumb(CGlobal::FOLDER_INFORSEO, $id, $data['info_img'], CGlobal::sizeImage_300, '', true, CGlobal::type_thumb_image_banner, false)}}">
+                                <div class="clearfix"></div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-2 text-left"></div>

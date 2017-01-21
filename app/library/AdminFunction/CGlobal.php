@@ -25,7 +25,6 @@ class CGlobal{
     const TYPE_LANGUAGE_VIET = 1;
     const TYPE_LANGUAGE_LAO = 2;
     const TYPE_LANGUAGE_ENG = 3;
-
     public static $arrLanguage= array(
         self::TYPE_LANGUAGE_VIET => 'Viet Nam',
         self::TYPE_LANGUAGE_LAO => 'Lao',
@@ -34,10 +33,21 @@ class CGlobal{
 
     const CATEGORY_TYPE_NEW = 1;
     const CATEGORY_TYPE_MENU = 2;
-
     public static $arrCategoryType= array(
         self::CATEGORY_TYPE_NEW => 'Category News',
         self::CATEGORY_TYPE_MENU => 'Category Menu',
+    );
+
+    const INFOR_FOOTER = 1;
+    const INFOR_CONTACT = 2;
+    const INFOR_SEO = 3;
+    const INFOR_IMAGE_LOGO = 4;
+
+    public static $arrInforSite= array(
+        self::INFOR_FOOTER => 'Thông tin chân trang',
+        self::INFOR_CONTACT => 'Thông tin liên hệ',
+        self::INFOR_SEO => 'Keyword seo',
+        self::INFOR_IMAGE_LOGO => 'Ảnh Logo site',
     );
 
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-20 22:07:05
+Date: 2017-01-21 11:27:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -135,7 +135,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1484922119', '::1', null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('2', 'admin', 'eef828faf0754495136af05c051766cb', 'Root', '', null, '1', '1', '1484965839', '::1', null, null, null, null, null, null);
 INSERT INTO `user` VALUES ('19', 'tech_code', '7eb3b9aba1960c22aa9bc8d1f27ebfb9', 'Tech code 3555', '', '', '1', '2', '1481772767', '::1', null, null, '2', 'admin', null, '1481772561');
 INSERT INTO `user` VALUES ('20', 'svquynhtm', 'a1f54bbcea29cf49935e0a5ead5a3dfa', 'Trương Mạnh Quỳnh', 'manhquynh1984@gmail.com', '0938413368', '1', '2', '1482826054', '::1', '2', 'admin', '2', 'admin', '1482823830', '1482824272');
 
@@ -232,32 +232,6 @@ INSERT INTO `w_category` VALUES ('30', 'Công ty chào bán', 'cong-ty-chao-ban'
 INSERT INTO `w_category` VALUES ('31', 'Công ty chào mua 33', 'cong-ty-chao-mua', '1', '1', '0', '0', '2', '1', '1471388488', 'Công ty chào mua', 'Công ty chào mua', 'Công ty chào mua');
 
 -- ----------------------------
--- Table structure for w_config_info
--- ----------------------------
-DROP TABLE IF EXISTS `w_config_info`;
-CREATE TABLE `w_config_info` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
-  `type_language` tinyint(5) DEFAULT '1',
-  `keyword` varchar(255) DEFAULT NULL COMMENT 'keyword',
-  `intro` longtext,
-  `content` longtext,
-  `img` varchar(255) DEFAULT NULL,
-  `img_other` longtext,
-  `created` varchar(15) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0' COMMENT 'Item enabled status (1 = enabled, 0 = disabled)',
-  `meta_title` text COMMENT 'Meta title',
-  `meta_keywords` text COMMENT 'Meta keywords',
-  `meta_description` text COMMENT 'Meta description',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Stores news content.';
-
--- ----------------------------
--- Records of w_config_info
--- ----------------------------
-INSERT INTO `w_config_info` VALUES ('9', 'Nội dung meta SEO trang chủ', '1', 'SITE_SEO_HOME', 'Không cần để nội dung...', '<p>Kh&ocirc;ng cần để nội dung...</p>\r\n', '', null, '1437450080', '1', 'Công ty trách nhiệm hữu hạn Đầu tư Quang Trung', 'Công ty trách nhiệm hữu hạn Đầu tư Quang Trung', 'Công ty trách nhiệm hữu hạn Đầu tư Quang Trung');
-
--- ----------------------------
 -- Table structure for w_images
 -- ----------------------------
 DROP TABLE IF EXISTS `w_images`;
@@ -286,6 +260,33 @@ CREATE TABLE `w_images` (
 -- ----------------------------
 INSERT INTO `w_images` VALUES ('11', '1', 'Vùng mỏ hôm nay', 'vung-mo-hom-nay', '', '', '01-10-23-17-08-2016-3.jpg', 'a:4:{i:0;s:25:\"01-10-23-17-08-2016-3.jpg\";i:1;s:25:\"01-10-24-17-08-2016-1.jpg\";i:2;s:25:\"01-10-27-17-08-2016-2.jpg\";i:3;s:25:\"01-10-28-17-08-2016-4.jpg\";}', '5', '1', '1', '1471370871', '1', '', '', '');
 INSERT INTO `w_images` VALUES ('12', '1', ' Trên khai trường sản xuất than', 'tren-khai-truong-san-xuat-than', '', '', '01-25-21-17-08-2016-4.jpg', 'a:2:{i:0;s:25:\"01-25-05-17-08-2016-3.jpg\";i:1;s:25:\"01-25-21-17-08-2016-4.jpg\";}', '5', '1', '1', '1471371905', '1', '', '', '');
+
+-- ----------------------------
+-- Table structure for w_info
+-- ----------------------------
+DROP TABLE IF EXISTS `w_info`;
+CREATE TABLE `w_info` (
+  `info_id` int(11) NOT NULL AUTO_INCREMENT,
+  `info_title` varchar(255) DEFAULT NULL,
+  `info_type` tinyint(5) DEFAULT NULL COMMENT 'Kiểu nội dung thông tin cua site',
+  `info_keyword` varchar(255) DEFAULT NULL COMMENT 'keyword',
+  `info_intro` longtext,
+  `info_content` longtext,
+  `info_img` varchar(255) DEFAULT NULL,
+  `info_created` varchar(15) DEFAULT NULL,
+  `info_order_no` int(11) DEFAULT '0',
+  `info_status` tinyint(4) DEFAULT '0' COMMENT 'Item enabled status (1 = enabled, 0 = disabled)',
+  `meta_title` text COMMENT 'Meta title',
+  `meta_keywords` text COMMENT 'Meta keywords',
+  `meta_description` text COMMENT 'Meta description',
+  PRIMARY KEY (`info_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Stores news content.';
+
+-- ----------------------------
+-- Records of w_info
+-- ----------------------------
+INSERT INTO `w_info` VALUES ('1', 'Thông tin chân trang bên trái 2', '1', 'SITE_FOOTER_LEFT', '', '<p><strong>T&ecirc;n đăng k&yacute;: </strong>C&ocirc;ng ty Cổ truyền th&ocirc;ng raovat30s</p>\r\n\r\n<p><strong>T&ecirc;n giao dịch: </strong>Raovat30s Online JSC</p>\r\n\r\n<p><strong>Địa chỉ trụ sở: </strong>Tầng 2, T&ograve;a nh&agrave; CT2A - KĐT Nghĩa Đ&ocirc;, Ho&agrave;ng Quốc Việt, Cầu Giấy, H&agrave; Nội.</p>\r\n\r\n<p><strong>Điện thoại: </strong>0913.922.986</p>\r\n\r\n<p><strong>Email: </strong>raovat@raovat30s.vn</p>\r\n\r\n<p><strong>Giấy chứng nhận đăng k&yacute; kinh doanh số 0305056245 do Sở Kế hoạch v&agrave; Đầu tư Th&agrave;nh phố H&agrave; Nội cấp ng&agrave;y 22/12/2016</strong></p>\r\n', '1484969868-57355c1302b01f7898000001.jpg', '1447794727', '0', '1', '', '', '');
+INSERT INTO `w_info` VALUES ('3', 'ảnh logo 222', '4', null, '', '', '1484972336-573cb4258e810763aa000001.jpg', '1484972320', '0', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for w_language
@@ -390,43 +391,35 @@ INSERT INTO `w_news` VALUES ('46', 'Vận chuyển thiết bị và xây dựng 
 DROP TABLE IF EXISTS `w_product`;
 CREATE TABLE `w_product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
   `product_title` varchar(255) DEFAULT NULL,
   `product_title_alias` varchar(255) DEFAULT '',
   `product_desc_sort` text,
   `product_content` text,
   `product_image` varchar(255) DEFAULT NULL COMMENT 'ảnh đại diện của bài viết',
   `product_image_other` longtext COMMENT 'Lưu ảnh của bài viết',
-  `product_type` tinyint(5) DEFAULT '1' COMMENT 'Kiểu tin',
+  `type_language` tinyint(5) DEFAULT '1',
   `product_category` int(11) DEFAULT NULL,
   `product_hot` int(11) DEFAULT NULL,
   `product_status` tinyint(5) DEFAULT NULL,
-  `product_num` int(11) DEFAULT '0',
   `product_link` varchar(255) DEFAULT NULL,
   `product_create` int(11) DEFAULT NULL,
   `product_meta_title` varchar(255) DEFAULT NULL,
   `product_meta_keyword` text,
   `product_meta_description` text,
   `product_order` int(11) DEFAULT NULL,
-  `product_title_en` varchar(255) DEFAULT NULL,
-  `product_desc_sort_en` text,
-  `product_content_en` longtext,
-  `product_meta_title_en` varchar(255) DEFAULT NULL,
-  `product_meta_keyword_en` text,
-  `product_meta_description_en` text,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of w_product
 -- ----------------------------
-INSERT INTO `w_product` VALUES ('32', '1', 'Giới thiệu chung', 'gioi-thieu-chung', '', '<p>C&ocirc;ng ty đ&atilde; k&yacute; hợp đồng với ch&iacute;nh phủ L&agrave;o hợp đồng khai th&aacute;c v&agrave; chế biến bột Barite tại mường Bualapha, tỉnh Khăm Muộn, bao gồm :<br />\r\n+ Một nh&agrave; m&aacute;y chế biến Barite được x&acirc;y dựng tr&ecirc;n diện t&iacute;ch 2,5ha :</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-03-57-17-08-2016-1.jpg\" /></p>\r\n\r\n<p><br />\r\n+ Khu mỏ với diện t&iacute;ch 17,48 km2. Tổng trữ lượng địa chất &nbsp;được đ&aacute;nh gi&aacute; &nbsp;như bảng sau :&nbsp;</p>\r\n\r\n<p>Trữ lượng địa chất thăm d&ograve; to&agrave;n khu mỏ<br />\r\n1&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp 121&nbsp;&nbsp; &nbsp;572.969&nbsp;&nbsp; &nbsp;Tấn<br />\r\n2&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp 122&nbsp;&nbsp; &nbsp;384.756&nbsp;&nbsp; &nbsp;Tấn<br />\r\n3&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp t&agrave;i nguy&ecirc;n 333&nbsp;&nbsp; &nbsp;448.074&nbsp;&nbsp; &nbsp;Tấn<br />\r\nTổng trữ lượng địa chất to&agrave;n khu mỏ&nbsp;&nbsp; &nbsp;1.405.799&nbsp;&nbsp; &nbsp;Tấn</p>\r\n\r\n<p><em>Qu&aacute; tr&igrave;nh khai th&aacute;c tại khu mỏ</em></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/02-00-01-16-08-2016-2.jpg\" /></p>\r\n\r\n<p>V&agrave; chất lượng quặng đ&atilde; được ph&acirc;n t&iacute;ch c&oacute; kết quả như sau :</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p>C&ocirc;ng ty c&oacute; khả năng đ&aacute;p ứng được c&aacute;c đơn h&agrave;ng c&oacute; tổng số lượng từ 60.000 đến 80.000 tấn bột v&agrave; quặng Barite /năm.</p>\r\n', '11-03-57-17-08-2016-1.jpg', 'a:4:{i:0;s:25:\"11-03-57-17-08-2016-1.jpg\";i:1;s:25:\"02-00-01-16-08-2016-2.jpg\";i:2;s:25:\"11-05-16-17-08-2016-3.jpg\";i:3;s:25:\"11-05-22-17-08-2016-4.jpg\";}', '22', '17', '0', '1', '0', null, '1471330663', 'Giới thiệu chung', 'Giới thiệu chung', 'Giới thiệu chung', '1', 'General introduction', '', '<p>The company has signed a contract with the Lao government mining and processing in Muong Boualapha District Barite powder , Kham Muon province , including :<br />\r\n+ A Barite processing plant was built on an area of 2.5 ha</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-03-57-17-08-2016-1.jpg\" /></p>\r\n\r\n<p>+ The mine with an area of 17.48 km2 . The total geological reserves are evaluated as the following table :</p>\r\n\r\n<p>Geological reserves of the entire mine exploration<br />\r\n1&nbsp;&nbsp; &nbsp;The total reserve of 121&nbsp;&nbsp;&nbsp; 572.969&nbsp;&nbsp; Ton<br />\r\n2&nbsp;&nbsp; &nbsp;The total reserve of 122&nbsp;&nbsp; &nbsp;384.756&nbsp;&nbsp; &nbsp;Ton<br />\r\n3&nbsp;&nbsp; &nbsp;The total reserve of resources 333&nbsp;&nbsp; &nbsp;448.074&nbsp;&nbsp; &nbsp;Ton<br />\r\nThe total geological reserves of the entire mine&nbsp;&nbsp; &nbsp;1.405.799&nbsp;&nbsp; &nbsp;Ton</p>\r\n\r\n<p><em>The process of extraction at the mine</em></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/02-00-01-16-08-2016-2.jpg\" /></p>\r\n\r\n<p>And quality of ore were analyzed with the following results :</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p>The company has the ability to meet orders with a total volume of 60,000 to 80,000 tonnes and ore Barite powder/year.</p>\r\n', '', '', '');
-INSERT INTO `w_product` VALUES ('33', '1', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'barite-khong-tuyen-chon-dung-de-san-xuat-dung-dich-khoan-dau-khi', '', '<p>+ K&iacute;ch cỡ của cục quặng Barite : &lt;25cm (hoặc theo đơn h&agrave;ng)<br />\r\n+ H&agrave;m lượng BaSO4 &ge; 95% , tỉ trọng : &ge; 4,3g/cm3.&nbsp;<br />\r\n+ Quặng c&oacute; c&aacute;c th&ocirc;ng số đạt về ti&ecirc;u chuẩn m&ocirc;i trường như bảng ph&acirc;n t&iacute;ch<br />\r\n+ Cảng xuất h&agrave;ng : Cảng H&ograve;n La</p>\r\n', '02-19-15-16-08-2016-5.jpg', 'a:1:{i:0;s:25:\"02-19-15-16-08-2016-5.jpg\";}', '22', '18', '0', '1', '0', null, '1471331955', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', '1', 'Barite ore not selected (used to produce oil and gas drilling mud', '', '<p>+ Size of Barite ore Department: &lt; 25cm (or orders )<br />\r\n+ BaSO4 content &ge; 95 % , density: &ge; 4,3g /cm3 .<br />\r\n+ Ores parameters have reached the environmental standards as a breakdown<br />\r\n+ Shipping port : Hon La Port</p>\r\n', 'Barite ore not selected (used to produce oil and gas drilling mud', 'Barite ore not selected (used to produce oil and gas drilling mud', 'Barite ore not selected (used to produce oil and gas drilling mud');
-INSERT INTO `w_product` VALUES ('34', '1', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'quang-barite-duoc-tuyen-chon-de-san-xuat-bot-baso4-phuc-vu-cho-cac-nganh-san-xuat-cong-nghiep', '', '<p>+ K&iacute;ch cỡ : theo đơn h&agrave;ng.<br />\r\n+ H&agrave;m lượng BaSO4 &gt; 97%.<br />\r\n+ Độ trắng v&agrave; c&aacute;c ti&ecirc;u chuẩn kh&aacute;c : do kh&aacute;ch h&agrave;ng y&ecirc;u cầu.<br />\r\n+ Cảng xuất h&agrave;ng : cảng H&ograve;n La</p>\r\n', '02-20-43-16-08-2016-6.jpg', 'a:1:{i:0;s:25:\"02-20-43-16-08-2016-6.jpg\";}', '22', '18', '0', '1', '0', null, '1471332043', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', '2', 'Barite ore producers selected to serve BaSO4 powder manufacturing industry sectors', '', '<p>+ Dimensions: follow orders.<br />\r\n+ BaSO4 content of &gt; 97 % .<br />\r\n+ Whiteness and other criteria: by customer request.<br />\r\n+ Shipping port: Hon La port</p>\r\n', 'Barite ore producers selected to serve BaSO4 powder manufacturing industry sectors', 'Barite ore producers selected to serve BaSO4 powder manufacturing industry sectors', 'Barite ore producers selected to serve BaSO4 powder manufacturing industry sectors');
-INSERT INTO `w_product` VALUES ('35', '1', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'bot-barite-dung-trong-cong-nghe-khoan-dau-khi', '', '<p>a. Bột Bartie tỷ trọng cao.&nbsp;<br />\r\n+ Tỷ trọng : &ge; 4,3g/cm3.<br />\r\n+ C&aacute;c th&ocirc;ng số c&ograve;n lại đạt ti&ecirc;u chuẩn API v&agrave; ti&ecirc;u chuẩn về m&ocirc;i trường<br />\r\nb. Bột Barite ti&ecirc;u chuẩn API<br />\r\n+ Tỷ trọng &ge; 4,2g/cm3.<br />\r\n+ C&aacute;c th&ocirc;ng số c&ograve;n lại đạt ti&ecirc;u chuẩn API v&agrave; ti&ecirc;u chuẩn về m&ocirc;i trường<br />\r\nH&agrave;ng được đ&oacute;ng bao 1,5 tấn/bao hoặc theo đơn h&agrave;ng.<br />\r\nCảng xuất h&agrave;ng : Cảng H&ograve;n La.</p>\r\n', '02-22-24-16-08-2016-7.jpg', 'a:1:{i:0;s:25:\"02-22-24-16-08-2016-7.jpg\";}', '22', '18', '0', '1', '0', null, '1471332144', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'Bột Barite dùng trong công nghệ khoan dầu khí ', '3', 'Powder Barite used in drilling technology', '', '<p>Asian. Bartie high density powder .<br />\r\n+ Gravity: &ge; 4,3g /cm3 .<br />\r\n+ The remaining parameters API standards and environmental standards<br />\r\nBarite powder API standards<br />\r\n+ Density &ge; 4,2g/cm3 .<br />\r\n+ The remaining parameters API standards and environmental standards<br />\r\nGoods are packed 1.5 tonnes/bag or according to the order.<br />\r\nPort of shipment: Hon La Port</p>\r\n', 'Powder Barite used in drilling technology', 'Powder Barite used in drilling technology', 'Powder Barite used in drilling technology');
-INSERT INTO `w_product` VALUES ('36', '1', 'Bột Barite chất lượng cao dùng làm phụ gia công nghiệp', 'bot-barite-chat-luong-cao-dung-lam-phu-gia-cong-nghiep', '', '<p>C&ocirc;ng ty tuyển chọn quặng Barite để sản xuất bột Barite l&agrave;m phụ gia c&ocirc;ng nghiệp theo đơn h&agrave;ng.&nbsp;<br />\r\nTi&ecirc;u chuẩn chất lượng căn cứ theo y&ecirc;u cầu về chất lượng của kh&aacute;ch h&agrave;ng (h&agrave;m lượng, độ trắng, cỡ hạt&hellip;).<br />\r\nCảng xuất h&agrave;ng : Cảng H&ograve;n La hoặc tại nh&agrave; m&aacute;y (mường Bualapha, tỉnh Khăm Muộn, nước CHDCND L&agrave;o)</p>\r\n', '02-23-18-16-08-2016-8.jpg', 'a:1:{i:0;s:25:\"02-23-18-16-08-2016-8.jpg\";}', '22', '18', '0', '1', '0', null, '1471332198', '', '', '', '4', 'High Quality Barite powder used as additives industry', '', '<p>Barite ore companies selected to produce Barite powder as additives industrial orders.<br />\r\nQuality standards based on the quality requirements of customers ( content, whiteness, particle size ...) .<br />\r\nPort of shipment : Hon La port or at the factory (pictured Boualapha District, Kham Muon province , Lao People&#39;s Democratic Republic )</p>\r\n', '', '', '');
-INSERT INTO `w_product` VALUES ('37', '1', 'Cát xây dựng và cát san lấp', 'cat-xay-dung-va-cat-san-lap', '', '<p>Được cung cấp từ b&atilde;i c&aacute;t của c&ocirc;ng ty tại x&atilde; T&acirc;n Hưng, huyện Ti&ecirc;n Lữ, tỉnh Hưng Y&ecirc;n.</p>\r\n', '11-15-17-17-08-2016-catdemi.jpg', 'a:1:{i:0;s:31:\"11-15-17-17-08-2016-catdemi.jpg\";}', '22', '4', '0', '1', '0', null, '1471332288', '', '', '', '5', 'Sand for building and leveling', '', '<p>Sand is supplied from the sands of the company in Tan Hung commune, Tien Lu District, Hung Yen Province.</p>\r\n', '', '', '');
-INSERT INTO `w_product` VALUES ('38', '1', 'Sản phẩm dịch vụ', 'san-pham-dich-vu', '', '<p>+ Dịch vụ t&igrave;m kiếm thăm d&ograve; kho&aacute;ng sản.<br />\r\n+ Tư vấn mua b&aacute;n, lắp đặt c&aacute;c sản phẩm viễn th&ocirc;ng v&agrave; tự động ho&aacute;.<br />\r\n+ Dịch vụ vận tải v&agrave; bốc xếp h&agrave;ng ho&aacute;.<br />\r\n+ Dịch vụ nghi&ecirc;n cứu v&agrave; bu&ocirc;n b&aacute;n vật tư thiết bị về c&ocirc;ng nghệ m&ocirc;i trường</p>\r\n', '', null, '22', '4', '0', '1', '0', null, '1471332349', '', '', '', '6', 'Products and Services', '', '<p>+ Service for mineral exploration .<br />\r\n+ Consulting purchase and installation of telecommunications products and automation .<br />\r\n+ Transport services and cargo handling .<br />\r\n+ Services Research and trafficking of materials and equipment for environmental technology</p>\r\n', '', '', '');
+INSERT INTO `w_product` VALUES ('32', 'Giới thiệu chung', 'gioi-thieu-chung', '', '<p>C&ocirc;ng ty đ&atilde; k&yacute; hợp đồng với ch&iacute;nh phủ L&agrave;o hợp đồng khai th&aacute;c v&agrave; chế biến bột Barite tại mường Bualapha, tỉnh Khăm Muộn, bao gồm :<br />\r\n+ Một nh&agrave; m&aacute;y chế biến Barite được x&acirc;y dựng tr&ecirc;n diện t&iacute;ch 2,5ha :</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-03-57-17-08-2016-1.jpg\" /></p>\r\n\r\n<p><br />\r\n+ Khu mỏ với diện t&iacute;ch 17,48 km2. Tổng trữ lượng địa chất &nbsp;được đ&aacute;nh gi&aacute; &nbsp;như bảng sau :&nbsp;</p>\r\n\r\n<p>Trữ lượng địa chất thăm d&ograve; to&agrave;n khu mỏ<br />\r\n1&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp 121&nbsp;&nbsp; &nbsp;572.969&nbsp;&nbsp; &nbsp;Tấn<br />\r\n2&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp 122&nbsp;&nbsp; &nbsp;384.756&nbsp;&nbsp; &nbsp;Tấn<br />\r\n3&nbsp;&nbsp; &nbsp;Tổng trữ lượng cấp t&agrave;i nguy&ecirc;n 333&nbsp;&nbsp; &nbsp;448.074&nbsp;&nbsp; &nbsp;Tấn<br />\r\nTổng trữ lượng địa chất to&agrave;n khu mỏ&nbsp;&nbsp; &nbsp;1.405.799&nbsp;&nbsp; &nbsp;Tấn</p>\r\n\r\n<p><em>Qu&aacute; tr&igrave;nh khai th&aacute;c tại khu mỏ</em></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/02-00-01-16-08-2016-2.jpg\" /></p>\r\n\r\n<p>V&agrave; chất lượng quặng đ&atilde; được ph&acirc;n t&iacute;ch c&oacute; kết quả như sau :</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/product/32/700x700/11-05-22-17-08-2016-4.jpg\" /></p>\r\n\r\n<p>C&ocirc;ng ty c&oacute; khả năng đ&aacute;p ứng được c&aacute;c đơn h&agrave;ng c&oacute; tổng số lượng từ 60.000 đến 80.000 tấn bột v&agrave; quặng Barite /năm.</p>\r\n', '11-03-57-17-08-2016-1.jpg', 'a:4:{i:0;s:25:\"11-03-57-17-08-2016-1.jpg\";i:1;s:25:\"02-00-01-16-08-2016-2.jpg\";i:2;s:25:\"11-05-16-17-08-2016-3.jpg\";i:3;s:25:\"11-05-22-17-08-2016-4.jpg\";}', '1', '17', '0', '1', null, '1471330663', 'Giới thiệu chung', 'Giới thiệu chung', 'Giới thiệu chung', '1');
+INSERT INTO `w_product` VALUES ('33', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'barite-khong-tuyen-chon-dung-de-san-xuat-dung-dich-khoan-dau-khi', '', '<p>+ K&iacute;ch cỡ của cục quặng Barite : &lt;25cm (hoặc theo đơn h&agrave;ng)<br />\r\n+ H&agrave;m lượng BaSO4 &ge; 95% , tỉ trọng : &ge; 4,3g/cm3.&nbsp;<br />\r\n+ Quặng c&oacute; c&aacute;c th&ocirc;ng số đạt về ti&ecirc;u chuẩn m&ocirc;i trường như bảng ph&acirc;n t&iacute;ch<br />\r\n+ Cảng xuất h&agrave;ng : Cảng H&ograve;n La</p>\r\n', '02-19-15-16-08-2016-5.jpg', 'a:1:{i:0;s:25:\"02-19-15-16-08-2016-5.jpg\";}', '1', '18', '0', '1', null, '1471331955', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', 'Barite không tuyển chọn (dùng để sản xuất dung dịch khoan dầu khí)', '1');
+INSERT INTO `w_product` VALUES ('34', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'quang-barite-duoc-tuyen-chon-de-san-xuat-bot-baso4-phuc-vu-cho-cac-nganh-san-xuat-cong-nghiep', '', '<p>+ K&iacute;ch cỡ : theo đơn h&agrave;ng.<br />\r\n+ H&agrave;m lượng BaSO4 &gt; 97%.<br />\r\n+ Độ trắng v&agrave; c&aacute;c ti&ecirc;u chuẩn kh&aacute;c : do kh&aacute;ch h&agrave;ng y&ecirc;u cầu.<br />\r\n+ Cảng xuất h&agrave;ng : cảng H&ograve;n La</p>\r\n', '02-20-43-16-08-2016-6.jpg', 'a:1:{i:0;s:25:\"02-20-43-16-08-2016-6.jpg\";}', '1', '18', '0', '1', null, '1471332043', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', 'Quặng Barite được tuyển chọn để sản xuất bột BaSO4 phục vụ cho các ngành sản xuất công nghiệp', '2');
+INSERT INTO `w_product` VALUES ('35', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'bot-barite-dung-trong-cong-nghe-khoan-dau-khi', '', '<p>a. Bột Bartie tỷ trọng cao.&nbsp;<br />\r\n+ Tỷ trọng : &ge; 4,3g/cm3.<br />\r\n+ C&aacute;c th&ocirc;ng số c&ograve;n lại đạt ti&ecirc;u chuẩn API v&agrave; ti&ecirc;u chuẩn về m&ocirc;i trường<br />\r\nb. Bột Barite ti&ecirc;u chuẩn API<br />\r\n+ Tỷ trọng &ge; 4,2g/cm3.<br />\r\n+ C&aacute;c th&ocirc;ng số c&ograve;n lại đạt ti&ecirc;u chuẩn API v&agrave; ti&ecirc;u chuẩn về m&ocirc;i trường<br />\r\nH&agrave;ng được đ&oacute;ng bao 1,5 tấn/bao hoặc theo đơn h&agrave;ng.<br />\r\nCảng xuất h&agrave;ng : Cảng H&ograve;n La.</p>\r\n', '02-22-24-16-08-2016-7.jpg', 'a:1:{i:0;s:25:\"02-22-24-16-08-2016-7.jpg\";}', '1', '18', '0', '1', null, '1471332144', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'Bột Barite dùng trong công nghệ khoan dầu khí ', 'Bột Barite dùng trong công nghệ khoan dầu khí ', '3');
+INSERT INTO `w_product` VALUES ('36', 'Bột Barite chất lượng cao dùng làm phụ gia công nghiệp', 'bot-barite-chat-luong-cao-dung-lam-phu-gia-cong-nghiep', '', '<p>C&ocirc;ng ty tuyển chọn quặng Barite để sản xuất bột Barite l&agrave;m phụ gia c&ocirc;ng nghiệp theo đơn h&agrave;ng.&nbsp;<br />\r\nTi&ecirc;u chuẩn chất lượng căn cứ theo y&ecirc;u cầu về chất lượng của kh&aacute;ch h&agrave;ng (h&agrave;m lượng, độ trắng, cỡ hạt&hellip;).<br />\r\nCảng xuất h&agrave;ng : Cảng H&ograve;n La hoặc tại nh&agrave; m&aacute;y (mường Bualapha, tỉnh Khăm Muộn, nước CHDCND L&agrave;o)</p>\r\n', '02-23-18-16-08-2016-8.jpg', 'a:1:{i:0;s:25:\"02-23-18-16-08-2016-8.jpg\";}', '1', '18', '0', '1', null, '1471332198', '', '', '', '4');
+INSERT INTO `w_product` VALUES ('37', 'Cát xây dựng và cát san lấp', 'cat-xay-dung-va-cat-san-lap', '', '<p>Được cung cấp từ b&atilde;i c&aacute;t của c&ocirc;ng ty tại x&atilde; T&acirc;n Hưng, huyện Ti&ecirc;n Lữ, tỉnh Hưng Y&ecirc;n.</p>\r\n', '11-15-17-17-08-2016-catdemi.jpg', 'a:1:{i:0;s:31:\"11-15-17-17-08-2016-catdemi.jpg\";}', '1', '4', '0', '1', null, '1471332288', '', '', '', '5');
+INSERT INTO `w_product` VALUES ('38', 'Sản phẩm dịch vụ', 'san-pham-dich-vu', '', '<p>+ Dịch vụ t&igrave;m kiếm thăm d&ograve; kho&aacute;ng sản.<br />\r\n+ Tư vấn mua b&aacute;n, lắp đặt c&aacute;c sản phẩm viễn th&ocirc;ng v&agrave; tự động ho&aacute;.<br />\r\n+ Dịch vụ vận tải v&agrave; bốc xếp h&agrave;ng ho&aacute;.<br />\r\n+ Dịch vụ nghi&ecirc;n cứu v&agrave; bu&ocirc;n b&aacute;n vật tư thiết bị về c&ocirc;ng nghệ m&ocirc;i trường</p>\r\n', '', null, '1', '4', '0', '1', null, '1471332349', '', '', '', '6');
 
 -- ----------------------------
 -- Table structure for w_type
