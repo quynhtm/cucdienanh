@@ -101,14 +101,12 @@ class ToolsCommonController extends BaseAdminController
         //echo base64_encode('HuongDanRaoVat30s'); //
         // http://raovat30s.vn/chi-tiet/tin-tuc-4/huong-dan-dang-tin-rao-vat.html?url_source=SHVvbmdEYW5SYW9WYXQzMHM=
         //echo base64_encode('http://minhducproperty.com/');
-        die();
-        die('tạm dừng chức năng này');
         $arrPermit = ArrayPermission::$arrPermit;
 
         /*DB::table('permission')->truncate();
         DB::table('group_user')->truncate();
         DB::table('group_user_permission')->truncate();*/
-        /*foreach($arrPermit as $permit=> $infor){
+        foreach($arrPermit as $permit=> $infor){
             $arrInsert = array('permission_code'=>$permit,
                 'permission_name'=>$infor['name_permit'],
                 'permission_group_name'=>$infor['group_permit'],
@@ -116,7 +114,7 @@ class ToolsCommonController extends BaseAdminController
             if (!Permission::checkExitsPermissionCode($permit)) {
                 Permission::createPermission($arrInsert);
             }
-        }*/
+        }
         FunctionLib::debug($arrPermit);
     }
 }

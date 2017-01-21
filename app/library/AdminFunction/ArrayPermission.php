@@ -6,6 +6,7 @@
 class ArrayPermission{
     public static $arrPermit = array(
         'root' => array('name_permit'=>'Root','group_permit'=>'Root'),
+        'supper_admin' => array('name_permit'=>'Admin','group_permit'=>'Admin'),
 
         'user_view' => array('name_permit'=>'Xem danh sách user Admin','group_permit'=>'Tài khoản Admin'),
         'user_create' => array('name_permit'=>'Tạo user Admin','group_permit'=>'Tài khoản Admin'),
@@ -56,6 +57,24 @@ class ArrayPermission{
         'user_customer_delete' => array('name_permit'=>'Xóa khách hàng','group_permit'=>'Quyền khách hàng'),
         'user_customer_create' => array('name_permit'=>'Tạo khách hàng','group_permit'=>'Quyền khách hàng'),
         'user_customer_edit' => array('name_permit'=>'Sửa khách hàng','group_permit'=>'Quyền khách hàng'),
+
+        'libraryImage_full' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_view' => array('name_permit'=>'Xem thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_delete' => array('name_permit'=>'Xóa thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_create' => array('name_permit'=>'Tạo thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_edit' => array('name_permit'=>'Sửa thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+
+        'video_full' => array('name_permit'=>'Full video','group_permit'=>'Quyền video'),
+        'video_view' => array('name_permit'=>'Xem video','group_permit'=>'Quyền video'),
+        'video_delete' => array('name_permit'=>'Xóa video','group_permit'=>'Quyền video'),
+        'video_create' => array('name_permit'=>'Tạo video','group_permit'=>'Quyền video'),
+        'video_edit' => array('name_permit'=>'Sửa video','group_permit'=>'Quyền video'),
+
+        'infor_full' => array('name_permit'=>'Full thông tin site','group_permit'=>'Quyền thông tin site'),
+        'infor_view' => array('name_permit'=>'Xem thông tin site','group_permit'=>'Quyền thông tin site'),
+        'infor_delete' => array('name_permit'=>'Xóa thông tin site','group_permit'=>'Quyền thông tin site'),
+        'infor_create' => array('name_permit'=>'Tạo thông tin site','group_permit'=>'Quyền thông tin site'),
+        'infor_edit' => array('name_permit'=>'Sửa thông tin site','group_permit'=>'Quyền thông tin site'),
 
     );
 

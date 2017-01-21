@@ -12,41 +12,6 @@ class LibraryImageController extends BaseAdminController
     private $permission_create = 'libraryImage_create';
     private $permission_edit = 'libraryImage_edit';
     private $arrStatus = array(-1 => '--Chọn trạng thái--', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
-    private $arrTarget = array(-1 => '--Chọn target link--', CGlobal::BANNER_NOT_TARGET_BLANK => 'Link trên site', CGlobal::BANNER_TARGET_BLANK => 'Mở tab mới');
-    private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', CGlobal::BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', CGlobal::BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
-    private $arrProvince = array();
-    private $arrRel = array(CGlobal::LINK_NOFOLLOW => 'Nofollow', CGlobal::LINK_FOLLOW => 'Follow');
-    private $arrPosition = array(0=>'---Chọn vị trí hiển thị ---',
-        1=> 'Vị trí Top',
-        2=> 'Vị trí Center',
-        3=> 'Vị trí Bottom',
-        );
-
-    private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',
-        CGlobal::BANNER_TYPE_TOP => 'Banner Top Header',
-        CGlobal::BANNER_TYPE_LEFT => 'Banner Trái - Phải',
-        /*CGlobal::BANNER_TYPE_LEFT => 'Banner Trái',
-        CGlobal::BANNER_TYPE_BOTTOM => 'Banner Dưới Footer',
-        CGlobal::BANNER_TYPE_CENTER => 'Banner Giữa nội dung'*/
-    );
-
-    const BANNER_PAGE_HOME = 1;
-    const BANNER_PAGE_DETAIL = 2;
-    const BANNER_PAGE_CATEGORY = 4;
-    const BANNER_PAGE_CUSTOMER_ITEMS = 5;
-    const BANNER_PAGE_CONTACT = 6;
-    const BANNER_PAGE_SEARCH = 7;
-    const BANNER_PAGE_OTHER = 8;
-
-    private $arrPage = array(0 => '-- Chọn page --',
-        CGlobal::BANNER_PAGE_HOME => 'Page trang chủ',
-        CGlobal::BANNER_PAGE_DETAIL=> 'Page chi tiết',
-        /*CGlobal::BANNER_PAGE_CATEGORY => 'Page danh mục',
-        CGlobal::BANNER_PAGE_CUSTOMER_ITEMS => 'Page Khách đăng tin',
-        CGlobal::BANNER_PAGE_SEARCH=> 'Page tìm kiếm',
-        CGlobal::BANNER_PAGE_CONTACT => 'Page liên hệ',
-        CGlobal::BANNER_PAGE_OTHER => 'Page khác'*/
-    );
 
     private $error = array();
     private $arrCategoryParent = array();

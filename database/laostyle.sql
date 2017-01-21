@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-21 12:06:36
+Date: 2017-01-21 14:36:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,13 +59,13 @@ CREATE TABLE `permission` (
   `permission_status` int(1) NOT NULL DEFAULT '1' COMMENT '1:hiá»‡n , 0:áº©n',
   `permission_group_name` varchar(255) DEFAULT NULL COMMENT 'group ten controller',
   PRIMARY KEY (`permission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
 -- ----------------------------
 INSERT INTO `permission` VALUES ('1', 'root', 'Root', '1', 'Root');
-INSERT INTO `permission` VALUES ('2', 'user_view', 'Xem danh sách user Admin', '1', 'Tài khoản Admin');
+INSERT INTO `permission` VALUES ('2', 'supper_admin', 'Admin', '1', 'Admin');
 INSERT INTO `permission` VALUES ('3', 'user_create', 'Tạo user Admin', '1', 'Tài khoản Admin');
 INSERT INTO `permission` VALUES ('4', 'user_edit', 'Sửa user Admin', '1', 'Tài khoản Admin');
 INSERT INTO `permission` VALUES ('5', 'user_change_pass', 'Thay đổi user Admin', '1', 'Tài khoản Admin');
@@ -107,6 +107,22 @@ INSERT INTO `permission` VALUES ('40', 'user_customer_delete', 'Xóa khách hàn
 INSERT INTO `permission` VALUES ('41', 'user_customer_create', 'Tạo khách hàng', '1', 'Quyền khách hàng');
 INSERT INTO `permission` VALUES ('42', 'user_customer_edit', 'Sửa khách hàng', '1', 'Quyền khách hàng');
 INSERT INTO `permission` VALUES ('43', 'toolsCommon_full', 'Full quyền', '1', 'Full quyền Share link');
+INSERT INTO `permission` VALUES ('44', 'libraryImage_full', 'Full thư viện ảnh', '1', 'Quyền thư viện ảnh');
+INSERT INTO `permission` VALUES ('45', 'libraryImage_view', 'Xem thư viện ảnh', '1', 'Quyền thư viện ảnh');
+INSERT INTO `permission` VALUES ('46', 'libraryImage_delete', 'Xóa thư viện ảnh', '1', 'Quyền thư viện ảnh');
+INSERT INTO `permission` VALUES ('47', 'libraryImage_create', 'Tạo thư viện ảnh', '1', 'Quyền thư viện ảnh');
+INSERT INTO `permission` VALUES ('48', 'libraryImage_edit', 'Sửa thư viện ảnh', '1', 'Quyền thư viện ảnh');
+INSERT INTO `permission` VALUES ('49', 'video_full', 'Full video', '1', 'Quyền video');
+INSERT INTO `permission` VALUES ('50', 'video_view', 'Xem video', '1', 'Quyền video');
+INSERT INTO `permission` VALUES ('51', 'video_delete', 'Xóa video', '1', 'Quyền video');
+INSERT INTO `permission` VALUES ('52', 'video_create', 'Tạo video', '1', 'Quyền video');
+INSERT INTO `permission` VALUES ('53', 'video_edit', 'Sửa video', '1', 'Quyền video');
+INSERT INTO `permission` VALUES ('54', 'infor_full', 'Full thông tin site', '1', 'Quyền thông tin site');
+INSERT INTO `permission` VALUES ('55', 'infor_view', 'Xem thông tin site', '1', 'Quyền thông tin site');
+INSERT INTO `permission` VALUES ('56', 'infor_delete', 'Xóa thông tin site', '1', 'Quyền thông tin site');
+INSERT INTO `permission` VALUES ('57', 'infor_create', 'Tạo thông tin site', '1', 'Quyền thông tin site');
+INSERT INTO `permission` VALUES ('58', 'infor_edit', 'Sửa thông tin site', '1', 'Quyền thông tin site');
+INSERT INTO `permission` VALUES ('59', 'user_view', 'Xem danh sách user Admin', '1', 'Tài khoản Admin');
 
 -- ----------------------------
 -- Table structure for user
@@ -237,7 +253,6 @@ INSERT INTO `w_category` VALUES ('31', 'Công ty chào mua 33', 'cong-ty-chao-mu
 DROP TABLE IF EXISTS `w_images`;
 CREATE TABLE `w_images` (
   `image_id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL,
   `image_title` varchar(255) DEFAULT NULL,
   `image_title_alias` varchar(255) DEFAULT NULL,
   `image_desc_sort` text,
@@ -253,13 +268,11 @@ CREATE TABLE `w_images` (
   `image_meta_keyword` text,
   `image_meta_description` text,
   PRIMARY KEY (`image_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of w_images
 -- ----------------------------
-INSERT INTO `w_images` VALUES ('11', '1', 'Vùng mỏ hôm nay', 'vung-mo-hom-nay', '', '', '01-10-23-17-08-2016-3.jpg', 'a:4:{i:0;s:25:\"01-10-23-17-08-2016-3.jpg\";i:1;s:25:\"01-10-24-17-08-2016-1.jpg\";i:2;s:25:\"01-10-27-17-08-2016-2.jpg\";i:3;s:25:\"01-10-28-17-08-2016-4.jpg\";}', '5', '1', '1', '1471370871', '1', '', '', '');
-INSERT INTO `w_images` VALUES ('12', '1', ' Trên khai trường sản xuất than', 'tren-khai-truong-san-xuat-than', '', '', '01-25-21-17-08-2016-4.jpg', 'a:2:{i:0;s:25:\"01-25-05-17-08-2016-3.jpg\";i:1;s:25:\"01-25-21-17-08-2016-4.jpg\";}', '5', '1', '1', '1471371905', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for w_info
@@ -359,7 +372,7 @@ CREATE TABLE `w_news` (
   `news_meta_description` text,
   `news_order` int(11) DEFAULT NULL,
   PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of w_news
@@ -385,6 +398,7 @@ INSERT INTO `w_news` VALUES ('41', 'Công ty TNHH Đầu tư Quang Trung có nhu
 INSERT INTO `w_news` VALUES ('44', 'Các hoạt động khác', 'cac-hoat-dong-khac', '1', '', '<p>Đất nước L&agrave;o xinh đẹp</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-23-17-08-2016-1dat-nuoc-lao-xinh-dep.jpg\" /></p>\r\n\r\n<p>Đ&ecirc;m mekong tại đất nước L&agrave;o</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-45-17-08-2016-2dem-mekong-tai-nuoc-lao-xinh-dep.jpg\" /></p>\r\n\r\n<p>Tham dự một đ&aacute;m cưới truyền thống tại L&agrave;o.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-46-17-08-2016-3du-dam-cuoi-lao.jpg\" /></p>\r\n\r\n<p>Giữa c&aacute;nh đồng chum</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-48-17-08-2016-4giua-canh-dong-chum.jpg\" /></p>\r\n\r\n<p>M&uacute;a Năm v&ocirc;ng</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-50-17-08-2016-5mua-namvong.jpg\" /></p>\r\n\r\n<p>Quảng trường suvanuvong - cố đ&ocirc; Luangpabang</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-43-17-08-2016-6quang-truong-suvanuvong-co-do-luongprabang.jpg\" /></p>\r\n\r\n<p>Tặng qu&agrave; cho cục mỏ - bộ mỏ năng lượng nước CHDCND L&agrave;o.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-45-17-08-2016-7tang-qua-cho-cuc-mo-bo-mo-nang-luong-nuoc-chdcnd-lao.jpg\" /></p>\r\n\r\n<p>Thăm c&aacute;nh đồng chum &ndash; xi&ecirc;ng khoảng.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-45-44-17-08-2016-8tham-canh-dong-chum-xiengkhoang.jpg\" /></p>\r\n\r\n<p>Thăm đồn bi&ecirc;n ph&ograve;ng cửa khầu L&agrave;o.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-48-40-17-08-2016-9tham-don-bien-phong-cua-khau-lao.jpg\" /></p>\r\n\r\n<p>Thăm mỏ Barite Tuy&ecirc;n Quang.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-49-16-17-08-2016-10tham-mo-barite-tuyen-quang.jpg\" /></p>\r\n\r\n<p>Thăm xưởng sản xuất Barite tại Tuy&ecirc;n Quang - Việt Nam.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/44/700x700/10-49-21-17-08-2016-11tham-xuong-san-xuat-barite.jpg\" /></p>\r\n', '10-45-23-17-08-2016-1dat-nuoc-lao-xinh-dep.jpg', 'a:11:{i:0;s:46:\"10-45-23-17-08-2016-1dat-nuoc-lao-xinh-dep.jpg\";i:1;s:57:\"10-45-45-17-08-2016-2dem-mekong-tai-nuoc-lao-xinh-dep.jpg\";i:2;s:40:\"10-45-46-17-08-2016-3du-dam-cuoi-lao.jpg\";i:3;s:44:\"10-45-48-17-08-2016-4giua-canh-dong-chum.jpg\";i:4;s:36:\"10-45-50-17-08-2016-5mua-namvong.jpg\";i:5;s:67:\"10-45-43-17-08-2016-6quang-truong-suvanuvong-co-do-luongprabang.jpg\";i:6;s:77:\"10-45-45-17-08-2016-7tang-qua-cho-cuc-mo-bo-mo-nang-luong-nuoc-chdcnd-lao.jpg\";i:7;s:56:\"10-45-44-17-08-2016-8tham-canh-dong-chum-xiengkhoang.jpg\";i:8;s:57:\"10-48-40-17-08-2016-9tham-don-bien-phong-cua-khau-lao.jpg\";i:9;s:52:\"10-49-16-17-08-2016-10tham-mo-barite-tuyen-quang.jpg\";i:10;s:52:\"10-49-21-17-08-2016-11tham-xuong-san-xuat-barite.jpg\";}', '17', '16', null, '0', '1', '1471448723', '', '', '', '0');
 INSERT INTO `w_news` VALUES ('45', 'Xây dựng nhà máy', 'xay-dung-nha-may', '1', '', '<p>Căn cứ v&agrave;o hợp đồng đ&atilde; k&yacute; kết giữa c&ocirc;ng ty v&agrave; Ch&iacute;nh phủ nước CHDCND L&agrave;o ng&agrave;y 16 th&aacute;ng 01 năm 2014. C&ocirc;ng ty đ&atilde; tiến h&agrave;nh x&acirc;y dựng một nh&agrave; m&aacute;y chế biến bột Barite tr&ecirc;n diện t&iacute;ch 2,5ha tại cụm bản Noong Ma, mường Bualapha tỉnh khăm muộn.<br />\r\nNh&agrave; m&aacute;y c&oacute; khả năng sản xuất từ 60.000 đến 80.000 tấn bột Barite API/ năm. Ngo&agrave;i ra, nh&agrave; m&aacute;y sẵn s&agrave;ng đ&aacute;p ứng c&aacute;c đơn h&agrave;ng ri&ecirc;ng lẻ sản xuất bột Barite trắng, h&agrave;m lượng cao để l&agrave;m phụ gia c&ocirc;ng nghiệp trong lĩnh vực sản xuất sơn, nhựa&hellip;<br />\r\nĐể c&oacute; đủ nguy&ecirc;n liệu sản xuất, nh&agrave; m&aacute;y c&oacute; một ph&acirc;n xưởng khai th&aacute;c quặng Barite trong khu mỏ Barite của c&ocirc;ng ty (diện t&iacute;ch 17,48&nbsp; km2) được c&aacute;c chuy&ecirc;n gia v&agrave; kh&aacute;ch h&agrave;ng đ&aacute;nh gi&aacute; gi&agrave;u tiềm năng.<br />\r\nTrong qu&aacute; tr&igrave;nh x&acirc;y dựng nh&agrave; m&aacute;y cũng như hoạt động sản xuất sau n&agrave;y, c&ocirc;ng ty lu&ocirc;n lu&ocirc;n ch&uacute; trọng ti&ecirc;u ch&iacute; xanh - sạch - đẹp v&agrave; an sinh x&atilde; hội.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/45/700x700/12-01-47-18-08-2016-6.jpg\" /><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/45/700x700/12-01-47-18-08-2016-8.jpg\" /><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/45/700x700/12-01-47-18-08-2016-7.jpg\" /></p>\r\n', '12-01-47-18-08-2016-8.jpg', 'a:3:{i:0;s:25:\"12-01-47-18-08-2016-8.jpg\";i:1;s:25:\"12-01-47-18-08-2016-6.jpg\";i:2;s:25:\"12-01-47-18-08-2016-7.jpg\";}', '17', '26', null, '0', '1', '1471453245', '', '', '', '0');
 INSERT INTO `w_news` VALUES ('46', 'Vận chuyển thiết bị và xây dựng cơ sở hạ tầng 22', 'van-chuyen-thiet-bi-va-xay-dung-co-so-ha-tang', '2', 'Vận chuyển thiết bị và xây dựng cơ sở hạ tầng 22', '<p>Mặc d&ugrave; dự &aacute;n được triển khai ở v&ugrave;ng s&acirc;u nhưng c&ocirc;ng ty đ&atilde; triển khai th&agrave;nh c&ocirc;ng việc vận chuyển v&agrave; x&acirc;y dựng một nh&agrave; m&aacute;y hiện đại c&oacute; quy m&ocirc; tương đối lớn.</p>\r\n\r\n<p><img alt=\"Vận chuyển thiết bị và xây dựng cơ sở hạ tầng 22\" src=\"http://localhost/cucdienanh/uploads/thumbs/news/46/600x600/1484886454-573cb4258e810763aa000001.jpg\" /></p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/46/700x700/12-05-05-18-08-2016-9.jpg\" /><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/46/700x700/12-05-05-18-08-2016-10.jpg\" /></p>\r\n\r\n<p>Hạ tầng cơ sở phục vụ cho dự &aacute;n v&agrave; d&acirc;n sinh đ&atilde; được c&ocirc;ng ty&nbsp; sửa chữa, n&acirc;ng cấp l&agrave;m mới nhằm đảm bảo t&iacute;nh khả thi v&agrave; hiệu quả của dự &aacute;n cũng như g&oacute;p phần tham gia v&agrave;o việc ph&aacute;t triển kinh tế x&atilde; hội của địa phương.</p>\r\n\r\n<p><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/46/700x700/12-05-05-18-08-2016-11.jpg\" /><img src=\"http://baritevietlao.com.vn/uploads/thumbs/news/46/700x700/12-04-49-18-08-2016-12.jpg\" /></p>\r\n', '1484886454-573cb4258e810763aa000001.jpg', 'a:5:{i:0;s:26:\"12-04-49-18-08-2016-12.jpg\";i:1;s:26:\"12-05-05-18-08-2016-11.jpg\";i:2;s:25:\"12-05-05-18-08-2016-9.jpg\";i:3;s:26:\"12-05-05-18-08-2016-10.jpg\";i:4;s:39:\"1484886454-573cb4258e810763aa000001.jpg\";}', '0', '25', 'Đơn vị trực thuộc và lĩnh vực hoạt động', '0', '1', '1471453489', '', '', '', '0');
+INSERT INTO `w_news` VALUES ('47', null, '', '1', null, null, null, 'a:1:{i:0;s:21:\"1484981795-222222.jpg\";}', '1', null, null, null, '127', '1484981795', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for w_product

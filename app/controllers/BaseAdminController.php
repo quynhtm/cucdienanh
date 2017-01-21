@@ -5,6 +5,7 @@ class BaseAdminController extends BaseController
     protected $permission = array();
     protected $user = array();
     protected $is_root = false;
+    protected $is_admin = false;
 
     public function __construct()
     {
@@ -19,11 +20,15 @@ class BaseAdminController extends BaseController
         if(in_array('root',$this->permission)){
             $this->is_root = true;
         }
+        if(in_array('supper_admin',$this->permission)){
+            $this->is_admin = true;
+        }
         $menu = $this->menu();
         View::share('menu',$menu);
         View::share('aryPermission',$this->permission);
         View::share('user',$this->user);
         View::share('is_root',$this->is_root);
+        View::share('is_admin',$this->is_admin);
     }
 
     public function menu(){
