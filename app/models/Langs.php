@@ -66,7 +66,7 @@ class Langs extends Eloquent {
     				self::removeCacheId($data->language_id);
     			}
     			if(isset($data->language_keyword) && $data->language_keyword != ''){
-    				self::removeCacheKeyword($data->language_keyword);
+    				self::removeCacheKeyword($data->language_keyword, $data->language_lang);
     			}
     		}
     		DB::connection()->getPdo()->commit();

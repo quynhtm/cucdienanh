@@ -58,6 +58,7 @@
 			    <?php endif; ?>
 				<?php endforeach; ?>
 				<?php endif; ?>
+               <li><a href="<?php echo URL::route('site.pageCustomer'); ?>" title="<?php echo Langs::getItemByKeywordLang('text_customer', $lang); ?>"><?php echo Langs::getItemByKeywordLang('text_customer', $lang); ?></a></li>
                <li><a href="<?php echo URL::route('site.pageContact'); ?>" title="<?php echo Langs::getItemByKeywordLang('text_contact', $lang); ?>"><?php echo Langs::getItemByKeywordLang('text_contact', $lang); ?></a></li>
             </ul>
          </div>

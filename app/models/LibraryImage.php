@@ -171,4 +171,55 @@ class LibraryImage extends Eloquent
             Cache::forget(Memcache::CACHE_IMAGE_ID.$id);
         }
     }
+    
+    public static function getSameNews($dataField='', $id=0, $limit=10, $lang){
+    	try{
+    		$result = array();
+    
+    		if($id>0 && $limit>0){
+    			$query = LibraryImage::where('image_id','<>', $id);
+    			$query->where('image_status', CGlobal::status_show);
+    			if($lang > 0){
+    				$query->where('type_language', $lang);
+    			}
+    			$query->orderBy('image_id', 'desc');
+    			 
+    			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
+    			if(!empty($fields)){
+    				$result = $query->take($limit)->get($fields);
+    			}else{
+    				$result = $query->take($limit)->get();
+    			}
+    		}
+    		return $result;
+    
+    	}catch (PDOException $e){
+    		throw new PDOException();
+    	}
+    }
+    
+    public static function getNewImages($dataField='', $limit=10, $lang){
+    	try{
+    		$result = array();
+    
+    		if($limit>0){
+    			$query = LibraryImage::where('image_status', CGlobal::status_show);
+    			if($lang > 0){
+    				$query->where('type_language', $lang);
+    			}
+    			$query->orderBy('image_id', 'desc');
+    
+    			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
+    			if(!empty($fields)){
+    				$result = $query->take($limit)->get($fields);
+    			}else{
+    				$result = $query->take($limit)->get();
+    			}
+    		}
+    		return $result;
+    
+    	}catch (PDOException $e){
+    		throw new PDOException();
+    	}
+    }
 }

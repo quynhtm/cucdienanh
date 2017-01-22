@@ -20,7 +20,7 @@
 	      @endif
 	   </div>
 	   @if(sizeof($newsSame) > 0)
-	   <div class="title-same">Bài viết khác<span></span></div>
+	   <div class="title-same">{{Langs::getItemByKeywordLang('text_other_post', $lang)}}<span></span></div>
 	   <div class="content-same-post">
 			<ul>
 				@foreach($newsSame as $k=>$item)

@@ -167,4 +167,21 @@
 	.bg-top .mobile {
 	    text-align: left;
 	}
+	.main-content-view .item-library,
+	.main-content-view .item-ads-partner{
+		height:auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.item-library .thumbL,
+	.item-library .titleL{
+		height:auto;
+	}
+	.item-library-detail {
+	    height: auto;
+	    margin-bottom: 15px;
+	}
+	.item-library-detail .thumbLDetail{
+		height: auto;
+	}
 }

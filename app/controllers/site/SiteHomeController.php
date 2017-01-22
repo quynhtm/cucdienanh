@@ -28,7 +28,7 @@ class SiteHomeController extends BaseSiteController{
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 		//Get News Hot
-    	$NewsHot = News::getHotNews('', CGlobal::number_show_4);
+    	$NewsHot = News::getHotNews('', CGlobal::number_show_4, $this->lang);
     	
     	//Category
     	$menuCategoriessAll = Category::getCategoriessAll();
@@ -48,7 +48,8 @@ class SiteHomeController extends BaseSiteController{
 		    		'category_name'=>'',
 		    	);
     	$arrItem = array();
-    	$meta_title = $meta_keywords = $meta_description = 'Tin tức';
+    	$str = Langs::getItemByKeywordLang('text_news', $this->lang);
+    	$meta_title = $meta_keywords = $meta_description = $str;
     	$meta_img = '';
     	if($caid > 0){
     		//GetCat
@@ -91,7 +92,8 @@ class SiteHomeController extends BaseSiteController{
     	$keyword = addslashes(Request::get('keyword',''));
     	
     	$arrItem = array();
-    	$meta_title = $meta_keywords = $meta_description = 'Tìm kiếm';
+    	$str = Langs::getItemByKeywordLang('text_search', $this->lang);
+    	$meta_title = $meta_keywords = $meta_description = $str;
     	$meta_img = '';
     	if($keyword != ''){
     
@@ -123,7 +125,8 @@ class SiteHomeController extends BaseSiteController{
     public function pageDetailNew($catname='', $title='', $id=0){
     	$item = array();
     	$arrCat = array();
-    	$meta_title = $meta_keywords = $meta_description = 'Tin tức';
+    	$str = Langs::getItemByKeywordLang('text_news', $this->lang);
+    	$meta_title = $meta_keywords = $meta_description = $str;
     	$meta_img = '';
     	$newsSame = array();
     	if($id > 0){
@@ -135,7 +138,7 @@ class SiteHomeController extends BaseSiteController{
     			$meta_keywords = stripslashes($item->news_meta_keyword);
     			$meta_description = stripslashes($item->news_meta_description);
     			
-    			$newsSame = News::getSameNews($dataField='', $item->news_category, $item->news_id, CGlobal::number_show_15);
+    			$newsSame = News::getSameNews($dataField='', $item->news_category, $item->news_id, CGlobal::number_show_15, $this->lang);
     		}
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
@@ -147,6 +150,23 @@ class SiteHomeController extends BaseSiteController{
 						    	->with('newsSame', $newsSame)
 						    	->with('lang', $this->lang);
     	$this->right();
+    	$this->footer();
+    }
+    
+    public function pageCustomer(){
+    	$str = Langs::getItemByKeywordLang('text_customer', $this->lang);
+    	$meta_title = $meta_keywords = $meta_description = $str;
+    	$meta_img= '';
+    	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+    	
+    	//Partner
+    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $this->lang, CGlobal::BANNER_CATEGORY_DOITAC);
+    	$arrBannerPartner = $this->getBannerWithPosition($arrBanner);
+    	
+    	$this->header();
+    	$this->layout->content = View::make('site.SiteLayouts.pageCustomer')
+						    	->with('arrBannerPartner', $arrBannerPartner)
+						    	->with('lang', $this->lang);
     	$this->footer();
     }
 	public function pageContact(){
@@ -166,5 +186,117 @@ class SiteHomeController extends BaseSiteController{
 								->with('infoContact', $infoContact)
 								->with('lang', $this->lang);
 		$this->footer();
+	}
+	
+	public function pageVideo(){
+		$str = Langs::getItemByKeywordLang('text_video_clip', $this->lang);
+		$meta_title = $meta_keywords = $meta_description = $str;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		
+		$pageNo = (int) Request::get('page_no',1);
+		$limit = CGlobal::number_show_40;
+		$offset = ($pageNo - 1) * $limit;
+		$search = $data = array();
+		$total = 0;
+		
+		$search['type_language'] = $this->lang;
+		$search['video_status'] = CGlobal::status_show;
+		
+		$data = Video::searchByCondition($search, $limit, $offset,$total);
+		$paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+		
+		$this->header();
+		$this->layout->content = View::make('site.SiteLayouts.pageVideo')
+		->with('arrItem', $data)
+		->with('paging', $paging)
+		->with('lang', $this->lang);
+		$this->footer();
+	}
+	public function pageVideoDetail($title='', $id=0){
+		$item = array();
+		//$newsSame = array();
+		
+		$str = Langs::getItemByKeywordLang('text_video_clip', $this->lang);
+		$meta_title = $meta_keywords = $meta_description = $str;
+		$meta_img = '';
+		 
+		if($id > 0){
+			$item = Video::getById($id);
+			if(sizeof($item) > 0){
+				$meta_title = stripslashes($item->video_name);
+				$meta_keywords = stripslashes($item->video_meta_keyword);
+				$meta_description = stripslashes($item->video_meta_description);
+				 
+				//$newsSame = Video::getSameVideo($dataField='', $item->video_id, CGlobal::number_show_8, $this->lang);
+			}
+		}
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		 
+		$this->header();
+		$this->layout->content = View::make('site.SiteLayouts.pageVideoDetail')
+								->with('item', $item)
+								//->with('newsSame', $newsSame)
+								->with('lang', $this->lang);
+		$this->right();
+		$this->footer();
+	}
+	public function pageLibrary(){
+		$str = Langs::getItemByKeywordLang('text_library', $this->lang);
+		$meta_title = $meta_keywords = $meta_description = $str;
+		$meta_img= '';
+		FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+		
+		$pageNo = (int) Request::get('page_no',1);
+        $limit = CGlobal::number_show_40;
+        $offset = ($pageNo - 1) * $limit;
+        $search = $data = array();
+        $total = 0;
+
+        $search['type_language'] = $this->lang;
+        $search['image_status'] = CGlobal::status_show;
+
+        $data = LibraryImage::searchByCondition($search, $limit, $offset,$total);
+        $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+		
+		$this->header();
+		$this->layout->content = View::make('site.SiteLayouts.pageLibrary')
+								->with('arrItem', $data)
+								->with('paging', $paging)
+								->with('lang', $this->lang);
+		$this->footer();
+	}
+	
+	public function pageLibraryDetail($title='', $id=0){
+		
+		FunctionLib::site_js('lib/slidermagnific/magnific-popup.min.js', CGlobal::$POS_END);
+		FunctionLib::site_css('lib/slidermagnific/magnific-popup.css', CGlobal::$POS_HEAD);
+		
+		$item = array();
+		$newsSame = array();
+		
+    	$str = Langs::getItemByKeywordLang('text_library', $this->lang);
+    	$meta_title = $meta_keywords = $meta_description = $str;
+    	$meta_img = '';
+    	
+    	if($id > 0){
+    		$item = LibraryImage::getById($id);
+    		if(sizeof($item) > 0){
+    			$meta_title = stripslashes($item->news_title);
+    			$meta_keywords = stripslashes($item->news_meta_keyword);
+    			$meta_description = stripslashes($item->news_meta_description);
+    			
+    			$newsSame = LibraryImage::getSameNews($dataField='', $item->image_id, CGlobal::number_show_8, $this->lang);
+    		}
+    	}
+    	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+    	
+    	
+    	$this->header();
+    	$this->layout->content = View::make('site.SiteLayouts.pageLibraryDetail')
+						    	->with('item', $item)
+						    	->with('newsSame', $newsSame)
+						    	->with('lang', $this->lang);
+    	$this->footer();
 	}
 }
