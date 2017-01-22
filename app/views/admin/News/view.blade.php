@@ -49,12 +49,13 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="5%" class="text-center">Image</th>
-                            <th width="40%">Title new</th>
-                            <th width="8%">Language</th>
-                            <th width="20%">Category</th>
-                            <th width="8%" class="text-center">Status</th>
-                            <th width="10%" class="text-center">Action</th>
+                            <th width="5%" class="text-center">Ảnh</th>
+                            <th width="20%">Tiêu đề</th>
+                            <th width="8%">Ngôn ngữ</th>
+                            <th width="15%">Danh mục</th>
+                            <th width="8%">Nổi bật</th>
+                            <th width="8%" class="text-center">Trạng thái</th>
+                            <th width="15%" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,10 +64,17 @@
                                 <td class="text-center">{{ $stt + $key+1 }}</td>
                                 <td class="text-center"><img src="{{$item['url_image']}}"></td>
                                 <td>
-                                    [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{ $item['news_title'] }}</a>
+                                    [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{stripcslashes($item['news_title'])}}</a>
                                 </td>
-                                <td class="text-center">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
-                                <td class="text-center">{{$item['news_category_name']}}</td>
+                                <td class="text-left">@if(isset($arrLanguage[$item['type_language']])){{$arrLanguage[$item['type_language']]}}@else -- @endif</td>
+                                <td class="text-left">{{$item['news_category_name']}}</td>
+                                <td class="text-center">
+                                    @if($item['news_hot'] == 1)
+                                        <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+                                    @else
+                                        <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)
                                         <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>

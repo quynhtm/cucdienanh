@@ -710,7 +710,7 @@ span.block {
     padding: 5px 15px;
 }
 .content-same-post ul li a:hover{
-    color: #c3a137;
+    color: #c3a137!important;
 }
 .item-post {
     clear: both;

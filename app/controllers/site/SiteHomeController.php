@@ -27,9 +27,17 @@ class SiteHomeController extends BaseSiteController{
     		$meta_description = $arrMeta->meta_description;
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
-		
+		//Get News Hot
+    	$NewsHot = News::getHotNews('', CGlobal::number_show_4);
+    	
+    	//Category
+    	$menuCategoriessAll = Category::getCategoriessAll();
+    	
 		$this->header();
-        $this->layout->content = View::make('site.SiteLayouts.Home');
+        $this->layout->content = View::make('site.SiteLayouts.Home')
+        						->with('NewsHot', $NewsHot)
+        						->with('menuCategoriessAll', $menuCategoriessAll)
+        						->with('lang', $this->lang);
         $this->right();
         $this->footer();
     }
@@ -117,6 +125,7 @@ class SiteHomeController extends BaseSiteController{
     	$arrCat = array();
     	$meta_title = $meta_keywords = $meta_description = 'Tin tức';
     	$meta_img = '';
+    	$newsSame = array();
     	if($id > 0){
     		$item = News::getNewByID($id);
     		if(sizeof($item) > 0){
@@ -125,6 +134,8 @@ class SiteHomeController extends BaseSiteController{
     			$meta_title = stripslashes($item->news_title);
     			$meta_keywords = stripslashes($item->news_meta_keyword);
     			$meta_description = stripslashes($item->news_meta_description);
+    			
+    			$newsSame = News::getSameNews($dataField='', $item->news_category, $item->news_id, CGlobal::number_show_15);
     		}
     	}
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
@@ -133,6 +144,7 @@ class SiteHomeController extends BaseSiteController{
     	$this->layout->content = View::make('site.SiteLayouts.pageNewsDetail')
 						    	->with('item', $item)
 						    	->with('arrCat', $arrCat)
+						    	->with('newsSame', $newsSame)
 						    	->with('lang', $this->lang);
     	$this->right();
     	$this->footer();

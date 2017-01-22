@@ -71,6 +71,7 @@ class CGlobal{
     const number_show_20 = 20;
     const number_show_15 = 15;
     const number_show_10 = 10;
+    const number_show_4 = 4;
     const number_show_5 = 5;
     const number_show_8 = 8;
 

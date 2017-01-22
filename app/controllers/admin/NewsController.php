@@ -52,7 +52,7 @@ class NewsController extends BaseAdminController
 
         $search['news_title'] = addslashes(Request::get('news_title',''));
         $search['news_status'] = (int)Request::get('news_status',-1);
-        //$search['field_get'] = 'category_id,news_title,news_status';//cac truong can lay
+        $search['field_get'] = '';//cac truong can lay
 
         $dataSearch = News::searchByCondition($search, $limit, $offset,$total);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
@@ -65,6 +65,7 @@ class NewsController extends BaseAdminController
                     'news_status'=>$val->news_status,
                     'news_category_name'=>$val->news_category_name,
                     'type_language'=>$val->type_language,
+                	'news_hot'=>$val->news_hot,
                     'url_image'=>$url_image,
                 );
             }
@@ -81,7 +82,7 @@ class NewsController extends BaseAdminController
             ->with('arrLanguage', CGlobal::$arrLanguage)
             ->with('optionStatus', $optionStatus)
             ->with('arrStatus', $this->arrStatus)
-
+            ->with('arrHot', $this->arrHot)
             ->with('is_root', $this->is_root)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
             ->with('permission_delete', in_array($this->permission_delete, $this->permission) ? 1 : 0)//dùng common
@@ -206,7 +207,8 @@ class NewsController extends BaseAdminController
             ->with('optionCategory', $optionCategory)
             ->with('optionLanguage', $optionLanguage)
             ->with('error', $this->error)
-            ->with('arrStatus', $this->arrStatus);
+            ->with('arrStatus', $this->arrStatus)
+        	->with('arrHot', $this->arrHot);
     }
 
     public function getCategoryNewsLanguage(){

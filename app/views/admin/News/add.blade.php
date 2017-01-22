@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-sm-8">
                     <div class="form-group">
-                        <input type="text" placeholder="Tên bài viết" id="news_title" name="news_title" class="form-control input-sm" value="@if(isset($data['news_title'])){{$data['news_title']}}@endif">
+                        <input type="text" placeholder="Tên bài viết" id="news_title" name="news_title" class="form-control input-sm" value="@if(isset($data['news_title'])){{stripcslashes($data['news_title'])}}@endif">
                     </div>
                 </div>
 
@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="form-group">
-                        <textarea class="form-control input-sm" rows="8" name="news_desc_sort">@if(isset($data['news_desc_sort'])){{$data['news_desc_sort']}}@endif</textarea>
+                        <textarea class="form-control input-sm" rows="8" name="news_desc_sort">@if(isset($data['news_desc_sort'])){{stripcslashes($data['news_desc_sort'])}}@endif</textarea>
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@
                 <div class="col-sm-10">
                     <div class="form-group">
                         <div class="controls"><button type="button" onclick="Admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
-                        <textarea class="form-control input-sm"  name="news_content">@if(isset($data['news_content'])){{$data['news_content']}}@endif</textarea>
+                        <textarea class="form-control input-sm"  name="news_content">@if(isset($data['news_content'])){{stripcslashes($data['news_content'])}}@endif</textarea>
                     </div>
                 </div>
 

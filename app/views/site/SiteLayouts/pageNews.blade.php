@@ -17,7 +17,6 @@
 						<img alt="{{$item['news_title']}}"
 							src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item['news_id'], $item['news_image'], CGlobal::sizeImage_500)}}">
 					@endif
-					
 					<div class="title-list-item">
 						<a class="post-title" title="{{$item['news_title']}}" href="{{FunctionLib::buildLinkDetailNews($item['news_category_name'], $item['news_title'], $item['news_id'])}}">
 							{{$item['news_title']}}

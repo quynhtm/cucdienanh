@@ -12,7 +12,7 @@ class News extends Eloquent
     //cac truong trong DB
     protected $fillable = array('news_id','news_title','news_title_alias', 'news_desc_sort',
         'news_content', 'news_image', 'news_image_other','news_create','news_order','type_language',
-        'news_type', 'news_category','news_category_name', 'news_status','news_meta_title', 'news_meta_keyword', 'news_meta_description');
+        'news_type', 'news_category','news_category_name', 'news_hot', 'news_status','news_meta_title', 'news_meta_keyword', 'news_meta_description');
 
     public static function getNewByID($id) {
         $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_NEW_ID.$id) : array();
@@ -137,7 +137,7 @@ class News extends Eloquent
                         FunctionLib::deleteFileThumb($dataSave->news_image,$dataSave->news_id,CGlobal::FOLDER_BANNER,$sizeThumb);
                     }
                 }
-                //xóa ?nh khác
+                //xï¿½a ?nh khï¿½c
                 if(!empty($dataSave->news_image_other)){
                     $arrImagOther = unserialize($dataSave->news_image_other);
                     if(sizeof($arrImagOther) > 0){
@@ -186,6 +186,56 @@ class News extends Eloquent
 	    		}else{
 	    			$result = $query->take($limit)->get();
 	    		}
+    		}
+    		return $result;
+    
+    	}catch (PDOException $e){
+    		throw new PDOException();
+    	}
+    }
+    
+    //get news hot
+    public static function getHotNews($dataField='', $limit=10){
+    	try{
+    		$result = array();
+    
+    		if($limit>0){
+    			$query = News::where('news_id','>', 0);
+    			$query->where('news_status', CGlobal::status_show);
+    			$query->where('news_hot', CGlobal::status_show);
+    			$query->where('news_image', '<>', '');
+    			$query->orderBy('news_id', 'desc');
+    			 
+    			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
+    			if(!empty($fields)){
+    				$result = $query->take($limit)->get($fields);
+    			}else{
+    				$result = $query->take($limit)->get();
+    			}
+    		}
+    		return $result;
+    
+    	}catch (PDOException $e){
+    		throw new PDOException();
+    	}
+    }
+    public static function getNewsInCat($dataField='', $catid=0, $limit=10){
+    	try{
+    		$result = array();
+    
+    		if($catid>0 && $limit>0){
+    			$query = News::where('news_id','>', 0);
+    			$query->where('news_category', $catid);
+    			$query->where('news_status', CGlobal::status_show);
+    			$query->where('news_hot','<>', CGlobal::status_show);
+    			$query->orderBy('news_id', 'desc');
+    			 
+    			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
+    			if(!empty($fields)){
+    				$result = $query->take($limit)->get($fields);
+    			}else{
+    				$result = $query->take($limit)->get();
+    			}
     		}
     		return $result;
     
