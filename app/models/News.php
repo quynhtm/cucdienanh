@@ -40,6 +40,10 @@ class News extends Eloquent
             if (isset($dataSearch['not_news_id']) && $dataSearch['not_news_id'] > 0) {
                 $query->where('news_id','<>', $dataSearch['not_news_id']);
             }
+            if (isset($dataSearch['type_language']) && $dataSearch['type_language'] > 0) {
+            	 $query->where('type_language', $dataSearch['type_language']);
+            }
+            
             $total = $query->count();
             $query->orderBy('news_id', 'desc');
 
@@ -170,7 +174,7 @@ class News extends Eloquent
         }
     }
     //get news same
-    public static function getSameNews($dataField='', $catid=0, $id=0, $limit=10){
+    public static function getSameNews($dataField='', $catid=0, $id=0, $limit=10, $lang=0){
     	try{
     		$result = array();
     		
@@ -178,6 +182,9 @@ class News extends Eloquent
 	    		$query = News::where('news_id','<>', $id);
 	    		$query->where('news_category', $catid);
 	    		$query->where('news_status', CGlobal::status_show);
+	    		if($lang > 0){
+	    			$query->where('type_language', $lang);
+	    		}
 	    		$query->orderBy('news_id', 'desc');
 	    
 	    		$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
@@ -195,7 +202,7 @@ class News extends Eloquent
     }
     
     //get news hot
-    public static function getHotNews($dataField='', $limit=10){
+    public static function getHotNews($dataField='', $limit=10, $lang=0){
     	try{
     		$result = array();
     
@@ -204,6 +211,9 @@ class News extends Eloquent
     			$query->where('news_status', CGlobal::status_show);
     			$query->where('news_hot', CGlobal::status_show);
     			$query->where('news_image', '<>', '');
+    			if($lang > 0){
+    				$query->where('type_language', $lang);
+    			}
     			$query->orderBy('news_id', 'desc');
     			 
     			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
@@ -219,7 +229,7 @@ class News extends Eloquent
     		throw new PDOException();
     	}
     }
-    public static function getNewsInCat($dataField='', $catid=0, $limit=10){
+    public static function getNewsInCat($dataField='', $catid=0, $limit=10, $lang=0){
     	try{
     		$result = array();
     
@@ -228,6 +238,9 @@ class News extends Eloquent
     			$query->where('news_category', $catid);
     			$query->where('news_status', CGlobal::status_show);
     			$query->where('news_hot','<>', CGlobal::status_show);
+    			if($lang > 0){
+    				$query->where('type_language', $lang);
+    			}
     			$query->orderBy('news_id', 'desc');
     			 
     			$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();

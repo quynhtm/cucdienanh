@@ -21,13 +21,14 @@ class Banner extends Eloquent
         'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
         'banner_time_click', 'banner_update_time', 'banner_create_time');
 
-    public static function getBannerAdvanced($banner_type = 0, $lang = 0){
-        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$lang;
+    public static function getBannerAdvanced($banner_type = 0, $lang = 0, $banner_category_id=0){
+        $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$lang.'_'.$banner_category_id;
         $bannerAdvanced = (Memcache::CACHE_ON)? Cache::get($key_cache) : array();
         if (sizeof($bannerAdvanced) == 0) {
             $banner = Banner::where('banner_id' ,'>', 0);
             $banner->where('banner_status',CGlobal::status_show);
             $banner->where('banner_type',$banner_type);
+            $banner->where('banner_category_id', $banner_category_id);
             if($lang > 0){
                $banner->where('type_language', $lang);
             }
@@ -111,7 +112,7 @@ class Banner extends Eloquent
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$data->banner_type.'_'.$data->banner_page.'_'.$data->banner_category_id.'_'.$data->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($data->banner_id);
-                    self::removeCacheLang($data->banner_type, $data->type_language);
+                    self::removeCacheLang($data->banner_type, $data->type_language, $data->banner_category_id);
                 }
                 return $data->banner_id;
             }
@@ -142,7 +143,7 @@ class Banner extends Eloquent
                     $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                     Cache::forget($key_cache);
                     self::removeCache($dataSave->banner_id);
-                    self::removeCacheLang($dataSave->banner_type, $dataSave->type_language);
+                    self::removeCacheLang($dataSave->banner_type, $dataSave->type_language, $dataSave->banner_category_id);
                 }
             }
             DB::connection()->getPdo()->commit();
@@ -180,7 +181,7 @@ class Banner extends Eloquent
                 $key_cache = Memcache::CACHE_BANNER_ADVANCED.'_'.$dataSave->banner_type.'_'.$dataSave->banner_page.'_'.$dataSave->banner_category_id.'_'.$dataSave->banner_province_id;
                 Cache::forget($key_cache);
                 self::removeCache($dataSave->banner_id);
-                self::removeCacheLang($dataSave->banner_type, $dataSave->type_language);
+                self::removeCacheLang($dataSave->banner_type, $dataSave->type_language, $dataSave->banner_category_id);
             }
             DB::connection()->getPdo()->commit();
             return true;
@@ -195,9 +196,9 @@ class Banner extends Eloquent
             Cache::forget(Memcache::CACHE_BANNER_ID.$id);
         }
     }
-    public static function removeCacheLang($banner_type=0, $banner_lang=0){
+    public static function removeCacheLang($banner_type=0, $banner_lang=0, $banner_category_id=0){
     	if($banner_type > 0 && $banner_lang > 0){
-    		Cache::forget(Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_lang);
+    		Cache::forget(Memcache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_lang.'_'.$banner_category_id);
     	}
     }
 }

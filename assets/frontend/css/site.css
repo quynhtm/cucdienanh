@@ -1031,6 +1031,72 @@ br{
     margin-top: 10px;
     width: 100%;
 }
+.page-list-customer{
+	display: inline-block;
+    margin-top: 20px;
+	margin-bottom: 20px;
+    width: 100%;
+}
+.item-ads-partner{
+    display: inline-block;
+    margin-bottom: 20px;
+	height: 105px;
+	overflow: hidden;
+	padding:5px;
+}
+.item-ads-partner img {
+    max-width: 100%;
+    width: auto;
+    height: 100%;
+}
+.item-library{
+	height:220px;
+	margin-bottom:5px;
+}
+.item-library .thumbL {
+    height: 155px;
+    overflow: hidden;
+    width: 100%;
+}
+.item-library .titleL{
+	font-weight: bold;
+	margin-top: 10px;
+	color: #555;
+	height: 38px;
+	overflow: hidden;
+}
+.item-library a:hover .titleL{
+	text-decoration: underline;
+}
+.item-library-detail{
+	height:180px;
+	overflow: hidden;
+	margin-bottom:15px;
+}
+.item-library-detail .thumbLDetail{
+	height:180px;
+	overflow: hidden;
+}
+.item-library-detail img{
+	width: 100%;
+}
+.item-library-detail:hover img{
+	opacity:0.8
+}
+.image-post .saperator img {
+    width: 100%;
+}
+.item-video{
+	height:350px;
+	margin-bottom:5px;
+}
+.item-video .titleL{
+	font-weight: bold;
+	margin-top: 10px;
+	color: #555;
+	height: 38px;
+	overflow: hidden;
+}
 /*pagging*/
 .show-box-paging {
     clear: both;

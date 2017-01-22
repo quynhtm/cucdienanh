@@ -283,7 +283,7 @@ class FunctionLib {
         if ($text) {
             return $text;
         } else {
-            return "shop";
+            return "danh-muc";
         }
     }
 
@@ -301,7 +301,7 @@ class FunctionLib {
         if ($text) {
             return $text;
         } else {
-            return "shop";
+            return "danh-muc";
         }
     }
 
@@ -474,6 +474,20 @@ class FunctionLib {
             return URL::route('Site.pageDetailNew', array('catname'=>strtolower(FunctionLib::safe_title($catname)), 'news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
         }
         return '#';
+    }
+    
+    static function buildLinkDetailLibrary($news_title = '', $new_id = 0){
+    	if($new_id > 0){
+    		return URL::route('site.pageLibraryDetail', array('news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
+    	}
+    	return '#';
+    }
+    
+    static function buildLinkDetailVideo($news_title = '', $new_id = 0){
+    	if($new_id > 0){
+    		return URL::route('site.pageVideoDetail', array('news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
+    	}
+    	return '#';
     }
 
     /**

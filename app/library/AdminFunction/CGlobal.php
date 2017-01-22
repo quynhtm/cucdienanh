@@ -57,11 +57,7 @@ class CGlobal{
     	self::INFOR_PHONE_HEADER => 'Hotline đầu trang',
     	self::INFOR_SOLOGAN_HEADER => 'Sologan đầu trang',
     );
-
-
-
-
-
+	
     const phoneSupport = '';
 
     const num_scroll_page = 2;
@@ -110,6 +106,7 @@ class CGlobal{
         self::sizeImage_300 =>array('w'=>self::sizeImage_300,'h'=>self::sizeImage_300),
     	self::sizeImage_600 =>array('w'=>self::sizeImage_600,'h'=>self::sizeImage_600),//insert vao noi dung
         self::sizeImage_500 =>array('w'=>self::sizeImage_500,'h'=>self::sizeImage_300),
+    	self::sizeImage_750 =>array('w'=>self::sizeImage_750,'h'=>self::sizeImage_750),
     );
 
     //dinh nghĩa khung ảnh hiển thị bên ngoài
@@ -161,8 +158,6 @@ class CGlobal{
         self::NEW_TYPE_GIOI_THIEU => 'Tin Hỗ trợ',
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
-
-
 
     const IMAGE_ERROR = 133;
     const FOLDER_NEWS = 'news';

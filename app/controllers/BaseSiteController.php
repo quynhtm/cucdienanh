@@ -42,7 +42,7 @@ class BaseSiteController extends BaseController{
     		$headSologan = stripslashes($arrSologan->info_content);
     	}
 		//Banner
-    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $this->lang);
+    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_TOP, $this->lang, CGlobal::BANNER_CATEGORY_QC);
     	$arrBannerHead = $this->getBannerWithPosition($arrBanner);
 		
     	//Category
@@ -59,11 +59,17 @@ class BaseSiteController extends BaseController{
     }
     public function right(){
     	//Banner
-    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $this->lang);
+    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_LEFT, $this->lang, CGlobal::BANNER_CATEGORY_QC);
     	$arrBannerRight = $this->getBannerWithPosition($arrBanner);
+    	
+    	$newImage = LibraryImage::getNewImages($dataField='', CGlobal::number_show_10, $this->lang);
+    	
+    	$newVideo = Video::getNewVideo($dataField='', CGlobal::number_show_10, $this->lang);
     	
     	$this->layout->right = View::make("site.BaseLayouts.right")
     							->with('arrBannerRight', $arrBannerRight)
+    							->with('newImage', $newImage)
+    							->with('newVideo', $newVideo)
 								->with('lang', $this->lang);
     }
 	public function footer(){

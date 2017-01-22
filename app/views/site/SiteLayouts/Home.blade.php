@@ -74,7 +74,7 @@
             @if(!empty($menuCategoriessAll))
 			@foreach($menuCategoriessAll as $cat)
 			@if($cat['type_language'] == $lang && $cat['category_show_content'] == CGlobal::status_show)
-            <?php $arrNews = News::getNewsInCat('', $cat['category_id'], CGlobal::number_show_5); ?>
+            <?php $arrNews = News::getNewsInCat('', $cat['category_id'], CGlobal::number_show_5, $lang); ?>
              @if(sizeof($arrNews) > 0)
             <div class="col-lg-6 col-sm-6">
                <div class="category">

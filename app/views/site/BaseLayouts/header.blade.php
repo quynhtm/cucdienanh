@@ -57,6 +57,7 @@
 			    @endif
 				@endforeach
 				@endif
+               <li><a href="{{URL::route('site.pageCustomer')}}" title="{{Langs::getItemByKeywordLang('text_customer', $lang)}}">{{Langs::getItemByKeywordLang('text_customer', $lang)}}</a></li>
                <li><a href="{{URL::route('site.pageContact')}}" title="{{Langs::getItemByKeywordLang('text_contact', $lang)}}">{{Langs::getItemByKeywordLang('text_contact', $lang)}}</a></li>
             </ul>
          </div>
