@@ -68,8 +68,8 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('user/view',array('as' => 'admin.user_view','uses' => 'UserController@view'));
     Route::get('user/create',array('as' => 'admin.user_create','uses' => 'UserController@createInfo'));
     Route::post('user/create',array('as' => 'admin.user_create','uses' => 'UserController@create'));
-    Route::get('user/edit/{id}',array('as' => 'admin.user_edit','uses' => 'UserController@editInfo'))->where('id', '[0-9]+');
-    Route::post('user/edit/{id}',array('as' => 'admin.user_edit','uses' => 'UserController@edit'))->where('id', '[0-9]+');
+    Route::get('user/edit/{id}',array('as' => 'admin.user_edit','uses' => 'UserController@editInfo'));
+    Route::post('user/edit/{id}',array('as' => 'admin.user_edit','uses' => 'UserController@edit'));
     Route::get('user/change/{id}',array('as' => 'admin.user_change','uses' => 'UserController@changePassInfo'));
     Route::post('user/change/{id}',array('as' => 'admin.user_change','uses' => 'UserController@changePass'));
     Route::post('user/remove/{id}',array('as' => 'admin.user_remove','uses' => 'UserController@remove'));

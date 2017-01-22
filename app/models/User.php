@@ -79,11 +79,14 @@ class User extends Eloquent {
         try {
             $query = User::where('user_id', '>', 0);
 
-            if (isset($data['user_id']) && $data['user_id'] > 0) {
-                $query->where('user_id', $data['user_id']);
+            if (isset($data['is_boos']) && $data['is_boos'] == 0) {
+                $query->where('user_id','>', 3);
             }
             if (isset($data['user_name']) && $data['user_name'] != '') {
                 $query->where('user_name', 'LIKE', '%' . $data['user_name'] . '%');
+            }
+            if (isset($data['user_phone']) && $data['user_phone'] != '') {
+                $query->where('user_phone', 'LIKE', '%' . $data['user_phone'] . '%');
             }
             if (isset($data['user_email']) && $data['user_email'] != '') {
                 $query->where('user_email', 'LIKE', '%' . $data['user_email'] . '%');

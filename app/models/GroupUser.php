@@ -129,9 +129,12 @@ class GroupUser extends Eloquent
         return $data;
     }
 
-    public static function getListGroupUser()
-    {
-        return GroupUser::where('group_user_status', '=', 1)->lists('group_user_name','group_user_id');
+    public static function getListGroupUser($is_boos = true){
+        if($is_boos){
+            return GroupUser::where('group_user_status', '=', 1)->lists('group_user_name','group_user_id');
+        }else{
+            return GroupUser::where('group_user_id', '>', 1)->where('group_user_status', '=', 1)->lists('group_user_name','group_user_id');
+        }
     }
 
 

@@ -31,12 +31,15 @@ class UserController extends BaseAdminController
         $dataSearch['user_full_name'] = Request::get('user_full_name', '');
         $dataSearch['user_name'] = Request::get('user_name', '');
         $dataSearch['user_group'] = Request::get('user_group', 0);
+        $dataSearch['is_boos'] = ($this->is_boss) ? 1: 0;
 
         $limit = CGlobal::number_limit_show;
         $total = 0;
         $offset = ($page_no - 1) * $limit;
         $data = User::searchByCondition($dataSearch, $limit, $offset, $total);
-        $arrGroupUser = GroupUser::getListGroupUser();
+        //FunctionLib::debug($data);
+
+        $arrGroupUser = GroupUser::getListGroupUser($this->is_boss);
 
         $paging = $total > 0 ? Pagging::getNewPager(3,$page_no,$total,$limit,$dataSearch) : '';
         $this->layout->content = View::make('admin.User.view')
@@ -59,7 +62,7 @@ class UserController extends BaseAdminController
         if (!$this->is_root && !in_array($this->permission_create, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
-        $arrGroupUser = GroupUser::getListGroupUser();
+        $arrGroupUser = GroupUser::getListGroupUser($this->is_boss);
         $this->layout->content = View::make('admin.User.create')
             ->with('arrGroupUser', $arrGroupUser);
     }
@@ -110,15 +113,16 @@ class UserController extends BaseAdminController
                 $error['mess'] = 'Lỗi truy xuất dữ liệu';
             }
         }
-        $arrGroupUser = GroupUser::getListGroupUser();
+        $arrGroupUser = GroupUser::getListGroupUser($this->is_boss);
         $this->layout->content = View::make('admin.User.create')
             ->with('error', $error)
             ->with('data', $data)
             ->with('arrGroupUser', $arrGroupUser);
     }
 
-    public function editInfo($id)
+    public function editInfo($ids)
     {
+        $id = base64_decode($ids);
         CGlobal::$pageAdminTitle = "Sửa nhóm User | Admin Seo";
 //        //check permission
         if (!$this->is_root && !in_array($this->permission_edit, $this->permission)) {
@@ -127,14 +131,15 @@ class UserController extends BaseAdminController
 
         $data = User::getUserById($id);
         $data['user_group'] = explode(',', $data['user_group']);
-        $arrGroupUser = GroupUser::getListGroupUser();
+        $arrGroupUser = GroupUser::getListGroupUser($this->is_boss);
         $this->layout->content = View::make('admin.User.edit')
             ->with('arrGroupUser', $arrGroupUser)
             ->with('is_root', $this->is_root)
             ->with('arrStatus', $this->arrStatus)
             ->with('data', $data);
     }
-    public function edit($id){
+    public function edit($ids){
+        $id = base64_decode($ids);
         //check permission
         if (!$this->is_root && !in_array($this->permission_edit, $this->permission)) {
             return Redirect::route('admin.dashboard',array('error'=>1));
@@ -172,7 +177,7 @@ class UserController extends BaseAdminController
                 $error[] = 'Lỗi truy xuất dữ liệu';;
             }
         }
-        $arrGroupUser = GroupUser::getListGroupUser();
+        $arrGroupUser = GroupUser::getListGroupUser($this->is_boss);
         $this->layout->content = View::make('admin.User.edit')
             ->with('error', $error)
             ->with('data', $data)
@@ -192,7 +197,6 @@ class UserController extends BaseAdminController
             ->with('is_root', $this->is_root)
             ->with('permission_change_pass', in_array($this->permission_change_pass, $this->permission) ? 1 : 0);
     }
-
     public function changePass($ids)
     {
         $id = base64_decode($ids);
@@ -246,11 +250,12 @@ class UserController extends BaseAdminController
             ->with('error', $error);
     }
 
-    public function remove($id){
+    public function remove($ids){
         $data['success'] = 0;
         if(!$this->is_root && !in_array($this->permission_remove, $this->permission)){
             return Response::json($data);
         }
+        $id = base64_decode($ids);
         $user = User::find($id);
         if($user){
             if(User::remove($user)){

@@ -166,7 +166,7 @@
                         <ul class="submenu">
                             @if(isset($item['sub']) && !empty($item['sub']))
                                 @foreach($item['sub'] as $sub)
-                                    @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
+                                    @if($is_boss)
                                         <li class="@if(strcmp(Route::currentRouteName(),$sub['RouteName']) == 0) active @endif">
                                             <a href="{{URL::route($sub['RouteName'])}}">
                                                 <i class="menu-icon fa fa-caret-right"></i>
@@ -174,6 +174,18 @@
                                             </a>
                                             <b class="arrow"></b>
                                         </li>
+                                    @else
+                                        @if($is_root || (isset($sub['permission']) && in_array($sub['permission'],$aryPermission)))
+                                            @if(isset($sub['showMenu']) && $sub['showMenu'] == 1)
+                                                <li class="@if(strcmp(Route::currentRouteName(),$sub['RouteName']) == 0) active @endif">
+                                                    <a href="{{URL::route($sub['RouteName'])}}">
+                                                        <i class="menu-icon fa fa-caret-right"></i>
+                                                        {{ $sub['name'] }}
+                                                    </a>
+                                                    <b class="arrow"></b>
+                                                </li>
+                                            @endif
+                                        @endif
                                     @endif
                                 @endforeach
                             @endif
