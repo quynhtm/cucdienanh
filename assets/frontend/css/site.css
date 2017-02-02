@@ -527,7 +527,7 @@ span.block {
 .list-link-category ul li {
     font-size: 14px;
     list-style: disc;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .list-link-category li a {
     color: #444;
@@ -1096,6 +1096,9 @@ br{
 	color: #555;
 	height: 38px;
 	overflow: hidden;
+}
+#myCarousel .carousel-inner > .item > img {
+    width: 100% !important;
 }
 /*pagging*/
 .show-box-paging {

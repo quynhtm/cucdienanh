@@ -237,7 +237,7 @@ class News extends Eloquent
     			$query = News::where('news_id','>', 0);
     			$query->where('news_category', $catid);
     			$query->where('news_status', CGlobal::status_show);
-    			$query->where('news_hot','<>', CGlobal::status_show);
+    			//$query->where('news_hot','<>', CGlobal::status_show);
     			if($lang > 0){
     				$query->where('type_language', $lang);
     			}

@@ -47,8 +47,10 @@
 	      @if($k == 0)
 	      <div class="saperator">
 	         @if($item['image_image'] != '')
+	         <a title="{{$item->image_title}}" href="{{FunctionLib::buildLinkDetailLibrary($item->image_title, $item->image_id)}}">
 	         <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_LIBRARY_IMAGE, $item['image_id'], $item['image_image'], CGlobal::sizeImage_500)}}" />
-	          @endif
+	         </a>
+	         @endif
 	         <div class="title-active">
 	            <i class="icon-other icon-image"></i>
 	            <a title="{{$item->image_title}}" href="{{FunctionLib::buildLinkDetailLibrary($item->image_title, $item->image_id)}}">{{$item->image_title}}</a>
