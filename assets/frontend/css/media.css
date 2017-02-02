@@ -111,7 +111,8 @@
         width: 100%;
     }
     .category .title-category {
-        background: #99e021 url("../img/bg-cate-mobile.png") no-repeat scroll center top;
+        #background: #99e021 url("../img/bg-cate-mobile.png") no-repeat scroll center top;
+    	background: #ed1c24
     }
     .section.corner-post{
         display: none;

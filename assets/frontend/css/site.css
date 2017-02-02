@@ -114,7 +114,7 @@ body{
     font-weight: bold;
 }
 .header-midd{
-    background: #3fbd1f url("../img/bg-header.png") no-repeat scroll 50% 50%;
+    background: #39b54a url("../img/bg-header.png") no-repeat scroll 50% 50%;
     width: 100%;
     min-height: 100px;
 }
@@ -135,7 +135,7 @@ body{
     text-transform: uppercase;
 }
 .slogan h1 {
-    color: #29166f;
+    color: #fff;
     display: inline;
     font-family: "Saysettha OT";
     font-size: 25px;
@@ -145,7 +145,7 @@ body{
 	text-transform: uppercase;
 }
 .slogan span {
-    color: #29166f;
+    color: #fff;
     font-size: 17px;
     font-weight: bold;
 }
@@ -264,10 +264,10 @@ body{
     text-align: right;
 }
 .sub-menu .left-column li {
-    border-bottom: 1px dotted #99e021;
+    border-bottom: 1px dotted #ec3629;
 }
 #myCarousel.carousel.slide {
-    border-bottom: 5px solid #3fbd1f;
+    border-bottom: 1px solid #ec3629;
 }
 #main {
     min-height: 100px;
@@ -295,7 +295,7 @@ body{
     width: 50px;
 }
 .title-section a {
-    border-bottom: 2px solid #3fbd1f;
+    border-bottom: 2px solid #ed1c24;
     margin-left: 15px;
     padding: 5px 0 15px;
 	color: #555;
@@ -509,8 +509,9 @@ span.block {
     text-transform: uppercase;
 }
 .category .title-category {
-    background: rgba(0, 0, 0, 0) url("../img/bg-cate.png") no-repeat scroll left top;
-    height: 40px;
+    #background: rgba(0, 0, 0, 0) url("../img/bg-cate.png") no-repeat scroll left top;
+    background: #ed1c24;
+	height: 40px;
     line-height: 40px;
     margin-bottom: 15px;
     padding: 0 10px;
@@ -600,14 +601,14 @@ span.block {
     padding-bottom: 10px;
 }
 #footer {
-    background: #c3b900;
-    border-top: 5px solid #3fbd1f;
+    background: #ed1c24;
+    border-top: 5px solid #ed1c24;
 }
 #footer .logo {
     margin: 2px;
 }
 #footer .pull-left * {
-    color: #1f0c65;
+    color: #fff;
     font-size: 15px;
     margin-top: 2px;
 }
@@ -1097,9 +1098,10 @@ br{
 	height: 38px;
 	overflow: hidden;
 }
-#myCarousel .carousel-inner > .item > img {
+.carousel-inner .item img {
     width: 100% !important;
 }
+
 /*pagging*/
 .show-box-paging {
     clear: both;
