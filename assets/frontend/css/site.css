@@ -72,12 +72,13 @@ body{
     width: 100%;
 }
 .bg-top {
-    background: #f2f2f2;
-    border-bottom: 1px solid #3fbd1f;
+    background: #ff2e34;
+    border-bottom: 1px solid #ff2e34;
     font-size: 12px !important;
     height: 30px;
     line-height: 30px;
     overflow: hidden;
+	color: #fff;
 }
 .bg-top .address{
     background: url(../img/address.png) no-repeat 0 5px;
@@ -122,11 +123,11 @@ body{
     background: rgba(0, 0, 0, 0) url("../img/logo.png") no-repeat scroll 50% 50%;
     display: inline-block;
     float: left;
-    height: 90px;
+    height: 100px;
     line-height: 18px;
     margin: 7px 5px;
     text-indent: -9999px;
-    width: 105px;
+    width: 145px;
 }
 .slogan {
     float: left;
@@ -601,8 +602,8 @@ span.block {
     padding-bottom: 10px;
 }
 #footer {
-    background: #ed1c24;
-    border-top: 5px solid #ed1c24;
+    #background: #00aa53;
+    border-top: 3px solid #ed1c24;
 }
 #footer .logo {
     margin: 2px;

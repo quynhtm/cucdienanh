@@ -77,7 +77,7 @@
 			@foreach($bannerShowRight as $k=>$sliderRight)
 			<div class="item-ads-right">
 			  <a @if($sliderRight->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($sliderRight->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($sliderRight->banner_link != '') {{$sliderRight->banner_link}} @else javascript:void(0) @endif" title="{{$sliderRight->banner_name}}">
-			      <img src="{{ThumbImg::thumbImageBannerNormal($sliderRight->banner_id,$sliderRight->banner_parent_id, $sliderRight->banner_image, CGlobal::sizeImage_1700,CGlobal::sizeImage_372, $sliderRight->banner_name,true,true)}}" alt="{{$sliderRight->banner_name}}" />
+			      <img src="{{ThumbImg::thumbImageBannerNormal($sliderRight->banner_id,$sliderRight->banner_parent_id, $sliderRight->banner_image, CGlobal::sizeImage_500,CGlobal::sizeImage_600, $sliderRight->banner_name,true,true)}}" alt="{{$sliderRight->banner_name}}" />
 			  </a>
 		    </div>
 			@endforeach
