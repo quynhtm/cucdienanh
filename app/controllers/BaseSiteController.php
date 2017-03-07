@@ -78,8 +78,14 @@ class BaseSiteController extends BaseController{
 		if(!empty($arrAddress)){
 			$address = $arrAddress->info_content;
 		}
+		
+		//Banner
+    	$arrBanner = Banner::getBannerAdvanced(CGlobal::BANNER_TYPE_BOTTOM, $this->lang, CGlobal::BANNER_CATEGORY_QC);
+    	$arrBannerFooter = $this->getBannerWithPosition($arrBanner);
+		
 		$this->layout->footer = View::make("site.BaseLayouts.footer")
-								->with('address', $address);
+								->with('address', $address)
+								->with('arrBannerFooter', $arrBannerFooter);
 	}
 	public function getBannerWithPosition($arrBanner = array()){
 		$arrBannerShow = array();
